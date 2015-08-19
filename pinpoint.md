@@ -1,0 +1,1 @@
+#Pinpoint 적용
