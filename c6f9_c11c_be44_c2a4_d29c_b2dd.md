@@ -41,4 +41,6 @@ KeepAliveTimeout 2
 **톰캣의 JDK 튜닝해야하는 이유 : **기본적으로 톰캣7은 256MB 힙을 포함한다. 그러나 최신 애플리케이션은 점점 많은 램을 요구한다. 
 
 **톰캣7의 힙 크기를 증가시키는 방법 ** </br>
+TOMCAT_HOME/bin에 위치한 catalina.sh파일에 JAVA_OPTS 파라미터를 추가한다 </br>
+JAVA_OPTS="-Xms128m -Xmx512m -XX:MaxPermSize=256m"
 
