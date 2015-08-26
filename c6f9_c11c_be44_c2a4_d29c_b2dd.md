@@ -11,7 +11,7 @@
 
 | 데이터 전송량을 줄이는 방법 | 구체적인 실행 방법 |
 | -- | -- |
-| CSS나 JavaScript를 minify한다. |  |
+| CSS나 JavaScript를 minify한다. | 들여쓰기나 행 바꿈을 없애는 등 CSS나 JavaScript의 파일 내용을 줄인다. |
 |  |  |
 |  |  |
 |  |  |
