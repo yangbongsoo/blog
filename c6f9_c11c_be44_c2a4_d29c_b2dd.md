@@ -19,5 +19,5 @@
 | CDN을 사용한다. | CDN에서 데이터를 캐시함으로써 자체 서버의 데이터 전송량을 줄인다. |
 
 </br>
-CDN(Content Delivery Network)서비스 : 콘텐츠(HTML, 이미지, 동영상, 기타파일)를 사용자들이 빠르게 받을 수 있도록 전 세계(or 전국) 곳곳에 위치한 캐시 서버에 복제해주는 서비스</br>
+**CDN(Content Delivery Network)서비스** : 콘텐츠(HTML, 이미지, 동영상, 기타파일)를 사용자들이 빠르게 받을 수 있도록 전 세계(or 전국) 곳곳에 위치한 캐시 서버에 복제해주는 서비스</br>
 HTTP KeepAlive : </br>
