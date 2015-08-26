@@ -16,6 +16,14 @@ HTTP KeepAlive를 사용하지 않는 경우에는 위 그림과 같이 각각�
 ![](keepalive.PNG)
 
 HTTP KeepAlive를 사용하면 위와 같이 하나의 접속을 다수의 요청에서 공유한다. HTTP KeepAlive의 이점은 매번 접속할 필요가 없기 때문에 서브 측과 클라이언트 측 모두 처리량이 줄어들어 사이트 표시가 빨라질 수 있다는 것이다. </br> 한편, 서버 측은 다음 요청이 올 수도 있기 때문에 일정 시간을 대기하게 되므로, 그만큼 접속을 유지해야만 한다. 따라서 서버 측의 병렬 수 는 많아진다.
+
+Apache에서 KeepAlive 설정법 </br>
+```
+KeepAlive On
+MaxKeepAliveReq uests 200
+KeepAliveTimeout 2
+```
+
 </br>
 
 | 데이터 전송량을 줄이는 방법 | 구체적인 실행 방법 |
