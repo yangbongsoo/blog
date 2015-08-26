@@ -9,6 +9,11 @@
 
 **HTTP KeepAlive : ** 하나의 TCP/IP 접속을 유지한 채로 다수의 HTTP 요청을 처리 할 수 있다.</br>
 
+![](nokeepalive.PNG)
+
+HTTP KeepAlive를 사용하지 않는 경우에는 위 그림과 같이 각각의 요청에 대해 하나씩 접속해야 한다. 
+
+
 
 </br>
 
