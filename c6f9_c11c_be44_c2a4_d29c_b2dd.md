@@ -42,6 +42,6 @@ KeepAliveTimeout 2
 
 **톰캣7의 힙 크기를 증가시키는 방법 ** </br>
 TOMCAT_HOME/bin에 위치한 catalina.sh파일에 JAVA_OPTS 파라미터를 추가한다 </br>
-
+(JVM 파라미터 설정 바꾸면 톰캣 서버 재시작해야 새로운 값 적용됌)
 JAVA_OPTS="-Xms128m -Xmx512m -XX:MaxPermSize=256m"
 
