@@ -47,5 +47,9 @@ TOMCAT_HOME/bin에 위치한 catalina.sh파일에 JAVA_OPTS 파라미터를 추�
 JAVA_OPTS="-Xms128m -Xmx512m -XX:MaxPermSize=256m" </br>
 합의 크기를 256MB에서 512MB로 증가시키며, 영구 세대(클래스 정의와 관련 메타데이터를 저장하는 힙의 영역)크기도 256MB로 설정</br>
 
-
+-XX:MaxNewSize=size : 신세대의 최대 크기(바이트 단위)</br>
+-XX:MaxPermSize=64m : 영구 세대의 크기(-Xmx 값을 초과했을 때)</br>
+-Xms : 톰캣 시작시 최소 힙 메모리 </br>
+-Xmx : 인스턴스에 할당할 최대 메모리 </br>
+-Xss : 힙의 스택 크기 
 
