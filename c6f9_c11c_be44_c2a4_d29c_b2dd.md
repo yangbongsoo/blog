@@ -44,6 +44,6 @@ KeepAliveTimeout 2
 TOMCAT_HOME/bin에 위치한 catalina.sh파일에 JAVA_OPTS 파라미터를 추가한다 </br>
 (JVM 파라미터 설정 바꾸면 톰캣 서버 재시작해야 새로운 값 적용됌)</br>
 
-JAVA_OPTS="-Xms128m -Xmx512m -XX:MaxPermSize=256m" 
-
+JAVA_OPTS="-Xms128m -Xmx512m -XX:MaxPermSize=256m" </br>
+합의 크기를 256MB에서 512MB로 증가시키며, 영구 세대(클래스 정의와 관련 메타데이터를 저장하는 합ㅇ)크기도 256MB로 설정
 
