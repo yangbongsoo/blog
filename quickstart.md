@@ -94,5 +94,5 @@ profiler.collector.ip를 pinpoint서버로 바꿔주고
 
 그리고 핵심이!! 29995 29994는 UDP였어 ... 해당 서버 방화벽 허용을 UDP로 꼭 바꿔줘 
 
-이걸로 pinpoint 적용 끝 !! 
+pinpoint 적용 성공!! <br>
 
