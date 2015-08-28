@@ -83,3 +83,4 @@ Slave DB로의 데이터 반영에는 지연이 발생한다</br>
 
 MySQL 5.6의 기본값은 'STATEMENT'이다. 이 경우 리플리케이션할 수 없는 SQL은 사용하지 않도록 해야 한다. 구체적으로 이에 해당하는 패턴은 아래와 같다. 
 1. 'order by'가 없는데 'limit'가 있는 'update'나 'delete' sql
+2. 'LOAD_FILE()', 'SYSDATE()', 'RAND()' 등의 함수
