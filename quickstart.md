@@ -65,9 +65,9 @@ export PATH</br>
 
 ``` du -h ```해보면 용량 알수있음 
 
-``` quickstart/bin/start-hbase.sh  ```해서 hbase 다운받음 
-``` quickstart/bin/init-hbase.sh  ```DB 테이블을 만들어줌 
-``` quickstart/bin/start-collector.sh ```Collector를 띄워 
+``` quickstart/bin/start-hbase.sh  ```해서 hbase 다운받음 <br>
+``` quickstart/bin/init-hbase.sh  ```DB 테이블을 만들어줌 <br>
+``` quickstart/bin/start-collector.sh ```Collector를 띄워 <br>
 
 Collector가 다 띄워지면 새로운 putty창 열어서 Web UI띄움 
 
@@ -94,4 +94,5 @@ profiler.collector.ip를 pinpoint서버로 바꿔주고
 
 그리고 핵심이!! 29995 29994는 UDP였어 ... 해당 서버 방화벽 허용을 UDP로 꼭 바꿔줘 
 
-pinpoint 적용 성공!! <br>dd
+pinpoint 적용 성공!! <br>
+
