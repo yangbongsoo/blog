@@ -76,7 +76,8 @@ Collector가 다 띄워지면 새로운 putty창 열어서 Web UI띄움
 이게 되면 또하나가 필요한데 test를 할 수 있는 putty창 띄워서
 ``` quickstart/bin/start-testapp.sh ```한다 
 
-Agent 붙여서 실제로 돌리기 
+**Agent 붙여서 실제로 돌리기** 
+
 1. 내 웹 서버에서 /usr/share/tomcat7/bin 가서 catalina.sh에 자바옵션을 추가해줘 (윈도우에서는 catalina.bat 고쳐야함)
 
 JAVA_OPTS="-javaagent:/local/pinpoint/pinpoint-agent/pinpoint-bootstrap-1.1.0.jar -Dpinpoint.agentId=sokit -Dpinpoint.applicationName=SOKIT" 
