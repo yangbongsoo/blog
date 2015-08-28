@@ -96,3 +96,4 @@ profiler.collector.ip를 pinpoint서버로 바꿔주고
 
 pinpoint 적용 성공!! </br>
 
+dd
