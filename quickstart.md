@@ -12,7 +12,6 @@ pinpoint 기능
 4. Agent; 각각의 대상 서버에 pinpoint agent를 줘서 각각의 pinpoint agent가 collector의 데이터를 udp/tcp + thrift를 통해서 
 보내주고 그걸로 디비에 저장하고 그걸 web ui가 보여줌 
 
-
 내가 보면서 따라하고 있는 동영상 url:https://www.youtube.com/watch?v=xipAXrm4vEI
 
 jdk1.6, 1.7다운은 oracle가서 다운받고(이전버전은 로그인해야함) url 복사해서 ```curl url붙여넣기 -o jdk버전``` 써놓으면 됌 
