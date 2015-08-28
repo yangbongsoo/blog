@@ -54,6 +54,6 @@ JAVA_OPTS="-Xms128m -Xmx512m -XX:MaxPermSize=256m" </br>
 -Xss : 힙의 스택 크기 </br>
 
 **[Web]을 스케일 아웃 할때의 주의점**</br>
-
+사용자 한 명의 연속된 액세스가 다수의 서버로 분산될 수도 있다.
 
 
