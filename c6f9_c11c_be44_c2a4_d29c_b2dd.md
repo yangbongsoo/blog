@@ -51,5 +51,8 @@ JAVA_OPTS="-Xms128m -Xmx512m -XX:MaxPermSize=256m" </br>
 -XX:MaxPermSize=64m : 영구 세대의 크기(-Xmx 값을 초과했을 때)</br>
 -Xms : 톰캣 시작시 최소 힙 메모리 </br>
 -Xmx : 인스턴스에 할당할 최대 메모리 </br>
--Xss : 힙의 스택 크기 
+-Xss : 힙의 스택 크기 </br>
+
+[Web]을 스케일 아웃 할때의 주의점</br>
+
 
