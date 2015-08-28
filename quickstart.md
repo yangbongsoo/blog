@@ -97,3 +97,9 @@ profiler.collector.ip를 pinpoint서버로 바꿔주고
 
 pinpoint 적용 성공!! <br>
 
+![](pinpoint1.PNG)
+
+![](pinpoint2.PNG)
+
+![](pinpoint3.PNG)
+
