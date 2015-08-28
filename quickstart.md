@@ -12,7 +12,6 @@ pinpoint 기능
 4. Agent; 각각의 대상 서버에 pinpoint agent를 줘서 각각의 pinpoint agent가 collector의 데이터를 udp/tcp + thrift를 통해서 
 보내주고 그걸로 디비에 저장하고 그걸 web ui가 보여줌 
 
-최종적으로 아마존 서버(모니터링할 서버)에다가 Agent 설치하고 그거 실행해서 데이터가 제대로 들어오는지 확인!! 
 
 내가 보면서 따라하고 있는 동영상 url:https://www.youtube.com/watch?v=xipAXrm4vEI
 
