@@ -21,5 +21,5 @@
 * [애자일적용후기](c560_c790_c77c_c801_c6a9_d6c4_ae30.md)
 * [Ruby On Rails](ruby_on_rails.md)
    * [설치](c124_ce58.md)
-   * 프로젝트 따라하기
+   * [프로젝트 따라하기](d504_b85c_c81d_d2b8_b530_b77c_d558_ae30.md)
 
