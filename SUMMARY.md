@@ -20,5 +20,5 @@
    * [REST의 이해와 설계](restc758_c774_d574_c640_c124_acc4.md)
 * [애자일적용후기](c560_c790_c77c_c801_c6a9_d6c4_ae30.md)
 * [Ruby On Rails](ruby_on_rails.md)
-   * 설치
+   * [설치](c124_ce58.md)
 
