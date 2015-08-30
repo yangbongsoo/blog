@@ -24,6 +24,19 @@ void reconnect(final PinpointSocket pinpointSocket, final SocketAddress socketAd
 ```
 reconnectDelay = 3초 <br>
 TimeUnit.MILLISECONDS
+```
+MILLISECONDS {
+        public long toNanos(long d)   { return x(d, C2/C0, MAX/(C2/C0)); }
+        public long toMicros(long d)  { return x(d, C2/C1, MAX/(C2/C1)); }
+        public long toMillis(long d)  { return d; }
+        public long toSeconds(long d) { return d/(C3/C2); }
+        public long toMinutes(long d) { return d/(C4/C2); }
+        public long toHours(long d)   { return d/(C5/C2); }
+        public long toDays(long d)    { return d/(C6/C2); }
+        public long convert(long d, TimeUnit u) { return u.toMillis(d); }
+        int excessNanos(long d, long m) { return 0; }
+    }
+```
 
 ```
 package org.jboss.netty.util;
