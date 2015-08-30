@@ -23,8 +23,7 @@ void reconnect(final PinpointSocket pinpointSocket, final SocketAddress socketAd
     }
 ```
 reconnectDelay = 3초 <br>
-
-TimeUnit.MILLISECONDS
+TimeUnit.MILLISECONDS 자체에 많은 함수가 있는데 어떤걸 쓰는거지?
 ```
 MILLISECONDS {
         public long toNanos(long d)   { return x(d, C2/C0, MAX/(C2/C0)); }
