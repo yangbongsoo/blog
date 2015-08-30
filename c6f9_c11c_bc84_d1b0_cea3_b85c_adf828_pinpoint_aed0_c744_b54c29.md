@@ -7,4 +7,11 @@
 
 
 **1. PinpointSocketFactory$ConnectEvent Try reconnect. Connectaddress:/52.69.198.82:29994**
-
+```
+public PinpointSocket scheduledConnect(String host, int port) {
+        PinpointSocket pinpointSocket = new PinpointSocket(new ReconnectStateSocketHandler());
+        SocketAddress address = new InetSocketAddress(host, port);
+        reconnect(pinpointSocket, address);
+        return pinpointSocket;
+    }
+```
