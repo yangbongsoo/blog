@@ -27,6 +27,11 @@ reconnectDelay = 3초
 ```
 package org.jboss.netty.util;
 
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import org.jboss.netty.util.Timeout;
+import org.jboss.netty.util.TimerTask;
+
 public interface Timer {
     Timeout newTimeout(TimerTask var1, long var2, TimeUnit var4);
 
