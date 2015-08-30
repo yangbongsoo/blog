@@ -25,5 +25,9 @@ void reconnect(final PinpointSocket pinpointSocket, final SocketAddress socketAd
 reconnectDelay = 3초  
 
 ```
+public interface Timer {
+    Timeout newTimeout(TimerTask var1, long var2, TimeUnit var4);
 
+    Set<Timeout> stop();
+}
 ```
