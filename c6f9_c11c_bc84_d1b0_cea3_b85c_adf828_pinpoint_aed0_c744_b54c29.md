@@ -22,3 +22,4 @@ void reconnect(final PinpointSocket pinpointSocket, final SocketAddress socketAd
         timer.newTimeout(connectEvent, reconnectDelay, TimeUnit.MILLISECONDS);
     }
 ```
+reconnectDelay = 3초 
