@@ -105,3 +105,5 @@ timeout이 발생하면 ConnectEvent 클래스의 run메소드가 실행되는�
 
 logger.warn("try reconnect. connectAddress:{}", socketAddress); 통해서 1번째 로그 출력
 
+final ChannelFuture channelFuture = reconnect(socketAddress);
+
