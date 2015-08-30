@@ -17,5 +17,8 @@ public PinpointSocket scheduledConnect(String host, int port) {
 ```
 
 ```
-
+void reconnect(final PinpointSocket pinpointSocket, final SocketAddress socketAddress) {
+        ConnectEvent connectEvent = new ConnectEvent(pinpointSocket, socketAddress);
+        timer.newTimeout(connectEvent, reconnectDelay, TimeUnit.MILLISECONDS);
+    }
 ```
