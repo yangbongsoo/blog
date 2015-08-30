@@ -1,0 +1,5 @@
+###3초마다 체크 
+###총 10단계 
+###30초 주기로 UdpDataSender 패킷 Sende
+**1. PinpointSocketFactory$ConnectEvent Try reconnect. Connectaddress:/52.69.198.82:29994**
+
