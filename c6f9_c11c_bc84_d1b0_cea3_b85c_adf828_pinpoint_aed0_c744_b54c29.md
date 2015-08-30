@@ -41,7 +41,7 @@ public interface Timer {
 jboss 오픈소스를 통해 timeout 설정하는건가 
 
 
-timeout이 발생하면
+timeout이 발생하면 ConnectEvent 클래스의 run메소드가 실행되는거 같다.
 ```
         @Override
         public void run(Timeout timeout) {
