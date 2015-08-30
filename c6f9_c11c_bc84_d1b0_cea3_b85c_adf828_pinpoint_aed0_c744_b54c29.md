@@ -38,7 +38,7 @@ public interface Timer {
     Set<Timeout> stop();
 }
 ```
-jboss 오픈소스를 통해 timeout 설정하는건가 
+jboss 오픈소스를 통해 timeout 설정하는건가 ???  잘 모르겠네 
 
 
 timeout이 발생하면 ConnectEvent 클래스의 run메소드가 실행되는거 같다.
