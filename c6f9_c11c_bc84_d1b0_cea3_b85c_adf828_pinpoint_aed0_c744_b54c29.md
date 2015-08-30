@@ -11,11 +11,11 @@
 public PinpointSocket scheduledConnect(String host, int port) {
         PinpointSocket pinpointSocket = new PinpointSocket(new ReconnectStateSocketHandler());
         SocketAddress address = new InetSocketAddress(host, port);
-        reconnect(pinpointSocket, address);
+        reconnect(pinpointSocket, address); <ㅡ--여기
         return pinpointSocket;
     }
 ```
-reconnect(pinpointSocket, address) ㄱㄱ 
+
 ```
 void reconnect(final PinpointSocket pinpointSocket, final SocketAddress socketAddress) {
         ConnectEvent connectEvent = new ConnectEvent(pinpointSocket, socketAddress);
