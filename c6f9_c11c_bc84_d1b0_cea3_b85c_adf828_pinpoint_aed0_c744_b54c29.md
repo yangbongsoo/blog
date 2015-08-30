@@ -40,3 +40,51 @@ public interface Timer {
 ```
 jboss 오픈소스를 통해 timeout 설정하는건가 
 
+
+timeout이 발생하면
+```
+        @Override
+        public void run(Timeout timeout) {
+            if (timeout.isCancelled()) {
+                return;
+            }
+
+            // Just return not to try reconnection when event has been fired but pinpointSocket already closed.
+            if (pinpointSocket.isClosed()) {
+                logger.debug("pinpointSocket is already closed.");
+                return;
+            }
+
+            logger.warn("try reconnect. connectAddress:{}", socketAddress);
+            final ChannelFuture channelFuture = reconnect(socketAddress);
+            Channel channel = channelFuture.getChannel();
+            final SocketHandler socketHandler = getSocketHandler(channel);
+            socketHandler.setConnectSocketAddress(socketAddress);
+            socketHandler.setPinpointSocket(pinpointSocket);
+
+            channelFuture.addListener(new ChannelFutureListener() {
+                @Override
+                public void operationComplete(ChannelFuture future) throws Exception {
+                    if (future.isSuccess()) {
+                        Channel channel = future.getChannel();
+                        logger.warn("reconnect success {}, {}", socketAddress, channel);
+                        pinpointSocket.reconnectSocketHandler(socketHandler);
+                    } else {
+                         if (!pinpointSocket.isClosed()) {
+
+                         /*
+                            // comment out because exception message can be taken at exceptionCaught
+                            if (logger.isWarnEnabled()) {
+                                Throwable cause = future.getCause();
+                                logger.warn("reconnect fail. {} Caused:{}", socketAddress, cause.getMessage());
+                            }
+                          */
+                            reconnect(pinpointSocket, socketAddress);
+                        } else {
+                            logger.info("pinpointSocket is closed. stop reconnect.");
+                        }
+                    }
+                }
+            });
+        }
+```
