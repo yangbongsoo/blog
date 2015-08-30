@@ -11,7 +11,7 @@
 public PinpointSocket scheduledConnect(String host, int port) {
         PinpointSocket pinpointSocket = new PinpointSocket(new ReconnectStateSocketHandler());
         SocketAddress address = new InetSocketAddress(host, port);
-        reconnect(pinpointSocket, address); <ㅡ--여기
+        reconnect(pinpointSocket, address); <ㅡㅡ여기
         return pinpointSocket;
     }
 ```
