@@ -107,3 +107,36 @@ logger.warn("try reconnect. connectAddress:{}", socketAddress); 통해서 1번�
 
 final ChannelFuture channelFuture = reconnect(socketAddress);
 
+```
+    public ChannelFuture reconnect(final SocketAddress remoteAddress) {
+        if (remoteAddress == null) {
+            throw new NullPointerException("remoteAddress");
+        }
+
+        ChannelPipeline pipeline;
+        final ClientBootstrap bootstrap = this.bootstrap;
+        try {
+            pipeline = bootstrap.getPipelineFactory().getPipeline();
+        } catch (Exception e) {
+            throw new ChannelPipelineException("Failed to initialize a pipeline.", e);
+        }
+        SocketHandler socketHandler = (PinpointSocketHandler) pipeline.getLast();
+        socketHandler.initReconnect();
+
+
+        // Set the options.
+        Channel ch = bootstrap.getFactory().newChannel(pipeline);
+        boolean success = false;
+        try {
+            ch.getConfig().setOptions(bootstrap.getOptions());
+            success = true;
+        } finally {
+            if (!success) {
+                ch.close();
+            }
+        }
+
+        // Connect.
+        return ch.connect(remoteAddress);
+    }
+```
