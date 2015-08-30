@@ -107,7 +107,7 @@ logger.warn("try reconnect. connectAddress:{}", socketAddress); 통해서 1번�
 
 
 final ChannelFuture channelFuture = reconnect(socketAddress);<br>
-socketAddress = /52.69.198.82:29994 <br>
+socketAddress = /52.69.198.82:29994
 ```
     public ChannelFuture reconnect(final SocketAddress remoteAddress) {
         if (remoteAddress == null) {
