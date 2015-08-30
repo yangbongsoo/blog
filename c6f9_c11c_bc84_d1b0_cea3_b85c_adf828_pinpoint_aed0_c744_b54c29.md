@@ -23,6 +23,7 @@ void reconnect(final PinpointSocket pinpointSocket, final SocketAddress socketAd
     }
 ```
 reconnectDelay = 3초 <br>
+
 TimeUnit.MILLISECONDS
 ```
 MILLISECONDS {
