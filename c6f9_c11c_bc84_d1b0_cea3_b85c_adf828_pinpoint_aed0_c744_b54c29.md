@@ -37,7 +37,7 @@ MILLISECONDS {
         int excessNanos(long d, long m) { return 0; }
     }
 ```
-
+timer.newTimeout
 ```
 package org.jboss.netty.util;
 
