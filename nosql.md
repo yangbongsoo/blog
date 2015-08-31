@@ -7,6 +7,7 @@ NoSQL에서 가장 기본이 되는 것은 Key/Value Store이다.
 Column Family 모델은 Key/Value 모델의 확장이다.
 
 **RDB 모델 **<br>
+데이터를 수평적으로 배열하는 구조
 
 |  | 사번 | 성명 | 성별 | 최종학력 |
 | -- | -- | -- | -- | -- |
@@ -14,3 +15,4 @@ Column Family 모델은 Key/Value 모델의 확장이다.
 | row2 | 1004 | 김,천사 | 여 | 옥스포드대학교 |
 
 **Column Family 모델**
+
