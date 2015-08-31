@@ -17,7 +17,7 @@ Column Family 모델은 Key/Value 모델의 확장이다.
 **Column Family 모델**<br>
 데이터를 수직적으로 쌓아가는 구조
 
-| row key(사번) | Columns(컬럼명) | 2:0 |
+| row key(사번) | Columns(컬럼명) | Value(값) |
 | -- | -- | -- |
 | 0:2 | 1:2 | 2:2 |
 | 0:3 | 1:3 | 2:3 |
