@@ -15,3 +15,6 @@ Amazon Cognito를 사용하면 Amazon, Facebook, Twitter, Google 및 모든 Open
 
 **AWS 자격 증명 보호**<br>
 Amazon Cognito를 사용하면 앱과 함께 AWS 리소스에 액세스할 수 있도록 임시적이며 제한 권한을 가진 자격 증명이 제공됩니다. 즉, 앱은 필요한 리소스에 액세스할 수 있으며 앱 내 자격 증명을 하드코딩하지 않고도 보안 모범 사례를 준수할 수 있다는 의미입니다.
+
+**AWS 리소스로의 액세스 권한 제어**<br>
+
