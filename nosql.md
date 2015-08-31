@@ -3,3 +3,5 @@
 RDBMS는 row 별로 데이터가 보관되고 조회된다. 관계형 모델의 모든 기준은 row 단위이다. 
 
 NoSQL에서 가장 기본이 되는 것은 Key/Value Store이다. 
+
+Column Family 모델은 Key/Value 모델의 확장이다.
