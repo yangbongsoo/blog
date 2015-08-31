@@ -15,4 +15,4 @@ Column Family 모델은 Key/Value 모델의 확장이다.
 | row2 | 1004 | 김,천사 | 여 | 옥스포드대학교 |
 
 **Column Family 모델**
-
+데이터를 수직적으로 쌓아가는 구조
