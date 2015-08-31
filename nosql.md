@@ -1,5 +1,10 @@
 빅데이터로 통하는 NoSQL은 다양한 데이터 구조를 갖는다. 그리고 Key/Value, Column Family, Graph, Document 등 다양한 형태의 데이터베이스로 분류된다. 
 
+가장 기본이 되는 Key/Value Store <br>
+Key/Value Store에서 컬럼 개념을 확장하여 생성된 Column Family <br>
+문서 저장에 적합한 Document Store <br>
+네트워크 구조인 Graph 
+
 RDBMS는 row 별로 데이터가 보관되고 조회된다. 관계형 모델의 모든 기준은 row 단위이다. 
 
 NoSQL에서 가장 기본이 되는 것은 Key/Value Store이다. 
