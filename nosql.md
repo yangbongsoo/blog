@@ -5,3 +5,7 @@ RDBMS는 row 별로 데이터가 보관되고 조회된다. 관계형 모델의 
 NoSQL에서 가장 기본이 되는 것은 Key/Value Store이다. 
 
 Column Family 모델은 Key/Value 모델의 확장이다.
+
+**RDB 모델 **
+
+**Column Family 모델**
