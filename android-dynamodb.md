@@ -8,3 +8,4 @@ Amazon Cognito를 사용하면 사용자 기본 설정, 모바일 로그인, 게
 앱과 함께 Amazon Cognito를 사용하면 로컬 데이터 스토어에서 읽기 및 쓰기 작업이 가능합니다. 즉, 디바이스 상태가 온라인이든 오프라인이든 관계없이 동일한 방식으로 앱이 작동한다는 의미입니다. 간편한 동기화 API 호출을 사용하여 앱의 데이터를 AWS 클라우드로 동기화할 수 있습니다.
 
 **고유 자격 증명 관리**<br>
+Amazon Cognito를 사용하면 Amazon, Facebook, Twitter, Google 및 모든 OpenID Connect 지원 공급자의 퍼블릭 로그인 공급자를 사용하거나 자체 사용자 자격 증명 시스템을 사용하여 AWS 클라우드 서비스에 액세스하기 위한 고유한 최종 사용자 식별자를 만들 수 있습니다. 이 식별자를 통해 앱 데이터를 Amazon Cognito 동기화 스토어에 저장하거나 Amazon S3 또는 Amazon DynamoDB 같은 다른 AWS 서비스에 액세스할 수 있습니다.
