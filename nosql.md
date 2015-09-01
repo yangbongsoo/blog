@@ -135,7 +135,7 @@ dependencies 풀 리스트
 | -- | -- |
 | AWS Mobile SDK core | com.amazonaws:aws-android-sdk-core:2.+ |
 | Auto Scaling | com.amazonaws:aws-android-sdk-autoscaling:2.+ |
-| Amazon Cloud Watch | 1:4 |
+| Amazon Cloud Watch | com.amazonaws:aws-android-sdk-cloudwatch:2.+ |
 | Amazon Cognito Sync | 1:5 |
 | Amazon DynamoDB | 1:6 |
 | Amazon DynamoDB Object Mapper | 1:7 |
@@ -154,7 +154,7 @@ dependencies 풀 리스트
 	
 	
 	
-	com.amazonaws:aws-android-sdk-cloudwatch:2.+
+	
 	com.amazonaws:aws-android-sdk-cognito:2.+
 	com.amazonaws:aws-android-sdk-ddb:2.+
 	com.amazonaws:aws-android-sdk-ddb-mapper:2.+
