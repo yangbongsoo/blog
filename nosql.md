@@ -231,4 +231,3 @@ import com.amazonaws.services.dynamodbv2.model.*;
 
 ### Create an Identity Pool
 내 모바일 애플리케이션에 AWS Services를 사용하기 위해서는 내 credential provider로 Amazon Cognito Identity를 이용해서 AWS Credentials를 얻어야 한다. credentials provider를 사용하는 것은 내가 애플리케이션에서 pivate credentials를 내장하는거 없이 AWS Services에 접근을 허용한다. 
-	
