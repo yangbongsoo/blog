@@ -156,7 +156,7 @@ https://github.com/aws/aws-sdk-android
 | Amazon SES | com.amazonaws:aws-android-sdk-ses:2.+ |
 | Amazon SNS | com.amazonaws:aws-android-sdk-sns:2.+ |
 | Amazon SQS | com.amazonaws:aws-android-sdk-sqs:2.+ |
-
+<br>
 
 
 
