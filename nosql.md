@@ -70,3 +70,6 @@ Table
 
 기본 키 : Hash key
 * Hash key 단체로 데이터를 고유하게 식별할 수 있는 경우 사용 
+
+기본 키 : Hash key & Range key
+* Hash key에 해당하는 여러 데이터에서 Range key로 검색 가능 
