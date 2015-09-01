@@ -100,3 +100,4 @@ Hash key
 Hash key + Range key
 * 복합 기본 키 
 * Range key는 sort가 있음 
+
