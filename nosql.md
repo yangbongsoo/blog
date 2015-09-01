@@ -97,3 +97,6 @@ Hash key
 * 간단한 키 값
 * Hash 이므로 정렬이 필요 없음 
 
+Hash key + Range key
+* 복합 기본 키 
+* Range key는 sort가 있음 
