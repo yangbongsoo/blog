@@ -181,26 +181,42 @@ https://github.com/aws/aws-sdk-android
 Release버전은 여기서 확인 <br>
 https://aws.amazon.com/releasenotes/Android
 
-| 0:0 | 1:0 |
+| Service/Feature | artifactID |
 | -- | -- |
-| 0:2 | 1:2 |
-| 0:3 | 1:3 |
-| 0:4 | 1:4 |
-| 0:5 | 1:5 |
-| 0:6 | 1:6 |
-| 0:7 | 1:7 |
-| 0:8 | 1:8 |
-| 0:9 | 1:9 |
-| 0:10 | 1:10 |
-| 0:11 | 1:11 |
-| 0:12 | 1:12 |
-| 0:13 | 1:13 |
-| 0:14 | 1:14 |
-| 0:15 | 1:15 |
-| 0:16 | 1:16 |
-| 0:17 | 1:17 |
+| AWS Mobile SDK Core [1] | 1:2 |
+| Auto Scaling | 1:3 |
+| Amazon Cloud Watch | 1:4 |
+| Amazon Cognito Sync | 1:5 |
+| Amazon DynamoDB | 1:6 |
+| Amazon DynamoDB Object Mapper | 1:7 |
+| Amazon EC2 | 1:8 |
+| Elastic Load Balancing | 1:9 |
+| Amazon Kinesis | 1:10 |
+| Amazon Machine Learning | 1:11 |
+| Amazon Mobile Analytics | 1:12 |
+| Amazon S3 | 1:13 |
+| Amazon Simple DB | 1:14 |
+| Amazon SES | 1:15 |
+| Amazon SNS | 1:16 |
+| Amazon SQS | 1:17 |
 
-
+	
+	aws-android-sdk-core
+	aws-android-sdk-autoscaling
+	aws-android-sdk-cloudwatch
+	aws-android-sdk-cognito
+	aws-android-sdk-ddb
+	aws-android-sdk-ddb-mapper
+	aws-android-sdk-ec2
+	aws-android-sdk-elb
+	aws-android-sdk-kinesis
+	aws-android-sdk-machinelearning
+	aws-android-sdk-mobileanalytics
+	aws-android-sdk-s3
+	aws-android-sdk-sdb
+	aws-android-sdk-ses
+	aws-android-sdk-sns
+	aws-android-sdk-sqs
 <br>
 * **jar파일 직접넣기** 
 	
