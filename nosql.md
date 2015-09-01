@@ -239,5 +239,7 @@ import com.amazonaws.services.dynamodbv2.model.*;
 2. 'Create new identity pool' 버튼을 클릭한다.
 ![](identitypool0.PNG)
 3. 'Identity pool name' 적고 'Unauthenticated identities'의 enable access to unauthenticated identities 체크박스를 체크하고 Create Pool 클릭한다. 
-
+![](identitypool1.PNG)
 4. Allow 누른다
+![](identitypool2.PNG)
+
