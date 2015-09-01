@@ -131,7 +131,7 @@ dependencies {
 ```
 dependencies 풀 리스트
 
-| 0:0 | 1:0 |
+| Dependency | Build.gradle Value |
 | -- | -- |
 | 0:2 | 1:2 |
 | 0:3 | 1:3 |
@@ -151,7 +151,7 @@ dependencies 풀 리스트
 | 0:17 | 1:17 |
 
 
-Dependency	Build.gradle Value
+	
 AWS Mobile SDK core	com.amazonaws:aws-android-sdk-core:2.+
 Auto Scaling	com.amazonaws:aws-android-sdk-autoscaling:2.+
 Amazon Cloud Watch	com.amazonaws:aws-android-sdk-cloudwatch:2.+
