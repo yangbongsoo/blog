@@ -153,7 +153,7 @@ Hash key + Range key
 
 
 
-2. import the jar files
+3. import the jar files
 	
 	
 	
