@@ -158,7 +158,25 @@ https://github.com/aws/aws-sdk-android
 | Amazon SQS | com.amazonaws:aws-android-sdk-sqs:2.+ |
 
 * **Maven 방식**
-
+```
+<dependencies>
+    <dependency>
+        <groupid>com.amazonaws</groupid>
+        <artifactid>aws-android-sdk-core</artifactid>
+        <version>[2.2.0, 2.3)</version>
+    </dependency>
+    <dependency>
+        <groupid>com.amazonaws</groupid>
+        <artifactid>aws-android-sdk-cognito</artifactid>
+        <version>[2.2.0, 2.3)</version>
+    </dependency>
+    <dependency>
+        <groupid>com.amazonaws</groupid>
+        <artifactid>aws-android-sdk-mobileanalytics</artifactid>
+        <version>[2.2.0, 2.3)</version>
+    </dependency>
+</dependencies>
+```
 
 * **jar파일 직접넣기** 
 	
