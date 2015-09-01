@@ -252,7 +252,7 @@ import com.amazonaws.services.dynamodbv2.model.*;
 1. https://console.aws.amazon.com/dynamodb/home 접속한다. (서버 지역 확인)
 2. Create Table을 클릭한다.
 ![](dbtable.PNG)
-3. 33
+3. Table Name에 Books를 적는다.
 4. 44
 5. 55
 6. 66
