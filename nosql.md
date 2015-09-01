@@ -225,6 +225,8 @@ import com.amazonaws.services.dynamodbv2.model.*;
 ```
 
 ### Set Permissions in Your Android Manifest
-
+```
+<uses-permission android:name="android.permission.INTERNET" />
+```
 	
 	
