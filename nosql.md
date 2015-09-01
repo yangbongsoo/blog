@@ -178,8 +178,8 @@ https://github.com/aws/aws-sdk-android
         </dependency>
     </dependencies>
     ```
-
-
+Release버전은 여기서 확인 
+https://aws.amazon.com/releasenotes/Android
 
 
 
