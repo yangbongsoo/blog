@@ -76,3 +76,5 @@ Table
 
 Local Secondary Indexes
 * Range key 이외에 필터 검색을 위한 키를 가질 수 있음
+
+
