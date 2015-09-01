@@ -119,7 +119,7 @@ Hash key + Range key
 
 **Include JAR Files in Your Project (내 프로젝트에 라이브러리 추가하기)**
 
-**1. gradle 방식** <br>
+1. gradle 방식 <br>
 
     ```
     dependencies {
@@ -129,7 +129,6 @@ Hash key + Range key
         compile 'com.amazonaws:aws-android-sdk-ddb:2.+'
     }
     ```
-
     dependencies 풀 리스트
 
 | Dependency | Build.gradle Value |
