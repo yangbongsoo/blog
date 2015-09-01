@@ -248,3 +248,4 @@ import com.amazonaws.services.dynamodbv2.model.*;
 
 
 ###Create DynamoDB Table
+이 튜토리얼을 위해 우리가 서점 앱을 만든다고 가정하자. 
