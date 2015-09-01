@@ -228,5 +228,6 @@ import com.amazonaws.services.dynamodbv2.model.*;
 ```
 <uses-permission android:name="android.permission.INTERNET" />
 ```
-	
+
+### Create an Identity Pool
 	
