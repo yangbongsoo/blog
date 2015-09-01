@@ -160,7 +160,11 @@ https://github.com/aws/aws-sdk-android
 
 * **jar파일 넣기** 
 	
-	
+http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/Welcome.html<br>
+
+여기서 'Download the AWS Mobile SDK for Android'부분에서 
+
+* Download AWS Mobile SDK for Android (zip file) 클릭하면 소스 전체를 다운받을 수 있는데 
 	
 	
 	
