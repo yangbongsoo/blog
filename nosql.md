@@ -235,3 +235,5 @@ import com.amazonaws.services.dynamodbv2.model.*;
 내 애플리케이션 사용자들의 identities는 identity pool에 의해 내 계정에 저장되고 관리된다. 모든 identity pool은 사용자가 접근할 수 있는 AWS resources를 지정하는 역할을 갖는다. 일반적으로 개발자는 한 애플리케이션에 한 identity pool을 사용한다. 
 
 내 애플리케이션에 identity pool을 생성하기 위해서는 
+1. https://console.aws.amazon.com/cognito/home 에 로그인해서 접속한다.
+2. 
