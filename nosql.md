@@ -215,16 +215,5 @@ http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/Welcome.html<br>
 
 
 
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
