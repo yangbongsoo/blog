@@ -65,4 +65,4 @@ Query(Hash + 범위 키만) <br>
 
 **테이블 디자인을 위한 요소 (1)**<br>
 Table 
-    - ㅇㅇ
+* Primary Key로 "Hash key" or "Hash key & Range key"를 선택 
