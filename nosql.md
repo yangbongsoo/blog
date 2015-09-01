@@ -129,7 +129,7 @@ dependencies {
     compile 'com.amazonaws:aws-android-sdk-ddb:2.+'
 }
 ```
-
+dependencies 풀 리스트
 A full list of dependencies are listed below.
 
 Dependency	Build.gradle Value
