@@ -247,3 +247,4 @@ import com.amazonaws.services.dynamodbv2.model.*;
 ![](identitypool3.PNG)
 
 
+###Create DynamoDB Table
