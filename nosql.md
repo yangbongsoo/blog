@@ -268,4 +268,5 @@ import com.amazonaws.services.dynamodbv2.model.*;
 11. Create 클릭하면 DynamoDB가 만들어 진다. 
 12. Details 탭 눌러보면 ARN 복사해라 곧 쓸거다 
  
+### Set Permissions
 
