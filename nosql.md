@@ -152,7 +152,7 @@ Hash key + Range key
 | Amazon SQS | com.amazonaws:aws-android-sdk-sqs:2.+ |
 
 
-* jar파일 넣기 
+* **jar파일 넣기** 
 	
 	
 	
