@@ -200,23 +200,7 @@ https://aws.amazon.com/releasenotes/Android
 | Amazon SNS | aws-android-sdk-sns |
 | Amazon SQS | aws-android-sdk-sqs |
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 <br>
 * **jar파일 직접넣기** 
 	
