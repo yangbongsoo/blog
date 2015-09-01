@@ -130,26 +130,26 @@ Hash key + Range key
     }
     ```
 
-dependencies 풀 리스트
-
-| Dependency | Build.gradle Value |
-| -- | -- |
-| AWS Mobile SDK core | com.amazonaws:aws-android-sdk-core:2.+ |
-| Auto Scaling | com.amazonaws:aws-android-sdk-autoscaling:2.+ |
-| Amazon Cloud Watch | com.amazonaws:aws-android-sdk-cloudwatch:2.+ |
-| Amazon Cognito Sync | com.amazonaws:aws-android-sdk-cognito:2.+ |
-| Amazon DynamoDB | com.amazonaws:aws-android-sdk-ddb:2.+ |
-| Amazon DynamoDB Object Mapper | com.amazonaws:aws-android-sdk-ddb-mapper:2.+ |
-| Amazon EC2 | com.amazonaws:aws-android-sdk-ec2:2.+ |
-| Elastic Load Balancing | com.amazonaws:aws-android-sdk-elb:2.+ |
-| Amazon Kinesis | com.amazonaws:aws-android-sdk-kinesis:2.+ |
-| Amazon Machine Learning | com.amazonaws:aws-android-sdk-machinelearning:2.+ |
-| Amazon Mobile Analytics | com.amazonaws:aws-android-sdk-mobileanalytics:2.+ |
-| Amazon S3 | com.amazonaws:aws-android-sdk-s3:2.+ |
-| Amazon Simple DB | com.amazonaws:aws-android-sdk-sdb:2.+ |
-| Amazon SES | com.amazonaws:aws-android-sdk-ses:2.+ |
-| Amazon SNS | com.amazonaws:aws-android-sdk-sns:2.+ |
-| Amazon SQS | com.amazonaws:aws-android-sdk-sqs:2.+ |
+    dependencies 풀 리스트
+    
+    | Dependency | Build.gradle Value |
+    | -- | -- |
+    | AWS Mobile SDK core | com.amazonaws:aws-android-sdk-core:2.+ |
+    | Auto Scaling | com.amazonaws:aws-android-sdk-autoscaling:2.+ |
+    | Amazon Cloud Watch | com.amazonaws:aws-android-sdk-cloudwatch:2.+ |
+    | Amazon Cognito Sync | com.amazonaws:aws-android-sdk-cognito:2.+ |
+    | Amazon DynamoDB | com.amazonaws:aws-android-sdk-ddb:2.+ |
+    | Amazon DynamoDB Object Mapper | com.amazonaws:aws-android-sdk-ddb-mapper:2.+ |
+    | Amazon EC2 | com.amazonaws:aws-android-sdk-ec2:2.+ |
+    | Elastic Load Balancing | com.amazonaws:aws-android-sdk-elb:2.+ |
+    | Amazon Kinesis | com.amazonaws:aws-android-sdk-kinesis:2.+ |
+    | Amazon Machine Learning | com.amazonaws:aws-android-sdk-machinelearning:2.+ |
+    | Amazon Mobile Analytics | com.amazonaws:aws-android-sdk-mobileanalytics:2.+ |
+    | Amazon S3 | com.amazonaws:aws-android-sdk-s3:2.+ |
+    | Amazon Simple DB | com.amazonaws:aws-android-sdk-sdb:2.+ |
+    | Amazon SES | com.amazonaws:aws-android-sdk-ses:2.+ |
+    | Amazon SNS | com.amazonaws:aws-android-sdk-sns:2.+ |
+    | Amazon SQS | com.amazonaws:aws-android-sdk-sqs:2.+ |
 
 2. import the jar files
 	
