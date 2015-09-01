@@ -78,3 +78,14 @@ Local Secondary Indexes
 * Range key 이외에 필터 검색을 위한 키를 가질 수 있음
 
 **테이블 디자인을 위한 요소 (2)**<br>
+
+Attributes
+* 데이터의 내용. Hash key에 해당하는 Attributes 이외에는 미리 정의할 필요는 없다. 또한 레코드에서 Attributes가 불규칙하더라도 문제 없다. 
+
+Attributes 형식
+* String
+* Number
+* Binary
+* Array of String
+* Array of Number
+* Array of Binary
