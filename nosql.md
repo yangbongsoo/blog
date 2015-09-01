@@ -63,4 +63,3 @@ Get/Put/Update/Delete/BatchGet <br>
 Scan (전체 테이블을 싹쓸이로 긁어옴) <br> 
 Query(Hash + 범위 키만) <br>
 
-
