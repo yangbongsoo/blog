@@ -251,6 +251,7 @@ import com.amazonaws.services.dynamodbv2.model.*;
 이 튜토리얼을 위해 우리가 서점 앱을 만든다고 가정하자. Books table을 만들기 위해 </br>
 1. https://console.aws.amazon.com/dynamodb/home 접속한다.
 2. Create Table을 클릭한다.
+
 3. 33
 4. 44
 5. 55
