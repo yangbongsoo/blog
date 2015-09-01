@@ -252,7 +252,7 @@ import com.amazonaws.services.dynamodbv2.model.*;
 1. https://console.aws.amazon.com/dynamodb/home 접속한다. (서버 지역 확인)
 ![](dbtable.PNG)
 2. Create Table을 클릭한다.
-![](dbtable2.PNG)<br>
+![](dbtable2.PNG)
 3. Table Name에 Books를 적는다.
 4. Primary key type으로 Hash를 선택한다.
 5. Hash Attribute Name에 ISBN적고 type은 String으로 한다. 그리고 continue 클릭
