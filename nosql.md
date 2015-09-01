@@ -158,7 +158,10 @@ https://github.com/aws/aws-sdk-android
 | Amazon SQS | com.amazonaws:aws-android-sdk-sqs:2.+ |
 
 
-* **jar파일 넣기** 
+
+
+
+* **jar파일 직접넣기** 
 	
 http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/Welcome.html<br>
 
