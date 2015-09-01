@@ -120,6 +120,9 @@ Hash key + Range key
 코드 샘플 <br>
 https://github.com/awslabs/aws-sdk-android-samples
 
+AWS-SDK-Android<br>
+https://github.com/aws/aws-sdk-android
+
 **Include JAR Files in Your Project (내 프로젝트에 라이브러리 추가하기)**
 
 * **gradle 방식** 
