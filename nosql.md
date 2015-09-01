@@ -266,6 +266,4 @@ import com.amazonaws.services.dynamodbv2.model.*;
 10. 노티 알려줄 이메일주소 적고 continue한다. 
 ![](dbtable6.PNG)
 11. Create 클릭하면 DynamoDB가 만들어 진다. 
-12. 12
-13. 13
-14. 14
+12. Details 탭 눌러보면 ARN 복사해라 곧 쓸거다 
