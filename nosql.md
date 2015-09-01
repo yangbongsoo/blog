@@ -150,6 +150,7 @@ dependencies 풀 리스트
 | Amazon SNS | com.amazonaws:aws-android-sdk-sns:2.+ |
 | Amazon SQS | com.amazonaws:aws-android-sdk-sqs:2.+ |
 
+
 2. import the jar files
 	
 	
