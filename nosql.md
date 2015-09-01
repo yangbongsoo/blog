@@ -121,7 +121,6 @@ Hash key + Range key
 
 1. gradle 방식 <br>
 
-
     ```
     dependencies {
         compile 'com.amazonaws:aws-android-sdk-core:2.+'
