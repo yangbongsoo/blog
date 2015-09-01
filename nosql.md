@@ -120,7 +120,7 @@ Hash key + Range key
 **Include JAR Files in Your Project (내 프로젝트에 라이브러리 추가하기)**
 
 1. gradle 방식 <br>
-
+2. import the jar files
 ```
 dependencies {
     compile 'com.amazonaws:aws-android-sdk-core:2.+'
@@ -150,7 +150,7 @@ dependencies 풀 리스트
 | Amazon SNS | com.amazonaws:aws-android-sdk-sns:2.+ |
 | Amazon SQS | com.amazonaws:aws-android-sdk-sqs:2.+ |
 
-2. import the jar files
+
 	
 	
 	
