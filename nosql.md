@@ -256,11 +256,11 @@ import com.amazonaws.services.dynamodbv2.model.*;
 3. Table Name에 Books를 적는다.
 4. Primary key type으로 Hash를 선택한다.
 5. Hash Attribute Name에 ISBN적고 type은 String으로 한다. 그리고 continue 클릭
-
+![](dbtable3.PNG)
 6. 인덱스는 hash와 range key 대체를 위한 데이터 구조이다. Index type을 Global Secondary Index로 한다. Index Hash Key의 type을 String으로 하고 Author를 적어 넣는다.
 7. Index Range key type을 String으로 하고 Title을 적어 넣는다.
-8. 88
-9. 99
+8. 나머지 것들은 default로 남기고 Add Index to Table 클릭하고 Continue한다.
+9. 
 10. 110
 11. 11
 12. 12
