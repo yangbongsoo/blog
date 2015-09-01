@@ -59,6 +59,6 @@ DynamoDB를 시작하려면
 2. Read/Write 처리량을 결정
 
 주로 사용되는 기능 <br>
-Get/Put/Update/Delete/BatchGet
+Get/Put/Update/Delete/BatchGet <br>
 Scan (전체 테이블을 싹쓸이로 긁어옴) 
 Query(Hash + 범위 키만) 
