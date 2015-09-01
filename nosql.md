@@ -136,7 +136,7 @@ dependencies 풀 리스트
 | AWS Mobile SDK core | 1:2 |
 | Auto Scaling | 1:3 |
 | Amazon Cloud Watch | 1:4 |
-| 0:5 | 1:5 |
+| Amazon Cognito Sync | 1:5 |
 | 0:6 | 1:6 |
 | 0:7 | 1:7 |
 | 0:8 | 1:8 |
