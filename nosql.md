@@ -252,6 +252,7 @@ import com.amazonaws.services.dynamodbv2.model.*;
 1. https://console.aws.amazon.com/dynamodb/home 접속한다.
 2. Create Table을 클릭한다.
 ![](dbtable.PNG)
+
 3. 33
 4. 44
 5. 55
