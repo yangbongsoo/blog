@@ -120,15 +120,19 @@ Hash key + Range key
 **Include JAR Files in Your Project (내 프로젝트에 라이브러리 추가하기)**
 
 1. gradle 방식 <br>
+
+    ```
+    dependencies {
+        compile 'com.amazonaws:aws-android-sdk-core:2.+'
+        compile 'com.amazonaws:aws-android-sdk-cognito:2.+'
+        compile 'com.amazonaws:aws-android-sdk-s3:2.+'
+        compile 'com.amazonaws:aws-android-sdk-ddb:2.+'
+    }
+    ```
+
+
 2. import the jar files
-```
-dependencies {
-    compile 'com.amazonaws:aws-android-sdk-core:2.+'
-    compile 'com.amazonaws:aws-android-sdk-cognito:2.+'
-    compile 'com.amazonaws:aws-android-sdk-s3:2.+'
-    compile 'com.amazonaws:aws-android-sdk-ddb:2.+'
-}
-```
+
 dependencies 풀 리스트
 
 | Dependency | Build.gradle Value |
