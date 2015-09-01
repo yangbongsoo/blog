@@ -129,6 +129,7 @@ Hash key + Range key
         compile 'com.amazonaws:aws-android-sdk-ddb:2.+'
     }
     ```
+    
     dependencies 풀 리스트
 
 | Dependency | Build.gradle Value |
