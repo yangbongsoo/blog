@@ -230,5 +230,5 @@ import com.amazonaws.services.dynamodbv2.model.*;
 ```
 
 ### Create an Identity Pool
-
+내 모바일 애플리케이션에 AWS Services를 사용하기 위해서는 
 	
