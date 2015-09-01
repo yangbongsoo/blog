@@ -24,5 +24,5 @@
    * [설치](c124_ce58.md)
    * [프로젝트 따라하기](d504_b85c_c81d_d2b8_b530_b77c_d558_ae30.md)
 * [Amazon Cognito(Android-DynamoDB)](android-dynamodb.md)
-   * [NoSQL](nosql.md)
+   * [DynamoDB](nosql.md)
 
