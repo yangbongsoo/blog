@@ -217,7 +217,11 @@ http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/Welcome.html<br>
 ### Add Import Statements 
 내 메인 액티비티에 해당 클래스들을 import한다 
 ```
-
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.*;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
+import com.amazonaws.services.dynamodbv2.model.*;
 ```
 	
 	
