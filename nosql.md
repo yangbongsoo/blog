@@ -171,6 +171,8 @@ http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/Welcome.html<br>
 이클립스를 사용중이라면 jar파일들을 내 프로젝트의 libs 폴더에 넣고, 안드로이드 스튜디오를 사용중이라면 apps/libs 폴더에 넣는다. 그러면 자동으로 빌드 패스에 포함시킬것이다.
 
 
+
+
 	
 	
 	
