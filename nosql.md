@@ -264,7 +264,7 @@ import com.amazonaws.services.dynamodbv2.model.*;
 9. Read capacity를 10으로 Write capacity를 5로 하고 continue한다.
 ![](dbtable5.PNG)
 10. 노티 알려줄 이메일주소 적고 continue한다. 
-11. 
+
 11. Create 클릭하면 DynamoDB가 만들어 진다. 
 12. 12
 13. 13
