@@ -89,3 +89,5 @@ Attributes 형식
 * Array of String
 * Array of Number
 * Array of Binary
+
+**DynamoDB의 데이터 모델** 
