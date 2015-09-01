@@ -236,4 +236,5 @@ import com.amazonaws.services.dynamodbv2.model.*;
 
 내 애플리케이션에 identity pool을 생성하기 위해서는 
 1. https://console.aws.amazon.com/cognito/home 에 로그인해서 접속한다.
-2. 
+2. Create new identity pool 버튼을 클릭한다.
+3. 
