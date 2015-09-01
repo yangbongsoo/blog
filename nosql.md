@@ -257,7 +257,7 @@ import com.amazonaws.services.dynamodbv2.model.*;
 4. Primary key type으로 Hash를 선택한다.
 5. Hash Attribute Name에 ISBN적고 type은 String으로 한다. 그리고 continue 클릭
 
-6. 인덱스는 hash와 range key 대체를 위한 데이터 구조이다. 
+6. 인덱스는 hash와 range key 대체를 위한 데이터 구조이다. Index type을 Global Secondary Index로 한다. Index Hash Key의 type을 String으로 하고 Author를 적어 넣는다.
 7. 77
 8. 88
 9. 99
