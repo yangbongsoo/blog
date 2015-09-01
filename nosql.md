@@ -138,7 +138,7 @@ dependencies 풀 리스트
 | Amazon Cloud Watch | com.amazonaws:aws-android-sdk-cloudwatch:2.+ |
 | Amazon Cognito Sync | com.amazonaws:aws-android-sdk-cognito:2.+ |
 | Amazon DynamoDB | com.amazonaws:aws-android-sdk-ddb:2.+ |
-| Amazon DynamoDB Object Mapper | 1:7 |
+| Amazon DynamoDB Object Mapper | com.amazonaws:aws-android-sdk-ddb-mapper:2.+ |
 | Amazon EC2 | 1:8 |
 | Elastic Load Balancing | 1:9 |
 | Amazon Kinesis | 1:10 |
@@ -157,7 +157,7 @@ dependencies 풀 리스트
 	
 	
 	
-	com.amazonaws:aws-android-sdk-ddb-mapper:2.+
+	
 	com.amazonaws:aws-android-sdk-ec2:2.+
 	com.amazonaws:aws-android-sdk-elb:2.+
 	com.amazonaws:aws-android-sdk-kinesis:2.+
