@@ -53,3 +53,7 @@ SQL 데이터베이스에서는 가장 어려운 점이고 가장 중요한 특�
 
 대표적으로 사용하는 Key/Value Store는 아마존 DynamoDB 같은 NoSQL이다. 
 
+
+DynamoDB를 시작하려면 
+1. 테이블의 Key 와 Index 를 결정
+2. Read/Write 처리량을 결정
