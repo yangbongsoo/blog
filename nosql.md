@@ -67,4 +67,5 @@ Query(Hash + 범위 키만) <br>
 
 Table 
 * Primary Key로 "Hash key" or "Hash key & Range key"를 선택 
+기본 키 : Hash key
 
