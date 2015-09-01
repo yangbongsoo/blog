@@ -253,6 +253,7 @@ import com.amazonaws.services.dynamodbv2.model.*;
 ![](dbtable.PNG)
 2. Create Table을 클릭한다.
 
+
 ![](dbtable2.PNG)
 3. Table Name에 Books를 적는다.
 4. Primary key type으로 Hash를 선택한다.
