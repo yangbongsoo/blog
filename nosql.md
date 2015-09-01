@@ -134,7 +134,7 @@ dependencies 풀 리스트
 | Dependency | Build.gradle Value |
 | -- | -- |
 | AWS Mobile SDK core | com.amazonaws:aws-android-sdk-core:2.+ |
-| Auto Scaling | 1:3 |
+| Auto Scaling | com.amazonaws:aws-android-sdk-autoscaling:2.+ |
 | Amazon Cloud Watch | 1:4 |
 | Amazon Cognito Sync | 1:5 |
 | Amazon DynamoDB | 1:6 |
@@ -153,7 +153,7 @@ dependencies 풀 리스트
 
 	
 	
-	com.amazonaws:aws-android-sdk-autoscaling:2.+
+	
 	com.amazonaws:aws-android-sdk-cloudwatch:2.+
 	com.amazonaws:aws-android-sdk-cognito:2.+
 	com.amazonaws:aws-android-sdk-ddb:2.+
