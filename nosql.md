@@ -166,7 +166,7 @@ http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/Welcome.html<br>
 
 * Download AWS Mobile SDK for Android (zip file) 클릭하면 소스 전체를 다운받을 수 있는데
 
-그 폴더안에 jar파일들이 있다. (github에서 다운받아지는 거랑 다름)
+압축풀고 lib 폴더안에 jar파일들이 있다. (github에서 다운받아지는 거랑 다름)
 
 
 	
