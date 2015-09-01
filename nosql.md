@@ -139,9 +139,9 @@ dependencies 풀 리스트
 | Amazon Cognito Sync | 1:5 |
 | Amazon DynamoDB | 1:6 |
 | Amazon DynamoDB Object Mapper | 1:7 |
-| 0:8 | 1:8 |
-| 0:9 | 1:9 |
-| 0:10 | 1:10 |
+| Amazon EC2 | 1:8 |
+| Elastic Load Balancing | 1:9 |
+| Amazon Kinesis | 1:10 |
 | 0:11 | 1:11 |
 | 0:12 | 1:12 |
 | 0:13 | 1:13 |
@@ -158,9 +158,9 @@ dependencies 풀 리스트
 	com.amazonaws:aws-android-sdk-cognito:2.+
 	com.amazonaws:aws-android-sdk-ddb:2.+
 	com.amazonaws:aws-android-sdk-ddb-mapper:2.+
-Amazon EC2	com.amazonaws:aws-android-sdk-ec2:2.+
-Elastic Load Balancing	com.amazonaws:aws-android-sdk-elb:2.+
-Amazon Kinesis	com.amazonaws:aws-android-sdk-kinesis:2.+
+	com.amazonaws:aws-android-sdk-ec2:2.+
+	com.amazonaws:aws-android-sdk-elb:2.+
+	com.amazonaws:aws-android-sdk-kinesis:2.+
 Amazon Machine Learning	com.amazonaws:aws-android-sdk-machinelearning:2.+
 Amazon Mobile Analytics	com.amazonaws:aws-android-sdk-mobileanalytics:2.+
 Amazon S3	com.amazonaws:aws-android-sdk-s3:2.+
