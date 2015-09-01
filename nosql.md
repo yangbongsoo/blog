@@ -130,7 +130,7 @@ dependencies {
 }
 ```
 dependencies 풀 리스트
-A full list of dependencies are listed below.
+
 
 Dependency	Build.gradle Value
 AWS Mobile SDK core	com.amazonaws:aws-android-sdk-core:2.+
