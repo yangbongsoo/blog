@@ -157,6 +157,7 @@ https://github.com/aws/aws-sdk-android
 | Amazon SNS | com.amazonaws:aws-android-sdk-sns:2.+ |
 | Amazon SQS | com.amazonaws:aws-android-sdk-sqs:2.+ |
 
+<br>
 * **Maven 방식**
     ```
     <dependencies>
