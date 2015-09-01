@@ -91,5 +91,8 @@ Attributes 형식
 * Array of Binary
 
 **DynamoDB의 데이터 모델**
+![](dynamodbtablemodel.PNG)
 
-
+Hash key
+* 간단한 키 값
+* Hash 이므로 정렬이 필요 없음 
