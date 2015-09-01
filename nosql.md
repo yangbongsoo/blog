@@ -107,3 +107,7 @@ Hash key + Range key
 * 테이블명 Products
 * 상품 ID(ProductId)를 테이블의 Hash key로 사용 
 
+
+
+---
+
