@@ -142,7 +142,7 @@ dependencies 풀 리스트
 | Amazon EC2 | com.amazonaws:aws-android-sdk-ec2:2.+ |
 | Elastic Load Balancing | com.amazonaws:aws-android-sdk-elb:2.+ |
 | Amazon Kinesis | com.amazonaws:aws-android-sdk-kinesis:2.+ |
-| Amazon Machine Learning | 1:11 |
+| Amazon Machine Learning | com.amazonaws:aws-android-sdk-machinelearning:2.+ |
 | Amazon Mobile Analytics | 1:12 |
 | Amazon S3 | 1:13 |
 | Amazon Simple DB | 1:14 |
@@ -161,7 +161,7 @@ dependencies 풀 리스트
 	
 	
 	
-	com.amazonaws:aws-android-sdk-machinelearning:2.+
+	
 	com.amazonaws:aws-android-sdk-mobileanalytics:2.+
 	com.amazonaws:aws-android-sdk-s3:2.+
 	com.amazonaws:aws-android-sdk-sdb:2.+
