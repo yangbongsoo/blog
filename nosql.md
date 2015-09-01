@@ -183,40 +183,40 @@ https://aws.amazon.com/releasenotes/Android
 
 | Service/Feature | artifactID |
 | -- | -- |
-| AWS Mobile SDK Core [1] | 1:2 |
-| Auto Scaling | 1:3 |
-| Amazon Cloud Watch | 1:4 |
-| Amazon Cognito Sync | 1:5 |
-| Amazon DynamoDB | 1:6 |
-| Amazon DynamoDB Object Mapper | 1:7 |
-| Amazon EC2 | 1:8 |
-| Elastic Load Balancing | 1:9 |
-| Amazon Kinesis | 1:10 |
-| Amazon Machine Learning | 1:11 |
-| Amazon Mobile Analytics | 1:12 |
-| Amazon S3 | 1:13 |
-| Amazon Simple DB | 1:14 |
-| Amazon SES | 1:15 |
-| Amazon SNS | 1:16 |
-| Amazon SQS | 1:17 |
+| AWS Mobile SDK Core [1] | aws-android-sdk-core |
+| Auto Scaling | aws-android-sdk-autoscaling |
+| Amazon Cloud Watch | aws-android-sdk-cloudwatch |
+| Amazon Cognito Sync | aws-android-sdk-cognito |
+| Amazon DynamoDB | aws-android-sdk-ddb |
+| Amazon DynamoDB Object Mapper | aws-android-sdk-ddb-mapper |
+| Amazon EC2 | aws-android-sdk-ec2 |
+| Elastic Load Balancing | aws-android-sdk-elb |
+| Amazon Kinesis | aws-android-sdk-kinesis |
+| Amazon Machine Learning | aws-android-sdk-machinelearning |
+| Amazon Mobile Analytics | aws-android-sdk-mobileanalytics |
+| Amazon S3 | aws-android-sdk-s3 |
+| Amazon Simple DB | aws-android-sdk-sdb |
+| Amazon SES | aws-android-sdk-ses |
+| Amazon SNS | aws-android-sdk-sns |
+| Amazon SQS | aws-android-sdk-sqs |
 
 	
-	aws-android-sdk-core
-	aws-android-sdk-autoscaling
-	aws-android-sdk-cloudwatch
-	aws-android-sdk-cognito
-	aws-android-sdk-ddb
-	aws-android-sdk-ddb-mapper
-	aws-android-sdk-ec2
-	aws-android-sdk-elb
-	aws-android-sdk-kinesis
-	aws-android-sdk-machinelearning
-	aws-android-sdk-mobileanalytics
-	aws-android-sdk-s3
-	aws-android-sdk-sdb
-	aws-android-sdk-ses
-	aws-android-sdk-sns
-	aws-android-sdk-sqs
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 <br>
 * **jar파일 직접넣기** 
 	
