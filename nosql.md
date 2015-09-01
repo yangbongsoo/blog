@@ -101,3 +101,8 @@ Hash key + Range key
 * 복합 기본 키 
 * Range key는 sort가 있음 
 
+샘플(1) 상품 카탈로그 <br>
+
+스키마 
+* 테이블명 Products
+* 상품 ID(ProductId)를 테이블의 Hash key로 사용 
