@@ -146,9 +146,9 @@ dependencies 풀 리스트
 | Amazon Mobile Analytics | com.amazonaws:aws-android-sdk-mobileanalytics:2.+ |
 | Amazon S3 | com.amazonaws:aws-android-sdk-s3:2.+ |
 | Amazon Simple DB | com.amazonaws:aws-android-sdk-sdb:2.+ |
-| Amazon SES | 1:15 |
-| Amazon SNS | 1:16 |
-| Amazon SQS | 1:17 |
+| Amazon SES | com.amazonaws:aws-android-sdk-ses:2.+ |
+| Amazon SNS | com.amazonaws:aws-android-sdk-sns:2.+ |
+| Amazon SQS | com.amazonaws:aws-android-sdk-sqs:2.+ |
 
 
 	
@@ -165,6 +165,6 @@ dependencies 풀 리스트
 	
 	
 	
-	com.amazonaws:aws-android-sdk-ses:2.+
-	com.amazonaws:aws-android-sdk-sns:2.+
-	com.amazonaws:aws-android-sdk-sqs:2.+
+	
+	
+	
