@@ -260,7 +260,7 @@ import com.amazonaws.services.dynamodbv2.model.*;
 6. 인덱스는 hash와 range key 대체를 위한 데이터 구조이다. Index type을 Global Secondary Index로 한다. Index Hash Key의 type을 String으로 하고 Author를 적어 넣는다.
 7. Index Range key type을 String으로 하고 Title을 적어 넣는다.
 8. 나머지 것들은 default로 남기고 Add Index to Table 클릭하고 Continue한다.
-
+![](dbtable4.PNG)
 9. Read capacity를 10으로 Write capacity를 5로 하고 continue한다.
 10. 110
 11. 11
