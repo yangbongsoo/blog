@@ -178,6 +178,11 @@ https://github.com/aws/aws-sdk-android
     </dependencies>
     ```
 
+
+
+
+
+
 * **jar파일 직접넣기** 
 	
 http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/Welcome.html<br>
