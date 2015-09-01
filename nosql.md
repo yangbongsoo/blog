@@ -244,4 +244,6 @@ import com.amazonaws.services.dynamodbv2.model.*;
 ![](identitypool2.PNG)
 
 다음페이지는 credentials provider를 생성하는 코드를 보여준다. 그래서 너가 쉽게 안드로이드 애플리케이션에서 Cognito Identity를 통합 할 수 있다.
+![](identitypool3.PNG)
+
 
