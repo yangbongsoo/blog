@@ -117,4 +117,5 @@ Hash key + Range key
 
 이 섹션은 AWS Mobile SDK(Android)를 사용하여 DynamoDB를 시작하기 위한 가이드를 step-by-step으로 제공한다. 
 
-1. Include JAR Files in Your Project 
+Include JAR Files in Your Project 
+
