@@ -299,8 +299,9 @@ import com.amazonaws.services.dynamodbv2.model.*;
 2. Roles를 선택하고 Cognito가 만들어준 Unauth를 선택해라 
 3. Attach Role Policy를 클릭해라(Create Role Policy를 말하는거 같다)
 4. Custom Policy를 선택하고 클릭 
+![](iam2.PNG)
 5. policy 이름을 적고 위에 있는 policy를 policy document에 붙여넣어라(ARN, Resource value 바꿔서)
-6. 66
+6. Apply Policy 클릭
 7. 77
 8. 88
 9. 
