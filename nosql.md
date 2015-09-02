@@ -294,3 +294,12 @@ import com.amazonaws.services.dynamodbv2.model.*;
 
 내 Cognito identity pool의 unauthenticated role에 이 policy를 적용해서 내 DynamoDB table에 대한 올바른 ARN과 Resource 값을 대체해라.
 
+1. 11
+2. 22
+3. 33
+4. 44
+5. 55
+6. 66
+7. 77
+8. 88
+9. 
