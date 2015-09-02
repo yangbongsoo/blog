@@ -292,4 +292,5 @@ import com.amazonaws.services.dynamodbv2.model.*;
 ```
 다음의 IAM policy는 유저가 ARN으로 두개의 resources(테이블과 인덱스) 작업을 수행할 수 있게 한다.
 
-내 Cognito identity pool의 unauthenticated role에 이 policy를 적용해서 내 DynamoDB table에 대한 올바른 ARN과 Resource 값을 대체한다.
+내 Cognito identity pool의 unauthenticated role에 이 policy를 적용해서 내 DynamoDB table에 대한 올바른 ARN과 Resource 값을 대체해라.
+
