@@ -302,3 +302,5 @@ import com.amazonaws.services.dynamodbv2.model.*;
 6. Apply Policy 클릭
 
 ### Create a DynamoDB Client and Object Mapper
+
+이제 DB와 client-side class를 맵핑할 DynamoDB Object Mapper를 사용하자. Object Mapper를 사용하기 위해 
