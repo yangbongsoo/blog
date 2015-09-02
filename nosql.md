@@ -271,5 +271,22 @@ import com.amazonaws.services.dynamodbv2.model.*;
 ### Set Permissions
 애플리케이션에서 DynamoDD를 사용하기 위해서 올바른 권한을 설정해야한다. 
 ```
-
+{
+"Statement": [{
+    "Effect": "Allow",
+    "Action": [
+        "dynamodb:DeleteItem",
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:Scan",
+        "dynamodb:Query",
+        "dynamodb:UpdateItem",
+        "dynamodb:BatchWriteItem"
+    ],
+    "Resource": [
+        "arn:aws:dynamodb:us-west-2:123456789012:table/Books",
+        "arn:aws:dynamodb:us-west-2:123456789012:table/Books/index/*"
+    ]
+}]
+}
 ```
