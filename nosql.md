@@ -290,4 +290,4 @@ import com.amazonaws.services.dynamodbv2.model.*;
 }]
 }
 ```
-다음의 IAM policy는 유저가 ARN으로 두개의 resources(테이블과 인덱스)
+다음의 IAM policy는 유저가 ARN으로 두개의 resources(테이블과 인덱스) 작업를 수행할 수 있게 한다
