@@ -269,4 +269,4 @@ import com.amazonaws.services.dynamodbv2.model.*;
 12. Details 탭 눌러보면 ARN 복사해라 곧 쓸거다 
  
 ### Set Permissions
-
+애플리케이션에서 DynamoDD를 사용하기 위해서 올바른 권한을 설정해야한다. 
