@@ -303,4 +303,5 @@ import com.amazonaws.services.dynamodbv2.model.*;
 
 ### Create a DynamoDB Client and Object Mapper
 
-이제 DB와 client-side class를 맵핑할 DynamoDB Object Mapper를 사용하자. Object Mapper를 사용하기 위해 
+이제 DB와 client-side class를 맵핑할 DynamoDB Object Mapper를 사용하자. Object Mapper를 사용하기 위해 첫번째로 DynamoDB client를 인스턴스화 해야한다. 
+
