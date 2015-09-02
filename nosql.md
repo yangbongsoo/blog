@@ -295,8 +295,9 @@ import com.amazonaws.services.dynamodbv2.model.*;
 내 Cognito identity pool의 unauthenticated role에 이 policy를 적용해서 내 DynamoDB table에 대한 올바른 ARN과 Resource 값을 대체해라.
 
 1. IAM Console에 로그인 **https://console.aws.amazon.com/iam/home#home**
+![](iam1.PNG)
 2. Roles를 선택하고 Cognito가 만들어준 Unauth를 선택해라 
-3. 33
+3. Attach Role Policy를 클릭해라(Create Role Policy를 말하는거 같다)
 4. 44
 5. 55
 6. 66
