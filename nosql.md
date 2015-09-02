@@ -270,3 +270,6 @@ import com.amazonaws.services.dynamodbv2.model.*;
  
 ### Set Permissions
 애플리케이션에서 DynamoDD를 사용하기 위해서 올바른 권한을 설정해야한다. 
+```
+
+```
