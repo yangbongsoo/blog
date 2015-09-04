@@ -331,5 +331,5 @@ bookstore 앱에서, 테이블안의 각각의 아이템은 book을 대표 할 �
 
 맵핑하기 위해 DynamoDB는 annotations을 정의한다. 
 1. @DynamoDBTable - DynamoDB의 타켓 테이블을 식별한다.
-2. @DynamoDBHashKey
+2. @DynamoDBHashKey - 테이블의 해쉬 attribute에 클래스 속성을 맵핑한다.
 3. @DynamoDBAttribute
