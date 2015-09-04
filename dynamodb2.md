@@ -415,4 +415,4 @@ book.setHardCover(false);
 ```
 mapper.save(book);
 ```
-기본 키(여기서 
+기본 키(여기서 "ISBN")를 제외하고 테이블에서 item들의 스키마가 미리 정의되어 있는건 없다. 
