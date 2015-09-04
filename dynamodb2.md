@@ -439,3 +439,4 @@ Book selectedBook = mapper.load(Book.class, "1234567890");
 selectedBook.setIsbn("0987654321");
 mapper.save(selectedBook);
 ```
+결과는 DB에 새로운 item이다. 
