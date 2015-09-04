@@ -329,3 +329,5 @@ bookstore 앱에서, 테이블안의 각각의 아이템은 book을 대표 할 �
 
 자바코드에서 Book 객체를 Book 테이블의 각각의 item에 맵핑하기 위해서, 자바코드의 객체 표현을 통해서 다이렉트로 database item을 조작할 수 있다  
 
+맵핑하기 위해 DynamoDB는 annotations을 정의한다. 
+1. 
