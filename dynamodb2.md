@@ -410,4 +410,4 @@ book.setPrice(1299);
 book.setIsbn("1234567890");
 book.setHardCover(false);
 ```
-
+그리고 테이블의 상응하는 item의 객체를 쓰기 위해 Object Mapper client를 사용한다
