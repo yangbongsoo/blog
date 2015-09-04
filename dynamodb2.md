@@ -465,3 +465,4 @@ Object Mapper에 의해 리턴된 리스트는 수정될수 없고 그렇게 시
 ###Perform a Query
 쿼리 작업은 hash와 range key 속성을 이용해 테이블의 아이템을 찾는다. Books테이블의 기본키는 range key를 갖지 않는다. 그러나 테이블을 만들때 global secondary index를 명시하고 그건 range key 속성을 갖는다.<br> 우리는 hash키와 secondary index의 범위 키에 대해 쿼리를 수행할것이다.
 
+**Secondary Indexes**<br>
