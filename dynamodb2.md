@@ -417,4 +417,4 @@ mapper.save(book);
 ```
 기본 키(여기서 "ISBN")를 제외하고 테이블에서 item들의 스키마가 미리 정의되어 있는건 없다. 매핑 클래스를 업데이트하고 추가하거나 뜻에 속성을 제거할 수 있다. item이 가질 수 있는 속성 수는 400KB size 이하로 가질 수 있다. 
 
-**Retrieve an Item**
+**Retrieve an Item(검색)**
