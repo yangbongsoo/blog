@@ -113,8 +113,8 @@ Hash key + Range key
 
 #AWS Documentation > AWS Mobile SDK > Android Developer Guide > Amazon DynamoDB
 
-이 섹션은 AWS Mobile SDK(Android)를 사용하여 DynamoDB를 시작하기 위한 가이드를 step-by-step으로 제공한다. 
-
+이 섹션은 AWS Mobile SDK(Android)를 사용하여 DynamoDB를 시작하기 위한 가이드를 step-by-step으로 제공한다. <br>
+http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/dynamodb_om.html<br><br>
 코드 샘플 <br>
 https://github.com/awslabs/aws-sdk-android-samples
 
