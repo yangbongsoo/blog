@@ -443,3 +443,7 @@ mapper.save(selectedBook);
 이제 selectBook은 새로운 DB의 새로운 item을 맵핑하지만 이전의 item도 남아있다. 
 
 **Delete an Item**<br>
+DB의 item을 지우기 위해 delete()메소드를 사용한다. 
+```
+mapper.delete(selectedBook);
+```
