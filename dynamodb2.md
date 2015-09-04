@@ -447,3 +447,5 @@ DB의 item을 지우기 위해 delete()메소드를 사용한다.
 ```
 mapper.delete(selectedBook);
 ```
+
+###Perform a Scan
