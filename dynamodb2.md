@@ -439,4 +439,4 @@ Book selectedBook = mapper.load(Book.class, "1234567890");
 selectedBook.setIsbn("0987654321");
 mapper.save(selectedBook);
 ```
-결과는DB에 loaded된 item과 동일하지만 새로운 ISBN을 갖는 새로운 item이다. 
+결과는 DB에 loaded된 item과 동일하지만 새로운 ISBN을 갖는 새로운 item이다. 
