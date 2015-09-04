@@ -419,3 +419,4 @@ mapper.save(book);
 
 **Retrieve an Item(검색)**
 
+object의 기본 키(여기서 해쉬 속성인 "ISBN")를 이용해서 DB로부터 상응하는 item을 로드할수 있다. 다음의 코드는 "1234567890"의 ISBN으로 도서 항목을 반환gksek.
