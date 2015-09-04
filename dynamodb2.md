@@ -426,3 +426,10 @@ Book selectedBook = mapper.load(Book.class, "1234567890");
 
 **Update an Item**
 
+DB의 item을 업데이트 하기 위해서 새로운 속성을 세팅하고 object를 저장하기만 하면 된다. 예를 들어 다음과 같이 price를 업데이트 할 수 있다.
+```
+Book selectedBook = mapper.load(Book.class, "1234567890");
+selectedBook.setPrice(1199);
+mapper.save(selectedBook);
+```
+
