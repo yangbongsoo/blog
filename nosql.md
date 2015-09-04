@@ -308,5 +308,5 @@ import com.amazonaws.services.dynamodbv2.model.*;
 우리가 identity pool을 만들때, Cognito client initialization code를 우리 앱에 복사했었다. 
 
 ```
-
+AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
 ```
