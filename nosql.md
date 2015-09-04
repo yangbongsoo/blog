@@ -310,3 +310,4 @@ import com.amazonaws.services.dynamodbv2.model.*;
 ```
 AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
 ```
+credentialsProvider 변수는 Cognito Sample code에 선언되어 있다 복사붙여넣기 하자 
