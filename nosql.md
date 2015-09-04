@@ -394,4 +394,4 @@ public class Book {
     }
 }
 ```
-hardCover가 nullable 타입인것을 주목해라. 
+hardCover가 nullable 타입인것을 주목해라. DynamoDB Object Mapper에서 primitives와 nullable 타입은 다게 동작한다. 
