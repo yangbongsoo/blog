@@ -457,3 +457,4 @@ PaginatedScanList<Book> result = mapper.scan(Book.class, scanExpression);
 ```
 리턴된 item들의 리스트는 가능한 느리게 로드된다. 그러므로 DynamoDB를 콜하는것은 필요에따라 만들어진다. 미리 전체 dataset을 다운로드할 필요가 있을 때, 전체 리스트를 가져오기 위해 size() 메소드를 콜할 수 있다. 
 
+Object Mapper에 의해 리턴된 리스트는 수정될수 없고 그렇게 시도했을 때 결과는 exception뜬다. 
