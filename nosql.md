@@ -396,4 +396,5 @@ public class Book {
 ```
 hardCover가 nullable 타입인것을 주목해라. DynamoDB Object Mapper에서 primitives와 nullable 타입은 다게 동작한다. save()에서 unset nullable 타입은 DynamoDB에 보내지지 않고, unset primitive는 default 값으로 보내진다. 
 
+###Interact with Stored Objects 
 
