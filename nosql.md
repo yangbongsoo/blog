@@ -319,3 +319,5 @@ DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
 이제 DB에 클래스를 매핑할 준비가 됐다  .
 
 ###Define a Mapping Class 
+
+DynamoDB에서 database는 테이블들의 집합이다. 한 테이블은 
