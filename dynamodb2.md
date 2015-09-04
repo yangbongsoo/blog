@@ -402,4 +402,11 @@ hardCover가 nullable 타입인것을 주목해라. DynamoDB Object Mapper에서
 
 **Save an Item**<br>
 객체를 저장하기 위해서, 먼저 생성하고, 적절한 필드값을 세팅시킨다.
-
+```
+Book book = new Book();
+book.setTitle("Great Expectations");
+book.setAuthor("Charles Dickens");
+book.setPrice(1299);
+book.setIsbn("1234567890");
+book.setHardCover(false);
+```
