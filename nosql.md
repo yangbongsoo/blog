@@ -325,3 +325,4 @@ DynamoDB에서 database는 테이블들의 집합이다. 한 테이블은 다음
 2. 각각의 아이템은 속성들의 집합이다.
 3. 각각의 속성은 name과 value를 갖는다. 
 
+우리 bookstore 앱에서, 테이블안의 각각의 아이템은 책을 설명할것이고 각각의 아이템은 5가지 속성들을 갖는다. Title, Author, Price, ISBN, Hardcover
