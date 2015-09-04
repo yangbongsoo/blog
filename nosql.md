@@ -312,3 +312,6 @@ AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
 ```
 credentialsProvider 변수는 Cognito Sample code에 선언되어 있다 복사붙여넣기 하자 
 그리고 Object Mapper를 생성하기 위해 DynamoDB client를 사용할 수 있다.
+```
+
+```
