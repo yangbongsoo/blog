@@ -440,3 +440,6 @@ selectedBook.setIsbn("0987654321");
 mapper.save(selectedBook);
 ```
 결과는 DB에 loaded된 item과 동일하지만, 새로운 ISBN을 갖는 새로운 item이다. 
+이제 selectBook은 새로운 DB의 새로운 item을 맵핑하지만 이전의 item도 남아있다. 
+
+**Delete an Item**<br>
