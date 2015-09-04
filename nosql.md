@@ -336,3 +336,4 @@ bookstore 앱에서, 테이블안의 각각의 아이템은 book을 대표 할 �
 
 DynamoDB annotation 전체 리스트 http://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/JavaDeclarativeTagsList.html
 
+이제 Book 맵핑 클래스를 만들자
