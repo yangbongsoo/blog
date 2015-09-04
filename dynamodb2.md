@@ -460,4 +460,4 @@ PaginatedScanList<Book> result = mapper.scan(Book.class, scanExpression);
 Object Mapper에 의해 리턴된 리스트는 수정될수 없고 그렇게 시도했을 때 결과는 exception뜬다. 
 만약 수정할 수 있는 user interface component(예를들어 수정가능한 ListActivity)를 위해 데이터소스로 스캔의 결과를 사용하길 원한다면, 수정할 수 있는(modifiable) list object 를 생성하고 거기에 data를 옮긴다. 
 
-스캔은 비용이 많이 드는 작업이며 테이블에 우선 순위가 높은 트래픽을 방해하지 않도록주의해서 사용해야 한다.
+스캔은 비용이 많이 드는 작업이며 테이블에 우선 순위가 높은 트래픽을 방해하지 않도록주의해서 사용해야 한다. The Amazon DynamoDB Developer Guide는 http://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/Introduction.html dp scan 작업의 최고 실행을 설명한다. 
