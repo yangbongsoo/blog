@@ -318,3 +318,4 @@ DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
 
 이제 DB에 클래스를 매핑할 준비가 됐다  .
 
+###Define a Mapping Class 
