@@ -423,3 +423,6 @@ object의 기본 키(여기서 해쉬 속성인 "ISBN")를 이용해서 DB로부
 ```
 Book selectedBook = mapper.load(Book.class, "1234567890");
 ```
+
+**Update an Item**
+
