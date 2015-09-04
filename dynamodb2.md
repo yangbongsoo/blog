@@ -415,4 +415,4 @@ book.setHardCover(false);
 ```
 mapper.save(book);
 ```
-
+기본 키(여기서 
