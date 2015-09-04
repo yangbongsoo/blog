@@ -410,4 +410,8 @@ book.setPrice(1299);
 book.setIsbn("1234567890");
 book.setHardCover(false);
 ```
-그리고 테이블에서 클래스 객체와 상응하는 item에 write하기 위해 Object Mapper client를 사용한다.
+그리고 테이블에서 클래스 객체와 상응하는 item에 write하기 위해 Object Mapper client를 사용한다. <br>
+클라이언트에서 save() 메소드를 콜함으로써 book객체를 보낸다.
+```
+
+```
