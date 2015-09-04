@@ -463,3 +463,4 @@ Object Mapper에 의해 리턴된 리스트는 수정될수 없고 그렇게 시
 스캔은 비용이 많이 드는 작업이며 테이블에 우선 순위가 높은 트래픽을 방해하지 않도록주의해서 사용해야 한다. The Amazon DynamoDB Developer Guide는 http://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/Introduction.html dp scan 작업의 최고 실행을 설명한다. 
 
 ###Perform a Query
+쿼리 작업은 hash와 range key 속성을 이용해 테이블의 아이템을 찾는다. Books테이블의 기본키는 range key를 갖지 않는다. 그러나 테이블을 만들때 global secondary index를 명시하고 그건 range key 속성을 갖는다. 
