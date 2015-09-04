@@ -394,4 +394,4 @@ public class Book {
     }
 }
 ```
-
+hardCover가 nullable 타입인것을 주목해라. 
