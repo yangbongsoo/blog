@@ -449,4 +449,9 @@ mapper.delete(selectedBook);
 ```
 
 ###Perform a Scan
-스캔 작업으로, 주어진 테이블에서 모든 item들을 검색할 수 있다. 
+스캔 작업으로, 주어진 테이블에서 모든 item들을 검색할 수 있다. 스캔은 table의 모든 item을 검사하고 비순차적으로 결과를 리턴한다. 
+```
+DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+PaginatedScanList<Book> result = mapper.scan(Book.class, scanExpression);
+// Do something with result.
+```
