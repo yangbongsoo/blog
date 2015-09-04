@@ -401,4 +401,4 @@ hardCover가 nullable 타입인것을 주목해라. DynamoDB Object Mapper에서
 현재, database가 있고, mapping class가 있고, Object Mapper Client가 있다. 이제 클라우드에서 객체들을 interacting할 수 있다. 
 
 **Save an Item**
-객체를 저장하기 위해서, 먼저 생성하고, 적절한 필드값을 세팅시
+객체를 저장하기 위해서, 먼저 생성하고, 적절한 필드값을 세팅시킨다.
