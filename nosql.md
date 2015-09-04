@@ -398,3 +398,4 @@ hardCover가 nullable 타입인것을 주목해라. DynamoDB Object Mapper에서
 
 ###Interact with Stored Objects 
 
+현재, database가 있고, mapping class가 있고, Object Mapper Client가 있다. 이제 클라우드에서 객체들을 interacting할 수 있다. 
