@@ -449,3 +449,4 @@ mapper.delete(selectedBook);
 ```
 
 ###Perform a Scan
+스캔 작업으로, 주어진 테이블에서 모든 item들을 검색할 수 있다. 
