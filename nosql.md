@@ -334,4 +334,4 @@ bookstore 앱에서, 테이블안의 각각의 아이템은 book을 대표 할 �
 2. @DynamoDBHashKey - 테이블의 해쉬속성에 클래스 속성을 맵핑한다.
 3. @DynamoDBAttribute - 아이템 속성에 클래스 속성을 맵핑한다. 
 
-DynamoDB annotation 전체 리스트 
+DynamoDB annotation 전체 리스트 : http://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/JavaDeclarativeTagsList.html
