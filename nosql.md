@@ -316,4 +316,5 @@ credentialsProvider 변수는 Cognito Sample code에 선언되어 있다 복사�
 DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
 ```
 
-이제 DB에 클래스를 매핑할 준비가 됐다  
+이제 DB에 클래스를 매핑할 준비가 됐다  .
+
