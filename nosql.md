@@ -320,4 +320,8 @@ DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
 
 ###Define a Mapping Class 
 
-DynamoDB에서 database는 테이블들의 집합이다. 한 테이블은 
+DynamoDB에서 database는 테이블들의 집합이다. 한 테이블은 다음과 같이 설명될 수 있다. 
+1. 한 테이블은 아이템들의 집합이다.
+2. 각각의 아이템은 속성들의 집합이다.
+3. 각각의 속성은 name과 value를 갖는다. 
+
