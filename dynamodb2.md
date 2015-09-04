@@ -433,4 +433,4 @@ selectedBook.setPrice(1199);
 mapper.save(selectedBook);
 ```
 
-새로운 해쉬키는 DB에새로운 item을 생성한다는 것을 주목해라  
+새로운 해쉬 키는 DB에새로운 item을 생성한다는 것을 주목해라 비록 클라이언트쪽에서 새로운 object를 생성하지 않음에도 불구하고.  
