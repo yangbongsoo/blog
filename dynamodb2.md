@@ -468,4 +468,4 @@ Object Mapper에 의해 리턴된 리스트는 수정될수 없고 그렇게 시
 **Secondary Indexes**<br>
 secondary index는 query 작업을 서포트 해줄 대체키와 함께 테이블로부터 속성들의 subset을 포함하는 데이터 구조이다. secondary index로 쿼리들은 더이상 기본키에 제한받지 않는다. 대체 키를 이용해서 똑같이 검색할 수 있다. 
 
-secondary index안의 데이터는 테이블에서 인덱스로 project되거나 복사된 속성들로 구성되어 있다. 모든 secondary index는 DynamoDB에 의해 자동으로 유지된다.
+secondary index안의 데이터는 테이블에서 인덱스로 project되거나 복사된 속성들로 구성되어 있다. 모든 secondary index는 DynamoDB에 의해 자동으로 유지된다. 
