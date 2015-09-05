@@ -505,3 +505,5 @@ DynamoDBQueryExpression을 만들 때 쿼리에 hash key 값과 range key condit
 
 ###Conditional Writes 
 멀티 유저 환경에서 multiple clients는 같은 item에 접근할 수 있고 동시에 그 속성 값의 수정을 시도할 수 있다. client들이 data item 쓰기작업하는것을 돕기 위해 DynamoDB low-level client는 PutItem, DeleteItem, UpdateItem operation(연산)에 conditional writes를 지원한다. conditional write로 operation(연산)은 item 속성들이 기대되는 조건들중 하나 이상 만족해야만 성공한다. 그렇지 않으면 error를 리턴한다.
+
+다음의 예에서 만약 "Price" item의 값이 "1299"면 Books 테이블의 price item을 업데이트 한다.
