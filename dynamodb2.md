@@ -499,4 +499,4 @@ book object를 생성하고 쿼리를 날릴 hash key 속성을 셋팅한다. Bo
 
 그리고 쿼리를 위한 선택 기준을 나타내는 range key condition을 생성한다. 여기서는 "Great"로 시작하는 속성 값을 select한다. 
 
-DynamoDBQueryExpression을 만들 때 쿼리에 hash key 값과 range key condition을 셋팅한다. 
+DynamoDBQueryExpression을 만들 때 쿼리에 hash key 값과 range key condition을 셋팅한다.  withRangeKeyCondition의 첫번째 파라미터가 range key 속성 이름인것을 주목해라
