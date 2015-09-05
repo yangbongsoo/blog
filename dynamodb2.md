@@ -494,3 +494,4 @@ DynamoDBQueryExpression queryExpression = new DynamoDBQueryExpression()
 PaginatedQueryList<Book> result = mapper.query(Book.class, queryExpression);
 // Do something with result.
 ```
+
