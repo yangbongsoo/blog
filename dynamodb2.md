@@ -537,3 +537,28 @@ try {
 conditional writes는 idempotent한 걸(반복 수행해도 값이 바뀌지 않음) 주목해라. 
 
 ###Batch Operations 
+DynamoDB Object Mapper는 database에 item 쓰기작업이나 item 삭제작업을 위해 batch를 제공한다. 다음의 예는 batchSave 메소드를 통해 bactch put operation을 설명한다. 
+```
+Book book1 = new Book();
+book1.setTitle("Moby-Dick; or, The Whale");
+book1.setAuthor("Herman Melville");
+book1.setPrice(999);
+book1.setIsbn("7654321098");
+book1.setHardCover(false);
+
+Book book2 = new Book();
+book2.setTitle("Madame Bovary");
+book2.setAuthor("Gustave Flaubert");
+book2.setPrice(1099);
+book2.setIsbn("6543210987");
+book2.setHardCover(true);
+
+Book book3 = new Book();
+book3.setTitle("The Brothers Karamazov");
+book3.setAuthor("Fyodor Dostoyevsky");
+book3.setPrice(1399);
+book3.setIsbn("5432109876");
+book3.setHardCover(false);
+
+mapper.batchSave(Arrays.asList(book1, book2, book3));
+```
