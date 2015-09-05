@@ -495,3 +495,4 @@ PaginatedQueryList<Book> result = mapper.query(Book.class, queryExpression);
 // Do something with result.
 ```
 
+book object를 생성하고 쿼리를 날릴 hash key 속성을 셋팅한다. 
