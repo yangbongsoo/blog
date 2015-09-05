@@ -466,4 +466,5 @@ Object Mapper에 의해 리턴된 리스트는 수정될수 없고 그렇게 시
 쿼리 작업은 hash와 range key 속성을 이용해 테이블의 아이템을 찾는다. Books테이블의 기본키는 range key를 갖지 않는다. 그러나 테이블을 만들때 global secondary index를 명시하고 그건 range key 속성을 갖는다.<br> 우리는 hash키와 secondary index의 범위 키에 대해 쿼리를 수행할것이다.
 
 **Secondary Indexes**<br>
-secondary index는 query 작업을 서포트 해줄 대체키와 함께 테이블로부터 속성들의 subset을 포함하는 데이터 구조이다. 
+secondary index는 query 작업을 서포트 해줄 대체키와 함께 테이블로부터 속성들의 subset을 포함하는 데이터 구조이다. secondary index로 쿼리들은 더이상 기본키에 제한받지 않는다. 대체 키를 이용해서 똑같이 검색할 수 있다. 
+
