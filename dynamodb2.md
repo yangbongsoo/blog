@@ -501,3 +501,4 @@ book object를 생성하고 쿼리를 날릴 hash key 속성을 셋팅한다. Bo
 
 DynamoDBQueryExpression을 만들 때 쿼리에 hash key 값과 range key condition을 셋팅한다.  withRangeKeyCondition의 첫번째 파라미터가 range key 속성 이름인것을 주목해라.
 
+마지막으로 쿼리의 결과를 나타내기 위해 PaginatedQueryList<T>를 만든다. scan 결과 리스트와 같이 쿼리 결과 리스트도 수정할 수 없다.
