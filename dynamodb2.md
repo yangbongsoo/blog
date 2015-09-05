@@ -504,4 +504,4 @@ DynamoDBQueryExpression을 만들 때 쿼리에 hash key 값과 range key condit
 마지막으로 쿼리의 결과를 나타내기 위해 PaginatedQueryList<T>를 만든다. scan 결과 리스트와 같이 쿼리 결과 리스트도 수정할 수 없다.
 
 ###Conditional Writes 
-멀티 유저 환경에서 multiple clients는 같은 item에 접근할 수 있고 동시에 그 속성 값의 수정을 시도할 수 있다. 
+멀티 유저 환경에서 multiple clients는 같은 item에 접근할 수 있고 동시에 그 속성 값의 수정을 시도할 수 있다. client들이 data item에 쓰기작업하는 것을 돕기 위해 DynamoDB low-level client는 PutItem, DeleteItem, UpdateItem을 위한 conditional writes를 지원한다. conditional write와 함께 operation은 오직 하나 이상 기대되는 조건들을 만족할 때 성공한다. 그렇지 않으면 error를 리턴한다. 
