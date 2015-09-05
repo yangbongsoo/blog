@@ -497,4 +497,4 @@ PaginatedQueryList<Book> result = mapper.query(Book.class, queryExpression);
 
 book object를 생성하고 쿼리를 날릴 hash key 속성을 셋팅한다. Books 테이블의 global secondary index는 hash key로 Author를 사용함으로 우리가 찾는 Book item으로 Author 속성을 셋팅한다. 
 
-그리고 쿼리를 위한 선택 기준을 나타내는 range key condition을 생성한다. 
+그리고 쿼리를 위한 선택 기준을 나타내는 range key condition을 생성한다. 여기서는 "Great"로 시작하는 속성 값을 select한다. 
