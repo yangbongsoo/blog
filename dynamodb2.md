@@ -475,4 +475,4 @@ http://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/SecondaryI
 
 **Query Example**
 
-다음의 예는 
+다음의 예는 title이 "Great"로 시작하고 author "Charles Dickens"에 의해 books에 대한 쿼리를 수행한다. 
