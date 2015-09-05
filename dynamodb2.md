@@ -562,3 +562,4 @@ book3.setHardCover(false);
 
 mapper.batchSave(Arrays.asList(book1, book2, book3));
 ```
+batchSave 메소드는 database의 item들에 저장한다. batchDelete 메소드를 통해 database의 item들을 삭제할 수 있고 batchWrite는 item들을 저장하거나 삭제할 수 있다. 
