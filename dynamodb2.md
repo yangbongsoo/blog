@@ -535,3 +535,5 @@ try {
 이 예에서 DynamoDB client에 updateItem()을 보내기 위해 UpdateItemRequest를 작성했다. UpdateItemRequest objcet는 update할 속성 이름을 명시한 addAttributeUpdatesEntry(속성에 대한 새로운 값, 속성에서 수행하기 위한 액션)를 호출한다. 또한 condition을 추가하기 위해  operation의 conditional block인 addExpectedEntry를 호출한다. <br>여기서 ComparisonOprator는 price의 item이 "1299"와 일치하는지 검사한다. 일치하지 않는다면 update는 실패한다.
 
 conditional writes는 idempotent한 걸(반복 수행해도 값이 바뀌지 않음) 주목해라. 
+
+###Batch Operations 
