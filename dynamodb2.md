@@ -532,5 +532,4 @@ try {
     // The conditional check failed.
 }
 ```
-
-이 예에서 
+이 예에서 DynamoDB client에 updateItem()을 보내기 위해 UpdateItemRequest를 작성했다. UpdateItemRequest objcet는 update할 속성 이름을 명시한 addAttributeUpdatesEntry를 호출한다.
