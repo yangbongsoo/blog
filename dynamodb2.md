@@ -476,3 +476,21 @@ http://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/SecondaryI
 **Query Example**
 
 다음의 예는 title이 "Great"로 시작하고 author "Charles Dickens"에 의해 books에 대한 쿼리를 수행한다. 
+```
+Book bookToFind = new Book();
+bookToFind.setAuthor("Charles Dickens");
+
+String queryString = "Great";
+
+Condition rangeKeyCondition = new Condition()
+        .withComparisonOperator(ComparisonOperator.BEGINS_WITH.toString())
+        .withAttributeValueList(new AttributeValue().withS(queryString.toString()));
+
+DynamoDBQueryExpression queryExpression = new DynamoDBQueryExpression()
+        .withHashKeyValues(bookToFind)
+        .withRangeKeyCondition("Title", rangeKeyCondition)
+        .withConsistentRead(false);
+
+PaginatedQueryList<Book> result = mapper.query(Book.class, queryExpression);
+// Do something with result.
+```
