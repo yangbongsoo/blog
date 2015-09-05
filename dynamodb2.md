@@ -473,3 +473,6 @@ secondary index안의 데이터는 테이블에서 인덱스로 project되거나
 secondary indexes를 더 배우기 위한 URL <br>
 http://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/SecondaryIndexes.html
 
+**Query Example**
+
+다음의 예는 
