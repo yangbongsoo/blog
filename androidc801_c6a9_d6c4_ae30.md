@@ -59,3 +59,4 @@ public class Member {
 }
 ```
 
+내 AWS 계정과 연결할 credential 생성한다.
