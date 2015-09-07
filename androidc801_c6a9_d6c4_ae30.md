@@ -90,5 +90,47 @@ public class Member {
 ```
 
 ```
+//AsyncTask를 써서 네트워킹 작업 
+  	private class Networking extends AsyncTask<URL, Integer, String>{
 
+  		@Override
+  		protected void onPreExecute() { 
+
+  			super.onPreExecute();	
+  		}
+  		
+  		@Override
+  		protected String doInBackground(URL... params) {
+
+  			String result =null;
+  			mapper.save(member);
+  			
+  			onCancelled();
+  			return result;
+  		}
+
+	  	@Override
+	  	protected void onProgressUpdate(Integer... values) {
+	  		super.onProgressUpdate(values);
+	  	}
+	  	@Override
+	  	protected void onPostExecute(String result) {
+	  		super.onPostExecute(result);
+	  		//doInBackground작업이 끝나면 여기로 와
+	  		sp = getSharedPreferences("PreName", MODE_PRIVATE);
+			SharedPreferences.Editor editor = sp.edit();
+			editor.putString("sp_id", memberID); 
+			editor.commit();
+			
+			Intent intent = new Intent(JoinActivity.this,ListActivity.class);
+			intent.putExtra("memberID", memberID);
+			startActivity(intent);
+    		finish();
+    		
+	  		//startActivity(new Intent(JoinActivity.this,ListActivity.class));
+		}
+	  	@Override
+	  	protected void onCancelled() {
+	  	}
+  	}//Networking end
 ```
