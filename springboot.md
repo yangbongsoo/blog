@@ -73,3 +73,4 @@ AccountController에서
 public ResponseEntity createAccount(@RequestBody @Valid AccountDto.Create create,
                                           BindingResult result) {
 ```
+@RequestBody 대신에 @RequestParam, @ModelAttribute 많이 썼었는데 요즘은 서버 사이드 개발이 주로 REST API쪽으로 많이 가다보니까 Request 본문에 들어오는걸 파싱받는게 많아져서 RequestBody를 많이 씀
