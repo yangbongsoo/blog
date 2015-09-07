@@ -66,3 +66,4 @@ AccountRepository는 jpa사용해서 만듦 두번째 인자는 pk 데이터타�
 extends JpaRepository<Account, Long>
 ```
 
+AccountService 클래스는 @Service 등록해서 component scan으로 빈으로 등록되게 하게
