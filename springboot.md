@@ -57,5 +57,5 @@ Account 클래스를 만드는데
 
 ```
 @Id @GeneratedValue
-    private Long id;
+private Long id;
 ```
