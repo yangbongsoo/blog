@@ -132,3 +132,5 @@ if(connect.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == Network
 	  	}
   	}//Networking end
 ```
+
+**DB Table 확인 **
