@@ -44,3 +44,7 @@ lombok을 사용하기 위해서는
 ![](lombok1.PNG)
 2. lombok 설정 
 ![](lombok2.PNG)
+
+AccountController에서 
+
+클래스에 @Controller, @ResponseBody 두개를 하면 
