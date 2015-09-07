@@ -38,3 +38,9 @@ public class Account {
 ```
 위 처럼 getter/setter를 줄여주는 기능이다.
 
+lombok을 사용하기 위해서는 
+
+1. lombok plugin 설치 
+![](lombok1.PNG)
+2. lombok 설정 
+![](lombok2.PNG)
