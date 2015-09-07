@@ -135,3 +135,4 @@ if(connect.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == Network
 
 **DB Table 확인 **
 ![](table.PNG)
+
