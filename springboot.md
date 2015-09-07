@@ -10,3 +10,29 @@
 소스를 다운받자마자 메소드를 인식 못한다는 에러가 발생했다. 이유는 lombok 때문 !! 
 
 lombok이 뭔고하니 
+```
+@Entity
+@Getter
+@Setter
+public class Account {
+
+    @Id @GeneratedValue
+    private Long id;
+
+    @Column(unique = true)
+    private String username;
+
+    private String password;
+
+    private String email;
+
+    private String fullName;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date joined;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updated;
+
+}
+```
