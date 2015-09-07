@@ -53,3 +53,9 @@ AccountController에서
 
 메인 메소드를 실행하면 내장 임베디드 톰캣이 실행되면서 뜬다. 
 
+Account 클래스를 만드는데 
+
+```
+@Id @GeneratedValue
+    private Long id;
+```
