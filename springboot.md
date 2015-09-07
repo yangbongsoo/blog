@@ -68,3 +68,8 @@ extends JpaRepository<Account, Long>
 
 AccountService 클래스는 @Service 등록해서 component scan으로 빈으로 등록되게끔만 하고 @Autowired로 AccountRepository를 가지고 있게끔만 한다. 그리고 @Transactional 붙여주면 이 클래스 안에 만드는 모든 public 메소드는 다 transactional 애노테이션이 적용된다. 
 
+AccountController에서 
+```
+public ResponseEntity createAccount(@RequestBody @Valid AccountDto.Create create,
+                                          BindingResult result) {
+```
