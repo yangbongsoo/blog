@@ -74,7 +74,6 @@ public class Member {
 
 
 **AsyncTask를 통해 네트워크 전송한다. **
-
 ```
 //인터넷이 연결돼 있나 확인 
 					if(connect.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED 
