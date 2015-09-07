@@ -60,3 +60,4 @@ public class Member {
 ```
 
 내 AWS 계정과 연결할 credential 생성하고 그걸 통해 DynamoDBMapper 객체를 생성한다.
+
