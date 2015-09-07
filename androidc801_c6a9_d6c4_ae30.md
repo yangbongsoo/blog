@@ -61,7 +61,15 @@ public class Member {
 
 **내 AWS 계정과 연결할 credential 생성하고 그걸 통해 DynamoDBMapper 객체를 생성한다.**
 ```
-
+//내 AWS 계정과 연결할 credential 생성 
+	    CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
+	    	    getApplicationContext(),
+	    	    "us-east-1:763c7b1e-e427-42b0-8488-feaa887c5613", // Identity Pool ID
+	    	    Regions.US_EAST_1 // Region
+	    );
+	    
+	    AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
+        mapper = new DynamoDBMapper(ddbClient);
 ```
 
 
