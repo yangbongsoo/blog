@@ -63,5 +63,6 @@ public class Member {
 ![](dynamodbmapper.PNG)
 
 
-AsyncTask를 통해 네트워크 전송한다.
+<br>
+AsyncTask를 통해 네트워크 전송한다. 
 ![](asynctask.PNG)
