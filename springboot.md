@@ -37,3 +37,4 @@ public class Account {
 }
 ```
 위 처럼 getter/setter를 줄여주는 기능이다.
+
