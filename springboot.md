@@ -78,3 +78,6 @@ public ResponseEntity createAccount(@RequestBody @Valid AccountDto.Create create
 spring-boot를 쓰게되면 여러개의 메세지 컨버터가 이미 등록이 되어 있어 
 
 그런데 Acount 객체를 바로 받는게 아니라 AccountDto 객체를 따로 만들어서 (내가 받을것만 또 지정해주는) 그걸로 바인딩 되게 하면 Acoount객체의 모든 변수를 바인딩 받지 않을 때 헷갈려 지지 않는다. 받을것만 AccountDto를 만들어서 넣게끔하니까 
+
+AccountDto 클래스 가보면 @NotBlank @Size가 적용되어 있는데 그걸 붙였다고 바로 검증이 되진 않는다. 
+실제 검증을 하려면 createAccount메소드 파라미터로 @Valid 꼭 붙여 줘야함
