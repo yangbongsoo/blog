@@ -2,7 +2,7 @@
 
 ![](라이브러리추가.PNG)
 
-2. MemberVo를 생성해준다. 
+**MemberVo를 생성해준다. **
 
 ```
 package com.example.multicall.vo;
