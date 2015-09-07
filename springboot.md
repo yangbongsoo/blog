@@ -81,4 +81,3 @@ spring-boot를 쓰게되면 여러개의 메세지 컨버터가 이미 등록이
 
 AccountDto 클래스 가보면 @NotBlank @Size가 적용되어 있는데 그걸 붙였다고 바로 검증이 되진 않는다. 
 실제 검증을 하려면 createAccount메소드 파라미터로 @Valid 꼭 붙여 줘야함
-
