@@ -65,6 +65,5 @@ public class Member {
 
 
 **AsyncTask를 통해 네트워크 전송한다. **
-
 <br>
 ![](asynctask.PNG)
