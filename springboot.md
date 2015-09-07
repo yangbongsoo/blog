@@ -65,3 +65,4 @@ AccountRepository는 jpa사용해서 만듦 두번째 인자는 pk 데이터타�
 ```
 extends JpaRepository<Account, Long>
 ```
+
