@@ -61,7 +61,7 @@ private Long id;
 ```
 @Id는 해당 프로퍼티가 테이블의 기본키 역할을 한다는 것을 나타낸다. @GeneratedValue는 기본키의 값을 위한 자동 생성 전략을 명시하는데 사용한다. 
 
-AccountRepository는 jpa사용해서 만듦 
+AccountRepository는 jpa사용해서 만듦 두번째 인자는 pk 데이터타입
 ```
 extends JpaRepository<Account, Long>
 ```
