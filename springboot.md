@@ -50,3 +50,6 @@ AccountController에서
 클래스에 @Controller, @ResponseBody 두개를 붙이면 이 클래스안의 모든 public 메소드에 @ResponseBody가 다 적용이 되는것이다.
 (@RestContoller = @Controller + @ResponseBody)
 요즘은 서버사이드 개발이 API개발로 바뀌었기 때문에 @RestController 쓰는게 무방하다. 
+
+메인 메소드를 실행하면 내장 임베디드 톰캣이 실행되면서 뜬다. 
+
