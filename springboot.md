@@ -94,7 +94,7 @@ AccountDto 클래스 가보면 @NotBlank @Size가 적용되어 있는데 그걸 
 어려워진다. 그래서 DB에 기록을 남기지 않으려고 so @Transactional을 붙임으로써 기본적으로 롤백이 되게끔 한다. 
 
 
-2. 테스트에 붙은 @Transactional 과 서비스에 있는 @Transactional과 정확히 어떤 차이가 있는건가요?
+- 테스트에 붙은 @Transactional 과 서비스에 있는 @Transactional과 정확히 어떤 차이가 있는건가요?
  
 
 답변 : 
