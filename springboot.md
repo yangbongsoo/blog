@@ -89,3 +89,5 @@ AccountDto 클래스 가보면 @NotBlank @Size가 적용되어 있는데 그걸 
 2. 테스트에 붙은 @Transactional 과 서비스에 있는 @Transactional과 정확히 어떤 차이가 있는건가요?
  
 
+ErrorResponse 클래스에 @Data붙이면 lombok에 의해 getter, setter 만들어짐 
+
