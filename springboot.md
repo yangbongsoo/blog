@@ -96,6 +96,8 @@ AccountDto 클래스 가보면 @NotBlank @Size가 적용되어 있는데 그걸 
 
 2. 테스트에 붙은 @Transactional 과 서비스에 있는 @Transactional과 정확히 어떤 차이가 있는건가요?
  
+
+답변 : 
 TransactionConfiguration는 class-level
 rollback은 method 레벨 
 근데 4.2 버전부터는 Rollback이 다 한다. 
