@@ -86,8 +86,10 @@ AccountDto 클래스 가보면 @NotBlank @Size가 적용되어 있는데 그걸 
 1. 테스트에 @Transactional에 붙으면 자동으로 롤백이 된다고 말씀하셨는데 제가 아는 롤백이란 개념은 
 '데이터베이스에서 업데이트에 오류가 발생할 때, 이전 상태로 되돌리는 것' 인데 테스트에서 롤백이 된다라는 부분이 잘 와닿지 않습니다.
 
+
 2. 테스트에 붙은 @Transactional 과 서비스에 있는 @Transactional과 정확히 어떤 차이가 있는건가요?
  
-
+TransactionConfiguration는 class-level
+rollback은 method 레벨 
 ErrorResponse 클래스에 @Data붙이면 lombok에 의해 getter, setter 만들어짐 
 
