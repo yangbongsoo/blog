@@ -98,6 +98,8 @@ AccountDto 클래스 가보면 @NotBlank @Size가 적용되어 있는데 그걸 
  
 
 답변 : 
+
+
 TransactionConfiguration는 class-level
 rollback은 method 레벨 
 근데 4.2 버전부터는 Rollback이 다 한다. 
