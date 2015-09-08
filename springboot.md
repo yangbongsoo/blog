@@ -103,6 +103,7 @@ AccountDto 클래스 가보면 @NotBlank @Size가 적용되어 있는데 그걸 
 TransactionConfiguration는 class-level
 rollback은 method 레벨 
 근데 4.2 버전부터는 Rollback이 다 한다. 
+TransactionConfiguration는 desperated 될것. 
 
 
 ErrorResponse 클래스에 @Data붙이면 lombok에 의해 getter, setter 만들어짐 
