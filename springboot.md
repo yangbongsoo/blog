@@ -97,7 +97,7 @@ AccountDto 클래스 가보면 @NotBlank @Size가 적용되어 있는데 그걸 
 - 테스트에 붙은 @Transactional 과 서비스에 있는 @Transactional과 정확히 어떤 차이가 있는건가요?
  
 
-답변 : 
+답변 : 테스트의 @Transactional이 기본적으로 롤백이 디폴트로 적용되는거 밖에 없다. 
 
 
 TransactionConfiguration는 class-level
