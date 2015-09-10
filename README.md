@@ -2,7 +2,7 @@
 
 **목표**<br>
 토스 완독 <br>
-Spring boot<br>
+Spring - boot<br>
 Python - Django <br>
 PHP - Laravel <br>
 Ruby - Rails<br> 
