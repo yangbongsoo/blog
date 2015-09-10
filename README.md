@@ -6,3 +6,5 @@ Spring boot<br>
 Django <br>
 Laravel <br>
 Rails<br> 
+네트워크 지식<br> 
+백엔드 서버 아키텍처 <br>
