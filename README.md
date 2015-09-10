@@ -7,4 +7,4 @@ Python - Django <br>
 PHP - Laravel <br>
 Ruby - Rails<br> 
 네트워크 지식<br> 
-백엔드 서버 아키텍처, 구조 <br>
+백엔드 서버 아키텍처 <br>
