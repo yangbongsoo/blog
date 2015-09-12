@@ -105,6 +105,8 @@ rollback은 method 레벨
 근데 4.2 버전부터는 Rollback이 다 한다. 
 TransactionConfiguration는 desperated 될것. 
 
+![](sdfsdf2.PNG)
+
 
 ErrorResponse 클래스에 @Data붙이면 lombok에 의해 getter, setter 만들어짐 
 
