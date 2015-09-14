@@ -3,7 +3,6 @@
 * [Introduction](README.md)
 * [Pinpoint](pinpoint.md)
    * [quickstart](quickstart.md)
-   * [웹서버 톰캣로그(Pinpoint껐을때)](c6f9_c11c_bc84_d1b0_cea3_b85c_adf828_pinpoint_aed0_c744_b54c29.md)
 * [LucyXssFilter](lucyxssfilter.md)
    * [LucyXssServletFilter](lucyxssservletfilter.md)
    * [LucyXssSaxFilter](lucyxsssaxfilter.md)
