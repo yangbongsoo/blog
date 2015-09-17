@@ -96,7 +96,7 @@ Web, Collector가 하는일은 HBase 접근이 주이므로 그냥 보면 될듯
    ex : HttpClient.execute()에 InterceptorA를 인젝트한다.
    com.navercorp.pinpoint.plugin.gson.GsonPlugin 가 이러한 일을 합니다.
 
- 2. Runtime에 어떤 데이터를 수집할것인가?
+2. Runtime에 어떤 데이터를 수집할것인가?
   Interceptor.before(), after()에서 데이터 수집이 실제 동작하는 단계.
 
   ex: HttpClient.execute()에 inject된 InterceptorX의 before(), after()가 걸린시간이나, url, 성공 여부를 수집하는 단계
