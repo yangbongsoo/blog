@@ -7,6 +7,7 @@ PRC 호출을 위한 기반조건은, RPC 호출시 TraceId를 넣을 공간이 
 
 TransactionId는 전체 메시지의 유니크 ID이고, 이는 요청 데이터를 조회하는 검색 key이도 하다.
 
+
 ![](pinpoint정리1.PNG)
 
 **2-1. 사례 질문**<br>
