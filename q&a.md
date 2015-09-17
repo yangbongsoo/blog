@@ -23,7 +23,7 @@
 
 ![](pinpoint정리3.PNG)
 
-3-1. Bytecode Instrument 질문
+**3-1. Bytecode Instrument 질문** <br>
 
 제 톰캣의 catalina.sh에 자바 옵션으로 javaagent를 설정함으로써 JVM이 구동될 때 이 JVM 안에서 특정 작업을 수행할 에이전트(Agent), 즉 요원을 지정할 수 있는 방식을 제공합니다. 
 
