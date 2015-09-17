@@ -3,7 +3,7 @@
 * [Introduction](README.md)
 * [Pinpoint](pinpoint.md)
    * [quickstart](quickstart.md)
-   * Q&A
+   * [Q&A](q&a.md)
 * [LucyXssFilter](lucyxssfilter.md)
    * [LucyXssServletFilter](lucyxssservletfilter.md)
    * [LucyXssSaxFilter](lucyxsssaxfilter.md)
