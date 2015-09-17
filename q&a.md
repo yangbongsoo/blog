@@ -25,7 +25,7 @@ Pinpoint는 모든 요청을 추적하지 않고 샘플링한 데이터를 수�
 **2-2. 사례 질문**<br>
 저는 TraceId 작동 사례만 보고 항상 트리구조인줄 알았다. 그래프 구조인게 맞는데 TraceId 작동 사례를 예로 들면 A->B->C->A 와 같은  순환관계가 발생할 수 있다.노드3번 or 노드4의 ParentSpanId가 10(노드1의 SPAN인 10이기 때문에) 이라면 순환관계
 
-ParentSpanId=-1 은 추적의 시작 지점입니다. 일종의 ROOT
+ParentSpanId=-1 은 추적의 시작 지점이다. 일종의 ROOT
 
 결국 구조는 사용자의 아키텍처가 어떻게 되냐에 따라 결정됩니다. 
 
@@ -38,6 +38,15 @@ ParentSpanId=-1 은 추적의 시작 지점입니다. 일종의 ROOT
 1번부터 5번까지 일련의 과정을 통해서 Agent가 작동하고 3~4번 transform에서 bytecode로 변환하는 부분이 있는데 Pinpoint에서는 직접 bytecode를 생성하기도 하고 라이브러리를 사용하기도 합니다.
 
 추가적으로 저는 3~4번에서 바이트코드를 변환하기 위해서 ASM 라이브러리를 사용하는줄 알았는데, 어제 발표에서 Pinpoint의 새로운 기능으로 ASM기반 으로 해서 프로그래머가 직접 trace할 구간을 정할 수 있도록 한다고 합니다. 
+
+ Pinpoint는 현재 Javassist를 사용하고 있습니다.
+Javassist가 생산성이나, 사용성은 좋은데, 기능이 ASM에 비해 한계가 있어서, 추후 ASM으로 변경될예정입니다.
+Pinpoint는 향후 이 변경을 쉽게 하기 위해서, Javassist의 API를 가능한 노출하지 않고, 별도의 추상화된 API를 제공하여 class를 수정하고 있습니다.
+
+Plugin 기능은 사용자가 트레이스할 API을 직접 구현하여, 별도의 jar로 분리 시킬수 있습니다.
+아래 패키지를 보시면 됩니다.
+https://github.com/naver/pinpoint/tree/master/plugins/gson
+아직 API가 완전히 고정된게 아니라. 추가로 변경될수 있습니다.
 
 ![](pinpoint정리4.PNG)
 
