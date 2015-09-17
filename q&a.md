@@ -68,8 +68,11 @@ https://github.com/naver/pinpoint/tree/master/plugins/gson
 **4-1. 추가적인 질문**<br>
 Pinpoint의 발전방향에서 Java가 아닌 구간의 프로파일링으로써 WebServer 구간의 성능 수집에 대해서 내가 알고 있는 개념은 아래 그림과 같다. 요즘 톰캣이 많이 발전되서 일부 WebServer기능까지 담고 있어서 아래와 같이 표현을 했다. 
 
-보통 WebServer는 정적인 데이터를 처리하는 서버이고 WebApplicationServer가 동적인 데이터를 처리하는 서버인데 WebServer 구간의 성능 수집이라 하시면 정적 데이터가 로딩되고 렌더링되는 성능 수집을 말씀하시는건가요?
-
+보통 WebServer는 정적인 데이터를 처리하는 서버이고 WebApplicationServer가 동적인 데이터를 처리하는 서버인데 WebServer 구간의 성능 수집이라 하시면 정적 데이터가 로딩되고 렌더링되는 성능 수집을 말씀하시는건가요?<br>
+답) No <br>
+정적데이터 보다는 WAS까지 오는 동적 데이터에 문제가 생기는 경우가 많다.
+Apache를 사용하였을 경우, Tomcat에 동적요청도 Apache를 통과해서 오게 됩니다.
+그런데 해당 구간(Webserver)이 문제를 자주 발생시키는 경향이 있어서, 이 구간에 대한 성능수집이 요구가 자주 발생하고 있다.
 
 또 톰캣을 통해 성능 수집을 하는 것을 Java구간의 프로파일링이라고 하는 건가요? 답) Yes
 
