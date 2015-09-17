@@ -61,9 +61,8 @@ https://github.com/naver/pinpoint/tree/master/plugins/gson
 
 아래 그림의 3번에서 해당 클래스가 메모리에 로딩될 때 Agent가 인터셉터로 before(), after()메소드를 주입시킵니다. 그리고 나온 결과를 네트워크 통신(TCP/UDP)을 통해 Collector로 전송시킵니다. 
 
-
-
-TCP로는 DB같은 중요한 데이터를 전송하고 나머지는 UDP로 전송합니다.(어제 강의를 통해 들었는데 맞는지 확신이 안섭니다.) 그리고 4번에서 native code로 변환하고 실행이 됩니다. 
+성능데이터의 경우 , 데이터의 양이 폭증할 가능성이 있고, 부분적으로 분실해도 큰 문제가 없기 때문에 UDP를 사용한다.
+API 메타데이터나, SQL정보와 같이 중요하고, 데이터양이 일정한 경우는 TCP로 보내고 있습니다.그리고 4번에서 native code로 변환하고 실행이 됩니다. 
 
 ![](pinpoint정리8.PNG)
 
