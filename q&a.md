@@ -35,3 +35,18 @@
 
 추가적으로 저는 3~4번에서 바이트코드를 변환하기 위해서 ASM 라이브러리를 사용하는줄 알았는데, 어제 발표에서 Pinpoint의 새로운 기능으로 ASM기반 으로 해서 프로그래머가 직접 trace할 구간을 정할 수 있도록 한다고 합니다. 
 
+![](pinpoint정리4.PNG)
+
+![](pinpoint정리5.PNG)
+
+![](pinpoint정리6.PNG)
+
+![](pinpoint정리7.PNG)
+
+3-2. Bytecode Instrument 질문
+
+아래 그림의 3번에서 해당 클래스가 메모리에 로딩될 때 Agent가 인터셉터로 before(), after()메소드를 주입시킵니다. 그리고 나온 결과를 네트워크 통신(TCP/UDP)을 통해 Collector로 전송시킵니다. 
+
+
+
+TCP로는 DB같은 중요한 데이터를 전송하고 나머지는 UDP로 전송합니다.(어제 강의를 통해 들었는데 맞는지 확신이 안섭니다.) 그리고 4번에서 native code로 변환하고 실행이 됩니다. 
