@@ -88,8 +88,7 @@ Pinpoint의 동작 원리, 구조를 실제 코드를 통해 보려고 소스다
 https://github.com/naver/pinpoint/blob/master/plugins/gson/src/main/java/com/navercorp/pinpoint/plugin/gson/GsonPlugin.java
 플러그인 같은 경우는 위를 보시면 됩니다.
 
-Web, Collector가 하는일은 HBase 접근이 주이므로 그냥 보면 될듯하고.
-Pinpoint Agent는  크게 2가지 일을 합니다.
+Web, Collector가 하는일은 HBase 접근이 주이므로 그냥 보면 될듯하고 Pinpoint Agent는  크게 2가지 일을 합니다.
 
 1. Class 로딩단계에서, 이 Class를 어떻게 변경할지 결정. ByteCode Instrumentation단계.
    이단계에서는 어떤 Interceptor가 어디에 inject 될지를 결정합니다..
