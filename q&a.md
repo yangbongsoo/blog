@@ -1,7 +1,7 @@
 **1. TraceId 작동 사례**<br> 
 하나의 Trace는 Span들의 집합이고 각각의 Span은 RPC가 도착할 때 처리할 작업을 나타내며 추적에 필요한 데이터를 가지고 있다. 그 데이터는 TraceId인데 TraceId는 TransactionId와 SpanId, ParentId로 이루어진 키의 집합이다. 
 
-이 TraceId를 HTTP 헤더에 넣어서 전송함으로써 각각의 노드 간의 관계를 정의 할 수 있다. 결국 Trace는 사용자의 한 요청에 따라 동작되는 모든 로직을 의미한다. 그래서 한 Trace에 TransactionId가 같게 하는것이다. 
+이 TraceId를 HTTP 헤더에 넣어서 전송함으로써 각각의 노드 간의 관계를 정의 할 수 있다. 결국 Trace는 사용자의 한 요청에 따라 동작되는 모든 로직을 의미한다. 그래서 한 Trace에 TransactionId가 같게 하는 것이다. 
 
 ![](pinpoint정리1.PNG)
 
