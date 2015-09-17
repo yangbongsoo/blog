@@ -84,7 +84,8 @@ Pinpoint의 동작 원리, 구조를 실제 코드를 통해 보려고 소스다
 
 어제 Plugin을 말씀해주셨는데 구체적으로 어디의 plugin인가요? 다 찾아봤는데 마땅한 시작점을 발견하지 못했습니다. 
 
-답)https://github.com/naver/pinpoint/blob/master/plugins/gson/src/main/java/com/navercorp/pinpoint/plugin/gson/GsonPlugin.java
+답)
+https://github.com/naver/pinpoint/blob/master/plugins/gson/src/main/java/com/navercorp/pinpoint/plugin/gson/GsonPlugin.java
 플러그인 같은 경우는 위를 보시면 됩니다.
 
 Web, Collector가 하는일은 HBase 접근이 주이므로 그냥 보면 될듯하고.
