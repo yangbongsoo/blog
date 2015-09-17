@@ -39,7 +39,7 @@ ParentSpanId=-1 은 추적의 시작 지점이다. 일종의 ROOT
 
 추가적으로 저는 3~4번에서 바이트코드를 변환하기 위해서 ASM 라이브러리를 사용하는줄 알았는데, 어제 발표에서 Pinpoint의 새로운 기능으로 ASM기반 으로 해서 프로그래머가 직접 trace할 구간을 정할 수 있도록 한다고 한다. 
 
- Pinpoint는 현재 Javassist를 사용하고 있습니다.
+ Pinpoint는 현재 Javassist를 사용하고 있다.
 Javassist가 생산성이나, 사용성은 좋은데, 기능이 ASM에 비해 한계가 있어서, 추후 ASM으로 변경될예정입니다.
 Pinpoint는 향후 이 변경을 쉽게 하기 위해서, Javassist의 API를 가능한 노출하지 않고, 별도의 추상화된 API를 제공하여 class를 수정하고 있습니다.
 
