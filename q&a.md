@@ -5,7 +5,7 @@
 
 PRC 호출을 위한 기반조건은, RPC 호출시 TraceId를 넣을 공간이 있다면 하면 어떤 형태의 RPC도 추적할수 있다. Thrift같은 경우는 헤더 공간이 없어서, 강제로 -(마이너스) key를 가상으로 생성하고 이를 이용하여 TraceId를 전달한다.
 
-TransactionId는 전체 메시지의 유니크 ID이고, 이는 요청 데이터를 조회하는 검색 key이도 합니다.
+TransactionId는 전체 메시지의 유니크 ID이고, 이는 요청 데이터를 조회하는 검색 key이도 하다.
 
 ![](pinpoint정리1.PNG)
 
