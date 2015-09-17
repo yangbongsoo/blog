@@ -41,12 +41,13 @@ ParentSpanId=-1 은 추적의 시작 지점이다. 일종의 ROOT
 
  Pinpoint는 현재 Javassist를 사용하고 있다.
 Javassist가 생산성이나, 사용성은 좋은데, 기능이 ASM에 비해 한계가 있어서, 추후 ASM으로 변경될예정이다.
-Pinpoint는 향후 이 변경을 쉽게 하기 위해서, Javassist의 API를 가능한 노출하지 않고, 별도의 추상화된 API를 제공하여 class를 수정하고 있습니다.
+Pinpoint는 향후 이 변경을 쉽게 하기 위해서, Javassist의 API를 가능한 노출하지 않고, 별도의 추상화된 API를 제공하여 class를 수정하고 있다.
 
 Plugin 기능은 사용자가 트레이스할 API을 직접 구현하여, 별도의 jar로 분리 시킬수 있습니다.
-아래 패키지를 보시면 됩니다.
+
+아래 패키지를 보시면 된다.
 https://github.com/naver/pinpoint/tree/master/plugins/gson
-아직 API가 완전히 고정된게 아니라. 추가로 변경될수 있습니다.
+아직 API가 완전히 고정된게 아니라. 추가로 변경될수 있다.
 
 ![](pinpoint정리4.PNG)
 
