@@ -84,4 +84,22 @@ Pinpoint의 동작 원리, 구조를 실제 코드를 통해 보려고 소스다
 
 어제 Plugin을 말씀해주셨는데 구체적으로 어디의 plugin인가요? 다 찾아봤는데 마땅한 시작점을 발견하지 못했습니다. 
 
-답)
+답)https://github.com/naver/pinpoint/blob/master/plugins/gson/src/main/java/com/navercorp/pinpoint/plugin/gson/GsonPlugin.java
+플러그인 같은 경우는 위를 보시면 됩니다.
+
+Web, Collector가 하는일은 HBase 접근이 주이므로 그냥 보면 될듯하고.
+Pinpoint Agent는  크게 2가지 일을 합니다.
+
+1. Class 로딩단계에서, 이 Class를 어떻게 변경할지 결정. ByteCode Instrumentation단계.
+   이단계에서는 어떤 Interceptor가 어디에 inject 될지를 결정합니다..
+
+   ex : HttpClient.execute()에 InterceptorA를 인젝트한다.
+   com.navercorp.pinpoint.plugin.gson.GsonPlugin 가 이러한 일을 합니다.
+
+ 2. Runtime에 어떤 데이터를 수집할것인가?
+  Interceptor.before(), after()에서 데이터 수집이 실제 동작하는 단계.
+
+  ex: HttpClient.execute()에 inject된 InterceptorX의 before(), after()가 걸린시간이나, url, 성공 여부를 수집하는 단계
+  com.navercorp.pinpoint.plugin.gson.interceptor.FromJsonInterceptor 가 이러한 일을 합니다.
+
+나머지는 위의 2가지를 효과적으로 수행하기 작업들입니다. 이 나머지는 2개를 중심으로 천천히 살펴보시기 바랍니다.
