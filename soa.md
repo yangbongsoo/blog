@@ -8,7 +8,7 @@ SOAP 과 REST 비교 <br>
 http://greatkim91.tistory.com/79 여기 글 참고 <br>
 
 **SOAP**<br>
-SOAP은 웹서비스를 만들기 위한 표준들이 있다. (WSDL, WS-Security 등등) 
+SOAP는 웹서비스를 만들기 위한 표준들이 있다. (WSDL, WS-Security 등등) 
 SOAP의 힘은 이런한 표준에서 나온다. 하지만 단점은 복잡성이다.(복잡도는 REST와 비교했을때)
 그리고 REST에 비해 무겁다. 
 
