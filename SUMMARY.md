@@ -28,5 +28,5 @@
 * [대용량 아키텍처와 성능 튜닝(조대협의 서버사이드)](b300_c6a9_b7c9_c544_d0a4_d14d_cc98_c640_c131_b2a5_d29c_b2dd28_c870_b300_d611_c758_c11c_bc84_c0ac_c774_b4dc29.md)
    * [REST의 이해와 설계](restc758_c774_d574_c640_c124_acc4.md)
    * [SOA](soa.md)
-   * MSA
+   * [MSA](msa.md)
 
