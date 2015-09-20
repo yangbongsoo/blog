@@ -45,7 +45,7 @@ export PATH<br>
 
 다음에 ``` mvn clean install -Dmaven.test.skip=true ```해주면 관련된것들을 빌드한다. (필요한 jar파일들 다운받아서 설치해줌) 
 
-이제 pinpoint 빌드는 다 됐고 실행할 준비가 됐음 
+이제 pinpoint 빌드는 다 됐고 실행할 준비가 됐다.
 
 ``` du -h ```해보면 용량 알수있음 
 
