@@ -70,7 +70,7 @@ JAVA_OPTS="-javaagent:/local/pinpoint/pinpoint-agent/pinpoint-bootstrap-1.1.0.ja
 
 그리고 실제로 /local/pinpoint에다가 pinpoint-agent가 있도록 설정해야 한다. 
 
-/local/pinpoint/pinpoint/agent/target에 있는 pinpoint-agent 디렉토리 자체를 옮겨야함
+/local/pinpoint/pinpoint/agent/target에 있는 pinpoint-agent 디렉토리 자체를 옮겨야한다.
 
 ``` cp -r pinpoint-agent ~/local/pinpoint/ ```로 복사 ㄱㄱ 
 
