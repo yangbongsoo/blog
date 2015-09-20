@@ -78,7 +78,7 @@ pinpoint-agent 들어가서 vi pinpoint.config를 연다.
 
 profiler.collector.ip를 pinpoint 서버로 바꿔주고 포트를 29996 29995 29994로 바꿔준다.
 
-그리고 핵심이!! 29995 29994는 UDP였어 ... 해당 서버 방화벽 허용을 UDP로 꼭 바꿔줘 
+그리고 중요한 부분이 29995 29994는 UDP이다 해당 서버 방화벽 허용을 Custom TCP가 아닌 UDP로 꼭 바꿔줘야한다. 
 
 pinpoint 적용 성공!! <br>
 
