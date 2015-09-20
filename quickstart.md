@@ -29,13 +29,13 @@ http://maven.apache.org/download.cgi 가서  apache-maven-3.3.3-bin.tar.gz 링�
 
 그리고 /files/sokit/pinpointInstallDirectory/maven 이 경로를 PATH에다가 추가해준다.
 
-////////////////////////////////////////////////////////////////////////////////////////////////</br>
-PATH=$PATH:$JAVA_HOME/bin</br>
-PATH=$PATH:/files/sokit/pinpointInstallDirectory/maven/bin</br>
-PATH=$PATH:$HOME/bin</br>
-</br>
-export PATH</br>
-////////////////////////////////////////////////////////////////////////////////////////////////</br>
+////////////////////////////////////////////////////////////////////////////////////////////////<br>
+PATH=$PATH:$JAVA_HOME/bin<br>
+PATH=$PATH:/files/sokit/pinpointInstallDirectory/maven/bin<br>
+PATH=$PATH:$HOME/bin<br>
+<br>
+export PATH<br>
+////////////////////////////////////////////////////////////////////////////////////////////////<br>
 
 그다음 git을 설치해야함 ``` apt-get install git ```
 
