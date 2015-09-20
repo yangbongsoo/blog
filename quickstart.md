@@ -1,6 +1,4 @@
-
-
-내가 보면서 따라하고 있는 동영상 url:https://www.youtube.com/watch?v=xipAXrm4vEI
+허광남님 동영상 url:https://www.youtube.com/watch?v=xipAXrm4vEI
 
 jdk1.6, 1.7다운은 oracle가서 다운받고(이전버전은 로그인해야함) url 복사해서 ```curl url붙여넣기 -o jdk버전``` 써놓으면 됌 
 
