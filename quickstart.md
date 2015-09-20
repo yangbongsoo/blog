@@ -47,7 +47,7 @@ export PATH<br>
 
 이제 pinpoint 빌드는 다 됐고 실행할 준비가 됐다.
 
-``` du -h ```해보면 용량 알수있음 
+``` du -h ```해보면 용량 알 수 있다. 
 
 ``` quickstart/bin/start-hbase.sh  ```해서 hbase 다운받음 <br>
 ``` quickstart/bin/init-hbase.sh  ```DB 테이블을 만들어줌 <br>
