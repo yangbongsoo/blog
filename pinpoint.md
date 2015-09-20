@@ -10,7 +10,7 @@
 
 **구성**
 
-
+![](pinpoint-architecture.png)
 1. DB; HBase(하둡 분산 데이터베이스 기반) 
 2. Web UI로 view적으로 보여줌 
 3. Collector; Web UI를 보여주는것을 쌓아두는거 , 대상이 되는 타겟 서버의 정보를 HBase가 저장함 
