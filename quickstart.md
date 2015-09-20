@@ -35,7 +35,6 @@ PATH=$PATH:$HOME/bin<br>
 <br>
 export PATH<br>
 
-
 그다음 git을 설치해야함 ``` apt-get install git ```
 
 여기까지가 pinpoint를 설치하기 위한 도구셋팅 !! 
