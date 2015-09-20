@@ -8,3 +8,6 @@
 
 **java.exe **(JIT 컴파일러)<br> 
 자바 인터프리터, 컴파일러가 생성한 bytecode를 해석하고 실행한다. 
+
+JRE(자바실행환경) = JVM + Java API(클래스 라이브러리) 
+JDK = JRE + 개발에 필요한 실행파일
