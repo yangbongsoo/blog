@@ -14,9 +14,9 @@ jdk1.6은 bin을 다운받았기 때문에 ```chmod +x jdk1.6.bin``` 해서 ll �
 
 ``` /etc/bash.bashrc ```가보니 맨끝에 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/  이렇게 되어있다. 
 
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
-export JAVA_7_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
-export JAVA_6_HOME=/files/sokit/pinpointInstallDirectory/jdk1.6.0_45
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/ <br>
+export JAVA_7_HOME=/usr/lib/jvm/java-7-openjdk-amd64/<br>
+export JAVA_6_HOME=/files/sokit/pinpointInstallDirectory/jdk1.6.0_45<br>
 
 다음은 메이븐을 다운받음 (3.2버전 이상)
 http://maven.apache.org/download.cgi 가서  apache-maven-3.3.3-bin.tar.gz 링크 복사해서 
