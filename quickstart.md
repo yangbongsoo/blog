@@ -35,9 +35,9 @@ PATH=$PATH:$HOME/bin<br>
 <br>
 export PATH<br>
 
-그다음 git을 설치한다 ``` apt-get install git ```
+그다음 git을 설치한다. ``` apt-get install git ```
 
-여기까지가 pinpoint를 설치하기 위한 도구셋팅 !! 
+여기까지가 pinpoint를 설치하기 위한 도구세팅이다. 
 
 ``` git clone https://github.com/naver/pinpoint.git ```명령어 쳐서 다운받고 pinpoint디렉토리에 들어가서 
 
