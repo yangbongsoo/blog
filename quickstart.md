@@ -20,7 +20,7 @@ export JAVA_6_HOME=/files/sokit/pinpointInstallDirectory/jdk1.6.0_45<br>
 
 추가적으로 위와 같이 작성한다.
 
-다음은 메이븐을 다운받음 (3.2버전 이상)
+다음은 메이븐을 다운받는다. (3.2버전 이상)
 http://maven.apache.org/download.cgi 가서  apache-maven-3.3.3-bin.tar.gz 링크 복사해서 
 
 ``` curl url붙여넣기 -o apache-maven-3.3.3.tar.gz ```으로 함 (압축풀기) 
