@@ -76,8 +76,8 @@ JAVA_OPTS="-javaagent:/local/pinpoint/pinpoint-agent/pinpoint-bootstrap-1.1.0.ja
 
 pinpoint-agent 들어가서 vi pinpoint.config를 열어 다음과 같이 수정해야한다. 
 
-profiler.collector.ip를 pinpoint서버로 바꿔주고 
-포트를 29996 29995 29994로 바꿔줘야함 
+profiler.collector.ip를 pinpoint 서버로 바꿔주고 
+포트를 29996 29995 29994로 바꿔준다.
 
 그리고 핵심이!! 29995 29994는 UDP였어 ... 해당 서버 방화벽 허용을 UDP로 꼭 바꿔줘 
 
