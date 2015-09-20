@@ -12,7 +12,7 @@ jdk1.6은 bin을 다운받았기 때문에 ```chmod +x jdk1.6.bin``` 해서 ll �
 
 환경변수 설정하기위해 ``` vi ~/.bash_profile ``` 가서 하는데 bash_profile이 왜 없나 했더니 Ubuntu는 bash_profile이 없고 bash.bashrc사용힌다.(동영상은 Centos) 
 
-``` /etc/bash.bashrc ```가보니 맨끝에 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/  이렇게 되어있음 
+``` /etc/bash.bashrc ```가보니 맨끝에 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/  이렇게 되어있다. 
 
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
 export JAVA_7_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
