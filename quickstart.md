@@ -72,7 +72,7 @@ JAVA_OPTS="-javaagent:/local/pinpoint/pinpoint-agent/pinpoint-bootstrap-1.1.0.ja
 
 /local/pinpoint/pinpoint/agent/target에 있는 pinpoint-agent 디렉토리 자체를 옮겨야한다.
 
-``` cp -r pinpoint-agent ~/local/pinpoint/ ```로 복사 ㄱㄱ 
+``` cp -r pinpoint-agent ~/local/pinpoint/ ```로 복사한다.
 
 pinpoint-agent 들어가서 vi pinpoint.config 로 수정해야함 
 
