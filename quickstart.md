@@ -27,7 +27,7 @@ http://maven.apache.org/download.cgi 가서  apache-maven-3.3.3-bin.tar.gz 링�
 
 그리고``` ln -s apache-maven-3.3.3 maven ```해서 단축링크로 만든다.
 
-그리고 /files/sokit/pinpointInstallDirectory/maven 이 경로를 PATH에다가 추가해줘 
+그리고 /files/sokit/pinpointInstallDirectory/maven 이 경로를 PATH에다가 추가해준다.
 
 ////////////////////////////////////////////////////////////////////////////////////////////////</br>
 PATH=$PATH:$JAVA_HOME/bin</br>
