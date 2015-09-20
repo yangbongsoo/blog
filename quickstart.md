@@ -43,7 +43,7 @@ export PATH<br>
 
 ``` git checkout tags/1.1.0 ```해주면 1.1.0버전으로 소스가 쫙 바뀐다.
 
-다음에 ``` mvn clean install -Dmaven.test.skip=true ```해주면 관련된것들을 빌드함 (필요한 jar파일들 다운받아서 설치해줌) 
+다음에 ``` mvn clean install -Dmaven.test.skip=true ```해주면 관련된것들을 빌드한다. (필요한 jar파일들 다운받아서 설치해줌) 
 
 이제 pinpoint 빌드는 다 됐고 실행할 준비가 됐음 
 
