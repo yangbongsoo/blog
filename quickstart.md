@@ -23,9 +23,9 @@ export JAVA_6_HOME=/files/sokit/pinpointInstallDirectory/jdk1.6.0_45<br>
 다음은 메이븐을 다운받는다. (3.2버전 이상)
 http://maven.apache.org/download.cgi 가서  apache-maven-3.3.3-bin.tar.gz 링크 복사해서 
 
-``` curl url붙여넣기 -o apache-maven-3.3.3.tar.gz ```으로 함 (압축풀기) 
+``` curl url붙여넣기 -o apache-maven-3.3.3.tar.gz ```(압축풀기) 
 
-그리고``` ln -s apache-maven-3.3.3 maven ```해서 단축링크로 만듦
+그리고``` ln -s apache-maven-3.3.3 maven ```해서 단축링크로 만든다.
 
 그리고 /files/sokit/pinpointInstallDirectory/maven 이 경로를 PATH에다가 추가해줘 
 
