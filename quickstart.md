@@ -1,6 +1,6 @@
 허광남님 동영상 url:https://www.youtube.com/watch?v=xipAXrm4vEI
 
-jdk1.6, 1.7다운은 oracle가서 다운받고(이전버전은 로그인해야함) url 복사해서 ```curl url붙여넣기 -o jdk버전``` 써놓으면 됌 
+jdk1.6, 1.7다운은 oracle가서 다운받고(이전버전은 로그인해야 다운가능) url 복사해서 ```curl url붙여넣기 -o jdk버전``` 써놓으면 됌 
 
 jdk1.7은 ```tar xvfz jdk1.7~~``` 로 압축풀어 
 jdk1.6은 bin을 다운받았기 때문에 ```chmod +x jdk1.6.bin``` 해서 ll 해서 보면 녹색으로 바뀜 
