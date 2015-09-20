@@ -39,11 +39,9 @@ export PATH<br>
 
 여기까지가 pinpoint를 설치하기 위한 도구세팅이다. 
 
-``` git clone https://github.com/naver/pinpoint.git ```명령어 쳐서 다운받고 pinpoint디렉토리에 들어가서 
+``` git clone https://github.com/naver/pinpoint.git ```명령어 쳐서 다운 받고 pinpoint디렉토리에 들어가서 ``` git tag -l ```해보면 릴리즈된 버전들이 있다. 
 
-``` git tag -l ```해보면 릴리즈된 버전들이 있다 
-
-``` git checkout tags/1.1.0 ```해주면 1.1.0버전으로 소스가 쫙 바뀜
+``` git checkout tags/1.1.0 ```해주면 1.1.0버전으로 소스가 쫙 바뀐다.
 
 다음에 ``` mvn clean install -Dmaven.test.skip=true ```해주면 관련된것들을 빌드함 (필요한 jar파일들 다운받아서 설치해줌) 
 
