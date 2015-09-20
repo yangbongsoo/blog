@@ -18,6 +18,8 @@ export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/ <br>
 export JAVA_7_HOME=/usr/lib/jvm/java-7-openjdk-amd64/<br>
 export JAVA_6_HOME=/files/sokit/pinpointInstallDirectory/jdk1.6.0_45<br>
 
+추가적으로 위와 같이성한다.
+
 다음은 메이븐을 다운받음 (3.2버전 이상)
 http://maven.apache.org/download.cgi 가서  apache-maven-3.3.3-bin.tar.gz 링크 복사해서 
 
