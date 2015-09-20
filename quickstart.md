@@ -49,11 +49,11 @@ export PATH<br>
 
 ``` du -h ```해보면 용량 알 수 있다. 
 
-``` quickstart/bin/start-hbase.sh  ```해서 hbase 다운받음 <br>
-``` quickstart/bin/init-hbase.sh  ```DB 테이블을 만들어줌 <br>
-``` quickstart/bin/start-collector.sh ```Collector를 띄워 <br>
+``` quickstart/bin/start-hbase.sh  ```해서 hbase 다운받는다. <br>
+``` quickstart/bin/init-hbase.sh  ```DB 테이블을 만든다. <br>
+``` quickstart/bin/start-collector.sh ```Collector를 띄운다. <br>
 
-Collector가 다 띄워지면 새로운 putty창 열어서 Web UI띄움 
+Collector가 다 띄워지면 새로운 putty창 열어서 Web UI띄운다. 
 
 ``` quickstart/bin/start-web.sh ```(AWS에서 28080 포트 열어주는거 잊지마) 
 
