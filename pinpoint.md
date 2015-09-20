@@ -9,7 +9,6 @@
 5. 서버의 jar목록 표시; 서버에 접속하지 않아도 관련된 jar 목록 확인 가능 
 
 **구성**
-
 ![](pinpoint-architecture.png)
 1. DB; HBase(하둡 분산 데이터베이스 기반) 
 2. Web UI로 view적으로 보여줌 
