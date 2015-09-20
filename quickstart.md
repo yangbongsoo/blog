@@ -74,7 +74,7 @@ JAVA_OPTS="-javaagent:/local/pinpoint/pinpoint-agent/pinpoint-bootstrap-1.1.0.ja
 
 ``` cp -r pinpoint-agent ~/local/pinpoint/ ```로 복사한다.
 
-pinpoint-agent 들어가서 vi pinpoint.config 로 수정해야함 
+pinpoint-agent 들어가서 vi pinpoint.config 로 수정해야한다. 
 
 profiler.collector.ip를 pinpoint서버로 바꿔주고 
 포트를 29996 29995 29994로 바꿔줘야함 
