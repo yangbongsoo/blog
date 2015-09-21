@@ -19,5 +19,5 @@ long은 8byte고 float은 4byte지만 실수형이 정수형보다 훨씬 더 �
 
 사칙 연산에서 int형 보다 크기가 작은 자료형은 int형으로 형변환 후에 연산을 수행한다.<br>
 byte + short -> int + int -> int<br>
-두개의 피연산자 중 자료형의 표현범위가 큰 쪽에 맞춰서 형변환 된 후 연산을 수행한다<br>
+두개의 피연산자 중 자료형의 표현범위가 큰 쪽에 맞춰서 형변환 된 후 연산을 수행한다.<br>
 float + long -> float + float -> float <br>
