@@ -18,4 +18,6 @@ JDK(자바개발도구) = JRE + 개발에 필요한 실행파일(javac.exe 등)<
 long은 8byte고 float은 4byte지만 실수형이 정수형보다 훨씬 더 큰 범위를 갖기 때문에 더 크다고 할 수 있다. 또한 char와 short 모두 2byte지만 char는 음수를 갖지 않으므로 서로 범위가 달라서 자동적으로 형변환이 수행되지 않는다.
 
 사칙 연산에서 int형 보다 크기가 작은 자료형은 int형으로 형변환 후에 연산을 수행한다.<br>
-byte + short -> int + int -> int
+byte + short -> int + int -> int<br>
+두개의 피연산자 중 자료형의 표현범위가 큰 쪽에 맞춰서 형변환 된 후 연산을 수행한다<br>
+float + long -> float + float -> float <br>
