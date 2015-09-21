@@ -10,6 +10,7 @@
 * [Docker](b3c4_cee4_md.md)
    * [도커의정의](b3c4_cee4_c758_c815_c758_md.md)
    * [도커를 사용해야하는 이유](b3c4_cee4_b97c_c0ac_c6a9_d574_c57c_d558_b294_c774_c720_md.md)
+   * 도커로 Pinpoint실행(ubuntu)
 * [Amazon Cognito(Android-DynamoDB)](android-dynamodb.md)
    * [DynamoDB](dynamodb2.md)
    * [Android적용 후기](androidc801_c6a9_d6c4_ae30.md)
