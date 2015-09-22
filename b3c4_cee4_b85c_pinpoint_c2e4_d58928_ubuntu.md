@@ -12,3 +12,7 @@ pinpoint : https://github.com/naver/pinpoint/tree/master/quickstart<br>
 wget -qO- https://get.docker.com/ | sh
 
 ```
+Docker가 정확하게 설치됐는지 확인해보자.
+```
+
+```
