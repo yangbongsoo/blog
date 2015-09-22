@@ -141,5 +141,13 @@ RUN chmod +x hbase-1.0.1/bin/start-hbase.sh
 ```
 Pinpoint 설치 후 HBase를 설치한다. 
 
+```
+VOLUME [/pinpoint]
+```
+`VOLUME`은 디렉토리의 내용을 컨테이너에 저장하지 않고 호스트에 저장하도록 설정한다. 
+
 **Docker 실행하기**<br>
 이제 Docker 이미지를 pull할 수 있다.
+```
+
+```
