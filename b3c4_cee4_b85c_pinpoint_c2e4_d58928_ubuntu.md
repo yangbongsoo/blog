@@ -121,3 +121,9 @@ RUN rm apache-maven-3.2.5-bin.tar.gz apache-maven-3.2.5-bin.tar.gz.md5 apache-ma
 ```
 이제 Docker에 Maven 3.2.5를 설치하고 `PATH`에 Maven의 경로를 추가했다. 
 
+```
+RUN git clone https://github.com/naver/pinpoint.git /pinpoint
+WORKDIR /pinpoint
+RUN git checkout tags/1.0.5
+RUN mvn install -Dmaven.test.skip=true
+```
