@@ -39,4 +39,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y java-package fakeroot
 ```
 ```git```, ```wget```, ```curl```같은 기본 툴을 설치한다. 또한 뒤에  QuickStart script에서 사용되는 ps, netstat를 위해 ```procps```, ```net-tools```도 설치한다. 
 
-```RUN DEBIAN_FRONTEND=noninteractive```은 Docker 이미지를 만들때 ```apt-get install```만을 위한 것임을 주의해라. 이것은 ```apt-get install``` 진행할 때 나오는 경고 메시지들을 억제한다.  
+```RUN DEBIAN_FRONTEND=noninteractive```은 Docker 이미지를 만들때 ```apt-get install```만을 위한 것임을 주의해라. 이것은 ```apt-get install``` 진행할 때 나오는 경고 메시지들을 막는다. 
+
+```
+
+```
