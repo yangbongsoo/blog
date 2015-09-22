@@ -21,3 +21,14 @@ long은 8byte고 float은 4byte지만 실수형이 정수형보다 훨씬 더 �
 byte + short -> int + int -> int<br>
 두개의 피연산자 중 자료형의 표현범위가 큰 쪽에 맞춰서 형변환 된 후 연산을 수행한다.<br>
 float + long -> float + float -> float <br>
+
+이름 붙은 반복문 
+```
+Loop1 : for(int i=0; i<9; i++){
+            for(int j=1; j<9; j++){
+                if(j==5)
+                    break Loop1; 
+            }
+        }
+```
+위와 같이 break를 설정하면 바로 빠져나오게 할 수 있다. 
