@@ -48,3 +48,8 @@ ENV DEBIAN_FRONTED noninteractive
 로 실행 시킬 때 Docker는 interactive하기 때문에 `DEBIAN_FRONTED`설정은 틀리게 된다. 그러므로 항상 inline으로 설정해야한다. 이부분에 대한 더 자세한 내용은 아래 주소를 참고하자. <br>
 https://github.com/docker/docker/issues/4032<br>
 
+```
+RUN useradd pinpoint -m
+```
+pinpoint의 설치 가이드를 보면 JDK6과 JDK7+를 설치해야한다. Java를 설치하기 위해 우리는 non-root user가 필요하다. 그래서 user `pinpoint`를 추가했고 `-m`으로  홈 디렉토리를 만든다. 추가된 user로 Java를 설치한다. 
+
