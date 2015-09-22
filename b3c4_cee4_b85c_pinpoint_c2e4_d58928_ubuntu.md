@@ -95,4 +95,9 @@ WORKDIR /usr/local/apache-maven
 ```
 이제 Maven을 설치해야한다. 
 
-
+```
+ADD http://mirror.apache-kr.org/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.tar.gz ./
+ADD http://www.apache.org/dist//maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.tar.gz.md5 ./
+ADD http://www.apache.org/dist//maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.tar.gz.asc ./
+```
+`ADD`명령어는 명시된 경로 URL로부터 새로운 파일이나 디렉토리나 원격 파일을 복사한다.
