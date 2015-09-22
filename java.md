@@ -24,7 +24,7 @@ byte + short -> int + int -> int<br>
 두개의 피연산자 중 자료형의 표현범위가 큰 쪽에 맞춰서 형변환 된 후 연산을 수행한다.<br>
 float + long -> float + float -> float <br>
 
-이름 붙은 반복문 
+**이름 붙은 반복문** 
 ```
 Loop1 : for(int i=0; i<9; i++){
             for(int j=1; j<9; j++){
