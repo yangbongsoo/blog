@@ -78,5 +78,5 @@ RUN chown pinpoint jdk-7u79-linux-x64.tar.gz
 RUN su pinpoint -c 'yes | fakeroot make-jpkg jdk-7u79-linux-x64.tar.gz'
 RUN rm jdk-7u79-linux-x64.tar.gz
 RUN dpkg -i oracle-j2sdk1.7_1.7.0+update79_amd64.deb
-RUN rm oracle-j2sdk1.7_1.7.0+update79_amd64.de
+RUN rm oracle-j2sdk1.7_1.7.0+update79_amd64.deb
 ```
