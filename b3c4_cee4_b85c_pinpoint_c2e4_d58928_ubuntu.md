@@ -10,9 +10,9 @@ pinpoint : https://github.com/naver/pinpoint/tree/master/quickstart<br>
 첫번째로 Docker를 설치한다. 
 ```
 wget -qO- https://get.docker.com/ | sh
-
 ```
 Docker가 정확하게 설치됐는지 확인해보자.
 ```
-
+sudo docker run hello-world
 ```
+
