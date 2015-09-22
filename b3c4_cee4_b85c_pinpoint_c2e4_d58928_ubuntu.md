@@ -19,7 +19,7 @@ sudo docker run hello-world
 
 **Dockerfile 살펴보기**<br>
 https://github.com/yous/pinpoint-docker <br>
-여기서 Dockerfile을 볼 수 있다. 이제부터 Dockerfile을 한줄한줄 살펴보자 
+여기서 Dockerfile을 볼 수 있다. 이제부터 Dockerfile을 한줄한줄 살펴보자. 
 
 ```
 FROM debian
@@ -44,4 +44,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y java-package fakeroot
 ```
 ENV DEBIAN_FRONTED noninteractive
 ```
-하지만 우리는 `ENV`를 설정(환경 변수 설정을 의미)하면 빌드가 끝난 뒤에도 이 설정이 남아있게 되므로 추가하지 않았다.
+하지만 우리는 `ENV`를 설정(환경 변수 설정을 의미)하면 빌드가 끝난 뒤에도 이 설정이 남아있게 되므로 추가하지 않았다. 우리가 Docker 이미지를 `docker run -i -t ... bash`
+로 실행 시킬 때 Docker는 interactive하기 때문에 `DEBIAN_FRONTED`설정은 틀리게 된다. 그러므로 항상 inline으로 설정해야한다. 이부분에 대한 더 자세한 내용은 아래 주소를 참고하자. <br>
+https://github.com/docker/docker/issues/4032<br>
+
