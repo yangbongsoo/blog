@@ -127,3 +127,4 @@ WORKDIR /pinpoint
 RUN git checkout tags/1.0.5
 RUN mvn install -Dmaven.test.skip=true
 ```
+Pinpoint clone을 내려받고 버전을 1.0.5로 바꿔준다. 그리고 설치
