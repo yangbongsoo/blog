@@ -61,4 +61,5 @@ adduser : 계정생성 및 비밀번호와 사용자 정보를 입력받아 계�
 ```
 WORKDIR /home/pinpoint
 ```
-`WORKDIR`명령어는 명령이 실행될 디렉토리 이다. 
+`WORKDIR`명령어는 명령이 실행될 디렉토리이다. 위의 명령어 후부터 모든 `RUN`명령어는 `/home/pinpoint`에서 실행한다. 
+
