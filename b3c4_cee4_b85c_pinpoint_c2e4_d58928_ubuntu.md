@@ -90,3 +90,9 @@ ENV JAVA_HOME /usr/lib/jvm/j2sdk1.7-oracle
 ```
 다음과 같이 환경변수를 추가한다. 
 
+```
+WORKDIR /usr/local/apache-maven
+```
+이제 Maven을 설치해야한다. 
+
+
