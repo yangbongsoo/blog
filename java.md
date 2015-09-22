@@ -33,3 +33,9 @@ Loop1 : for(int i=0; i<9; i++){
 ```
 위와 같이 break를 설정하면 바로 빠져나오게 할 수 있다. 
 
+배열의 복사<br>
+System클래스의 arraycopy()를 사용하면 보다 간단히 배열을 복사할 수 있다. <br>
+```
+System.arraycopy(arr1, 0, arr2, 0, arr1.length);
+```
+arr1배열의 0번째부터 arr1.length까지의 내용을 arr2의 0번째부터 
