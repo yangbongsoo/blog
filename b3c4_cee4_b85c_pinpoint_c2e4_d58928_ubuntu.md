@@ -112,3 +112,10 @@ cf) MD5 checksum이란 다운이 이상없이 됐는지 확인하는 용도다. 
 RUN gpg --keyserver pgp.mit.edu --recv-key BB617866
 RUN gpg --verify apache-maven-3.2.5-bin.tar.gz.asc apache-maven-3.2.5-bin.tar.gz
 ```
+이것은 `apache-maven-3.2.5-bin.tar.gz`과 `apache-maven-3.2.5-bin.tar.gz.asc`의 signature를 확인한다.
+
+```
+RUN tar -zxf apache-maven-3.2.5-bin.tar.gz
+ENV PATH $PATH:/usr/local/apache-maven/apache-maven-3.2.5/bin
+RUN rm apache-maven-3.2.5-bin.tar.gz apache-maven-3.2.5-bin.tar.gz.md5 apache-maven-3.2.5-bin.tar.gz.asc
+```
