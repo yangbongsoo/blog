@@ -149,5 +149,10 @@ VOLUME [/pinpoint]
 **Docker 실행하기**<br>
 이제 Docker 이미지를 pull할 수 있다.
 ```
+docker pull yous/pinpoint
+```
 
+그리고 이미지를 돌린다.
+```
+docker run -i -t yous/pinpoint bash
 ```
