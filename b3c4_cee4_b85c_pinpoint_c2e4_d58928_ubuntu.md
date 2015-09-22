@@ -37,4 +37,6 @@ RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y git wget curl procps net-tools
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y java-package fakeroot
 ```
+```git```, ```wget```, ```curl```같은 기본 툴을 설치한다. 또한 뒤에  QuickStart script에서 사용되는 ps, netstat를 위해 ```procps```, ```net-tools```도 설치한다. 
+
 
