@@ -24,4 +24,10 @@ https://github.com/yous/pinpoint-docker <br>
 ```
 FROM debian
 ```
-```FROM``` 명령어는 
+```FROM``` 명령어는 Docker의 기본 이미지를 세팅한다. 우리는 최신 debian 이미지를 사용한다. 
+
+```
+RUN echo 'deb http://http.debian.net/debian/ wheezy contrib' >> /etc/apt/sources.list
+RUN apt-get update
+
+```
