@@ -18,3 +18,7 @@ sudo docker run hello-world
 디테일한 부분은 Docker의 installation guides를 참고하자<br> https://docs.docker.com/installation/#installation
 
 **Dockerfile 살펴보기**<br>
+https://github.com/yous/pinpoint-docker <br>
+여기서 Dockerfile을 볼 수 있다. 이제부터 Dockerfile을 한줄한줄 살펴보자 
+
+
