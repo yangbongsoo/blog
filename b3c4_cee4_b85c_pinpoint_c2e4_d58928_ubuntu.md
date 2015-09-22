@@ -44,4 +44,4 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y java-package fakeroot
 ```
 ENV DEBIAN_FRONTED noninteractive
 ```
-하지만 우리는 `ENV`를 설정하면 빌드가 끝난 뒤에도 이 설정이 남아있게 되므로 추가하지 않았다. 
+하지만 우리는 `ENV`를 설정(환경 변수 설정을 의미)하면 빌드가 끝난 뒤에도 이 설정이 남아있게 되므로 추가하지 않았다.
