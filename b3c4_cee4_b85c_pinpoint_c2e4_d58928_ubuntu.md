@@ -83,5 +83,10 @@ RUN rm oracle-j2sdk1.7_1.7.0+update79_amd64.deb
 지금 Java SE 6 과 Java SE 7을 Docker에서 설치했다.`wget` 스크립트는 http://stackoverflow.com/questions/10268583/downloading-java-jdk-on-linux-via-wget-is-shown-license-page-instead/10959815#10959815 여기를 참고하자. 
 Running `fakeroot make-jpkg ...`와 `dpkg -i ...`로 Java를 설치한다. 
 
-
+```
+ENV JAVA_6_HOME /usr/lib/jvm/j2sdk1.6-oracle
+ENV JAVA_7_HOME /usr/lib/jvm/j2sdk1.7-oracle
+ENV JAVA_HOME /usr/lib/jvm/j2sdk1.7-oracle
+```
+다음과 같이 환경변수를 추가한다. 
 
