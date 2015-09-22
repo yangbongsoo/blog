@@ -38,4 +38,4 @@ System클래스의 arraycopy()를 사용하면 보다 간단히 배열을 복사
 ```
 System.arraycopy(arr1, 0, arr2, 0, arr1.length);
 ```
-arr1배열의 0번째부터 arr1.length까지의 내용을 arr2의 0번째부터 
+arr1배열의 0번째부터 arr1.length까지의 내용을 arr2의 0번째부터 복사하겠다는 뜻
