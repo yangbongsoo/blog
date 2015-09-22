@@ -53,3 +53,8 @@ RUN useradd pinpoint -m
 ```
 pinpoint의 설치 가이드를 보면 JDK6과 JDK7+를 설치해야한다. Java를 설치하기 위해 우리는 non-root user가 필요하다. 그래서 user `pinpoint`를 추가했고 `-m`으로  홈 디렉토리를 만든다. 추가된 user로 Java를 설치한다. 
 
+cf) debian 계열(우분투)의 경우 useradd / adduser 모두 사용할 수 있지만 차이가 있다.<br>
+useradd : 순수 계정만 생성해주고, 기본 셸인 sh가 할당된다.(홈 디렉토리 / 패스워드 등을 따로 설정해줘야함)<br>
+adduser : 계정생성 및 비밀번호와 사용자 정보를 입력받아 계정을 생성하고, 사용자가 설정한 기본 셸을 사용자의 셸로 지정해주고 홈 디렉토리도 만들어 준다. <br>
+-m 옵션 : 홈 디렉토리를 지정할 때 사용(-d 옵션과 쓰임)
+
