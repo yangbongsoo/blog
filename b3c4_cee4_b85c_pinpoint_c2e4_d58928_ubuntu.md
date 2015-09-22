@@ -128,4 +128,17 @@ RUN git checkout tags/1.0.5
 RUN mvn install -Dmaven.test.skip=true
 ```
 Pinpoint clone을 내려받고 버전을 1.0.5로 바꿔준다. 그리고 설치(현재 릴리즈 버전은 1.1.1)
+https://github.com/naver/pinpoint/releases/tag/1.1.1
 
+```
+WORKDIR quickstart/hbase
+ADD http://archive.apache.org/dist/hbase/hbase-1.0.1/hbase-1.0.1-bin.tar.gz ./
+RUN tar -zxf hbase-1.0.1-bin.tar.gz
+RUN rm hbase-1.0.1-bin.tar.gz
+RUN ln -s hbase-1.0.1 hbase
+RUN cp ../conf/hbase/hbase-site.xml hbase-1.0.1/conf/
+RUN chmod +x hbase-1.0.1/bin/start-hbase.sh
+```
+Pinpoint 설치 후 HBase를 설치한다. 
+
+**Docker 실행하기**<br>
