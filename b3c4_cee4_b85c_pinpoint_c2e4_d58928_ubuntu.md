@@ -156,3 +156,9 @@ docker pull yous/pinpoint
 ```
 docker run -i -t yous/pinpoint bash
 ```
+
+만약 Docker exit후에 컨테이너를 지우고 싶으면 아래와 같이 입력한다. 
+```
+docker run -i -t --rm yous/pinpoint bash
+```
+
