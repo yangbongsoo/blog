@@ -106,7 +106,7 @@ ADD http://www.apache.org/dist//maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-
 RUN [ $(md5sum apache-maven-3.2.5-bin.tar.gz | grep --only-matching -m 1 '^[0-9a-f]*') = $(cat apache-maven-3.2.5-bin.tar.gz.md5) ]
 ```
 `apache-maven-3.2.5-bin.tar.gz`과 `apache-maven-3.2.5-bin-tar.gz.md5`의 MD5 checksum을 매치시킨다. <br>
-cf) MD5 checksum이란 다운이 이상없이 됐는지 확인하는 용도다.
+cf) MD5 checksum이란 다운이 이상없이 됐는지 확인하는 용도다. 자세한 설명 : http://mytory.net/archives/96/
 
 
 
