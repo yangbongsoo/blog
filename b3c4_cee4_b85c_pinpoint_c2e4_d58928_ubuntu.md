@@ -119,3 +119,5 @@ RUN tar -zxf apache-maven-3.2.5-bin.tar.gz
 ENV PATH $PATH:/usr/local/apache-maven/apache-maven-3.2.5/bin
 RUN rm apache-maven-3.2.5-bin.tar.gz apache-maven-3.2.5-bin.tar.gz.md5 apache-maven-3.2.5-bin.tar.gz.asc
 ```
+이제 Docker에 Maven 3.2.5를 설치하고 `PATH`에 Maven의 경로를 추가했다. 
+
