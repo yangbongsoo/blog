@@ -30,6 +30,6 @@
    * [REST의 이해와 설계](restc758_c774_d574_c640_c124_acc4.md)
    * [SOA](soa.md)
    * [MSA](msa.md)
-* [JAVA](java.md)
 * [실용주의프로그래머/익스트림프로그래밍](c2e4_c6a9_c8fc_c758_d504_b85c_adf8_b798_ba38_c775_c2a4_d2b8_b9bc_d504_b85c_adf8_b798_bc0d.md)
+* [JAVA](java.md)
 
