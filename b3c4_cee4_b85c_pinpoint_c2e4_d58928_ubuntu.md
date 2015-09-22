@@ -31,3 +31,10 @@ RUN echo 'deb http://http.debian.net/debian/ wheezy contrib' >> /etc/apt/sources
 RUN apt-get update
 
 ```
+```RUN``` 명령어는 Docker에서 Commands를 실행한다. 우리는 ```java-package```패키지를 위해 ```/etc/apt/sources.list```에  ```http://http.debian.net/debian/ wheezy contrib'```를 추가하고 ```apt-get update```를 실행한다. 
+
+```
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y git wget curl procps net-tools
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y java-package fakeroot
+```
+
