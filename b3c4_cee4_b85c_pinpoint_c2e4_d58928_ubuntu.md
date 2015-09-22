@@ -80,4 +80,8 @@ RUN rm jdk-7u79-linux-x64.tar.gz
 RUN dpkg -i oracle-j2sdk1.7_1.7.0+update79_amd64.deb
 RUN rm oracle-j2sdk1.7_1.7.0+update79_amd64.deb
 ```
-지금 Java SE 6 과 Java SE 7을 Docker에서 설치했다.
+지금 Java SE 6 과 Java SE 7을 Docker에서 설치했다.`wget` 스크립트는 http://stackoverflow.com/questions/10268583/downloading-java-jdk-on-linux-via-wget-is-shown-license-page-instead/10959815#10959815 여기를 참고하자. 
+Running `fakeroot make-jpkg ...`와 `dpkg -i ...`로 Java를 설치한다. 
+
+
+
