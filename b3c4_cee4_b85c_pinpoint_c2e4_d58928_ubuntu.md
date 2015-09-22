@@ -102,3 +102,6 @@ ADD http://www.apache.org/dist//maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-
 ```
 `ADD`명령어는 명시된 경로 URL로부터 새로운 파일이나 디렉토리나 원격 파일을 복사한다. 위의 라인은 Apache mirror를 통해 Maven 파일을 다운받는 것이다. 
 
+```
+RUN [ $(md5sum apache-maven-3.2.5-bin.tar.gz | grep --only-matching -m 1 '^[0-9a-f]*') = $(cat apache-maven-3.2.5-bin.tar.gz.md5) ]
+```
