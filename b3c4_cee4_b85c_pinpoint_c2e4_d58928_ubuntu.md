@@ -21,4 +21,6 @@ sudo docker run hello-world
 https://github.com/yous/pinpoint-docker <br>
 여기서 Dockerfile을 볼 수 있다. 이제부터 Dockerfile을 한줄한줄 살펴보자 
 
-
+```
+From debian
+```
