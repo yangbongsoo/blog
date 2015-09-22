@@ -63,3 +63,20 @@ WORKDIR /home/pinpoint
 ```
 `WORKDIR`명령어는 명령이 실행될 디렉토리이다. 위의 명령어 후부터 모든 `RUN`명령어는 `/home/pinpoint`에서 실행한다. 
 
+```
+RUN wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
+  http://download.oracle.com/otn-pub/java/jdk/6u45-b06/jdk-6u45-linux-x64.bin
+RUN chown pinpoint jdk-6u45-linux-x64.bin
+RUN su pinpoint -c 'yes | fakeroot make-jpkg jdk-6u45-linux-x64.bin'
+RUN rm jdk-6u45-linux-x64.bin
+RUN dpkg -i oracle-j2sdk1.6_1.6.0+update45_amd64.deb
+RUN rm oracle-j2sdk1.6_1.6.0+update45_amd64.deb
+
+RUN wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
+  http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-x64.tar.gz
+RUN chown pinpoint jdk-7u79-linux-x64.tar.gz
+RUN su pinpoint -c 'yes | fakeroot make-jpkg jdk-7u79-linux-x64.tar.gz'
+RUN rm jdk-7u79-linux-x64.tar.gz
+RUN dpkg -i oracle-j2sdk1.7_1.7.0+update79_amd64.deb
+RUN rm oracle-j2sdk1.7_1.7.0+update79_amd64.de
+```
