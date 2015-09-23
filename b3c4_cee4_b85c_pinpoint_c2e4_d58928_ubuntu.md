@@ -178,4 +178,38 @@ docker run -i -t -p 28080:28080 -p 28081:28081 -p 28082:28082 \
 지금까지 Pinpoint를 위한 Docker 이미지를 만들었다. 이제 QuickStart 스크립트를 돌릴 수 있다. Pinpoint 가이드에서 언급한대로 몇개의 추가적인 스크립트를 돌려야한다. 
 
 **Install & Start HBase**<br>
-Download & Start : `quickstart/bin/start-hbase.sh`
+Download & Start : `quickstart/bin/start-hbase.sh`<br>
+Initialize Tables : `quickstart/bin/init-hbase.sh`<br>
+
+**Start Pinpoint Daemons**<br>
+Collector : `quickstart/bin/start-collector.sh`<br>
+Web UI : `quickstart/bin/start-web.sh`<br>
+TestAPP : `quickstart/bin/start-testapp.sh`<br>
+
+HBase와 3개의 데몬들을 돌리면 아래의 주소로 Pinpoint TestApp에 대한 APM을 확인할 수 있다.
+
+Web UI : http://address:28080<br>
+TetsAPP : http://address:28081<br>
+
+**Stopping**<br>
+HBase : `quickstart/bin/stop-hbase.sh`<br>
+Collector : `quickstart/bin/stop-collector.sh`<br>
+Web UI : `quickstart/bin/stop-web.sh`<br>
+TestAPP : `quickstart/bin/stop-testapp.sh`<br>
+
+**요약**<br>
+Dokcer로 Pinpoint를 실행 시키고 
+```
+docker pull yous/pinpoint
+docker run -i -t -p 28080:28080 -p 28081:28081 -p 28082:28082 \
+  --cap-add SYS_PTRACE --security-opt apparmor:unconfined yous/pinpoint bash
+```
+도커 안에서 아래 스크립트를 실행시킨다.
+```
+quickstart/bin/start-hbase.sh
+quickstart/bin/init-hbase.sh
+quickstart/bin/start-collector.sh
+quickstart/bin/start-web.sh
+quickstart/bin/start-testapp.sh
+```
+그럼 Web UI : http://address:28080 TetsAPP : http://address:28081를 통해 확인할 수 있다. 
