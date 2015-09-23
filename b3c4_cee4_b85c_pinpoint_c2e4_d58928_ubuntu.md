@@ -167,3 +167,8 @@ docker run -i -t --rm yous/pinpoint bash
 docker run -i -t --cap-add SYS_PTRACE --security-opt apparmor:unconfined \
   yous/pinpoint bash
 ```
+또한 QuickStart에서 28080,28081,28082 포트를 사용하므로 container 포트로 바인딩해주는게 필요하다. `-p`가 그 역할을 수행한다. 디테일한 자료 : https://docs.docker.com/userguide/dockerlinks/
+
+```
+
+```
