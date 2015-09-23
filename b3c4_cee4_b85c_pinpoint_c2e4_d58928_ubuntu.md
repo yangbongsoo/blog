@@ -175,4 +175,7 @@ docker run -i -t -p 28080:28080 -p 28081:28081 -p 28082:28082 \
 ```
 
 **QuickStart**<br>
-지금까지 Pinpoint를 위한 Docker 이미지를 만들었다. 이제 QuickStart 스크립트를 돌릴 수 있다. 
+지금까지 Pinpoint를 위한 Docker 이미지를 만들었다. 이제 QuickStart 스크립트를 돌릴 수 있다. Pinpoint 가이드에서 언급한대로 몇개의 추가적인 스크립트를 돌려야한다. 
+
+**Install & Start HBase**<br>
+Download & Start : `quickstart/bin/start-hbase.sh`
