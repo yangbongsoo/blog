@@ -161,7 +161,7 @@ docker run -i -t yous/pinpoint bash
 ```
 docker run -i -t --rm yous/pinpoint bash
 ```
-위의 명령어는 `which java`같은 몇가지 요구사항을 체크할 수 있게 하지만 **성공적으로 QuickStart 스크립트를 돌릴 수 없다.** 스크립트가 `netstat` 결과로 프로그램 이름을 체크 하기 때문에 몇가지 옵션을 붙여야 한다. 디테일한 자료 : https://github.com/docker/docker/issues/7276
+위의 명령어는 `which java`같은 몇가지 요구사항을 체크할 수 있게 하지만 성공적으로 QuickStart 스크립트를 돌릴 수 없다. 스크립트가 `netstat` 결과로 프로그램 이름을 체크 하기 때문에 몇가지 옵션을 붙여야 한다. 디테일한 자료 : https://github.com/docker/docker/issues/7276
 
 ```
 docker run -i -t --cap-add SYS_PTRACE --security-opt apparmor:unconfined \
