@@ -202,6 +202,7 @@ AWS EC2를 생성하고
 ```
 sudo apt-get update
 sudo apt-get install -y git wget curl procps net-tools
+sudo wget -qO- https://get.docker.com/ | sh
 docker pull yous/pinpoint
 docker run -i -t -p 28080:28080 -p 28081:28081 -p 28082:28082 \
   --cap-add SYS_PTRACE --security-opt apparmor:unconfined yous/pinpoint bash
