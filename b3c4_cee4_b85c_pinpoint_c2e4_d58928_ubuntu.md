@@ -6,6 +6,27 @@ Quickstart 스크립트로 샘플 Pinpoint instance를 실행시키는 것이 �
 pinpoint : https://github.com/naver/pinpoint/tree/master/quickstart<br>
 도커 : https://www.docker.com/
 
+
+**요약**<br>
+AWS EC2를 생성하고 
+```
+sudo apt-get update
+sudo apt-get install -y git wget curl procps net-tools
+sudo wget -qO- https://get.docker.com/ | sh
+sudo docker pull yous/pinpoint
+sudo docker run -i -t -p 28080:28080 -p 28081:28081 -p 28082:28082 \
+  --cap-add SYS_PTRACE --security-opt apparmor:unconfined yous/pinpoint bash
+```
+도커 안에서 아래 스크립트를 실행시킨다.
+```
+quickstart/bin/start-hbase.sh
+quickstart/bin/init-hbase.sh
+quickstart/bin/start-collector.sh
+quickstart/bin/start-web.sh
+quickstart/bin/start-testapp.sh
+```
+그럼 Web UI : http://address:28080 TetsAPP : http://address:28081를 통해 확인할 수 있다. 
+
 **요구사항**<br>
 첫번째로 Docker를 설치한다. 
 ```
@@ -196,23 +217,3 @@ HBase : `quickstart/bin/stop-hbase.sh`<br>
 Collector : `quickstart/bin/stop-collector.sh`<br>
 Web UI : `quickstart/bin/stop-web.sh`<br>
 TestAPP : `quickstart/bin/stop-testapp.sh`<br>
-
-**요약**<br>
-AWS EC2를 생성하고 
-```
-sudo apt-get update
-sudo apt-get install -y git wget curl procps net-tools
-sudo wget -qO- https://get.docker.com/ | sh
-docker pull yous/pinpoint
-docker run -i -t -p 28080:28080 -p 28081:28081 -p 28082:28082 \
-  --cap-add SYS_PTRACE --security-opt apparmor:unconfined yous/pinpoint bash
-```
-도커 안에서 아래 스크립트를 실행시킨다.
-```
-quickstart/bin/start-hbase.sh
-quickstart/bin/init-hbase.sh
-quickstart/bin/start-collector.sh
-quickstart/bin/start-web.sh
-quickstart/bin/start-testapp.sh
-```
-그럼 Web UI : http://address:28080 TetsAPP : http://address:28081를 통해 확인할 수 있다. 
