@@ -198,7 +198,7 @@ Web UI : `quickstart/bin/stop-web.sh`<br>
 TestAPP : `quickstart/bin/stop-testapp.sh`<br>
 
 **요약**<br>
-Dokcer로 Pinpoint를 실행 시키고 
+AWS EC2를 생성하고 
 ```
 docker pull yous/pinpoint
 docker run -i -t -p 28080:28080 -p 28081:28081 -p 28082:28082 \
