@@ -27,6 +27,12 @@ quickstart/bin/start-testapp.sh
 ```
 그럼 Web UI : http://address:28080 TetsAPP : http://address:28081를 통해 확인할 수 있다. 
 
+
+
+---
+
+디테일한 설명 <br>
+
 **요구사항**<br>
 첫번째로 Docker를 설치한다. 
 ```
