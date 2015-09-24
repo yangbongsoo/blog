@@ -89,4 +89,7 @@ void add(int a, int b, int[] result)
 메서드는 단 하나의 값만을 리턴할 수 있지만 이것을 응용하면 여러 개의 값을 리턴받는 것과 같은 효과를 얻을 수 있다. 
 
 **JVM 메모리 구조**<br>
-
+![](jvm.PNG)
+1. 메소드 영역(method area)
+2. 호출스택(call stack)
+3. 힙(heap)
