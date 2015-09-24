@@ -53,3 +53,23 @@ arr1배열의 0번째부터 arr1.length까지의 내용을 arr2의 0번째부터
 
 메소드의 매개변수가 있는 경우, 본격적인 작업을 시작하기에 앞서 넘겨받은 매개변수의 값이 유효한 것인지 꼭 확인하는것이 중요하다. 
 
+```
+int max(int a, int b)
+{
+    if(a>b)
+        return a;
+    else
+        return b;
+}
+```
+
+```
+int max(int a, int b)
+{
+    int result = 0;
+    if(a>b)
+        result = a;
+    else
+        result = b;
+}
+```
