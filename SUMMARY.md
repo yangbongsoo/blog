@@ -27,5 +27,5 @@
 * [실용주의프로그래머/익스트림프로그래밍](c2e4_c6a9_c8fc_c758_d504_b85c_adf8_b798_ba38_c775_c2a4_d2b8_b9bc_d504_b85c_adf8_b798_bc0d.md)
 * [애자일적용후기](c560_c790_c77c_c801_c6a9_d6c4_ae30.md)
 * [JAVA](java.md)
-* JPA
+* [JPA](jpa.md)
 
