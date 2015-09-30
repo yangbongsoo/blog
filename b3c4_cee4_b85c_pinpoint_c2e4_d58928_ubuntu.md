@@ -26,7 +26,7 @@ docker run -it --rm -p 28080:28080 -p 28081:28081 -p 28082:28082 \
 --cap-add SYS_PTRACE --security-opt apparmor:unconfined yous/pinpoint:1.0.4 bash
 ```
 
-도커에서는 새롭게 터미널창을 켜서 web.sh , testapp.sh 실행이 안된다. attach해서 도커안으로 들어가도 동기화되버림. 그래서 백그라운드로 실행시키는게 좋은듯.
+주의) 도커에서는 새롭게 터미널창을 켜서 web.sh , testapp.sh 실행이 안된다. attach해서 도커안으로 들어가도 동기화되버린다. 그래서 백그라운드로 실행시키는게 좋은듯.
 ```
 quickstart/bin/start-hbase.sh
 quickstart/bin/init-hbase.sh
