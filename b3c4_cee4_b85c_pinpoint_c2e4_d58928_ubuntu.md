@@ -18,6 +18,14 @@ sudo docker run -i -t -p 28080:28080 -p 28081:28081 -p 28082:28082 \
   --cap-add SYS_PTRACE --security-opt apparmor:unconfined yous/pinpoint bash
 ```
 도커 안에서 아래 스크립트를 실행시킨다.
+
+지금 1.0.5에서는 HBase 설치가 안된다. 
+```
+docker pull yous/pinpoint:1.0.4
+docker run -it --rm -p 28080:28080 -p 28081:28081 -p 28082:28082 \
+--cap-add SYS_PTRACE --security-opt apparmor:unconfined yous/pinpoint:1.0.4 bash
+```
+
 ```
 quickstart/bin/start-hbase.sh
 quickstart/bin/init-hbase.sh
