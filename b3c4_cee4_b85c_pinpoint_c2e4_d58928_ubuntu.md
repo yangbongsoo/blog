@@ -164,7 +164,7 @@ WORKDIR /pinpoint
 RUN git checkout tags/1.0.5
 RUN mvn install -Dmaven.test.skip=true
 ```
-Pinpoint clone을 내려받고 버전을 1.0.5로 바꿔준다. 그리고 설치(현재 릴리즈 버전은 1.1.1)
+Pinpoint clone을 내려받고 버전을 1.0.5로 바꿔준다. 그리고 설치한다.
 https://github.com/naver/pinpoint/releases/tag/1.1.1
 
 ```
