@@ -21,9 +21,10 @@ sudo docker run -i -t -p 28080:28080 -p 28081:28081 -p 28082:28082 \
 ```
 quickstart/bin/start-hbase.sh
 quickstart/bin/init-hbase.sh
-quickstart/bin/start-collector.sh
-quickstart/bin/start-web.sh
-quickstart/bin/start-testapp.sh
+
+quickstart/bin/start-collector.sh &
+quickstart/bin/start-web.sh &
+quickstart/bin/start-testapp.sh &
 ```
 그럼 Web UI : http://address:28080 TetsAPP : http://address:28081를 통해 확인할 수 있다. 
 
