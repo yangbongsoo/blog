@@ -169,12 +169,12 @@ https://github.com/naver/pinpoint/releases/tag/1.1.1
 
 ```
 WORKDIR quickstart/hbase
-ADD http://archive.apache.org/dist/hbase/hbase-1.0.1/hbase-1.0.1-bin.tar.gz ./
-RUN tar -zxf hbase-1.0.1-bin.tar.gz
-RUN rm hbase-1.0.1-bin.tar.gz
-RUN ln -s hbase-1.0.1 hbase
-RUN cp ../conf/hbase/hbase-site.xml hbase-1.0.1/conf/
-RUN chmod +x hbase-1.0.1/bin/start-hbase.sh
+ADD http://archive.apache.org/dist/hbase/hbase-0.94.25/hbase-0.94.25.tar.gz ./
+RUN tar -zxf hbase-0.94.25.tar.gz
+RUN rm hbase-0.94.25.tar.gz
+RUN ln -s hbase-0.94.25 hbase
+RUN cp ../conf/hbase/hbase-site.xml hbase-0.94.25/conf/
+RUN chmod +x hbase-0.94.25/bin/start-hbase.sh
 ```
 Pinpoint 설치 후 HBase를 설치한다. 
 
