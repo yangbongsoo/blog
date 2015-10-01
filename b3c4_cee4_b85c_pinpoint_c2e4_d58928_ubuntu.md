@@ -7,7 +7,8 @@ pinpoint : https://github.com/naver/pinpoint/tree/master/quickstart<br>
 도커 : https://www.docker.com/
 
 ###요약(빠른설치)<br>
-AWS EC2를 생성하고 
+AWS EC2를 생성하고
+cf) 주의!!
 ```
 sudo apt-get update
 sudo apt-get install -y git wget curl procps net-tools
