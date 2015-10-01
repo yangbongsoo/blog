@@ -8,7 +8,7 @@ pinpoint : https://github.com/naver/pinpoint/tree/master/quickstart<br>
 
 ###요약(빠른설치)<br>
 AWS EC2를 생성하고<br>
-cf) 주의!!
+cf) 주의!! AWS 1년 무료 t2.micro는 스펙이 딸려서 Pinpoint감당 못함 최소 t2.small로 해야함.
 ```
 sudo apt-get update
 sudo apt-get install -y git wget curl procps net-tools
