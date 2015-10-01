@@ -6,7 +6,6 @@ Quickstart 스크립트로 샘플 Pinpoint instance를 실행시키는 것이 �
 pinpoint : https://github.com/naver/pinpoint/tree/master/quickstart<br>
 도커 : https://www.docker.com/
 
-
 ###요약(빠른설치)<br>
 AWS EC2를 생성하고 
 ```
