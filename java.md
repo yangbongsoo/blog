@@ -134,3 +134,24 @@ class Card{
 }
 ```
 이 기능을 활용하면 각 인스턴스마다 final이 붙은 멤버변수가 다른 값을 갖도록 하는것이 가능하다.
+
+**생성자의 접근 제어자**<br>
+생성자에 접근 제어자를 사용함으로써 인스턴스의 생성을 제한할 수 있다. 보통 생성자의 접근 제어자는 클래스의 접근 제어자와 같지만, 다르게 지정할 수도 있다. 
+
+생성자의 접근 제어자를 private으로 지정하면, 외부에서 생성자에 접근 할 수 없으므로 인스턴스를 생성할 수 없게 된다. 그래도 클래스 내부에서는 인스턴스의 생성이 가능하다. 
+
+```
+class Singleton{
+    
+    private static Singleton s = new Singleton();
+    
+    private Singleton(){
+        //...    
+    }
+    
+    //인스턴스를 생성하지 않고도 호출할 수 있어야 하므로 static이어야 한다. 
+    public static Singleton getInstance(){
+        return s;
+    }
+}
+```
