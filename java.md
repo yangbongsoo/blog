@@ -241,3 +241,24 @@ Fightable 자체에는 정의된 멤버가 하나도 없지만 조상 인터페�
 - 클래스는 사용하는 쪽(User)과 클래스를 제공하는 쪽(Provider)이 있다.
 - 메서드를 사용(호출)하는 쪽(User)에서는 사용하려는 메서드(Provider)의 선언부만 알면 된다.(내용은 몰라도 된다.)
 
+```
+class A{
+    public void methodA(B b){
+        b.methodB();
+    }
+}
+
+class B{
+    public void methodB(){
+        System.out.println("methodB()");
+    }
+}
+
+class InterfaceTest{
+    public static void main(String args[]){
+        A a = new A();
+        a.methodA(new B());
+    }
+}
+```
+위와 같이 클래스 A와 클래스 B가 있을때 클래스 A(User)는 클래스  B(Provider)의 인스턴스를 생성하고 메서드를 호출한다. 이 두 클래스는 서로 직접적인 관계에 있다. 
