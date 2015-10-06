@@ -200,3 +200,10 @@ class Child extends Parent{
     }
 }
 ```
+실행결과
+```
+p.x = 100
+Child Method
+c.x = 200
+Child Method
+```
