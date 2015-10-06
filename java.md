@@ -267,3 +267,27 @@ class InterfaceTest{
 
 그러나 클래스 A가 클래스 B를 직접 호출하지 않고 인터페이스를 매개체로 해서 클래스 A가 인터페이스를 통해서 클래스 B의 메서드에 접근하도록 하면, 클래스 B에 변경사항이 생기거나 클래스 B와 같은 기능의 다른 클래스로 대체 되어도 클래스 A는 전혀 영향을 받지 않도록 하는 것이 가능하다. 
 
+두 클래스간의 관계를 직접적으로 변경하기 위해서는 먼저 인터페이스를 이용해서 클래스 B(Provider)의 선언과 구현을 분리해야한다. 
+
+먼저 다음과 같이 클래스 B에 정의된 메서드를 추상메서드로 정의하는 인터페이스 I를 정의한다.
+```
+interface I{
+    public abstract void methodB();
+}
+```
+그 다음에는 클래스 B가 인터페이스 I를 구현하도록 한다. 
+```
+class B implements I{
+    public void methodB(){
+        System.out.println("methodB in B class");
+    }
+}
+```
+이제 클래스 A는 클래스 B 대신 인터페이스 I를 사용해서 작성할 수 있다. 
+```
+class A{
+    public void methodA(I i){
+        i.methodB();
+    }
+}
+```
