@@ -320,3 +320,5 @@ try{
     System.setErr(ps);
 }
 ```
+출력 방향이 변경되었기 때문에 `System.err.println("")`을 이용해서 출력하는 내용은 error.log파일에 저장된다. 
+
