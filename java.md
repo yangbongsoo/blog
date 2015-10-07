@@ -317,6 +317,9 @@ class A{
     - IOException
     - ClassNotFoundException
     - FileNotFoundException
+    - DataFormatException
+
+RuntimeException 클래스들 그룹에 속하는 예외가 발생할 가능성이 있는 코드에는 예외처리를 해주지 않아도 컴파일 시에 문제가 되지 않지만, Exception 클래스들 그룹에 속하는 예외가 발생할 가능성이 있는 예외는 반드시 처리를 해주어야 하며, 그렇지 않으면 컴파일 시에 에러가 발생한다.
 
 
 **System.err**<br>
