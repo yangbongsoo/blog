@@ -339,3 +339,26 @@ try{
 출력 방향이 변경되었기 때문에 `System.err.println("")`을 이용해서 출력하는 내용은 error.log파일에 저장된다. 
 
 **예외 되던지기(exception re-throwing)**<br>
+단 하나의 예외에 대해서 예외가 발생한 메서드와 호출한 메서드 양쪽에서 처리할 수 있다. 
+```
+class ExceptionEx23{
+    public static void main(String[] args){
+        try{
+            method1();
+        }catch(Exception e){
+            System.out.println("main메서드에서 예외가 처리되었습니다.");
+        }
+    }
+    
+    static void method1() throws Exception{
+        try{
+            throw new Exception();
+        }catch(Exception e){
+            System.out.println("method1메서드에서 예외가 처리되었습니다.");
+            throw e; // 다시 예외를 발생시킨다. 
+        }
+    }
+}
+```
+method1()의 catch블럭에서 예외를 처리하고도 throw문을 통해 다시 예외를 발생시켰다. 그리고 이 예외를 method1을 호출한 main 메서드에서 한번 더 처리하였다. 
+
