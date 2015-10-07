@@ -338,3 +338,4 @@ try{
 ```
 출력 방향이 변경되었기 때문에 `System.err.println("")`을 이용해서 출력하는 내용은 error.log파일에 저장된다. 
 
+**예외 되던지기(exception re-throwing)**<br>
