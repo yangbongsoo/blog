@@ -307,6 +307,10 @@ class A{
 
 ###Chapter 8 예외처리
 
+
+
+
+**System.err**<br>
 System.err는 setErr 메서드를 이용해서 출력방향을 바꾸지 않는 한 err에 출력하는 내용은 모두 화면에 나타나게 된다. 
 ```
 PrintStream ps =null;
