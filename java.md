@@ -306,3 +306,17 @@ class A{
 인터페이스 I는 실제구현 내용(클래스 B)을 감싸고 있는 껍데기이며, 클래스 A는 껍데기 안에 어떤 알맹이(클래스)가 들어 있는지 몰라도 된다.
 
 ###Chapter 8 예외처리
+
+System.err는 setErr 메서드를 이용해서 출력방향을 바꾸지 않는 한 err에 출력하는 내용은 모두 화면에 나타나게 된다. 
+```
+PrintStream ps =null;
+FileOutputStream fos = null;
+
+try{
+    //error.log파일에 출력할 준비를 한다.
+    fos = new FileOutputStream("error.log"mtrue);
+    ps = new PrintStream(fos);
+    //error의 출력을 화면이 아닌, error.log 파일로 변경한다. 
+    System.setErr(ps);
+}
+```
