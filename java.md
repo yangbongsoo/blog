@@ -307,7 +307,9 @@ class A{
 
 ###Chapter 8 예외처리
 
-
+예외 클래스들은 다음과 같이 두 개의 그룹으로 나눠질 수 있다. (모든 예외의 최고 조상은 Exception 클래스이다.)
+- RuntimeException 클래스와 그 자손클래스들 
+- Exception 클래스와 그 자손 클래스들 
 
 
 **System.err**<br>
