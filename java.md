@@ -401,14 +401,14 @@ boolean equalsIgnoreCase(String str)
 String[] split(String regex) 
 ```
 
+기본형 -> 문자열
 ```
-//지정된 값을 문자열로 변환하여 반환 
 String a = String.valueof(‘a’);
 String b = String.valueof(100);
 String c = String.valueof(true);
 ```
 
-//문자열 -> 기본형 
+문자열 -> 기본형 
 ```
 boolean Boolean.getBoolean(String s)
 byte Byte.parseByte(String s)
