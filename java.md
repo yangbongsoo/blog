@@ -407,3 +407,13 @@ String a = String.valueof(‘a’);
 String b = String.valueof(100);
 String c = String.valueof(true);
 ```
+
+//문자열 -> 기본형 
+boolean Boolean.getBoolean(String s)
+byte Byte.parseByte(String s)
+short Short.parseShort(String s)
+int Integer.parseInt(String s)
+long Long.parseLong(String s)
+float Float.parseFloat(String s)
+double Double.parseDouble(String s) 
+```
