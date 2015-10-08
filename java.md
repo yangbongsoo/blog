@@ -409,6 +409,7 @@ String c = String.valueof(true);
 ```
 
 //문자열 -> 기본형 
+```
 boolean Boolean.getBoolean(String s)
 byte Byte.parseByte(String s)
 short Short.parseShort(String s)
