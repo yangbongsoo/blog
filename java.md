@@ -382,4 +382,21 @@ equals(String s)를 사용했을 때는 문자열간의 내용으로 비교하�
 String클래스의  intern()은 String인스턴스의 문자열을 ‘constant pool’에 등록하는 일을 한다. 등록하고자 하는 문자열이 ‘constant pool’에 이미 존재하는 경우에는 그 문자열의 주소값을 반환한다.
 
 **String클래스의 생성자와 메서드**<br>
+```
+String file = “Hello.txt”;
+boolean b = file.endsWith(“txt”);  //true
+```
+```
+String s = “java.lang.Object”;
+boolean b = s.startsWith(“java”); // true
+boolean b2 = s.startWith(“lang”);// false
+```
 
+```
+boolean equalsIgnoreCase(String str) 
+//대소문자 구분없이 비교한다. 
+```
+
+```
+String[] split(String regex) 
+```
