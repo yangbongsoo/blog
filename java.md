@@ -362,3 +362,4 @@ class ExceptionEx23{
 ```
 method1()의 catch블럭에서 예외를 처리하고도 throw문을 통해 다시 예외를 발생시켰다. 그리고 이 예외를 method1을 호출한 main 메서드에서 한번 더 처리하였다. 
 
+###Chapter 9 java.lang패키지
