@@ -419,3 +419,14 @@ float Float.parseFloat(String s)
 double Double.parseDouble(String s) 
 ```
 ###Chapter 10 내부 클래스
+내부 클래스는 마치 변수를 선언하는 것과 같은 위치에 선언할 수 있으며, 변수의 선언위치에 따라 인스턴스변수, 클래스변수, 지역변수로 구분되는 것과 같이 내부 클래스도 선언위치에 따라 인스턴스 클래스, 스태틱 클래스, 지역 클래스로 나뉜다. 
+```
+class Outer{
+	class InstanceInner{}
+	static class StaticInner {}
+
+	void myMethod(){
+		class LocalInner{}
+	}
+}
+```
