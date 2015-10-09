@@ -14,6 +14,7 @@
    * [Android적용 후기](androidc801_c6a9_d6c4_ae30.md)
 * [JAVA](java.md)
 * [SpringBoot](springboot.md)
+* [애자일적용후기](c560_c790_c77c_c801_c6a9_d6c4_ae30.md)
 * [웹 엔지니어가 알아야 할 인프라의 기본](c6f9_c5d4_c9c0_b2c8_c5b4_ac00_c54c_c544_c57c_d560_c778_d504_b77c_c758_ae30_bcf8_md.md)
    * [웹 서비스에서 인프라의 역할](c6f9_c11c_be44_c2a4_c5d0_c11c_c778_d504_b77c_c758_c5ed_d560_md.md)
    * [인프라 기술의 기초 지식](c778_d504_b77c_ae30_c220_c758_ae30_cd08_c9c0_c2dd_md.md)
@@ -26,5 +27,4 @@
    * [SOA](soa.md)
    * [MSA](msa.md)
 * [실용주의프로그래머/익스트림프로그래밍](c2e4_c6a9_c8fc_c758_d504_b85c_adf8_b798_ba38_c775_c2a4_d2b8_b9bc_d504_b85c_adf8_b798_bc0d.md)
-* [애자일적용후기](c560_c790_c77c_c801_c6a9_d6c4_ae30.md)
 
