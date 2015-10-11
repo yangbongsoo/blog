@@ -460,7 +460,16 @@ List list = new ArrayList(10);
 ArrayList를 생성 할 때, 저장할 요소의 갯수를 고래해서 초기화 시키는게 좋다. 생성할 때 지정한 크기보다 더 많은 객체를 저장하면 자동적으로 크기가 늘어나기는 하지만 이 과정에서 처리시간이 많이 소요되기 때문이다. <br>
 다시 말하면 배열은 크기를 변경할 수 없기 때문에 새로운 배열을 생성해서 데이터를 복사해야하기 때문에 효율이 많이 떨어진다. 
 
-ArrayList remove 메서드 일부 
+ArrayList remove를 통해 객체를 삭제할때는 
+```
+for(i = list2.size2()-1; i>=0; i--){
+    if(list1.contains(list2.get(i)))
+        list2.remove(i);
+}
+```
+위와 같이 끝에서부터 인덱스를 감소시키면서 삭제를 진행한다. 그 이유는 배열의 한 요소가 삭제될때마다 나머지 요소들이 한칸씩 앞으로 자리이동을 해야되는데 뒤에서부터하면 이동을 최소화 시킬수 있다. 
+
+실제 ArrayList remove 메서드 일부 
 ```
 private void fastRemove(int index){
     modCount++;
@@ -470,3 +479,4 @@ private void fastRemove(int index){
     elementData[--size] = null;
 }
 ```
+내가 생성한 객체 size가 5이고 지우려고하는 인덱스가 마지막이라면(4) numMoved는 0이되므로 System.arraycopy를 호출하지 않아 작업시간이 짧아진다. 배열의 중간에 위치한 객체를 추가하거나 삭제하는 경우 System.arraycopy()를 호출해서 다른 데이터의 위치를 이동시켜 줘야하기 때문에 다루는 데이터의 개수가 많을수록 작업시간이 오래걸린다. 
