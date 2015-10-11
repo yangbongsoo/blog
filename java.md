@@ -483,3 +483,5 @@ private void fastRemove(int index){
 
 **LinkedList**<br>
 실제로 LinkedList 클래스는 이름과 달리 링크드리스트가 아니라 더블 원형 링크드리스트로 구현되어있다. 
+
+순차적으로 추가/삭제하는 경우에는 ArrayList가 LinkedList보다 빠르다. 중간 데이터를 추가/삭제 하는 경우에는 LinkedListk가 ArrayList보다 빠르다. 
