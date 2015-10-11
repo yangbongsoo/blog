@@ -480,3 +480,6 @@ private void fastRemove(int index){
 }
 ```
 내가 생성한 객체 size가 5이고 지우려고하는 인덱스가 마지막이라면(4) numMoved는 0이되므로 System.arraycopy를 호출하지 않아 작업시간이 짧아진다. 배열의 중간에 위치한 객체를 추가하거나 삭제하는 경우 System.arraycopy()를 호출해서 다른 데이터의 위치를 이동시켜 줘야하기 때문에 다루는 데이터의 개수가 많을수록 작업시간이 오래걸린다. 
+
+**LinkedList**<br>
+실제로 LinkedList 클래스는 이름과 달리 링크드리스트가 아니라 더블 원형 링크드리스트로 구현되어있다. 
