@@ -494,3 +494,5 @@ LinkedList ll = new LinkedList(al);
 for(int i=0; i<1000; i++)
     ll.add(500, "X");
 ```
+컬렉션 프레임워크에 속한 대부분의 컬렉션 클래스들은 이처럼 서로 변환이 가능한 생성자를 제공한다. 
+
