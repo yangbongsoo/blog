@@ -533,7 +533,6 @@ cf) entrySet()을 이용해서 key와 value를 함께 읽어 올수도 있고 ke
 ```
     Set set = map.entrySet();
     Iterator iterator = set.iterator();
-
     while(iterator.hasNext()){
         System.out.println(iterator.next());
     }
