@@ -508,3 +508,23 @@ for(int i=0; i<1000; i++)
 순차적으로 데이터를 추가하고 삭제하는 스택에는 ArrayList와 같은 배열기반의 컬렉션 클래스가 적합하지만, 큐는 데이터를 꺼낼 때 항상 첫번째 저장된 데이터를 삭제하므로, ArrayList와 같은 배열기반의 컬렉션 클래스를 사용한다면 데이터를 꺼낼 때마다 빈 공간을 채우기 위해 데이터의 복사가 발생하므로 비효율적이다. 그래서 큐는 ArrayList보다 데이터의 추가/삭제가 쉬운 LinkedList로 구현하는 것이 더 적합하다.
 
 **HashMap**<br>
+```
+HashMap map = new HashMap();
+map.put("김자바", new Integer(90));
+map.put("김자바", new Integer(100));
+map.put("이자바", new Integer(100));
+map.put("강자바", new Integer(80));
+map.put("안자바", new Integer(90));
+```
+Map에서 키가 중복되면 기존의 값을 덮어쓴다. 
+
+```
+Set set = map.entrySet();
+Iterator it = set.iterator(); 
+
+while(it.hasNext()){
+    Map.Entry e = (Map.Entry)it.next();
+    System.out.println(e.getKey() + e.getValue());
+}
+```
+Map은 Iterator가 없기 때문에 entrySet() 메서드를 통해 Set에 key와 value 결합한 형태로 저장시킨다. 그리고  Map의 내부 인터페이스인 Map.Entry를 통해 key와 value를 얻어온다. 
