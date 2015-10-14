@@ -531,7 +531,22 @@ Map은 Iterator가 없기 때문에 entrySet() 메서드를 통해 Set에 key와
 
 cf) entrySet()을 이용해서 key와 value를 함께 읽어 올수도 있고 keySet()이나 values()를 이용해서 키와 값을 따로 읽어 올 수 있다. 
 ```
-Set set = map.entrySet();
+    Set set = map.entrySet();
+    Iterator iterator = set.iterator();
 
+    while(iterator.hasNext()){
+        System.out.println(iterator.next());
+    }
 
+    Set set = map.keySet();
+    Iterator iterator = set.iterator();
+    while(iterator.hasNext()){
+        System.out.println(iterator.next());
+    }
+
+    Collection values = map.values();
+    Iterator iterator = values.iterator();
+    while(iterator.hasNext()){
+        System.out.println(iterator.next());
+    }
 ```
