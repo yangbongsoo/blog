@@ -527,4 +527,4 @@ while(it.hasNext()){
     System.out.println(e.getKey() + e.getValue());
 }
 ```
-Map은 Iterator가 없기 때문에 entrySet() 메서드를 통해 Set에 key와 value 결합한 형태로 저장시킨다. 그리고  Map의 내부 인터페이스인 Map.Entry를 통해 key와 value를 얻어온다. 
+Map은 Iterator가 없기 때문에 entrySet() 메서드를 통해 Set에 key와 value 결합한 형태로 저장시켜. iterator를 통해 하나씩 읽어온다. 그리고  Map의 내부 인터페이스인 Map.Entry를 통해 key와 value를 얻어온다. 
