@@ -2,4 +2,3 @@
 
 ![](db-access-process.PNG)
 
-    
