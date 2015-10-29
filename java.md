@@ -566,3 +566,6 @@ cf) entrySet()을 이용해서 key와 value를 함께 읽어 올수도 있고 ke
 
 **HashSet**<br>
 HashSet은 내부적으로 HashMap을 이용해서 만들어졌으며, HashSet이란 이름은 해싱을 이용해서 구현했기 때문에 붙여진 것이다. 
+
+저장한 순서를 유지하고자 한다면 LinkedHashSet을 사용해야한다.
+
