@@ -444,7 +444,10 @@ class Outer{
 ```
 
 ###Chapter 11 컬렉션 프레임워크와 유용한 클래스
-![](collection.PNG)
+![](collection.PNG)<br>
+List : 순서가 있는 데이터의 집합. 데이터의 중복을 허용한다.(ArrayList, LinkedList, Stack, Vector 등)<br>
+Set : 순서를 유지하지 않는 데이터의 집합. 데이터의 중복을 허용하지 않는다.(HashSet, TreeSet 등)<br>
+Map : 키와 값의 쌍으로 이루어진 데이터의 집합. 순서는 유지되지 않으며, 키는 중복을 허용하지 않고, 값은 중복을 허용한다. (HashMap, TreeMap, Hashtable, Properties 등)<br>
 
 **Map.Entry 인터페이스**<br>
 Map.Entry 인터페이스는 Map 인터페이스의 내부 인터페이스이다. 내부 클래스와 같이 인터페이스도 이처럼 인터페이스 안에 인터페이스를 정의할 수있다. 
