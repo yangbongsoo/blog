@@ -540,7 +540,7 @@ while(it.hasNext()){
 ```
 Map은 Iterator가 없기 때문에 entrySet() 메서드를 통해 Set에 key와 value 결합한 형태로 저장시켜. iterator를 통해 하나씩 읽어온다. 그리고  Map의 내부 인터페이스인 Map.Entry를 통해 key와 value를 얻어온다. 
 
-cf) entrySet()을 이용해서 key와 value를 함께 읽어 올수도 있고 keySet()이나 values()를 이용해서 키와 값을 따로 읽어 올 수 있다. (key는 중복을 허용하지 않으니까 Set타입으로 반환하고 value는 중복을 허용하니까 Collection 타입으로 반환한다)
+cf) entrySet()을 이용해서 key와 value를 함께 읽어 올수도 있고 keySet()이나 values()를 이용해서 키와 값을 따로 읽어 올 수 있다. (key는 중복을 허용하지 않으니까 Set타입으로 반환하고 value는 중복을 허용하니까 Collection 타입으로 반환한다.)
 ```
     Set set = map.entrySet();
     Iterator iterator = set.iterator();
