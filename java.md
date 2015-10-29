@@ -570,3 +570,5 @@ HashSet은 내부적으로 HashMap을 이용해서 만들어졌으며, HashSet�
 저장한 순서를 유지하고자 한다면 LinkedHashSet을 사용해야한다.
 
 String클래스는 문자열의 내용으로 해시코드를 만들어 내기 때문에 내용이 같은 문자열에 대한 hashCode()호출은 항상 동일한 해시코드를 반환한다. 반면에 Object클래스는 객체의 주소로 해시코드를 만들어 내기 때문에 실행 할 때마다 해시코드 값이 달라질 수 있다. 
+
+**Comparator와 Comparable**<br>
