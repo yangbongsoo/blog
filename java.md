@@ -601,5 +601,4 @@ setDaemon 메서드는 반드시 start()를 호출하기 전에 실행되어야 
 **스레드 실행제어 / 동기화**<br>
 suspend(), resume(), stop()은 스레드를 교착상태에 빠뜨릴 가능성이 있기 때문에 deprecated되었으므로 사용하지 않는 것이 좋다.(suspend() 대신 wait()을, resume() 대신 notify()를 사용한다.)
 
-
-
+wait()과 notify()는 동기화 블록 내에서만 사용할 수 있으며 notify()는 객체의 waiting pool에 있는 스레드 중의 하나만 깨우고 notifyAll()은 모든 스레드를 깨운다. 어차피 하나의 스레드만 객체를 사용할 수 있기 때문에 notify()를 사용하나 notifyAll()을 사용하나 별차이는 없다. 그러나 notify()에 의해 어떤 스레드가 깨워지게 될지는 알수 없기 때문에 다시 객체의 waiting pool에 들어가더라도 notifyAll()을 이요해서 모든 스레드를 깨워놓고 JVM의 스레드 스케줄링에 의해서 처리되도록 하는 것이 안전하다. 
