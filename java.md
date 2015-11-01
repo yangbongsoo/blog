@@ -637,11 +637,24 @@ public class UserInfo implements java.io.Serializable{
 }
 ```
 
-아래는 직렬화할 수 없는 클래스의 객체를 인스턴스변수가 참조하고 있어서 직렬화에 실패한다.
+아래는 직렬화할 수 없는 클래스의 객체를 인스턴스변수가 참조하고 있어서 직렬화에 실패한다. 모든 클래스의 최고조상인 Object는 Serializable을 구현하지 않았기 때문에 직렬화할 수 없다.
 ```
 public class UserInfo implements java.io.Serializable{
     String name;
     String password;
     int age;
+    
+    Object obj = new Object();
+}
+```
+
+
+```
+public class UserInfo implements java.io.Serializable{
+    String name;
+    String password;
+    int age;
+    
+    Object obj = new String("abc");
 }
 ```
