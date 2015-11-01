@@ -178,9 +178,10 @@ public final class Math{
     }
 }
 ```
-
+**정리**<br>
 접근지정을 할 수 있는 곳은 class, 멤버변수, 메서드, 생성자 4곳이다.
 
+class는 private, protected 선언이 안된다. (private은 내부 클래스만 가능)
 
 
 
