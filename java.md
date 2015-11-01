@@ -648,7 +648,7 @@ public class UserInfo implements java.io.Serializable{
 }
 ```
 
-
+아래와 같은 경우는 직렬화가 가능하다. 인스턴스변수 obj의 타입이 직렬화가 안되는 Object이긴 하지만 실제로 저장된 객체는 직렬화가 가능한 String인스턴스이기 때문에 직렬화가 가능하다. 인스턴스변수의 타입이 아닌 실제로 연결된 객체의 종류에 의해서 결정된다.
 ```
 public class UserInfo implements java.io.Serializable{
     String name;
