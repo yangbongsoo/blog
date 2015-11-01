@@ -181,9 +181,17 @@ public final class Math{
 **정리**<br>
 접근지정을 할 수 있는 곳은 class, 멤버변수, 메서드, 생성자 4곳이다.
 
-class는 private, protected 선언이 안된다. (private은 내부 클래스만 가능)
-
-
+class : private, protected 선언이 안된다. (private은 내부 클래스만 가능)<br>
+멤버변수와 메서드<br>
+private : 같은 클래스만 접근 가능<br>
+default : 같은 패키지만 접근 가능<br>
+protected : 같은 패키지와 상속관계에서는 접근 가능<br>
+public : 어디서나 접근 가능<br>
+생성자<br>
+private : 객체 생성을 못함 <br>
+default : 같은 패키지면 객체생성, 상속 가능하지만 다른 패키지면 객체생성, 상속 못함<br>
+protected : 같은 패키지면 객체생성, 상속 가능하지만 다른 패키지면 상속은 가능한데 객체생성은 못함 <br>
+public : 같은, 다른 패키지 객체생성, 상속 가능
 
 <br>**참조변수와 인스턴스의 연결**<br>
 조상 클래스에 선언된 멤버변수와 같은 이름의 인스턴스변수를 자손 클래스에 중복으로 정의했을 때, 
