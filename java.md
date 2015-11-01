@@ -659,12 +659,13 @@ public class UserInfo implements java.io.Serializable{
 }
 ```
 
+제어자 transient를 붙여서 직렬화 대상에서 제외되도록 할 수 있다. 또한 password와 같이 보안상 직렬화되면 안되는 값에 대해 transient를 사용할 수 있다.
 ```
 public class UserInfo implements java.io.Serializable{
     String name;
     transient String password;
     int age;
     
-    transient Object obj = new String("abc");
+    transient Object obj = new Object();
 }
 ```
