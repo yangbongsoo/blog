@@ -627,3 +627,11 @@ wait()과 notify()는 동기화 블록 내에서만 사용할 수 있으며 noti
 직렬화(객체 --> 스트림) : 객체를 스트림에 출력 ObjectOutputStream<br>
 역직렬화(스트림 --> 객체) : 스트림으로부터 객체에 입력 ObjectInputStream<br>
 
+**직렬화가 가능한 클래스 만들기**<br>
+```
+public class UserInfo implements java.io.Serializable{
+    String name;
+    String password;
+    int age;
+}
+```
