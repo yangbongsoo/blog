@@ -636,3 +636,12 @@ public class UserInfo implements java.io.Serializable{
     int age;
 }
 ```
+
+아래는 직렬화할 수 없는 클래스의 객체를 인스턴스변수가 참조하고 있어서 직렬화에 실패한다.
+```
+public class UserInfo implements java.io.Serializable{
+    String name;
+    String password;
+    int age;
+}
+```
