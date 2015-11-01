@@ -591,7 +591,7 @@ Comparator - 기본 정렬기준 외에 다른 기준으로 정렬하고자 할 
 데몬스레드는 일반 스레드의 작성방법과 실행방법이 같으며 다만 스레드를 생성한 다음 실행하기 전에 setDaemon(true)를 호출하기만 하면 된다. 그리고 데몬 스레드가 생성한 스레드는 자동적으로 데몬 스레드가 된다. 
 
 ```
-Thread t = enw Thread(new ThreadEx8());
+Thread t = new Thread(new ThreadEx8());
 
 t.setDaemon(true);
 t.start();
