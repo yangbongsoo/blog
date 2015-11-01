@@ -658,3 +658,13 @@ public class UserInfo implements java.io.Serializable{
     Object obj = new String("abc");
 }
 ```
+
+```
+public class UserInfo implements java.io.Serializable{
+    String name;
+    transient String password;
+    int age;
+    
+    transient Object obj = new String("abc");
+}
+```
