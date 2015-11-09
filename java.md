@@ -40,6 +40,8 @@ byte + short -> int + int -> int<br>
 두개의 피연산자 중 자료형의 표현범위가 큰 쪽에 맞춰서 형변환 된 후 연산을 수행한다.<br>
 float + long -> float + float -> float <br>
 
+**쉬푸트 연산자**<br>
+
 ###Chapter 4 조건문과 반복문
 **이름 붙은 반복문** 
 ```
