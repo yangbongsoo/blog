@@ -152,4 +152,7 @@ CSS,JS,이미지 등의 자원은 거의 변하지 않기 때문에, 웹 브러�
 <mvc:resources mapping="/resources/**" location="/resources/" cache-period="60"/>
 ```
 
-mapping : 요청 경로 패턴을 설정한다. (컨텍스트 경로를 제외한 나머지 부분의 경로)
+mapping : 요청 경로 패턴을 설정한다. (컨텍스트 경로를 제외한 나머지 부분의 경로)<br>
+cache-period: 웹 브라우저에 캐시 시간 관련 응답 헤더를 전송한다. 초 단위로 캐시 시간을 지정하며 이 값이 0이면 웹 브라우저가 캐시하지 않도록 한다. <br>
+
+위 설정의 경우 요청 경로가 /resources/로 시작하면, 그에 해당하는 자원을 /resources/나 /WEB-INF/resources/ 디렉토리에서 검색한다. 
