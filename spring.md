@@ -144,3 +144,6 @@ DispatcherServlet이 처리하지 못한 요청을 서블릿 컨테이너의 Def
 </mime-mapping>
 ```
 
+```
+<mvc:resources mapping="/resources/**" location="/resources/" cache-period="60"/>
+```
