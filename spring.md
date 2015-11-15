@@ -144,6 +144,11 @@ DispatcherServlet이 처리하지 못한 요청을 서블릿 컨테이너의 Def
 </mime-mapping>
 ```
 
+**정적자원 설정하기**<br>
+
+CSS,JS,이미지 등의 자원은 거의 변하지 않기 때문에, 웹 브러우저에 캐시를 하면 네트워크 사용량, 서버 사용량, 웹 브라우저의 반응 속도 등을 개선할 수 있다. 스프링 MVC를 이용하는 웹 애플리케이션에 정적 자원 파일이 함께 포함되어 있다면 웹 서버 설정을 사용하지 않고 캐시를 사용하도록 지정할 수 있다. 
+
 ```
 <mvc:resources mapping="/resources/**" location="/resources/" cache-period="60"/>
 ```
+
