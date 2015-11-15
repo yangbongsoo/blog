@@ -152,3 +152,4 @@ CSS,JS,이미지 등의 자원은 거의 변하지 않기 때문에, 웹 브러�
 <mvc:resources mapping="/resources/**" location="/resources/" cache-period="60"/>
 ```
 
+mapping : 요청 경로 패턴을 설정한다. (컨텍스트 경로를 제외한 나머지 부분의 경로)
