@@ -143,3 +143,9 @@ public void destory() throws Excption{
 ```
 위 클래스를 스프링 빈으로 등록하면 스프링 컨테이너는 빈 생성 후 afterPropertiesSet() 메서드를 호출해서 초기화를 진행하고 destroy() 메서드를 호출해서 소멸을 진행한다. 
 
+```
+<bean id="connPool" class="jorg.springframwork.connPool"/>
+```
+
+이 두 인터페이스를 모두 상속해야 하는 것은 아니며, 필요한 인터페이스만 상속받으면 된다. 
+
