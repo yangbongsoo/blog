@@ -126,3 +126,7 @@ public interface DisposableBean{
 }
 ```
 스프링 컨테이너는 생성한 빈 객체가 InitializingBean 인터페이스를 구현하고 있으면, InitializingBean 인터페이스로 정의되어 있는 afterPropertiesSet() 메서드를 호출한다.
+
+```
+
+```
