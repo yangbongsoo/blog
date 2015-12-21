@@ -256,3 +256,27 @@ public class WorkRunner implements BeanNameAware{
 **빈 객체 범위(scope)**<br>
 스프링의 빈은 범위를 갖는데 주요 범위에는 싱글톤과 프로토타입이 있다. (두개의 범위 외에 요청범위, 세션 범위가 존재하지만 잘 사용되지 않는다.)
 
+싱글톤범위 
+```
+<bean id="pool1" class="net.madvirus.chap03.ConnPool1"/>
+```
+별로 설정을 하지 않으면 빈은 싱글톤 범위를 갖는다. 명시적으로 표기하고 싶다면 
+
+```
+-- XML
+<bean id="pool1" class="net.madvirus.chap03.ConnPool1" scope="singleton"/>
+
+--Java
+@Bean
+@Scope("singleton")
+public ConnPool1 pool1(){
+    return new ConnPool1();
+}
+```
+
+```
+ConnPool1 p1 = ctx.getBean("pool1", ConnPool1.class);
+ConnPool1 p2 = ctx.getBean("pool1", ConnPool1.class);
+```
+getBean()메서드는 매번 동일한 객체를 리턴하기 때문에 p1과 p2는 동일한 객체를 참조하게 된다. 
+
