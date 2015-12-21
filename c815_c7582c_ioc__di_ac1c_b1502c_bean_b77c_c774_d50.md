@@ -193,3 +193,11 @@ public ConnPool3 connPool3(){
 ```
 초기화와 소멸 과정에서 사용될 메서드는 파라미터를 가져서는 안된다.
 
+**ApplicationContextAware 인터페이스와 BeanNameAware 인터페이스**<br>
+빈으로 사용될 객체에서 스프링 컨테이너에 접근해야 한다거나, 빈 객체에서 로그를 기록할 때 빈의 이름을 남기고 싶다면 어떻게 해야할까? 이런 경우에 다음의 두 인터페이스를 사용하면 된다. 
+
+`o.s.context.ApplicationContextAware`<br>
+이 인터페이스를 상속받은 빈 객체는 초기화 과정에서 컨테이너(ApplicationContext)를 전달받는다.<br>
+`o.s.beans.factory.BeanNameAware`<br>
+이 인터페이스를 상속받은 빈 객체는 초기화 과정에서 빈 이름을 전달받는다.<br>
+
