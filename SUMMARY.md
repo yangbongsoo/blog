@@ -13,7 +13,6 @@
    * [DynamoDB](dynamodb2.md)
    * [Android적용 후기](androidc801_c6a9_d6c4_ae30.md)
 * [Spring](spring.md)
-* [JAVA](java.md)
 * [DB](db.md)
 * [애자일적용후기](c560_c790_c77c_c801_c6a9_d6c4_ae30.md)
 * [네이버를 만든 기술, 자바편](b124_c774_bc84_b97c_b9cc_b4e0_ae30_c2202c_c790_bc14_d3b8.md)
