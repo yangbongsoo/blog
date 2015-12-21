@@ -137,9 +137,13 @@ bace-package포함, 하위의 클래스들 중 @Transcational이 붙은 곳에 �
 DispatcherServlet이 처리하지 못한 요청을 서블릿 컨테이너의 DefaultServlet에게 넘겨주는 역할을 하는 핸들러이다. 
 
 `<context:component-scan> / <mvc:annotation-driven> / <context:annotation-config> 차이점`
-1. <context:component-scan>
-2. <mvc:annotation-driven>
-3. <context:annotation-config>
+1. context:component-scan
+    1. 특정 패키지안의 클래스들을 스캔하고, 빈 인스턴스를 생성한다.
+    2. @Component @Controller @Service @Repository 애노테이션이 존재해야 빈을 생성할 수 있다. 
+    3. 이것의 장점 중 하나는 @Autowired 와 @Qualifier 애노테이션을 이해한다는 것인데 component-scan을 선언했다면 <dd>
+2. mvc:annotation-driven
+    1. 
+3. context:annotation-config
 
 
 /js/jquery.js 처럼 컨트롤러에 매핑안되는 URL같은 경우는 DefaultServletHttpRequestHandler가 담당한다. 이 핸들러는 매핑 우선순위가 가장 낮아서 애노테이션 매핑 등등을 거쳐서 다 실패한 URL만 넘어온다. 그리고 요청을 자신이 직접 읽어서 처리하는 것이 아니라, 원래 서버가 제공하는 디폴트 서블릿으로 넘겨버린다. 그러면 서버의 기본 디폴트 서블릿이 동작해서 스태틱리소스를 처리하는 것이다. 다시말해 일단 스프링이 다 받고 스프링이 처리 못하는 건 다시 서버의 디폴트 서블릿으로 넘긴다는 아이디어이다. 
