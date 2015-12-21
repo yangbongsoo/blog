@@ -256,7 +256,7 @@ public class WorkRunner implements BeanNameAware{
 **빈 객체 범위(scope)**<br>
 스프링의 빈은 범위를 갖는데 주요 범위에는 싱글톤과 프로토타입이 있다. (두개의 범위 외에 요청범위, 세션 범위가 존재하지만 잘 사용되지 않는다.)
 
-싱글톤범위 
+1.싱글톤 범위 
 ```
 <bean id="pool1" class="net.madvirus.chap03.ConnPool1"/>
 ```
@@ -280,3 +280,5 @@ ConnPool1 p2 = ctx.getBean("pool1", ConnPool1.class);
 ```
 getBean()메서드는 매번 동일한 객체를 리턴하기 때문에 p1과 p2는 동일한 객체를 참조하게 된다. 
 
+2.프로토타입 범위<br>
+프로토타입 범위의 빈은 객체의 원형(즉, 프로토타입)으로 사용되는 빈으로서, 프로토타입 범위 빈을 getBean()등을 이용해서 구할 경우 스프링 컨테이너는 매번 새로운 객체를 생성한다. 프로토타입 범위로 설정하기 위해서는 다음과 같이 `<bean>`태그의 scope 속성을 "prototype"으로 지정하면 된다.
