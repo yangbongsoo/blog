@@ -177,4 +177,19 @@ public class ConnPool2{
 
 초기화와 소멸 과정에서 사용될 메서드는 파라미터를 가져서는 안된다.
 
-**커스텀 init 메서드와 커스텀 destroy 메서드**
+**커스텀 init 메서드와 커스텀 destroy 메서드**<br>
+만약 외부에서 제공받는 라이브러리가 있는데, 이 라이브러리의 클래스를 스프링 빈으로 사용해야 할 수 도 있다. 이 라이브러리의 클래스는 초기화를 위해 init() 메서드를 제공하고 있는데, 이 init()메서드는 @PostConstruct 애노테이션을 갖고 있지 않고 스프링의 InitializingBean 인터페이스를 상속받지도 않았다. 이때 커스텀 방식을 사용한다.
+
+```
+<bean id="pool3" class="net.madvirus.spring4.chap03.ConnPool3"
+    init-method="init" destroy-method="destroy"/>
+```
+자바 기반 설정을 사용한다면 
+```
+@Bean(initMethod = "init", destroyMethod = "destroy")
+public ConnPool3 connPool3(){
+    return new ConnPool3(); 
+}
+```
+초기화와 소멸 과정에서 사용될 메서드는 파라미터를 가져서는 안된다.
+
