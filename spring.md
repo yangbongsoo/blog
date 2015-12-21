@@ -140,9 +140,9 @@ DispatcherServlet이 처리하지 못한 요청을 서블릿 컨테이너의 Def
 1. context:component-scan
     1. 특정 패키지안의 클래스들을 스캔하고, 빈 인스턴스를 생성한다.
     2. @Component @Controller @Service @Repository 애노테이션이 존재해야 빈을 생성할 수 있다. 
-    3. 이것의 장점 중 하나는 @Autowired 와 @Qualifier 애노테이션을 이해한다는 것인데 component-scan을 선언했다면 <dd>
+    3. 이것의 장점 중 하나는 @Autowired 와 @Qualifier 애노테이션을 이해한다는 것인데 component-scan을 선언했다면 context:annotation-config를 선언할 필요가 없다.
 2. mvc:annotation-driven
-    1. 
+    1. 스프링 MVC 컴포넌트들을 그것의 디폴트 설정을 가지고 활성화 하기위해 사용된다. 만약 context:component-scan을 XML 파일에서 빈을 생성하기 위해 사용하면서 mvc:annotation-driven을 포함시키지 않아도 MVC 애플리케이션은 작동할 것이다. 그러나 mvc:annotation-driven은 특별한 일들을 하는데 이 태그는 당신의 @Controllers에게 요청을 전파하기위해 요구되는 HandlerMapping과 HandlerAdapter를 등록한다. 게다가, 클래스패스상에 존재하는 디폴트 작업을 수행한다. 
 3. context:annotation-config
 
 
