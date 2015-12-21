@@ -114,7 +114,7 @@ ErrorResponse 클래스에 @Data붙이면 lombok에 의해 getter, setter 만들
 compile(default) : 컴파일 시 라이브러리를 사용한다<br>
 runtime : 실행 시 라이브러리를 사용한다<br>
 provided : 외부에서 라이브러리가 제공된다. 컴파일 시 사용하지만 빌드에 포함하지 않는다. 보통 JSP, Servlet 라이브러리들에 사용한다.<br>
-test : 테스트 코드에만 사용한다. <br>
+test : 테스트 코드에만 사용한다. <br>dd
 ```
 <mvc:annotation-driven/>
 <context:component-scan base-package=""/>
