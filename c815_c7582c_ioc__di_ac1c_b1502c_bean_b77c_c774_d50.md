@@ -133,11 +133,13 @@ public class ConnPool implements InitializingBean, DisposableBean{
 @Override
 public void afterPropertiesSet() throws Exception{
     //커넥션 풀 초기화 실행: DB 커넥션을 여는 코드 
-}
+    }
 
 @Override
 public void destory() throws Excption{
     //커넥션 풀 종료 실행: 연 DB 커넥션을 닫은 코드 
-}
+    }
 }
 ```
+위 클래스를 스프링 빈으로 등록하면 스프링 컨테이너는 빈 생성 후 afterPropertiesSet() 메서드를 호출해서 초기화를 진행하고 destroy() 메서드를 호출해서 소멸을 진행한다. 
+
