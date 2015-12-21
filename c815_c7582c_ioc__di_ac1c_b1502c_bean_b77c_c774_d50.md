@@ -151,3 +151,4 @@ public void destory() throws Excption{
 
 그런데 위와 같이 스프링에 종속된 인터페이스를 구현하면 빈이 스프링에 종속되므로 스프링 IoC컨테이너 외부에서 재사용하지 못한다. 
 
+**@PostConstruct @PreDestroy**
