@@ -128,5 +128,16 @@ public interface DisposableBean{
 스프링 컨테이너는 생성한 빈 객체가 InitializingBean 인터페이스를 구현하고 있으면, InitializingBean 인터페이스로 정의되어 있는 afterPropertiesSet() 메서드를 호출한다.
 
 ```
+public class ConnPool implements InitializingBean, DisposableBean{
+...
+@Override
+public void afterPropertiesSet() throws Exception{
+    //커넥션 풀 초기화 실행: DB 커넥션을 여는 코드 
+}
 
+@Override
+public void destory() throws Excption{
+    //커넥션 풀 종료 실행: 연 DB 커넥션을 닫은 코드 
+}
+}
 ```
