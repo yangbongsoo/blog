@@ -175,5 +175,6 @@ public class ConnPool2{
 (context:annotation-config 태크를 사용하면 CommonAnnotationBeanPostProcessor가 빈으로 등록됨) 
 
 
-**초기화와 소멸 과정에서 사용될 메서드는 파라미터를 가져서는 안된다.**
+초기화와 소멸 과정에서 사용될 메서드는 파라미터를 가져서는 안된다.
 
+**커스텀 init 메서드와 커스텀 destroy 메서드**
