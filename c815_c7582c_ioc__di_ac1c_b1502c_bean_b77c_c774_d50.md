@@ -114,3 +114,15 @@ UserDao와 ConnectionMaker 사이에 DI가 적용되려면 UserDao도 반드시 
 **빈 라이프사이클 개요**<br>
 ![](beanlifecycle.PNG)
 
+**InitializingBean 인터페이스와 DisposableBean 인터페이스**<br>
+스프링은 객체의 초기화 및 소멸 과정을 위해 다음의 두 인터페이스를 제공하고 있다. 
+```
+public interface InitializingBean{
+    void afterPropertiesSet() throws Exception;
+}
+
+public interface DisposableBean{
+    void destroy() throws Exception; 
+}
+```
+
