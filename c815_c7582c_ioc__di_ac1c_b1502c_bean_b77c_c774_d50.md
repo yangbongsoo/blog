@@ -171,3 +171,9 @@ public class ConnPool2{
     }
 }
 ```
+두 애노테이션이 적용된 메서드를 초기화/소멸 과정에서 실행하려면 다음과 같이 `CommonAnnotationBeanPostProcessor` 전처리기를 스프링 빈으로 등록해줘야 한다. 
+(context:annotation-config 태크를 사용하면 CommonAnnotationBeanPostProcessor가 빈으로 등록됨) 
+
+
+**초기화와 소멸 과정에서 사용될 메서드는 파라미터를 가져서는 안된다.**
+
