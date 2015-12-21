@@ -253,3 +253,6 @@ public class WorkRunner implements BeanNameAware{
 }
 ```
 
+**빈 객체 범위(scope)**<br>
+스프링의 빈은 범위를 갖는데 주요 범위에는 싱글톤과 프로토타입이 있다. (두개의 범위 외에 요청범위, 세션 범위가 존재하지만 잘 사용되지 않는다.)
+
