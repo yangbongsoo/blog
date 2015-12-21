@@ -147,5 +147,7 @@ public void destory() throws Excption{
 <bean id="connPool" class="jorg.springframwork.connPool"/>
 ```
 
-이 두 인터페이스를 모두 상속해야 하는 것은 아니며, 필요한 인터페이스만 상속받으면 된다. 
+이 두 인터페이스를 모두 상속해야 하는 것은 아니며, 필요한 인터페이스만 상속 받으면 된다. 
+
+그런데 위와 같이 스프링에 종속된 인터페이스를 구현하면 빈이 스프링에 종속되므로 스프링 IoC컨테이너 외부에서 재사용하지 못한다. 
 
