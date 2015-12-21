@@ -201,3 +201,55 @@ public ConnPool3 connPool3(){
 `o.s.beans.factory.BeanNameAware`<br>
 이 인터페이스를 상속받은 빈 객체는 초기화 과정에서 빈 이름을 전달받는다.<br>
 
+먼저 ApplicationContextAware 인터페이스는 다음과 같이 정의되어 있다.
+```
+public interface ApplicationContextAware extends Aware{
+    void setApplicationContext(ApplicationContext applicationContext)
+    throws BeansException;
+}
+
+```
+ApplicationContextAware 인터페이스를 상속받아 구현한 클래스는 setApplicationContext() 메서드를 통해서 컨테이너 객체(ApplicationContext)를 전달받는다. 따라서, 전달받은 컨테이너를 필드에 보관한 후, 이를 이용해서 다른 빈 객체를 구하거나, 컨테이너가 제공하는 기능(이벤트 발생, 메시지 구하기)을 사용할 수 있다. 아래 코드는 ApplicationContextAware 인터페이스의 구현 예시이다. 
+```
+public class WorkScheduler implements ApplicationContextAware{
+    
+    private WorkRunner workRunner;
+    private ApplicationContext ctx;
+    
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext)
+    throws BeansException{
+        this.ctx = applicationContext;
+    }
+    
+    public void makeAndRunWork(){
+        for(long order = 1; order<=10; order++){
+            Work work = ctx.getBean("workProto",Work.class);
+            work.setOrder(order);
+            workRunner.execute(work);
+        }
+    }
+}
+```
+BeanNameAware 인터페이스는 다음과 같이 정의되어 있다.
+```
+public interface BeanNameAware extends Aware{
+    void setBeanName(String name);
+}
+```
+BeanNameAware 인터페이스를 상속받아 구현한 클래스는 setBeanName() 메서드를 이용해서 빈의 이름을 전달받는다. 따라서, 로그 메시지에 빈의 이름을 함께 기록해야 할 때처럼 빈의 이름이 필요한 경우에 BeanNameAware 인터페이스를 사용하면 된다. 
+```
+public class WorkRunner implements BeanNameAware{
+    private String beanId;
+    
+    @Override
+    public void setBeanName(String name){
+        this.beanId = name;
+    }
+    
+    public void execute(Work work){
+        logger.debug(String.format("WorkRunner[%s] execute Work[%d]",beanId,work.getOrder()));
+    }
+}
+```
+
