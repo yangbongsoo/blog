@@ -152,3 +152,22 @@ public void destory() throws Excption{
 그런데 위와 같이 스프링에 종속된 인터페이스를 구현하면 빈이 스프링에 종속되므로 스프링 IoC컨테이너 외부에서 재사용하지 못한다. 
 
 **@PostConstruct와 @PreDestroy**<br>
+각각 초기화를 실행하는 메서드와 소멸을 실행하는 메서드에 애노테이션을 적용한다.
+
+```
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+public class ConnPool2{
+    
+    @PostConstruct
+    public void initPool(){
+        //커넥션 풀 초기화 실행:DB 커넥션을 여는 코드
+    }
+    
+    @PreDestroy
+    public void destroyPool(){
+        //커넥션 풀 종료 실행 : 연 DB 커넥션을 닫는 코드 
+    }
+}
+```
