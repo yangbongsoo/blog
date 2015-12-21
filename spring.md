@@ -119,7 +119,7 @@ test : 테스트 코드에만 사용한다. <br>
 <mvc:annotation-driven/>
 <context:component-scan base-package=""/>
 ```
-dfdf
+
 base-package포함, 하위의 클래스들 중 @Controller, @Repository, @Service, @Component가 붙어 있는 클래스들을 자동으로 스프링 빈으로 등록한다. 
 
 ```
