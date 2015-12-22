@@ -101,3 +101,8 @@ public static <K, V> HashMap<K, v> newInstance(){
 //이런 메서드가 있으면 좀 더 간결하게 작성할 수 있다. 
 Map<String, List<String>> m = HashMap.newInstance(); 
 ```
+JDK 1.7부터는 생성자를 호출할 때도 자료형 유추를 사용할 수 있다.
+```
+Map<String, List<String>> myMap = new HashMap<>();
+```
+
