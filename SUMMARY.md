@@ -5,7 +5,7 @@
    * [quickstart](quickstart.md)
    * [Q&A](q&a.md)
 * [LucyXssServletFilter](lucyxssservletfilter.md)
-* Effective Java
+* [Effective Java](effective_java.md)
 * [Java의 정석](javac758_c815_c11d.md)
 * [Spring](spring.md)
    * [정의, IOC/DI개념, Bean 라이프사이클](c815_c7582c_ioc__di_ac1c_b1502c_bean_b77c_c774_d50.md)
