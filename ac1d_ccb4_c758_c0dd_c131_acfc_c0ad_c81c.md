@@ -41,3 +41,63 @@ try{
     
     ...
 ```
+
+```
+//서비스 제공자 인터페이스의 대략적인 모습
+
+//서비스 인터페이스 ex)Connection
+public interface Service{
+    ... //서비스에 고유한 메서드들이 이 자리에 온다. 
+}
+
+//서비스 제공자 인터페이스 ex) Driver (서비스 구현체의 객체를 생성하기 위한것) 
+public interface Provider{
+    Service newService();
+}
+
+//서비스 등록과 접근에 사용되는 객체 생성 불가능 클래스 ex) DriverManager
+public class Services{
+    private Services() {}
+    
+    //서비스 이름과 서비스 간 대응관계 보관
+    private static final Map<String, Provider> providers = 
+        new ConcurrentHashMap<String, Provider>();
+    public static final String DEFAULT_PROVIDER_NAME = "<def>";
+    
+    //제공자 등록 API ex) DriverManager.registerDriver
+    public static void registerDefaultProvider(Provider p){
+        registerProvider(DEFAULT_PROVIDER_NAME, p);
+    }
+    
+    public static void registerProvider(String name, Provider p){
+        providers.put(name,p);
+    }
+    
+    //서비스 접근 API ex) DriverManager.getConnection
+    public static Service newInstance(){
+        return newInstance(DEFAULT_PROVIDER_NAME);
+    }
+    
+    public static Service newInstance(String name){
+        Provider p = providers.get(name);
+        if(p == null){
+            throw new IllegalArgumentException("No provider registered with name: "+name);
+        }
+        return p.newService(); 
+    }
+}
+```
+
+**네 번째 장점은, 형인자 자료형(parameterized type)객체를 만들 때 편하다는 점이다.**<br>
+```
+Map<String, List<String>> m = new HashMap<String, List<String>>();
+```
+이처럼 자료형 명세를 중복하면, 형인자가 늘어남에 따라 길고 복잡한 코드가 만들어진다. 하지만 정적 팩토리 메서드를 사용하면 컴파일러가 형인자를 스스로 알아내도록 할 수 있다. 이런 기법을 자료형 유추라고 부른다.
+```
+public static <K, V> HashMap<K, v> newInstance(){
+    return new HashMap<K,V>();
+}
+
+//이런 메서드가 있으면 좀 더 간결하게 작성할 수 있다. 
+Map<String, List<String>> m = HashMap.newInstance(); 
+```
