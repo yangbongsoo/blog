@@ -106,3 +106,5 @@ JDK 1.7부터는 생성자를 호출할 때도 자료형 유추를 사용할 수
 Map<String, List<String>> myMap = new HashMap<>();
 ```
 
+
+**정적 팩토리 메서드만 있는 클래스를 만들면 생기는 가장 큰 문제는, public이나 protected로 선언된 생성자가 없으므로 하위 클래스를 만들 수 없다는 것이다. **
