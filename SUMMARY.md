@@ -31,4 +31,5 @@
    * [MSA](msa.md)
 * [실용주의프로그래머/익스트림프로그래밍](c2e4_c6a9_c8fc_c758_d504_b85c_adf8_b798_ba38_c775_c2a4_d2b8_b9bc_d504_b85c_adf8_b798_bc0d.md)
 * [자료구조&알고리즘](c790_b8cc_ad6c_c87026_c54c_ace0_b9ac_c998.md)
+* Effective Java
 
