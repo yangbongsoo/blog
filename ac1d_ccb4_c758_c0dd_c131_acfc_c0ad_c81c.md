@@ -22,7 +22,7 @@ public static Boolean valueOf(boolean b){
 JDBC와 같은 서비스 제공자 프레임워크의 근간을 이루는 것이 바로 유연한 정적 팩토리 메서드들이다.
 ![](serviceproviderframework.PNG)
 서비스 제공자 프레임워크는 세 가지의 핵심 컴포넌트로 구성된다. 
-1. 서비스 인터페이스 : Connection 
+1. 서비스 인터페이스 : Connection (서비스 제공자가 구현한다.)
 2. 제공자 등록 API : DriverManager.registerDriver
 3. 서비스 접근 API : DriverManager.getConnection
 4. 서비스 제공자 인터페이스(옵션) : Driver
