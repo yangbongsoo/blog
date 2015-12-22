@@ -30,6 +30,7 @@ JDBC와 같은 서비스 제공자 프레임워크의 근간을 이루는 것이
 
 ```
 Connection conn = null;  
+
 try{
     String url = "jdbc:mysql://localhost:3306/jdbcTest";
     String id = "testid";                                   
