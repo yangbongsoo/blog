@@ -4,3 +4,9 @@
 ###규칙1 : 생성자 대신 정적 팩터리 메서드를 사용할 수 없는지 생각해보라
 
 클래스를 통해 객체를 만드는 일반적인 방법(public 생성자 이용)말고 또 다른 방법이 있다. 바로 **public static factory method**를 만드는 것이다. 
+```
+public static Boolean valueOf(boolean b){
+    return b ? Boolean.TRUE : Boolean.FALSE;
+}
+```
+
