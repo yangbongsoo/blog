@@ -26,7 +26,6 @@ JDBC와 같은 서비스 제공자 프레임워크의 근간을 이루는 것이
 2. 제공자 등록 API : DriverManager.registerDriver
 3. 서비스 접근 API : DriverManager.getConnection
 4. 서비스 제공자 인터페이스(옵션) : Driver
-
 ```
 Connection conn = null;  
 
