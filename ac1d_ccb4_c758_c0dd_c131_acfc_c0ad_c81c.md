@@ -10,3 +10,4 @@ public static Boolean valueOf(boolean b){
 }
 ```
 
+**첫번째 장점은, 생성자와는 달리 정적 팩토리 메서드에는 이름(name)이 있다.**<br>
