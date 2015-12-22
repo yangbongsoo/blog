@@ -11,3 +11,4 @@ public static Boolean valueOf(boolean b){
 ```
 
 **첫번째 장점은, 생성자와는 달리 정적 팩토리 메서드에는 이름(name)이 있다.**<br>
+생성자에 전달되는 인자(parameter)들은 어떤 객체가 생성되는지를 설명하지 못하지만, 정적 팩토리 메서드는 이름을 잘 짓기만 한다면 사용하기 쉽고, 클라이언트 코드의 가독성도 높아진다. 예를들어, 소수일 가능성이 높은 BigInteger 객체를 생성하는 생성자 BigInteger(int, int, Random)는 BigInteger.probablePrime과 같은 이름의 정적 팩토리 메서드로 표현했으면 더 이해하기 쉬웠을 것이다.(이 메서드는 JDK 1.4 버전에 결국 추가됨) 
