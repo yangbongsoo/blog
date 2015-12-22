@@ -18,3 +18,6 @@ public static Boolean valueOf(boolean b){
 **두 번째 장점은, 생성자와는 달리 호출할 때마다 새로운 객체를 생성할 필요가 없다.**<br><br>
 **세 번째 장점은, 생성자와는 달리 반환값 자료형의 하위 자료형 객체를 반환할 수 있다**<br>
 
+
+JDBC와 같은 서비스 제공자 프레임워크의 근간을 이루는 것이 바로 유연한 정적 팩토리 메서드들이다.
+![](serviceproviderframework.PNG)
