@@ -121,3 +121,80 @@ getType : getInstance와 같지만, 반환될 객체의 클래스와 다른 클�
 newType : newInstance와 같지만, 반환될 객체의 클래스와 다른 클래스에 팩토리 메서드가 있을 때 사용한다. Type은 팩토리 메서드가 반환할 객체의 자료형이다.<br>
 
 **요약 : 정적 팩토리 메서드와 public 생성자는 용도가 서로 다르며, 정적 팩토리 메서드를 고려해 보지도 않고 무조건 public 생성자를 만드는 것은 삼가기 바란다. **
+
+###규칙2 : 생성자 인자가 많을 때는 Builder 패턴 적용을 고려하라
+선택적 인자가 많은 상황에서 어떤 생성자나 정적 팩토리 메서드가 적합할까?
+
+**점층적 생성자 패턴**<br>
+필수 인자만 받는 생성자를 하나 정의하고, 선택적 인자를 하나 받는 생성자를 추가하고 거기에 두개의 선택적 인자를 받는 생성자를 추가하는 식으로 생성자들을 쌓아 올리듯 추가하는 것이다.
+```
+public class NutritionFacts{
+    private final int servingSize; //필수
+    private final int servings; //필수
+    private final int calories //선택
+    private final int fat //선택
+    private final int sodium //선택
+    private final int carbohydrate //선택
+    
+    public NutritionFacts(int servingSize, int servings){
+        this(servingSizem servings, 0);
+    }
+    
+    public NutritionFacts(int servingSize, int servings, int calories){
+        this(servingSizem servings, calories, 0);
+    }
+    
+    public NutritionFacts(int servingSize, int servings, int calories int fat){
+        this(servingSizem servings, calories, fat, 0); 
+    }
+    
+    public NutritionFacts(int servingSize, int servings, int calories int fat, 
+                            int sodium){
+        this(servingSizem servings, calories, fat, sodium, 0);
+    }
+    
+    public NutritionFacts(int servingSize, int servings, int calories int fat, 
+                            int sodium, int carbohydrate){
+        this.servingSize = servingSize;
+        this.servings = servings;
+        this.calories = calories;
+        this.fat = fat;
+        this.sodium = sodium;
+        this.carbohydrate = carbohydrate; 
+    }
+}
+```
+이 방식은 인자 수가 늘어나면 클라이언트 코드를 작성하기가 어려워지고, 무엇보다 읽기 어려운 코드가 되고 만다. 대체 그 많은 인자가 무슨 값인지 알 수 없게 되고, 그 의미를 알려면 인자를 주의깊게 세어보아야 한다. 
+
+**자바빈 패턴**<br>
+```
+public class NutritionFacts{
+    //필드는 기본값으로 초기화(기본값이 있는 경우만)
+    private int servingSize = -1;
+    private int servings = -1;
+    private int calories = 0;
+    private int fat = 0;
+    private int sodium = 0;
+    private int carbohydrate = 0;
+    
+    public NutritionFacts() {}
+    
+    //설정자(setter)
+    public void setServingSize(int val) { servingSize = val; }
+    public void setServings(int val) { servings = val; }
+    public void setCalories(int val) { calories = val; }
+    public void setFat(int val) { fat = val; }
+    public void setSodium(int val) { sodium = val; } 
+    public void setCarbohydrate(int val) { carbohydrate = val; } 
+}
+```
+이 패턴에는 점층적 생성자 패턴에 있던 문제는 없다. 작성해야 하는 코드의 양이 조금 많아질 수는 있지만 객체를 생성하기도 쉬우며, 읽기도 좋다. 
+```
+NutritionFacts cocaCola = new NutritionFacts();
+cocaCola.setServingSize(240);
+cocaCola.setServings(8);
+cocaCola.setCalories(100);
+cocaCola.setSodium(35);
+cocaCola.setCarbohydrate(27); 
+```
+
