@@ -270,4 +270,4 @@ NutirtionFacts cocaCola = new NutritionFacts.Builder(240,8).calories(100)
                                             .sodium(35).carbohydrate(27).build();
 ```
 
-
+빌더 패턴은 인자가 많은 생성자나 정적 팩토리가 필요한 클래스를 설계할 때, 특히 대부분의 인자가 선택적 인자인 상황에 유용하다. 
