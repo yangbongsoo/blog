@@ -264,3 +264,10 @@ public class NutritionFacts {
 	}
 }
 ```
+NutritionFacts 객체가 변경 불가능하다는 사실, 그리고 모든 인자의 기본값이 한곳에 모여 있다는 것에 유의해라. 빌더에 정의된 설정 메서드는 빌더 객체 자신을 반환하므로, 설정 메서드를 호출하는 코드는 계속 이어서 쓸 수 있다.
+```
+NutirtionFacts cocaCola = new NutritionFacts.Builder(240,8).calories(100)
+                                            .sodium(35).carbohydrate(27).build();
+```
+
+
