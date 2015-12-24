@@ -307,6 +307,7 @@ public class Elvis {
 
 	public static Elvis getInstance() {
 	    if(INSTANCE == null) INSTANCE = new Elvis();
+		
 		return INSTANCE;
 	}
 
