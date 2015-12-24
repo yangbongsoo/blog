@@ -277,7 +277,7 @@ NutirtionFacts cocaCola = new NutritionFacts.Builder(240,8).calories(100)
 
 JDK 1.5 이전에는 싱글턴을 구현하는 방법이 두 가지였다. 두 방법 다 생성자는 private로 선언하고, 싱글턴 객체는 정적(static) 멤버를 통해 이용한다. 
 
-첫 번째 방법
+첫 번째 방법 - 필드
 ```
 public class Elvis {
 	public static final Elvis INSTANCE = new Elvis();
@@ -297,7 +297,26 @@ public class Elvis {
 }
 ```
 
-두 번째 방법
+두 번째 방법 - 메서드
 ```
+public class Elvis {
+	private static final Elvis INSTANCE = new Elvis();
 
+	private Elvis() {
+	}
+
+	public static Elvis getInstance() {
+		return INSTANCE;
+	}
+
+	public void leaveTheBuilding() {
+		System.out.println("Whoa baby, I'm outta here!");
+	}
+
+	// This code would normally appear outside the class!
+	public static void main(String[] args) {
+		Elvis elvis = Elvis.getInstance();
+		elvis.leaveTheBuilding();
+	}
+}
 ```
