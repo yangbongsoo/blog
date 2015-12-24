@@ -342,3 +342,15 @@ class Private{
 }
 ```
 리플렉션 기능을 이용하면 메모리에 적재된 클래스의 정보를 가져오는 프로그램을 작성할 수 있다. Class 객체가 주어지면, 해당 객체가 나타내는 클래스의 생성자, 메서드, 필드 등을 나타내는 Constructor, Method, Field 객체들을 가져올 수 있는데, 이 객체들을 사용하면 클래스의 멤버 이름이나 필드 자료형, 메서드 시그너처 등의 정보들을 얻어낼 수 있다.
+
+싱글턴 클래스를 직렬화 가능(Serializable) 클래스로 만들려면 클래스 선언에 implements Serializable을 추가하는 것으로는 부족하다. 싱글턴 특성을 유지하려면 모든 필드를 transient로 선언하고 readResolve 메서드를 추가해야 한다. 그렇지 않으면 serialize된 객체가 역직렬화될 때마다 새로운 객체가 생기게 된다. 
+```
+//싱글턴 상태를 유지하기 위한 readResolve 구현
+private Object readResolve(){
+    //동일한 Elvis 객체가 반환되도록 하는 동시에, 가짜 Elvis 객체는
+    //GC가 처리하도록 만든다.
+    return INSTANCE;
+}
+```
+
+**JDK 1.5부터는 싱글턴을 구현할 때 새로운 방법을 사용할 수 있다. 원소가 하나뿐인 enum 자료형을 정의하는 것이다.**<br>
