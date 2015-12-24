@@ -322,4 +322,23 @@ public class Elvis {
 	}
 }
 ```
+private 생성자이기 때문에 클라이언트가 이 상태를 변경할 방법은 없지만 주의할 것이 하나 있다. `AccessibleObject.setAccessible`메서드의 도움을 받아 권한을 획득한 클라이언트는 리플렉션(reflection)기능을 통해 private 생성자를 호출 할 수 있다는 것이다.
+```
+import java.lang.relfect.Constructor;
 
+public class PrivateInvoker{
+    public static void main(String[] args) throws Exception{
+        //리플렉션과 setAccessible메서드를 통해 private로 선언된 생성자의 호출 권한을 획득한다.
+        Constructor<?> con = Private.class.getDeclaredConstructors()[0];
+        con.setAccessible(true);
+        Private p = (Private)con.newInstance();
+    }
+}
+
+class Private{
+    private Private(){
+        System.out.println("hello");
+    }
+}
+```
+리플렉션 기능을 이용하면 메모리에 적재된 클래스의 정보를 가져오는 프로그램을 작성할 수 있다. Class 객체가 주어지면, 해당 객체가 나타내는 클래스의 생성자, 메서드, 필드 등을 나타내는 Constructor, Method, Field 객체들을 가져올 수 있는데, 이 객체들을 사용하면 클래스의 멤버 이름이나 필드 자료형, 메서드 시그너처 등의 정보들을 얻어낼 수 있다.
