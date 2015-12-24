@@ -280,7 +280,7 @@ JDK 1.5 이전에는 싱글턴을 구현하는 방법이 두 가지였다. 두 �
 첫 번째 방법 - 필드
 ```
 public class Elvis {
-	public static final Elvis INSTANCE = new Elvis();
+	public static final Elvis INSTANCE = new Elvis();  //public 필드로 선언
 
 	private Elvis() {
 	}
@@ -300,7 +300,7 @@ public class Elvis {
 두 번째 방법 - 메서드
 ```
 public class Elvis {
-	private static final Elvis INSTANCE;
+	private static final Elvis INSTANCE; //private 필드로 선언
 
 	private Elvis() {
 	}
