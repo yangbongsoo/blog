@@ -300,12 +300,13 @@ public class Elvis {
 두 번째 방법 - 메서드
 ```
 public class Elvis {
-	private static final Elvis INSTANCE = new Elvis();
+	private static final Elvis INSTANCE;
 
 	private Elvis() {
 	}
 
 	public static Elvis getInstance() {
+	    if(INSTANCE == null) INSTANCE = new Elvis();
 		return INSTANCE;
 	}
 
