@@ -388,4 +388,28 @@ String s = "abc";
 이렇게 하면 실행할 때마다 객체를 만드는 대신, 동일한 String 객체를 사용한다. 게다가 같은 가상 머신에서 실행되는 모든 코드가 해당 객체를 재사용하게 된다.
 
 Person 클래스는 어떤 사람이 베이비 붐 세대에 속하는지 아닌지를 알려주는 isBabyBoomer 메서드(1946년과 1964년 사이에 태어난 사람이면 참을 반환)를 갖고 있다.
+```
+public class Person{
+    private final Date birthDate;
+    
+    //다른 필드와 메서드, 생성자는 생략 
+    
+    //이렇게 하면 안된다!
+    public boolean isBabyBoomer(){
+        //생성 비용이 높은 객체를 쓸데없이 생성한다. 
+        Calendar gtmCal = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+        
+        gmtCal.set(1946, Calendar.JANUARY, 1, 0, 0, 0);
+        Date boomStart = gmtCal.getTime();
+        gmtCal.set(1965, Calendar.JANUARY, 1, 0, 0, 0);
+        Date boomEnd = gmtCal.getTime();
+        
+        return birthDate.compareTo(boomStart) >= 0 && birthDate.compareTo(boomEnd) < 0;
+    }
+}
+```
+위에 보인 isBabyBoomer 메서드는 호출될 때마다 Calendar 객체 하나, TimeZone 객체 하나, 그리고 Date 객체 두 개를 쓸데없이 만들어 댄다. 이렇게 비효율적인 코드는 정적 초기화 블록을 통해 개선하는 것이 좋다. 
+```
+
+```
 
