@@ -451,3 +451,16 @@ public static void main(String[] args){
 sum은 long이 아니라 Long으로 선언되어 있는데 그 덕에 long i가 Long sum에 더해질때마다 하나씩 객체가 생긴다. 
 
 
+###규칙6 : 유효기간이 지난 객체 참조는 폐기하라 
+스택이 커졌다가 줄어들면서 제거한 객체들을 GC가 처리하지 못하는 경우가 있다. 첨자 값이 size보다 작은 곳에 있는 요소들은 실제로 쓰이는 참조들이지만, 나머지 영역에 있는 참조들은 그렇지 않다. 문제는 남아있는 객체를 통해 참조되는 다른 객체들도 쓰레기 수집에서 제외된다. 
+
+이런 문제는 간단히 고칠 수 있다. 쓸 일 없는 객체 참조는 무조건 null로 만드는 것이다.
+```
+public Object pop(){
+    if(size ==0)
+        throw new EmptyStackException();
+    Object result = elements[--size];
+    elements[size] = null //만기 참조 제거
+    return result;
+}
+```
