@@ -410,6 +410,44 @@ public class Person{
 ```
 위에 보인 isBabyBoomer 메서드는 호출될 때마다 Calendar 객체 하나, TimeZone 객체 하나, 그리고 Date 객체 두 개를 쓸데없이 만들어 댄다. 이렇게 비효율적인 코드는 정적 초기화 블록을 통해 개선하는 것이 좋다. 
 ```
+public class Person{
+    private final Date birthDate;
 
+    //다른 필드와 메서드, 생성자는 생략 
+    
+    /**
+     * 베이비 붐 시대의 시작과 끝 
+     */
+     
+    private static final Date BOOM_START;
+    private static final Date BOOM_END;
+    
+    static{
+        Calendar gtmCal = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+        
+        gmtCal.set(1946, Calendar.JANUARY, 1, 0, 0, 0);
+        BOOM_START = gmtCal.getTime();
+        gmtCal.set(1965, Calendar.JANUARY, 1, 0, 0, 0);
+        BOOM_END = gmtCal.getTime();
+    }
+    
+    public boolean isBabyBoomer(){
+        return birthDate.compareTo(BOOM_START) >= 0 && birthDate.compareTo(BOOM_END) < 0;
+    }
+}
 ```
+이렇게 개선된 Person 클래스는 Calendar, TimeZone 그리고 Date 객체를 클래스가 초기화 될 때 한 번만 만든다. 
+
+JDK 1.5부터는 쓸데없이 객체르 만들 새로운 방법이 더 생겼다. **autoboxing**을 통해 자바의 기본 자료형과 그 객체 표현형을 섞어 사용할 수 있다. 둘 간의 변환은 자동으로 이뤄진다.
+```
+public static void main(String[] args){
+    Long sum = 0L;
+    for(long i = 0; i< Integer.MAX_VALUE; i++){
+        sum += i;
+    }
+    System.out.println(sum);
+}
+```
+sum은 long이 아니라 Long으로 선언되어 있는데 그 덕에 long i가 Long sum에 더해질때마다 하나씩 객체가 생긴다. 
+
 
