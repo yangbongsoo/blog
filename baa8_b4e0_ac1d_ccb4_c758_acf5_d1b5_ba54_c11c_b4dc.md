@@ -185,4 +185,8 @@ public class CounterPoint extends Point{
     public int numberCreated() { return counter.get(); } 
 }
 ```
+**리스코프 대체 원칙은 어떤 자료형의 중요한 속성은 하위 자료형에도 그대로 유지되어서, 그 자료형을 위한 메서드는 하위 자료형에도 잘 동작해야 한다는 원칙이다.** 그런데 CounterPoint 객체를 onUnitCircle 메서드의 인자로 넘기는 경우를 생각해보자. Point 클래스의 equals 메서드가 getClass를 사용하고 있다면, onUnitCircle 메서드는 CounterPoint 객체의 x나 y값에 상관없이 무조건 false를 반환할 것이다. 
 
+이는 onUnitCircle 메서드가 이용하는 HashSet 같은 컬렉션이 객체 포함여부를 판단할 때 equals를 사용하기 때문이며, CounterPoint객체는 어떤 Point객체와도 같을 수 없기 때문이다. 
+
+객체 생성 가능 클래스를 계승해서 새로운 값 컴포넌트를 추가할 만족스러운 방법이 없긴 하지만, 문제를 깔끔하게 피할 수 있는 방법은 하나 있다. **Point를 계승해서 ColorPoint를 만드는 대신, ColorPoint안에 private Point 필드를 두고, public 뷰(view) 메서드를 하나 만드는 것이다.** 이 뷰 메서드는 ColorPoint가 가리키는 위치를 Point 객체로 반환한다. 
