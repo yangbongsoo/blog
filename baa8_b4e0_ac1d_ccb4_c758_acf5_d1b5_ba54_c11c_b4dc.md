@@ -55,7 +55,39 @@ String s = "polish";
 
 **cis.equals(s)는 True**를 반환할 것이다. 하지만 **s.equals(cis)는 false**를 반환한다. 왜냐하면 String은 CaseInsensitiveString이 뭔지 모르기 때문이다. 
 
+그러므로 이 문제를 방지하려면 CaseInsensitiveString의 equals 메서드가 String 객체와 상호작용하지 않도록 해야 한다. 
+```
+@Override
+public boolean equals(Object o){
+    return o instanceof CaseInsensitiveString &&
+            ((CaseInsensitiveString)o).s.equalsIgnoreCase(s); 
+}
+```
 
+**추이성:** null이 아닌 참조 x,y,z가 있을 때, x.equals(y)가 true이고 y.equals(z)가 true이면 x.equals(z)도 true이다. <br>
 
+상위 클래스에 없는 새로운 값 컴포넌트를 하위 클래스에 추가하는 상황을 생각해 보자. 다시 말해 equals가 비교할 새로운 정보를 추가한다는 뜻이다. 
 
+```
+public class Point{
+    private final int x;
+    private final int y;
+    
+    public Point(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+    
+    @Override
+    public boolean equals(Object o){
+        if(!(o instanceof Point)){
+            return false;
+        }
+        Point p = (Point)o;
+        return p.x == x && p.y ==y; 
+    }
+    
+    ... //이하 생략 
+}
 
+```
