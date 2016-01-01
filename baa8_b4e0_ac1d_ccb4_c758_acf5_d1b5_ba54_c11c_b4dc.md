@@ -10,6 +10,10 @@ Object에 정의된 비-final 메서드(equals, hashCode, toString, clone, final
 3. 상위 클래스에서 재정의한 equals가 하위 클래스에서 사용하기에도 적당하다. 
 4. 클래스가 private 또는 package-private로 선언되었고, equals 메서드를 호출할 일이 없다. 
     1. 하지만 저자는 재정의해서 `throw new AssertionError();`를 선언하라고 한다. 
+5. 최대 하나의 객체만 존재하도록 제한하는 클래스
+
+
+**equals를 재정하는 것이 바람직할 때** : 객체 동일성(object equality)이 아닌 논리적 동일성(logical equality)의 개념을 지원하는 클래스일 때, 그리고 상위 클래스의 equals가 하위 클래스의 필요를 충족하지 못할 때 재정의해야 한다. 
 
 
 
