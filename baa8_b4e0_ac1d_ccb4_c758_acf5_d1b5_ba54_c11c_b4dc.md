@@ -99,4 +99,24 @@ public class ColorPoint extends Point{
     }
 }
 ```
+**ColorPoint 클래스의 equals 구현은 어떻게 해야 할까?** 구현을 생략한다면 Point의 equals가 그대로 상속되어서 추가된 색상 정보는 비교하지 못한다. 
+```
+//대칭성 위반 !!
+@Override
+public boolean equals(Object o){
+    if(!(o instanceof ColorPoint)){
+        return false; 
+    }
+    return super.equals(o) && ((ColorPoint)o).color == color;
+}
+```
+
+위와 같이 equals를 구현했다면, 아래 코드에서 대칭성이 어떻게 위반되는것이 명확하게 확인된다.
+```
+Point p = new Point(1,2);
+ColorPoint cp = new ColorPoint(1,2,Color.RED);
+
+p.equals(cp); // true 왜냐면 Pointer의 equals는 color를 비교하지 않으니까  
+cp.equals(p); // false 왜냐면 ColorPointer의 equals에서 color가 같을 수가 없으니까 
+```
 
