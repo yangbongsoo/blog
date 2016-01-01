@@ -255,6 +255,8 @@ public boolean equals(Object anObject){
     return false;
 }
 ```
+훌륭한 equals 메서드를 구현하기 위해 따라야 할 지침들이다. 
+
 1. == 연산자를 사용하여 equals의 인자가 자기 자신인지 검사하라.
 2. instanceof 연산자를 사용하여 인자의 자료형이 정확한지 검사하라. 
 3. equals의 인자를 정확한 자료형으로 변환하라. 
