@@ -190,3 +190,27 @@ public class CounterPoint extends Point{
 이는 onUnitCircle 메서드가 이용하는 HashSet 같은 컬렉션이 객체 포함여부를 판단할 때 equals를 사용하기 때문이며, CounterPoint객체는 어떤 Point객체와도 같을 수 없기 때문이다. 
 
 객체 생성 가능 클래스를 계승해서 새로운 값 컴포넌트를 추가할 만족스러운 방법이 없긴 하지만, 문제를 깔끔하게 피할 수 있는 방법은 하나 있다. **Point를 계승해서 ColorPoint를 만드는 대신, ColorPoint안에 private Point 필드를 두고, public 뷰(view) 메서드를 하나 만드는 것이다.** 이 뷰 메서드는 ColorPoint가 가리키는 위치를 Point 객체로 반환한다. 
+```
+//equals 규약을 위반하지 않으면서 값 컴포넌트 추가 
+public class ColorPoint{
+    private final Point point; 
+    private final Color color;
+    
+    public ColorPoint(int x, int y, Color color){
+        if(color == null)
+            throw new NullPointerException();
+        point = new Point(x, y);
+        this.color = color; 
+    }
+    
+    //ColorPoint의 Point 뷰 반환
+    public Point asPoint(){
+        return point;
+    }
+    
+    @Override
+    public boolean equals(Object o){
+        
+    }
+}
+```
