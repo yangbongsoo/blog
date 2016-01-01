@@ -44,7 +44,6 @@ public final class CaseInsensitiveString{
         }
         return false; 
     }
-    ... //이하 생략 
 }
 ```
 
@@ -86,8 +85,18 @@ public class Point{
         Point p = (Point)o;
         return p.x == x && p.y ==y; 
     }
-    
-    ... //이하 생략 
 }
 
 ```
+이 클래스를 계승하여, 색상 정보를 추가해보자. 
+```
+public class ColorPoint extends Point{
+    private final Color color; 
+    
+    public ColorPoint(int x, int y, Color color){
+        super(x, y);
+        this.color = color; 
+    }
+}
+```
+
