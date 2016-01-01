@@ -117,6 +117,72 @@ Point p = new Point(1,2);
 ColorPoint cp = new ColorPoint(1,2,Color.RED);
 
 p.equals(cp); // true 왜냐면 Pointer의 equals는 color를 비교하지 않으니까  
-cp.equals(p); // false 왜냐면 ColorPointer의 equals에서 color가 같을 수가 없으니까 
+cp.equals(p); // false 왜냐면 ColorPoint의 equals에서 color가 같을 수가 없으니까 
+```
+
+그렇다면 ColorPoint의 equals를 수정해서 Point 객체와 비교할때는 색상 정보를 무시하도록 하면 어떻게 될까? 
+```
+//추이성 위반!!
+@Override
+public boolean equals(Object o){
+    if(!(o instanceof Point))
+        return false; 
+        
+        //o가 Point 객체이면 색상은 비교하지 않는다. 
+        if(!(o instanceof ColorPoint))
+            return o.equals(this);
+            
+        //o가 ColorPoint이므로 모든 정보를 비교
+        return super.equals(o) && ((ColorPoint) o).color == color; 
+}
+```
+이렇게 하면 대칭성은 보존되지만 추이성은 깨진다. 
+```
+ColorPoint p1 = new ColorPoint(1, 2, Color.RED);
+Point p2 = new Point(1, 2);
+ColorPoint p3 = new ColorPoint(1, 2, Color.BLUE);
+```
+p1.equals(p2)와 p2.equals(p3)는 모두 true를 반환하지만 p1.equals(p3)는 false를 반환한다. 
+
+**이 문제의 해결책은 무엇인가?**<br>
+사실 이것은 객체 지향 언어에서 동치 관계를 구현할 때 발생하는 본질적 문제다. `객체 생성가능 클래스를 계승하여 새로운 값 컴포넌트를 추가하면서 equals 규악을 어기지 않을 방법은 없다.`
+
+equals 메서드를 구현할 때 instanceof 대신 getClass 메서드를 사용하면 기존 클래스를 확장하여 새로운 값 컴포넌트를 추가하더라도 equals 규약을 준수할 수 있다?
+```
+//리스코프 대체 원칙 위반
+@Override public boolean equals(Object o){
+    if(o == null || o.getClass() != getClass())
+        return false;
+    Point p = (Point)o;
+    return p.x == x && p.y == y;
+}
+```
+이렇게 하면 같은 클래스의 객체만 비교하게 된다. 하지만 아래의 예제를 보면 올바르지 않다는 것을 알 수 있다. 
+```
+//단위 원 상의 모든 점을 포함하도록 unitCircle 초기화 
+private static final Set<Point> uniCircle;
+static{
+    unitCircle = new HashSet<Point>();
+    unitCircle.add(new Point(1, 0));
+    unitCircle.add(new Point(0, 1));
+    unitCircle.add(new Point(-1, 0));
+    unitCircle.add(new Point(0, -1));
+}
+
+public static boolean onUnitCircle(Point p){
+    return unitCircle.contatins(p); 
+}
+```
+```
+public class CounterPoint extends Point{
+    private static final AtomicInteger counter = new AtomicInteger();
+    
+    public CounterPoint(int x, int y){
+        super(x, y);
+        counter.incrementAndGet();
+    }   
+    
+    public int numberCreated() { return counter.get(); } 
+}
 ```
 
