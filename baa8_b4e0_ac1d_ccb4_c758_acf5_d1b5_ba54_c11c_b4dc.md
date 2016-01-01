@@ -212,7 +212,50 @@ public class ColorPoint{
     public boolean equals(Object o){
         if(!(o instanceof ColorPoint))
             return false; 
-        
+        ColorPoint cp = (ColorPoint)o;
+        return cp.point.equals(point) && cp.color.equals(color);
     }
 }
 ```
+
+자바의 기본 라이브러리 가운데는 객체 생성 가능 클래스를 계승하여 값 컴포넌트를 추가한 클래스도 있다. 일례로 java.sql.Timestamp는 java.util.Date를 계승하여 nanoseconds 필드를 추가한 것이다. Timestamp 클래스의 equals 메서드는 대칭성을 위반하므로 Timestamp 객체와 Date 객체를 같은 컬렉션에 보관하거나 섞어 쓰면 문제가 생길 수 있다. 
+
+abstract로 선언된 클래스와 값 필드를 추가하는 것은 equals 규약을 어기지 않고도 가능하다. 추상 클래스는 객체를 생성할 수 없으므로 앞서 살펴본 문제들은 생기지 않을 것이다. 
+
+**일관성:** null이 아닌 참조 x와 y가 있을 때, equals를 통해 비교되는 정보에 아무 변화가 없으면, x.equals(y) 호출 결과는 호출 횟수에 상관없이 항상 같아야 한다.
+
+신뢰성이 보장되지 않는 자원들을 비교하는 equals를 구현하는 것을 삼가라. 예를 들어 java.net.URL의 equals 메서드는 URL에 대응되는 호스트의 IP 주소를 비교하여 equals의 반환값을 결정한다. 문제는 호스트명을 IP 주소로 변환하려면 네트워크에 접속해야 하므로, 언제나 같은 결과가 나온다는 보장이 없다는 것이다. 
+
+**Null에 대한 비 동치성:** null이 아닌 참조 x에 대해서, x.equals(null)은 항상 false이다.<br>
+
+instanceof 연산자는 첫 번째 피연산자가 null이면 두 번째 피연산자의 자료형에 상관없이 무조건 false를 반환하므로 따로 null인지 검사할 필요없다.
+
+**String클래스의 equals 메서드**
+```
+public boolean equals(Object anObject){
+    if(this == anObject){ //1번 
+        return true; 
+    }
+    if(anObject instanceof String){ //2번
+        String anotherString = (String)anObject;  //3번
+        
+        int n = value.length; //4번
+        if(n == anotherString.value.length){
+            char v1[] = value;
+            char v2[] = anotherString.value; 
+            int i = 0;
+            while(n-- != 0){
+                if(v1[i] != v2[i])
+                    return false;
+                i++;
+            }
+            return true;
+        }
+    }
+    return false;
+}
+```
+1. == 연산자를 사용하여 equals의 인자가 자기 자신인지 검사하라.
+2. instanceof 연산자를 사용하여 인자의 자료형이 정확한지 검사하라. 
+3. equals의 인자를 정확한 자료형으로 변환하라. 
+4. "중요" 필드 각각이 인자로 주어진 객체의 해당 필드와 일치하는지 검사한다. 
