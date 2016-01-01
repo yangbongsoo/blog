@@ -210,6 +210,8 @@ public class ColorPoint{
     
     @Override
     public boolean equals(Object o){
+        if(!(o instanceof ColorPoint))
+            return false; 
         
     }
 }
