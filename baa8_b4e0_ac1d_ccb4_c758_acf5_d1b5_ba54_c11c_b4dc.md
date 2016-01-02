@@ -274,3 +274,14 @@ hashCode 일반 규약
 
 ###규칙11 : clone을 재정의할 때는 신중하라 
 
+`protected native Object clone() throws CloneNotSupportedException;`
+
+cf) native 키워드는 자바가 아닌 언어(보통 C나 C++)로 구현한 후 자바에서 사용하려고 할때 이용하는 키워드이다. 자바로 구현하기 까다로운 것을 다른 언어로 구현해서, 자바에서 사용하기 위한 방법이다. 
+```
+//Clone 사용 예시 만들어봤다. 
+```
+public class CloneTest implements Cloneable{
+    
+}
+```
+```
