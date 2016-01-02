@@ -289,7 +289,8 @@ public class CloneTest implements Cloneable{
         b = 2;
     }
     
-    public CloneTest doClone(){
+    @Override
+    public CloneTest clone(){
         try{
             return (CloneTest) super.clone(); 
         }catch(CloneNotSupportedException e){
@@ -305,7 +306,7 @@ public class CloneTest implements Cloneable{
 ```
 public static void main(String[] args){
     CloneTest clone1 = new CloneTest();
-    CloneTest clone2 = clone1.doClone(); //복사 
+    CloneTest clone2 = clone1.clone(); //복사 
 }
 ```
 Cloneable 인터페이스는 복제를 허용하는 객체라는 것을 알리는 목적으로 사용하는 믹스인(Mixin) 인터페이스이다.(Cloneable 인터페이스는 아무런 추상 메서드도 가지고 있지 않다.)
