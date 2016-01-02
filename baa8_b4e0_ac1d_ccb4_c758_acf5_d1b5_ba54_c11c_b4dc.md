@@ -303,3 +303,9 @@ public class CloneTest implements Cloneable{
 }
 
 ```
+```
+public static void main(String[] args){
+    CloneTest clone1 = new CloneTest();
+    CloneTest clone2 = clone1.doClone(); //복사 
+}
+```
