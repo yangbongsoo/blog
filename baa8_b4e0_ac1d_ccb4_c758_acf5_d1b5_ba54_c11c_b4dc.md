@@ -292,7 +292,7 @@ public class CloneTest implements Cloneable{
     @Override
     public CloneTest clone(){
         try{
-            return (CloneTest) super.clone(); 
+            return (CloneTest) super.clone(); //깊은 복사를 의미하기도 함 
         }catch(CloneNotSupportedException e){
             e.printStackTrace();
         }
