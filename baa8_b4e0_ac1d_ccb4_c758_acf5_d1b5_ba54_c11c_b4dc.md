@@ -279,7 +279,6 @@ hashCode 일반 규약
 cf) native 키워드는 자바가 아닌 언어(보통 C나 C++)로 구현한 후 자바에서 사용하려고 할때 이용하는 키워드이다. 자바로 구현하기 까다로운 것을 다른 언어로 구현해서, 자바에서 사용하기 위한 방법이다. 
 ```
 //Clone 사용 예시 만들어봤다. 
-
 public class CloneTest implements Cloneable{
     private final int a;
     private final int b;
@@ -292,7 +291,7 @@ public class CloneTest implements Cloneable{
     
     public CloneTest doClone(){
         try{
-            return (CloneTest)clone(); 
+            return (CloneTest)super.clone(); 
         }catch(CloneNotSupportedException e){
             e.printStackTrace();
         }
@@ -309,4 +308,14 @@ public static void main(String[] args){
     CloneTest clone2 = clone1.doClone(); //복사 
 }
 ```
+Cloneable 인터페이스는 복제를 허용하는 객체라는 것을 알리는 목적으로 사용하는 믹스인(Mixin) 인터페이스이다.(Cloneable 인터페이스는 아무런 추상 메서드도 가지고 있지 않다.)
 
+믹스인(Mixin)이란 "원래 타입"에 어떤 부가적인 행위를 추가로 구현했다는 것을 나타내는 타입.<br>ex) Comparable 인터페이스 
+
+ Object 클래스의 protected 메서드인 clone을 사용할 것인지의 여부를 결정한다. 어떤 클래스에서 Cloneable 인터페이스를 implements하고 clone 메서드를 호출하면, 그 클래스 객체의 복제본을 만들어 반환한다. 이때 복제 객체는 원본 객체와 같은 필드를 가지며, 필드의 값도 복사된다. 
+ 
+ Cloneable 인터페이스를 구현하지 않고 clone을 호출하면 ClassNotSupportedException이 발생한다. **즉 이 녀석은 슈퍼 클래스의 protected clone 메서드 동작 여부를 결정한다.**
+ 
+ clone은 생성자를 호출하지 않고 객체를 생성, 복제한다. 
+ 
+ 
