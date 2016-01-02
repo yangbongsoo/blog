@@ -291,7 +291,7 @@ public class CloneTest implements Cloneable{
     
     public CloneTest doClone(){
         try{
-            return (CloneTest)super.clone(); 
+            return (CloneTest) super.clone(); 
         }catch(CloneNotSupportedException e){
             e.printStackTrace();
         }
