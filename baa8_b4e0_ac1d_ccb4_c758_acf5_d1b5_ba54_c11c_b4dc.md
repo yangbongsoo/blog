@@ -279,9 +279,27 @@ hashCode 일반 규약
 cf) native 키워드는 자바가 아닌 언어(보통 C나 C++)로 구현한 후 자바에서 사용하려고 할때 이용하는 키워드이다. 자바로 구현하기 까다로운 것을 다른 언어로 구현해서, 자바에서 사용하기 위한 방법이다. 
 ```
 //Clone 사용 예시 만들어봤다. 
-```
+
 public class CloneTest implements Cloneable{
+    private final int a;
+    private final int b;
+    private final int c = 100;
     
+    public CloneTest(){
+        a = 1;
+        b = 2;
+    }
+    
+    public CloneTest doClone(){
+        try{
+            return (CloneTest)clone(); 
+        }catch(CloneNotSupportedException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    //setter getter 
 }
-```
+
 ```
