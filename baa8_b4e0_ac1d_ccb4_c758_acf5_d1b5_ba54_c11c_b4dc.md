@@ -330,5 +330,5 @@ Cloneable 인터페이스는 복제를 허용하는 객체라는 것을 알리�
  **저자의 강력한 권고사항 :** `(x.compareTo(y) == 0) == (x.equals(y)) `
  <br>일반적으로, Comparable 인터페이스를 구현하면서 이 조건을 만족하지 않는 클래스는 반드시 그 사실을 명시해야 한다. 이렇게 적을 것을 추천한다. "주의: 이 클래스의 객체들은 equals에 부합하지 않는 자연적 순서를 따른다."
  
- 
- 
+ ex) BigDecimal 클래스<br>
+ 이 클래스의 compareTo 메서드는 equals에 부합하지 않는다. HashSet 객체를 만들어 거기에 new BigDecimal("1.0")과 new BigDecimal("1.00")로 만든 객체들을 추가해 보자. 그러면 집합에는 두 개의 객체가 추가된다. 이 두 객체를 equals로 비교하면 서로 다르다고 판정되기 때문이다. 하지만 HashSet 대신 TreeSet을 사용하면 집합에는 하나의 객체만 삽입된다. compareTo로 비교하면 그 두 객체는 같은 객체이기 때문이다. 
