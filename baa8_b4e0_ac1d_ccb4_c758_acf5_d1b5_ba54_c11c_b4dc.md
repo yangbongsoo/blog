@@ -264,3 +264,10 @@ public boolean equals(Object anObject){
 
  
 ###규칙9 : equals를 재정의할 때는 반드시 hashCode도 재정의하라 
+hashCode 일반 규약 
+1. 응용프로그램 실행 중에 같은 객체의 hashCode를 여러 번 호출하는 경우, equals가 사용하는 정보들이 변경되지 않았다면, 언제나 동일한 정수가 반환되어야 한다. 다만 프로그램이 종료되었다가 다시 실행되어도 같은 값이 나올 필요는 없다. 
+2. **equals(Object) 메서드가 같다고 판정한 두 객체의 hashCode 값은 같아야한다.**
+3. equals(Object) 메서드가 다르다고 판정한 두 객체의 hashCode 값은 꼭 다를 필요는 없지만 서로 다른 hashCode 값이 나오면 해시 테이블의 성능이 향상될 수 있다는 점은 이해해라. 
+
+###규칙10 : toString은 항상 재정의하라 
+
