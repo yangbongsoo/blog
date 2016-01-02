@@ -263,3 +263,4 @@ public boolean equals(Object anObject){
 4. "중요" 필드 각각이 인자로 주어진 객체의 해당 필드와 일치하는지 검사한다.
 
  
+###규칙9 : equals를 재정의할 때는 반드시 hashCode도 재정의하라 
