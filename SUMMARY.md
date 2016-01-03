@@ -2,8 +2,8 @@
 
 * [Introduction](README.md)
 * [Pinpoint](pinpoint.md)
-   * [quickstart](quickstart.md)
    * [Q&A](q&a.md)
+   * [quickstart](quickstart.md)
 * [LucyXssServletFilter](lucyxssservletfilter.md)
 * [Effective Java](effective_java.md)
    * [객체의 생성과 삭제](ac1d_ccb4_c758_c0dd_c131_acfc_c0ad_c81c.md)
