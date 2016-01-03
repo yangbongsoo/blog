@@ -8,7 +8,7 @@
 * [Effective Java](effective_java.md)
    * [객체의 생성과 삭제](ac1d_ccb4_c758_c0dd_c131_acfc_c0ad_c81c.md)
    * [모든 객체의 공통 메서드](baa8_b4e0_ac1d_ccb4_c758_acf5_d1b5_ba54_c11c_b4dc.md)
-   * 클래스와 인터페이스
+   * [클래스와 인터페이스](d074_b798_c2a4_c640_c778_d130_d398_c774_c2a4.md)
 * [Java의 정석](javac758_c815_c11d.md)
 * [Spring](spring.md)
    * [정의, IOC/DI개념, Bean 라이프사이클](c815_c7582c_ioc__di_ac1c_b1502c_bean_b77c_c774_d50.md)
