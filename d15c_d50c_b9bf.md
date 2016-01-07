@@ -117,3 +117,24 @@ public void add(final User user) throws SQLException{
 **익명 내부 클래스**<br>
 클래스 선언과 오브젝트 생성이 결합된 형태로 만들어지며, 클래스를 재사용할 필요가 없고 구현한 인터페이스 타입으로만 사용할 경우에 유용하다. 
 
+익명 내부 클래스는 선언과 동시에 오브젝트를 생성한다. 이름이 없기 때문에 클래스 자신의 타입을 가질 수 없고, 구현한 인터페이스 타입의 변수에만 저장할 수 있다. 
+
+```
+public void add(final User user) throws SQLExecption{
+    jdbcContextWithStatementStrategy(
+        new StatementStrategy(){
+               public PreparedStatement makePreparedStatement(Connection c) throws SQLException{
+                
+                PreparedStatement ps = c.prepareStatement(
+                    "insert into users(id, name, password) values(?,?,?)");
+                ps.setString(1, user.getId());
+                ps.setString(2, user.getName());
+                ps.setString(3, user.getPassword());
+                
+                return ps;
+            } 
+        }
+    );
+}
+
+```
