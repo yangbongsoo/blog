@@ -85,3 +85,6 @@ public class DeleteAllStatement implements StatementStrategy{
     }
 }
 ```
+
+이 방법의 두 가지 개선할 부분이 있다. 첫째는 DAO 메서드마다 새로운 StatementStrategy 구현 클래스를 만들어야 한다는 점이다. 이렇게 되면 상속을 사용하는 템플릿 메서드 패턴을 적용했을 때보다 그다지 나을게 없다. 두 번째는 add()메서드 같은 경우는 새로운 user에 대한 부가적인 정보가 있어서 번거롭게 인스턴스 변수를 만들어야 한다는 점이다. 
+
