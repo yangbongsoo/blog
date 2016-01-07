@@ -35,4 +35,5 @@ public void deleteAll() throws SQLException{
     }// finally end
 }
 ```
+close()는 만들어진 순서의 반대로 하는 것이 원칙이다. 
 
