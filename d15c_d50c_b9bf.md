@@ -88,3 +88,32 @@ public class DeleteAllStatement implements StatementStrategy{
 
 이 방법의 두 가지 개선할 부분이 있다. 첫째는 DAO 메서드마다 새로운 StatementStrategy 구현 클래스를 만들어야 한다는 점이다. 이렇게 되면 상속을 사용하는 템플릿 메서드 패턴을 적용했을 때보다 그다지 나을게 없다. 두 번째는 add()메서드 같은 경우는 새로운 user에 대한 부가적인 정보가 있어서 번거롭게 인스턴스 변수를 만들어야 한다는 점이다. 
 
+**로컬 클래스**<br>
+StatementStrategy 전략 클래스를 매번 독립된 파일로 만들지 말고 UserDao 클래스 안에 내부 클래스로 정의해버리는 간단한 방법이 있다. 
+
+```
+//내부 클래스에서 외부의 변수를 사용할 때는 외부변수를 반드시 final로 선언해줘야된다.
+public void add(final User user) throws SQLException{
+
+    class AddStatement implements StatementStrategy{
+        public PreparedStatement makePreparedStatement(Connection c) throws SQLException{
+            
+            PreparedStatement ps = c.prepareStatement(
+                "insert into users(id, name, password) values(?,?,?)");
+            ps.setString(1, user.getId());
+            ps.setString(2, user.getName());
+            ps.setString(3, user.getPassword());
+            
+            return ps;
+        }
+    }// class end 
+    
+    StatementStrategy st = new AddStatement(); // 생성자 파라미터로 user 전달하지 않아도 된다.
+    jdbcContextWithStatementStrategy(st); 
+    
+}
+```
+
+**익명 내부 클래스**<br>
+클래스 선언과 오브젝트 생성이 결합된 형태로 만들어지며, 클래스를 재사용할 필요가 없고 구현한 인터페이스 타입으로만 사용할 경우에 유용하다. 
+
