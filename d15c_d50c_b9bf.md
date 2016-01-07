@@ -37,3 +37,49 @@ public void deleteAll() throws SQLException{
 ```
 close()는 만들어진 순서의 반대로 하는 것이 원칙이다. 
 
+이제 이 deleteAll() 메서드에 담겨 있던 변하지 않는 부분, 자주 변하는 부분을 전략 패턴을 사용해 깔끔하게 분리해보자.
+![](strategypattern.PNG)
+
+클라이언트 책임을 담당할 deleteAll() 메서드
+```
+public void deleteAll() throws SQLException{
+    StatementStrategy st = new DeleteAllStatement();
+    jdbcContextWithStatementStrategy(st);
+}
+```
+메서드로 분리한 try/catch/finally 컨텍스트 코드
+
+```
+public void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLException{
+    Connection c = null;
+    PreparedStatement ps = null; 
+    
+    try{
+        c = dataSource.getConnection();
+        
+        ps = stmt.makePreparedStatement(c);
+        
+        ps.executeUpdate();
+    }catch(SQLException e){
+        throw e;
+    }finally{
+        if(ps != null) { try { ps.close(); } catch (SQLException e) {} }
+        if(c != null) { try { c.close(); } catch (SQLException e) {} }
+    }
+}
+```
+StatementStrategy 인터페이스
+```
+public interface StatementStrategy{
+    PreparedStatement makePreparedStatement(Connection c) throws SQLException;
+}
+```
+deleteAll() 메서드의 기능을 구현한 StatementStrategy 전략 클래스 
+```
+public class DeleteAllStatement implements StatementStrategy{
+    public PreparedStatement makePreparedStatement(Connection c) throws SQLException{
+        PreparedStatement ps = c.PreparedStatement("delete from users");
+        return ps;
+    }
+}
+```
