@@ -129,13 +129,6 @@ base-package포함, 하위의 클래스들 중 @Controller, @Repository, @Servic
 ```
 bace-package포함, 하위의 클래스들 중 @Transcational이 붙은 곳에 트랜잭션을 적용한다.
 
-**mvc:resources**<br>
-
-```
-<mvc:default-servlet-handler default-servlet-name="default"/>
-```
-DispatcherServlet이 처리하지 못한 요청을 서블릿 컨테이너의 DefaultServlet에게 넘겨주는 역할을 하는 핸들러이다. 
-
 `<context:component-scan> / <mvc:annotation-driven> / <context:annotation-config> 차이점`
 1. context:component-scan
     1. 특정 패키지안의 클래스들을 스캔하고, 빈 인스턴스를 생성한다.
@@ -147,6 +140,13 @@ DispatcherServlet이 처리하지 못한 요청을 서블릿 컨테이너의 Def
     1. context:annotation-config은 애플리케이션 컨텍스트안에 이미 등록된 빈들의 애노테이션을 활성화하기 위해 사용된다.(그것들이 XML로 설정됐는지 혹은 패키지스캐닝을 통한건지는 중요하지 않다.) 그 의미는 이미 스프링 컨텍스트에 의해 생성되어 저장된 빈들에 대해서 @Autowired와 @Qualifier 애노테이션을 해석할거란 얘기다. component-scan 또한 같은일을 할 수 있는데, 추가적으로 애플리케이션 컨텍스트에 빈을 등록하기위한 패키지들을 스캔한다. context:annotation-config는 빈을 등록하기 위해 검색할 수 없다. 
     2. context:annotation-config 태그를 설정하면 @Required @Autowired @Resource @PostConstruct @PreDestroy @Configuration 기능을 각각 설정하는 수고를 덜게 해준다. 
 
+
+**mvc:resources**<br>
+
+```
+<mvc:default-servlet-handler default-servlet-name="default"/>
+```
+DispatcherServlet이 처리하지 못한 요청을 서블릿 컨테이너의 DefaultServlet에게 넘겨주는 역할을 하는 핸들러이다. 
 
 /js/jquery.js 처럼 컨트롤러에 매핑안되는 URL같은 경우는 DefaultServletHttpRequestHandler가 담당한다. 이 핸들러는 매핑 우선순위가 가장 낮아서 애노테이션 매핑 등등을 거쳐서 다 실패한 URL만 넘어온다. 그리고 요청을 자신이 직접 읽어서 처리하는 것이 아니라, 원래 서버가 제공하는 디폴트 서블릿으로 넘겨버린다. 그러면 서버의 기본 디폴트 서블릿이 동작해서 스태틱리소스를 처리하는 것이다. 다시말해 일단 스프링이 다 받고 스프링이 처리 못하는 건 다시 서버의 디폴트 서블릿으로 넘긴다는 아이디어이다. 
 
