@@ -173,3 +173,4 @@ cache-period: 웹 브라우저에 캐시 시간 관련 응답 헤더를 전송�
 3.0.x : @Configuration, @Bean <br>
 3.1.x : @Enable~ ex) @EnableTransactionManagement
 
+![](bean설정방식의변화2.PNG)
