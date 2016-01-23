@@ -162,3 +162,10 @@ location : 웹 애플리케이션 내에서 요청 경로 패턴에 해당하는
 cache-period: 웹 브라우저에 캐시 시간 관련 응답 헤더를 전송한다. 초 단위로 캐시 시간을 지정하며 이 값이 0이면 웹 브라우저가 캐시하지 않도록 한다. <br>
 
 위 설정의 경우 요청 경로가 /resources/로 시작하면, 그에 해당하는 자원을 /resources/나 /WEB-INF/resources/ 디렉토리에서 검색한다. 
+
+
+**빈 설정방식의 변화**<br>
+![](bean설정방식의변화.PNG)
+
+1.x : 모든걸 `<bean> </bean>`으로 <br>
+2.x : `<tx:annotation-driven`
