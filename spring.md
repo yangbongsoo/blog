@@ -179,7 +179,5 @@ cache-period: 웹 브라우저에 캐시 시간 관련 응답 헤더를 전송�
 
 @EnableWebMvc는 `<mvc:annotation-driven>`과 똑같다. 따라서 애노테이션 드리븐을 설정하면 위의 주석에 해당하는 것들이 자동으로 등록이 된다. 기본적으로 Http메세지 컨버터도 등록이 되지만, JSON을 위한 MappingJackson2HttpMessageConverter는 직접 등록해줘야 사용할 수 있다. 
 
-
-
 ---
 
