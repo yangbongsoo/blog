@@ -13,7 +13,7 @@
    * [템플릿](d15c_d50c_b9bf.md)
    * [예외](c608_c678.md)
    * [서비스 추상화](c11c_be44_c2a4_cd94_c0c1_d654.md)
-   * AOP
+   * [AOP](aop.md)
 * [Effective Java](effective_java.md)
    * [객체의 생성과 삭제](ac1d_ccb4_c758_c0dd_c131_acfc_c0ad_c81c.md)
    * [모든 객체의 공통 메서드](baa8_b4e0_ac1d_ccb4_c758_acf5_d1b5_ba54_c11c_b4dc.md)
