@@ -20,7 +20,7 @@
    * [모든 객체의 공통 메서드](baa8_b4e0_ac1d_ccb4_c758_acf5_d1b5_ba54_c11c_b4dc.md)
    * [클래스와 인터페이스](d074_b798_c2a4_c640_c778_d130_d398_c774_c2a4.md)
    * [제네릭](c81c_b124_b9ad.md)
-   * 열거형(enum)과 어노테이션
+   * [열거형(enum)과 어노테이션](c5f4_ac70_d61528_enum_acfc_c5b4_b178_d14c_c774_c15.md)
 * [Java의 정석](javac758_c815_c11d.md)
 * [Docker](b3c4_cee4_md.md)
    * [도커의정의](b3c4_cee4_c758_c815_c758_md.md)
