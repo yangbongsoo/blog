@@ -42,7 +42,7 @@
    * [SOA](soa.md)
    * [MSA](msa.md)
 * [실용주의프로그래머/익스트림프로그래밍](c2e4_c6a9_c8fc_c758_d504_b85c_adf8_b798_ba38_c775_c2a4_d2b8_b9bc_d504_b85c_adf8_b798_bc0d.md)
-* 객체지향의 사실과 오해
+* [객체지향의 사실과 오해](ac1d_ccb4_c9c0_d5a5_c758_c0ac_c2e4_acfc_c624_d574.md)
 * [DB](db.md)
 * [자료구조&알고리즘](c790_b8cc_ad6c_c87026_c54c_ace0_b9ac_c998.md)
    * 객체지향의 사실과 오해
