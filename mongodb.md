@@ -109,5 +109,10 @@ try {
     cursor.close();
 }
 ```
-Although the following idiom is permissible, its use is discouraged as the application can leak a cursor if the loop terminates early:
+비록 다음 관용구도 허용되지만 만약 루프가 일찍 끝나면 커서가 누수될 수 있다는 단점이 있다. 
+```
+for (Document cur : collection.find()) {
+    System.out.println(cur.toJson());
+}
 
+```
