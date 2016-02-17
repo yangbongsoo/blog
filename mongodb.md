@@ -1,6 +1,6 @@
-# MongoDB
+# MongoDB Driver Quick Tour
 
-**Make a Connection**<br>
+###Make a Connection
 다음 예제는 로컬 머신에 `mydb` DB를 연결하는 5가지 방법이다. 만약 DB가 없다면 MongoDB는 알아서 만들어준다.
 ```
 // To directly connect to a single MongoDB server
@@ -34,11 +34,11 @@ MongoClient 인스턴스는 사실 데이터베이스 연결의 풀을 대표한
 - 모든 리소스 사용 한계(최대 연결수, 등등)는 MongoClient 인스턴스 당 적용한다. 
 - 인스턴스를 처분할때, 너는 자원을 클린업하기 위해서 MongoClient.close()를 콜해야 한다.  
 
-**Get a Collection**<br>
+###Get a Collection
 collection을 가져올땐 getCollection() 메서드에 collection 이름을 넣어라.
 `MongoCollection<Document> collection = database.getCollection("test");`
 
-**Insert a Document**<br>
+###Insert a Document
 collection 객체를 가질때, collection에 documents를 삽입할 수 있다. 예를 들어, 다음 JSON document를 생각해봐라; 그 document는 `info` 필드로 또 하나의 document를 포함하고 있다.
 ```
 {
@@ -81,3 +81,4 @@ collection.insertMany(documents);
 `System.out.println(collection.count());`
 
 **Query the Collection**<br>
+find() 메서드로 collection을 쿼리한다. 
