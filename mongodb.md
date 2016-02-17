@@ -82,3 +82,5 @@ collection.insertMany(documents);
 ###Query the Collection
 `find()` 메서드로 collection을 쿼리한다.<br>
 **Find the First Document in a Collection**<br>
+To get the first document in the collection, call the first() method on the find() operation. collection.find().first() returns the first document or null rather than a cursor. This is useful for queries that should only match a single document, or if you are interested in the first document only.
+collection에 첫번째  document를 가져오기 위해서 `find()`명령의 `first()`메서드를 콜해라. 
