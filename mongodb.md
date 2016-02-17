@@ -61,3 +61,4 @@ Document doc = new Document("name", "MongoDB")
 ```
 collection에 document를 삽입하기 위해서는 insertOne() 메서드를 사용해라. `collection.insertOne(doc);`
 
+**Add Multiple Documents**<br>
