@@ -98,3 +98,4 @@ System.out.println(myDoc.toJson());
 NOTE : `_id` 요소는 MongoDB가 자동으로 추가해왔고 값은 보여지는 것과 다를 것이다. MongoDB는 내부적인 사용을 위해 "_"와 "$"로 시작하는 필드명을 남겨둔다. 
 
 **Find All Documents in a Collection**<br>
+To retrieve all the documents in the collection, we will use the find() method. The find() method returns a FindIterable instance that provides a fluent interface for chaining or controlling find operations. Use the iterator() method to get an iterator over the set of documents that matched the query and iterate. The following code retrieves all documents in the collection and prints them out (101 documents):
