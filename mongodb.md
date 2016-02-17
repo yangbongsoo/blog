@@ -114,5 +114,4 @@ try {
 for (Document cur : collection.find()) {
     System.out.println(cur.toJson());
 }
-
 ```
