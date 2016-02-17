@@ -39,3 +39,6 @@ collection을 가져올땐 getCollection() 메서드에 collection 이름을 넣
 `MongoCollection<Document> collection = database.getCollection("test");`
 
 **Insert a Document**<br>
+Once you have the collection object, you can insert documents into the collection. 
+
+For example, consider the following JSON document; the document contains a field info which is an embedded document:
