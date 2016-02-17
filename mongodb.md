@@ -38,3 +38,4 @@ MongoClient 인스턴스는 사실 데이터베이스 연결의 풀을 대표한
 To get a collection to operate upon, specify the name of the collection to the getCollection() method:
 
 The following example gets the collection test:
+`MongoCollection<Document> collection = database.getCollection("test");`
