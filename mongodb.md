@@ -116,3 +116,10 @@ for (Document cur : collection.find()) {
 }
 ```
 ###Get A Single Document with a Query Filter
+collection의 document들을 필터를 적용해서 해당하는 것들만 가져올 수 있다. 예를 들어 71번째 필드만 가져오고 싶으면 다음과 같이 작성하면 된다. 
+```
+import static com.mongodb.client.model.Filters.*;
+
+myDoc = collection.find(eq("i", 71)).first();
+System.out.println(myDoc.toJson());
+```
