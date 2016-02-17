@@ -109,3 +109,5 @@ try {
     cursor.close();
 }
 ```
+Although the following idiom is permissible, its use is discouraged as the application can leak a cursor if the loop terminates early:
+
