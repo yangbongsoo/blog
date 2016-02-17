@@ -72,4 +72,7 @@ List<Document> documents = new ArrayList<Document>();
 for (int i = 0; i < 100; i++) {
     documents.add(new Document("i", i));
 }
+
+collection.insertMany(documents);
 ```
+
