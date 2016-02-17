@@ -40,3 +40,16 @@ collection을 가져올땐 getCollection() 메서드에 collection 이름을 넣
 
 **Insert a Document**<br>
 collection 객체를 가질때, collection에 documents를 삽입할 수 있다. 예를 들어, 다음 JSON document를 생각해봐라; 그 document는 `info` 필드로 또 하나의 document를 포함하고 있다.
+```
+{
+   "name" : "MongoDB",
+   "type" : "database",
+   "count" : 1,
+   "info" : {
+               x : 203,
+               y : 102
+             }
+}
+```
+자바 드라이버를 이용해 그 document를 생성하기 위해서는 Document 클래스를 사용해라. 이 클래스로 내장된 document 또한 생성할 수 있다. 
+
