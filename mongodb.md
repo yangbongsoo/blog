@@ -90,3 +90,9 @@ collection에 첫 번째 document를 가져오기 위해서 `find()`명령의 `f
 Document myDoc = collection.find().first();
 System.out.println(myDoc.toJson());
 ```
+이 예제는 다음의 document를 출력한다. 
+```
+{ "_id" : { "$oid" : "551582c558c7b4fbacf16735" },
+  "name" : "MongoDB", "type" : "database", "count" : 1,
+  "info" : { "x" : 203, "y" : 102 } }
+```
