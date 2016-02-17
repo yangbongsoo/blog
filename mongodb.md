@@ -99,7 +99,14 @@ NOTE : `_id` 요소는 MongoDB가 자동으로 추가해왔고 값은 보여지�
 
 **Find All Documents in a Collection**<br>
 To retrieve all the documents in the collection, we will use the find() method. The find() method returns a FindIterable instance that provides a fluent interface for chaining or controlling find operations. Use the iterator() method to get an iterator over the set of documents that matched the query and iterate. The following code retrieves all documents in the collection and prints them out (101 documents):
-collection의 모든 document들을 검색하기 위해서 `find()`메서드를 사용한다. 
+collection의 모든 document들을 검색하기 위해서 `find()`메서드를 사용한다. `find()`메서드는 검색 작업의 체이닝이나 컨트롤링 인터페이스를 제공하는 FindIterable 인스턴스를 리턴한다. 
 ```
-
+MongoCursor<Document> cursor = collection.find().iterator();
+try {
+    while (cursor.hasNext()) {
+        System.out.println(cursor.next().toJson());
+    }
+} finally {
+    cursor.close();
+}
 ```
