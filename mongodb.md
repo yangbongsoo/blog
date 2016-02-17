@@ -123,3 +123,7 @@ import static com.mongodb.client.model.Filters.*;
 myDoc = collection.find(eq("i", 71)).first();
 System.out.println(myDoc.toJson());
 ```
+그러면 하나의 document만 출력할 것이다. 
+`{ "_id" : { "$oid" : "5515836e58c7b4fbc756320b" }, "i" : 71 }`
+###Get a Set of Documents with a Query
+We can use the query to get a set of documents from our collection. For example, if we wanted to get all documents where "i" > 50, we could write:
