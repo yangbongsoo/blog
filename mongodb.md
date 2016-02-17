@@ -34,4 +34,7 @@ MongoClient 인스턴스는 사실 데이터베이스 연결의 풀을 대표한
 - 모든 리소스 사용 한계(최대 연결수, 등등)는 MongoClient 인스턴스 당 적용한다. 
 - 인스턴스를 처분할때, 너는 자원을 클린업하기 위해서 MongoClient.close()를 콜해야 한다.  
 
+**Get a Collection**<br>
+To get a collection to operate upon, specify the name of the collection to the getCollection() method:
 
+The following example gets the collection test:
