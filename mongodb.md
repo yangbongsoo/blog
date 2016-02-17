@@ -35,7 +35,7 @@ MongoClient 인스턴스는 사실 데이터베이스 연결의 풀을 대표한
 - 인스턴스를 처분할때, 너는 자원을 클린업하기 위해서 MongoClient.close()를 콜해야 한다.  
 
 ###Get a Collection
-collection을 가져올땐 getCollection() 메서드에 collection 이름을 넣어라.
+collection을 가져올땐 `getCollection()` 메서드에 collection 이름을 넣어라.
 `MongoCollection<Document> collection = database.getCollection("test");`
 
 ###Insert a Document
@@ -59,9 +59,9 @@ Document doc = new Document("name", "MongoDB")
                .append("count", 1)
                .append("info", new Document("x", 203).append("y", 102));
 ```
-collection에 document를 삽입하기 위해서는 insertOne() 메서드를 사용해라. `collection.insertOne(doc);`
+collection에 document를 삽입하기 위해서는 `insertOne()` 메서드를 사용해라. `collection.insertOne(doc);`
 ###Add Multiple Documents
-다수의  document들을 추가하기 위해서 insertMany() 메서드를 사용한다. 
+다수의  document들을 추가하기 위해서 `insertMany()` 메서드를 사용한다. 
 
 다음 예제는 다수의 document들을 추가한다. 
 `{ "i" : value }`<br>
@@ -76,9 +76,9 @@ collection.insertMany(documents);
 ```
 
 ###Count Documents in A Collection
-지금까지 101개의 document들을 삽입했다.(100개는 루프를 통해서, 아까 한개 추가한거까지) count() 메서드를 통해서 확인해볼 수 있다. 다음 예제 코드는 101이 나와야한다. 
+지금까지 101개의 document들을 삽입했다.(100개는 루프를 통해서, 아까 한개 추가한거까지) `count()` 메서드를 통해서 확인해볼 수 있다. 다음 예제 코드는 101이 나와야한다. 
 `System.out.println(collection.count());`
 
 ###Query the Collection
-find() 메서드로 collection을 쿼리한다.<br>
+`find()` 메서드로 collection을 쿼리한다.<br>
 **Find the First Document in a Collection**<br>
