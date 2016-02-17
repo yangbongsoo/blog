@@ -25,3 +25,4 @@ MongoClient mongoClient = new MongoClient(connectionString);
 
 MongoDatabase database = mongoClient.getDatabase("mydb");
 ```
+이 시점에서 database 객체는 MongoDB 서버에 연결이 된다.
