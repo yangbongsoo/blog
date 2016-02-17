@@ -28,3 +28,5 @@ MongoDatabase database = mongoClient.getDatabase("mydb");
 이 시점에서 database 객체는 MongoDB 서버에 연결이 된다.
 
 **MongoClient**<br>
+The MongoClient instance actually represents a pool of connections to the database; you will only need one instance of class MongoClient even with multiple threads.
+MongoClient 인스턴스는 사실 데이터베이스 연결의 풀을 대표한다. 그리고 다수의 스레드 환경에서도 MongoClient 인스턴스는 하나만 있으면 된다. 
