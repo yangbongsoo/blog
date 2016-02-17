@@ -62,3 +62,14 @@ Document doc = new Document("name", "MongoDB")
 collection에 document를 삽입하기 위해서는 insertOne() 메서드를 사용해라. `collection.insertOne(doc);`
 
 **Add Multiple Documents**<br>
+다수의  document들을 추가하기 위해서 insertMany() 메서드를 사용한다. 
+
+다음 예제는 다수의 document들을 추가한다. 
+`{ "i" : value }`<br>
+루프에서 document들을 생성한다. 
+```
+List<Document> documents = new ArrayList<Document>();
+for (int i = 0; i < 100; i++) {
+    documents.add(new Document("i", i));
+}
+```
