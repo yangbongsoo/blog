@@ -53,3 +53,9 @@ collection 객체를 가질때, collection에 documents를 삽입할 수 있다.
 ```
 자바 드라이버를 이용해 그 document를 생성하기 위해서는 Document 클래스를 사용해라. 이 클래스로 내장된 document 또한 생성할 수 있다. 
 
+```
+Document doc = new Document("name", "MongoDB")
+               .append("type", "database")
+               .append("count", 1)
+               .append("info", new Document("x", 203).append("y", 102));
+```
