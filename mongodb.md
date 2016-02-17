@@ -76,3 +76,5 @@ for (int i = 0; i < 100; i++) {
 collection.insertMany(documents);
 ```
 
+**Count Documents in A Collection**<br>
+
