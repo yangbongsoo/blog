@@ -75,7 +75,7 @@ for (int i = 0; i < 100; i++) {
 collection.insertMany(documents);
 ```
 
-**Count Documents in A Collection**<br>
+###Count Documents in A Collection
 지금까지 101개의 document들을 삽입했다.(100개는 루프를 통해서, 아까 한개 추가한거까지) count() 메서드를 통해서 확인해볼 수 있다. 다음 예제 코드는 101이 나와야한다. 
 `System.out.println(collection.count());`
 
