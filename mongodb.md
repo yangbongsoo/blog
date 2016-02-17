@@ -97,3 +97,4 @@ System.out.println(myDoc.toJson());
   "info" : { "x" : 203, "y" : 102 } }
 ```
 NOTE : `_id` 요소는 MongoDB가 자동으로 추가해왔고 값은 보여지는 것과 다를 것이다. MongoDB는 내부적인 사용을 위해 "_"와 "$"로 시작하는 필드명을 남겨둔다. 
+
