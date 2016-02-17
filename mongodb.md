@@ -59,3 +59,5 @@ Document doc = new Document("name", "MongoDB")
                .append("count", 1)
                .append("info", new Document("x", 203).append("y", 102));
 ```
+collection에 document를 삽입하기 위해서는 insertOne() 메서드를 사용해라. `collection.insertOne(doc);`
+
