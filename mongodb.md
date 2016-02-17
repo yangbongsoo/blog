@@ -37,3 +37,5 @@ MongoClient 인스턴스는 사실 데이터베이스 연결의 풀을 대표한
 **Get a Collection**<br>
 collection을 가져올땐 getCollection() 메서드에 collection 이름을 넣어라.
 `MongoCollection<Document> collection = database.getCollection("test");`
+
+**Insert a Document**<br>
