@@ -40,5 +40,4 @@ collection을 가져올땐 getCollection() 메서드에 collection 이름을 넣
 
 **Insert a Document**<br>
 Once you have the collection object, you can insert documents into the collection. 
-
-For example, consider the following JSON document; the document contains a field info which is an embedded document:
+collection 객체를 가질때, collection에 documents를 삽입할 수 있다. 예를 들어, 다음 JSON document를 생각해봐라; 그 document는 `info` 필드로 또 하나의 document를 포함하고 있다.
