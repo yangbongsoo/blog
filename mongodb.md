@@ -84,6 +84,8 @@ collection.insertMany(documents);
 **Find the First Document in a Collection**<br>
 To get the first document in the collection, call the first() method on the find() operation. collection.find().first() returns the first document or null rather than a cursor. This is useful for queries that should only match a single document, or if you are interested in the first document only.
 collection에 첫 번째 document를 가져오기 위해서 `find()`명령의 `first()`메서드를 콜해라. `collection.find().first()`는 첫 번째 document나 null(커서보다)을 리턴한다. 이것은 단일 document 매치여부 쿼리나 첫 번째 document를 가져올때 유용하다. 
+
+다음은 collection의 첫 번째 document를 찾아 출력하는 예제다. 
 ```
 Document myDoc = collection.find().first();
 System.out.println(myDoc.toJson());
