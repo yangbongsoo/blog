@@ -48,5 +48,4 @@
 * [What / Why / How Living Documentation](what__why__how_living_documentation.md)
 * [DB](db.md)
 * [자료구조&알고리즘](c790_b8cc_ad6c_c87026_c54c_ace0_b9ac_c998.md)
-   * What / Why / How Living Documentation
 
