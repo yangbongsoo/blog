@@ -2,6 +2,7 @@
 
 * [Introduction](README.md)
 * [NHN은 이렇게한다! 소프트웨어 품질관리](nhnc740_c774_b807_ac8c_d55c_b2e421_c18c_d504_d2b8_.md)
+* [What / Why / How Living Documentation](what__why__how_living_documentation.md)
 * [Specification by Example](specification_by_example.md)
 * [토비의 스프링3.1](spring.md)
    * [정의, IOC/DI개념, Bean 라이프사이클](c815_c7582c_ioc__di_ac1c_b1502c_bean_b77c_c774_d50.md)
@@ -45,7 +46,6 @@
    * [웹 서비스 서버 구성의 모범 사례](c6f9_c11c_be44_c2a4_c11c_bc84_ad6c_c131_c758_baa8_bc94_c0ac_b840_md.md)
    * [인프라 준비의 기초 지식](c778_d504_b77c_c900_be44_c758_ae30_cd08_c9c0_c2dd_md.md)
    * [웹 서비스 튜닝](c6f9_c11c_be44_c2a4_d29c_b2dd.md)
-* [What / Why / How Living Documentation](what__why__how_living_documentation.md)
 * [DB](db.md)
 * [자료구조&알고리즘](c790_b8cc_ad6c_c87026_c54c_ace0_b9ac_c998.md)
 
