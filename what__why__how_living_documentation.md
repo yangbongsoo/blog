@@ -83,3 +83,20 @@ Feature: Photo display
 잘 정제된 이러한 documentation은 애플리케이션이 무엇을, 그리고 왜 하는지에 대한 이해를 기본으로 한다. 팀 공통 용어집을 정의하는데, 이전에 까먹었던 기능을 호출하는데 사용해라. 그리고 PDF로 출력해서 새로운 팀 동료가 읽게 해라.
 
 **WHY NOT USE A LIGHWEIGHT SPEC FRAMEWORK TO WRITE THE DOCUMENTATION?**<br>
+spec framework(예를 들어, RSpec, Capybara’s feature DSL)을 사용할 수 있지만 몇 가지 단점이 있다. 아래의 문서를 보자. <br>
+Gherkin 버전
+```
+Feature: Background picture display
+
+  Scenario: show random background picture
+    When a visitor visits the page multiple times
+    Then they see a different background picture each time
+```
+```
+describe "Background picture display" do
+  context "When a visitor visits the page multiple times"
+    it "They see a different background picture each time" do
+    end
+  end
+end
+```
