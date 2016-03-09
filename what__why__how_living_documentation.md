@@ -80,7 +80,7 @@ Feature: Photo display
 - 시나리오들은 약간의 정해진 포맷으로 작성된다.(각각의 라인은 반드시 Given, When, Then, And, But 중 하나로 시작해야 된다.)
 
 위 documentation에 그 어떤 코드도 없다는걸 알아챘는가? 완벽하게 자연어로 작성된, 읽을수 있는 문서이기 때문에 이해 관계자(stakeholders)들 또한 볼수 있다. 하지만 무엇보다도 팀 동료들이 읽을 수 있다.
-잘 정제된 이러한 documentation은 애플리케이션이 무엇을, 그리고 왜 하는지에 대한 이해를 기본으로 한다. 팀 공통 용어집을 정의하는데, 이전에 까먹었던 기능을 호출하는데 사용해라. 그리고 PDF로 출력해서 새로운 팀 동료가 읽게 해라.
+잘 정제된 이러한 documentation은 애플리케이션이 무엇을, 그리고 왜 하는지에 대한 이해를 기본으로 한다. 팀 공통 용어집을 정의하는데, 그리고 이전에 까먹었던 기능을 호출하는데 사용해라. 또 PDF로 출력해서 새로운 팀 동료가 읽게 해라.
 
 **WHY NOT USE A LIGHWEIGHT SPEC FRAMEWORK TO WRITE THE DOCUMENTATION?**<br>
 spec framework(예를 들어, RSpec, Capybara’s feature DSL)을 사용할 수 있지만 몇 가지 단점이 있다. 아래의 문서를 보자. <br>
