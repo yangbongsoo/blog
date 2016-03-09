@@ -92,6 +92,7 @@ Feature: Background picture display
     When a visitor visits the page multiple times
     Then they see a different background picture each time
 ```
+RSpec 버전
 ```
 describe "Background picture display" do
   context "When a visitor visits the page multiple times"
