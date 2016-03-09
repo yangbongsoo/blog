@@ -20,7 +20,7 @@ cf) Specification by Example에서 ‘living documentation’
 
 당신이 요구사항을 갖고 있고 그 feature를 만들어야된다면, 원래의 solution-problem을 포함해서 가능한한 각각의 solution들을 고려해야한다. 다음과 같은 질문을 하라.
 - input이 무엇인가? 어떤 일이 일어나야 되는가? corner case의 경우가 있는가?
-- 새로운 feature는 어떻게 기존 application과 통합되는가?
+- 새로운 feature는 어떻게 기존 애플리케이션과 통합되는가?
 - 기존 기능에 어떻게 영향을 끼치는가? 얼마나 복잡한가? 
 - 얼마나 사이즈가 큰가?
 - 성능에 문제가 있는가?
@@ -73,3 +73,13 @@ Feature: Photo display
 
   ...
 ```
+이것들은 living documentation의 일반적인 컴포넌트들이다. 
+- feature 이름 
+- quick overview : 왜 feature가 있는지, 해결한 문제가 뭔지, 어떤 대안들을 찾아봤는지 등등 
+- 몇몇 사람들은 잘 알려진 스토리 포맷을 사용한다. “As a ... I want to ... so tht ...” 또 어떤 사람들은 자유로운 포맷을 선호한다. 
+- 시나리오들은 약간의 정해진 포맷으로 작성된다.(각각의 라인은 반드시 Given, When, Then, And, But 중 하나로 시작해야 된다.)
+
+위 documentation에 그 어떤 코드도 없다는걸 알아챘는가? 완벽하게 자연어로 작성된, 읽을수 있는 문서이기 때문에 이해 관계자(stakeholders)들 또한 볼수 있다. 하지만 무엇보다도 팀 동료들이 읽을 수 있다.
+잘 정제된 이러한 documentation은 애플리케이션이 무엇을, 그리고 왜 하는지에 대한 이해를 기본으로 한다. 팀 공통 용어집을 정의하는데, 이전에 까먹었던 기능을 호출하는데 사용해라. 그리고 PDF로 출력해서 새로운 팀 동료가 읽게 해라.
+
+**WHY NOT USE A LIGHWEIGHT SPEC FRAMEWORK TO WRITE THE DOCUMENTATION?**<br>
