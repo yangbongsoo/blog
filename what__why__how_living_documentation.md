@@ -36,3 +36,34 @@ cf) Specification by Example에서 ‘living documentation’
 당신이 빛을 아직 보지 못한 사람이라고 해보자. 그런데 당신은 빛을 생각해내야 하는 문제에 있다. 어떻게 할 것인가? 아마 해결책에 도달할때까지 빛을 생각해보고, 스케치를 해보고, 써보는걸 반복할 것이다. 그렇게 해서 나온 output은 어떻게 될까? 그냥 무시하는가? 아니면 당신이 사용하는 프로젝트 계획 도구에 묻혀 두고 구현을 시작하는가? 아마 당신은 코드가 디자인이라고 믿을 것이다.
 
 **코드가 디자인인가? 그렇기도 하고 아니기도 하다.** 먼저 이론적으로 코드는 디자인 될 수 있고 동작하는 애플리케이션에 필요한 모든 것이며, 애플리케이션이 어떻게 동작하는지 이해하기 위한 것이다. 하지만 코드는 어떻게 동작하는지만 알려줄 뿐이다. 코드는 ‘왜 그렇게 동작해야되는지 실제로 어떻게 동작하도록 되어 있는지’를 말해주지 않는다. 그래서 코드가 디자인이라고 해도 그것만으로는 부족하다. 
+
+```
+Feature: Photo display
+
+  A photography site is all about photos, and the bigger 
+  they are, the better. If we limit the text content, we 
+  can use the entire background area to show a single photo.
+
+  Due to time constraints, we're not building a dedicated 
+  photo gallery yet, but we must give people a chance 
+  to see more photos, using a very simple navigation system 
+  that uses "back" and "forward" links, like a manually 
+  activated slideshow.
+
+  Scenario: photo shown on the homepage
+    When a visitor visits the homepage multiple times
+    Then they should see a different photo each time
+
+  Scenario: photo navigation
+    When a visitor is looking at a photo
+    Then they can choose to see the photo that follows it
+    And they can choose to see the photo that precedes it
+
+  Scenario: photo navigation beyond last photo
+    When a visitor tries to see the photo that comes after 
+    the last photo
+    Then they should be shown the first photo in the 
+    slideshow instead
+
+  ...
+```
