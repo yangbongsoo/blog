@@ -109,3 +109,11 @@ end
 
 **결론**<br>
 이 글에서 저자는 코드에서 한걸음 물러나서 더 상위 레벨 이슈에 대해 생각해보는것을 원했다. 이후의 글에서는 완벽한 예제를 가지고 living documentation에 대해서 더 깊이있게 살펴본 후 더 나은 workflow를 제안할 예정이다. 인간이 쓰는 언어보다 더 강력한 것은 없다. 이걸 사용해라! 
+
+###[How you should write living documentation]
+원문 : http://blog.mojotech.com/how-you-should-write-living-documentation/ <br>
+
+이번 글에서는 어떻게 좋은 living documentation을 만드는 가에 대해서 다룬다. 예제들은 저자가 실무에서 사용하는 큐컴버 living documentation 포맷인 Gherkin으로 썼다. 사실 이게 완벽하진 않다. 몇가지 단점들이 있지만 올바른 방향의 한 스텝이라고 생각한다. 당신이 생각하는 최고의 도구가 무엇이든, 이 글은 도움이 될 것이다. 
+
+**Who write the documentation? Who is our audience?** <br>
+이 글은 개발자에 의해 쓰여진, 개발자를 위한 documentation에 포커스를 맞출 것이다. 저번 글에서 개발자가 living documentation을 쓰면 좋은 점 몇 가지를 소개했다. 
