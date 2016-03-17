@@ -166,5 +166,5 @@ Scenario: letting clients view photos
 
 **A tale of two definitions**<br>
 저자는 living documentation은 주로 약 두 가지 서로 다른 영역이라고 믿어왔다. <br>
-1.Entities in the system, 그리고 그것들을 포함하는 모든 관련된 속성들의 집합. 관련 속성들은 비지니스 도메인의 부분이다.<br>
+1.Entities in the system, 그리고 그것들을 포함하는 모든 관련된 속성들의 집합. 관련 속성들은 비지니스 도메인의 부분이다.(즉, 그것은 단순한 상세 구현이 아니다)<br>
 2.The behavior of the system. 이것은 누군가나 무엇인가가 어떤 역할아래
