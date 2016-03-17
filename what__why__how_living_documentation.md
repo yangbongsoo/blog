@@ -116,4 +116,55 @@ end
 이번 글에서는 어떻게 좋은 living documentation을 만드는 가에 대해서 다룬다. 예제들은 저자가 실무에서 사용하는 큐컴버 living documentation 포맷인 Gherkin으로 썼다. 사실 이게 완벽하진 않다. 몇가지 단점들이 있지만 올바른 방향의 한 스텝이라고 생각한다. 당신이 생각하는 최고의 도구가 무엇이든, 이 글은 도움이 될 것이다. 
 
 **Who write the documentation? Who is our audience?** <br>
-이 글은 개발자에 의해 쓰여진, 개발자를 위한 documentation에 포커스를 맞출 것이다. 저번 글에서 개발자가 living documentation을 쓰면 좋은 점 몇 가지를 소개했다. 
+이 글은 개발자에 의해 쓰여진, 개발자를 위한 documentation에 포커스를 맞출 것이다. 저번 글에서 개발자가 living documentation을 쓰면 좋은 점 몇 가지를 소개했다. <br>
+1. feature를 구현 가기 전에 documentation을 작성하는 것은 도메인을 더 잘 이해할 수 있게 해준다. 또한 어떤 일이 일어나길 원하고 원하지 않는지 생각하게 해준다. edge case(일정 범위를 넘어서는 경우에 발생하는 문제)를 생각하게 하고 비니지스 도메인과 관련있는 개념들을 찾게 도와준다. 이번 글에서는 우리의 코드를 구성하는 법을 알려준다. 
+2. documentation은 팀에게 공유된 도메인 언어를 제공해서 의사소통을 편하게 해준다. 
+3. documentation이 자연어와 유사하게 작성되어 있기 때문에 새로운 개발자의 업무 숙지가 쉽다. documentation은 how 보다는 what, why에 대해 이해하는데 유용하다. 관련 documentation의 quick glance는 숙련된 개발자가 고려해야 할 것들에 대해 도와준다. 그래서 그들이 고려하지 못한 측면 때문에 발생한 잘못된 접근을 구현 중간에 발견하지 않게 된다. 
+4. 마지막으로 documentation이 테스트에 의해 돌아가기 때문에 계속 최신을 유지한다. 
+
+**How not to write living documentation**<br>
+우리는 큐컴버에 대한 첫 소개 이후로 먼 길을 왔다. 
+```
+Scenario: viewing a photo shoot
+  Given a client with the following attributes:
+    | id   | 1                   |
+    | name | Guybrush Threepwood |
+  And the following photo shoot:
+    | id        | 2                 |
+    | client_id | 1                 |
+    | name      | Guybrush & Elaine |
+    | shot_at   | 2 days ago        |
+  And the following photos exist:
+    | photo_shoot_id | name                      |
+    | 2              | Put that voodoo ring away |
+    | 2              | Here comes LeChuck        |
+    | 2              | Kiss the bride            |
+  And I am signed in as "Guybrush Threepwood"
+  When I visit "/photo_shoots"
+  And I click "Guybrush & Elaine"
+  Then I should see "The cursed ring"
+  And I should see "Here comes LeChuck"
+  Then I should see "Kiss the bride"
+```
+위의 시나리오는 몇가지 문제가 있다. <br>
+첫 번째로 디테일한 구현을 노출한다. (DB 필드명 id, client_id, photo_shoot_id, shot_at 그리고 URL)<br>
+living documentation을 작성할 때 디테일한 구현을 작성하면 안된다. 위에서 언급했던 대로 living documentation은 도메인에 대해서 생각하도록 돕는 것이지, 상세 구현을 돕지 않는다. 실제 코드작성 하기 전에 읽어야 하기 때문이다.   <br>
+두 번째로 shot_at이 왜 필요한지 명확하지 않다. shot_at을 지우면 어떻게 되는가? And, whatever does happen, why does it happen? <br>
+세 번째로 시나리오가 명령형 방식으로 쓰여졌다. 그건 마치 유저 메뉴얼 같다. “Visit a”, “click b” 이런 것들은 어떻게 하는 가를 설명할 뿐 유자가 뭘 하는지 설명하지 않는다. - viewing a photo shoot. photo shoot 페이지를 사용하는 시나리오가 더 있다고 상상해봐라. 같은 step을 계속 반복할건가? <br>
+추가로 “URLs”, “visiting”, “clicking”들은 UI 개념들이다.(상세 구현의 또 다른 종류)<br>
+네 번째로 위의 시나리오가 읽기 쉽나? 저자는 쉽지 않다고 생각한다. 위에서 설명했던 여러 문제들과 중복(photo 이름들이 얼마나 반복되는지 봐라)은 시나리오를 지루하고 기술적인 소리로 만든다. SW 개발자들이 왜 그렇게 작성하는지 이해하지만 그 누구도 읽고 싶어하지 않다고 생각한다. 그것은 문서의 중요한 부분으로 간주되는 대신 또다른 유지 보수 부담이 될 것이다. 
+
+**How to write living documentation**<br>
+이제 위의 문제들을 해결할 시간이다. 여기에 잘 쓰여진 같은 시나리오가 있다. 
+```
+Scenario: letting clients view photos
+  
+  When a client views a completed photo shoot
+  Then they should see the list of all its photos
+```
+이 시나리오는 이전 것보다 훨씬 짧다. 각각의 정보는 이유가 있다. 완벽하다고 말할 순 없지만 적어도 여기서 떠 빼야할 부분은 없다. 그러나 몇 가지 문제점이 있다. 예를 들어 위 시나리오에는 클라이언트가 반드시 로그인 해야된다고 말하지 않는다. 그리고 무엇이 “completed photo shoot”인가? <br>
+
+**A tale of two definitions**<br>
+저자는 living documentation은 주로 약 두 가지 서로 다른 영역이라고 믿어왔다. <br>
+1.Entities in the system, 그리고 그것들을 포함하는 모든 관련된 속성들의 집합. 관련 속성들은 비지니스 도메인의 부분이다.(즉, 그것은 단순한 상세 구현이 아니다)
+2. The behavior of the system. 이것은 누군가나 무엇인가가 어떤 역할아래
