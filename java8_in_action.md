@@ -82,3 +82,31 @@ isHeavyApple, isGreenApple처럼 한두 번만 사용할 메서드를 매번 정
 `filterApples(inventory, (Apple a) -> a.getWeight() > 150);`<br>
 `filterApples(inventory, (Apple a) -> a.getWeight() < 80 || “brown”.equals(a.getColor());`<br>
 즉, 한 번만 사용할 메서드는 따로 정의를 구현할 필요가 없다. 하지만 람다가 몇 줄 이상으로 길어진다면(복잡한 동작을 수행하는 상황) 익명 람다보다는 코드가 수행하는 일을 잘 설명하는 이름을 가진 메서드를 정의하고 메서드 레퍼런스를 활용하는 것이 바람직하다. **코드의 명확성이 우선시 되어야 한다.**<br>
+
+###스트림
+다음은 리스트에서 고가의 거래(Transcation)만 필터링한 다음에 통화로 결과를 그룹화하는 코드다. 
+```
+Map<Currency, List<Transaction>> transactionsByCurrencies = new HashMap<>(); // 그룹화된 트랜잭션을 더할 Map 생성
+
+for (Transaction transaction : transactions){ // 트랜잭션의 리스트를 반복
+	if (transaction.getPrice() > 1000){ // 고가의 트랜잭션을 필터링
+		Currency currency = transaction.getCurrency(); // 트랜잭션의 통화 추출
+		List<Transcation> transactionsForCurrency = transactionsByCurrencies.get(currency); 
+		if (transactionsForCurrency == null){ // 현재 통화의 그룹화된 맵에 항목이 없으면 새로 만든다.
+			transactionsForCurrency = new ArrayList<>();
+			transactionsByCurrencies.put(currency, transactionsForCurrency);
+		}
+		transactionsForCurrency.add(transaction); // 현재 탐색된 트랜잭션을 같은 통화의 트랜잭션 리스트에 추가한다. 
+	}
+}
+```
+위 예제 코드에는 중첩된 제어 흐름 문장이 많아서 코드를 한 번에 이해하기 어렵다. 스트림 API를 이요하면 다음처럼 문제를 해결할 수 있다. 
+```
+import static java.util.stream.Collections.toList;
+
+Map<Currency, List<Transaction>> transactionByCurrencies = 
+	transactions.stream()
+           		   .filter((Transaction t) -> t.getPrice() > 1000) //고가의 트랜잭션 필터링
+			   .collect(groupingBy(Transaction::getCurrency);	
+```
+컬렉션에서는 반복 과정을 직접 처리해야 했다. 이런 방식의 반복을 외부 반복이라고 한다. 반면 스프림 API를 이용하면 루프를 신경쓸 필요가 없다. 라이브러리 내부에서 모든 데이터가 처리된다. 이와 같은 반복을 내부 반복이라고 한다.
