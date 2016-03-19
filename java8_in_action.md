@@ -20,3 +20,5 @@ File[] hiddenFiles = new File(“.”).listFiles(new FileFilter(){
 File[] hiddenFiles = new File(“.”).listFiles(File::isHidden);
 ```
 **자바8의 메서드 레퍼런스 ::** (이 메서드를 값으로 사용하라는 의미)를 이용해서 listFiles에 직접 전달할 수 있다. 기존에 객체 레퍼런스(new로 객체 레퍼런스를 생성함)를 이용해서 객체를 이리저리 주고받았던 것처럼 자바 8에서는 File::isHidden을 이용해서 메서드 레퍼런스를 만들어 전달할 수 있게 되었다. <br>
+
+**람다: 익명 함수**<br>
