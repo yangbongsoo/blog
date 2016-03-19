@@ -156,4 +156,8 @@ public static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p){
 }
 
 ```
+하지만 익명 클래스를 사용해도 반복되어 지저분한 코드는 여전히 많고 많은 프로그래머가 익명 클래스의 사용에 익숙하지 않다. 
 
+**람다 표현식 사용**<br>
+자바8의 람다 표현식을 이용해서 간단히 재구현할 수 있다. <br>
+`List<Apple> result = filterApples(inventory, (Apple apple) -> “red”.equals(apple.getColor()));`<br>
