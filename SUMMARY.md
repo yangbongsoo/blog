@@ -1,6 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
+* [Kakao인턴](kakaoc778_d134.md)
 * [Java8 in Action](java8_in_action.md)
 * [클린코더스 강의 정리](d074_b9b0_cf54_b354_c2a4_ac15_c758_c815_b9ac.md)
 * [NHN은 이렇게한다! 소프트웨어 품질관리](nhnc740_c774_b807_ac8c_d55c_b2e421_c18c_d504_d2b8_.md)
@@ -51,5 +52,4 @@
    * [웹 서비스 튜닝](c6f9_c11c_be44_c2a4_d29c_b2dd.md)
 * [DB](db.md)
 * [자료구조&알고리즘](c790_b8cc_ad6c_c87026_c54c_ace0_b9ac_c998.md)
-* [Kakao인턴](kakaoc778_d134.md)
 
