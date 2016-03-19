@@ -23,7 +23,6 @@
    * [열거형(enum)과 어노테이션](c5f4_ac70_d61528_enum_acfc_c5b4_b178_d14c_c774_c15.md)
 * [객체지향의 사실과 오해](ac1d_ccb4_c9c0_d5a5_c758_c0ac_c2e4_acfc_c624_d574.md)
 * [네이버를 만든 기술, 자바편](b124_c774_bc84_b97c_b9cc_b4e0_ae30_c2202c_c790_bc14_d3b8.md)
-   * Java8 in Action
 * [Java의 정석](javac758_c815_c11d.md)
 * [Pinpoint](pinpoint.md)
    * [Q&A](q&a.md)
