@@ -161,3 +161,25 @@ public static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p){
 **람다 표현식 사용**<br>
 자바8의 람다 표현식을 이용해서 간단히 재구현할 수 있다. <br>
 `List<Apple> result = filterApples(inventory, (Apple apple) -> “red”.equals(apple.getColor()));`<br>
+![](parameterization.jpg)
+
+**리스트 형식으로 추상화**<br>
+Apple 이외의 다양한 물건에서 필터링이 작동하도록 리스트 형식을 추상화할 수 있다. 
+```
+public interface Predicate<T>{
+	boolean test(T t);
+}
+
+public static <T> List<T> filter(List<T> list, Predicate<T> p){
+	List<T> result = new ArrayList<>();
+	for (T e : list){
+		if (p.test(e)){
+			result.add(e); 
+		}
+	}
+	return result; 
+}
+```
+이제 바나나, 오렌지, 정수, 문자열 등의 리스트에 필터 메서드를 사용할 수 있다. 
+`List<Apple> redApples = filter(inventory, (Apple apple) -> “red”.equals(apple.getColor());`<br>
+`List<String> evenNumbers = filter(numbers, (Integer i) -> i % 2 == 0);`<br>
