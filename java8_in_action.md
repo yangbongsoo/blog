@@ -73,3 +73,4 @@ static List<Apple> filterApples(List<Apple> inventory,
 다음 처럼 메서드를 호출 할 수 있다. <br>
 `filterApples(inventory, Apple::isGreenApple);`<br>
 `filterApples(inventory, Apple::isHeavyApple);`<br>
+
