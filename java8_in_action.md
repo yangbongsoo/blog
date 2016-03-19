@@ -183,3 +183,25 @@ public static <T> List<T> filter(List<T> list, Predicate<T> p){
 이제 바나나, 오렌지, 정수, 문자열 등의 리스트에 필터 메서드를 사용할 수 있다. 
 `List<Apple> redApples = filter(inventory, (Apple apple) -> “red”.equals(apple.getColor());`<br>
 `List<String> evenNumbers = filter(numbers, (Integer i) -> i % 2 == 0);`<br>
+
+**실전 예제 - Comparator로 정렬하기**<br>
+자바8의 List에는 sort 메서드가 포함되어 있다.(물론 Collections.sort도 존재) 다음과 같은 인터페이스를 갖는 java.util.Comparator 객체를 이용해서 sort의 동작을 파라미터화 할 수 있다. 
+```
+//java.uitl.Comparator
+public interface Comparator<T>{
+	public int compare(T o1, T o2);
+}
+```
+Comparator를 구현해서 sort 메서드의 동작을 다양화할 수 있다. 예를 들어 익명 클래스를 이용해서 무게가 적은 순으로 목록에서 사과를 정렬할 수 있다.
+```
+inventory.sort(new Comparator<Apple>{
+	public int compare(Apple a1, Apple a2){
+		return a1.getWeight().compareTo(a2.getWeight());
+	}
+});
+```
+람다 표현식을 이용하면 다음처럼 간단하게 코드를 구현할 수 있다.
+```
+inventory.sort(
+	(Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
+```
