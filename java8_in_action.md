@@ -74,3 +74,5 @@ static List<Apple> filterApples(List<Apple> inventory,
 `filterApples(inventory, Apple::isGreenApple);`<br>
 `filterApples(inventory, Apple::isHeavyApple);`<br>
 
+cf) Predicate : 수학에서는 인수로 값을 받아 true / false를 반환하는 함수를 Predicate라고 한다. <br>
+
