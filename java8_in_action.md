@@ -76,3 +76,9 @@ static List<Apple> filterApples(List<Apple> inventory,
 
 cf) Predicate : 수학에서는 인수로 값을 받아 true / false를 반환하는 함수를 Predicate라고 한다. <br>
 
+**메서드 전달에서 람다로 **<br>
+isHeavyApple, isGreenApple처럼 한두 번만 사용할 메서드를 매번 정의하는 것은 귀찮은 일이다. 자바8 에서는 다음처럼 새로운 개념을 이용해서 코드를 구현할 수 있다. 
+`filterApples(inventory, (Apple a) -> “green”.equals(a.getColor());`<br>
+`filterApples(inventory, (Apple a) -> a.getWeight() > 150);`<br>
+`filterApples(inventory, (Apple a) -> a.getWeight() < 80 || “brown”.equals(a.getColor());`<br>
+즉, 한 번만 사용할 메서드는 따로 정의를 구현할 필요가 없다. 하지만 람다가 몇 줄 이상으로 길어진다면(복잡한 동작을 수행하는 상황) 익명 람다보다는 코드가 수행하는 일을 잘 설명하는 이름을 가진 메서드를 정의하고 메서드 레퍼런스를 활용하는 것이 바람직하다. **코드의 명확성이 우선시 되어야 한다.**<br>
