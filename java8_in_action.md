@@ -110,3 +110,5 @@ Map<Currency, List<Transaction>> transactionByCurrencies =
 			   .collect(groupingBy(Transaction::getCurrency);	
 ```
 컬렉션에서는 반복 과정을 직접 처리해야 했다. 이런 방식의 반복을 외부 반복이라고 한다. 반면 스프림 API를 이용하면 루프를 신경쓸 필요가 없다. 라이브러리 내부에서 모든 데이터가 처리된다. 이와 같은 반복을 내부 반복이라고 한다.
+###디폴트 메서드 
+디폴트 메서드는 특정 프로그램을 구현하는 데 도움을 주는 기능이 아니라 미래에 프로그램이 쉽게 변화할 수 있는 환경을 제공하는 기능이다. <br> 
