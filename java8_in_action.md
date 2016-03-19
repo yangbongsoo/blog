@@ -120,3 +120,27 @@ Map<Currency, List<Transaction>> transactionByCurrencies =
 디폴트 메서드는 특정 프로그램을 구현하는 데 도움을 주는 기능이 아니라 미래에 프로그램이 쉽게 변화할 수 있는 환경을 제공하는 기능이다. <br> 
 
 ##2장 - 동작 파라미터화 코드 전달하기
+동작 파라미터화를 이용하면 자주 바뀌는 요구사항에 효과적으로 대응할 수 있다. **동작 파라미터화란 아직은 어떻게 실행할 것인지 결정하지 않은 코드 블록을 의미한다. ** 이 코드 블록은 나중에 프로그램에서 호출한다. 즉, 코드 블록의 실행은 나중으로 미뤄진다. 결과적으로 코드 블록에 따라 메서드의 동작이 파라미터화된다. <br>
+
+**동작 파라미터화**<br>
+```
+public interface ApplePredicate{
+	boolean test (Apple apple);
+}
+```
+선택 조건을 결정하는 인터페이스이다. 이와 같은 동작을 프레디케이트(불린을 반환하는 함수)라고 한다. <br>
+다음 예제처럼 다양한 선택 조건을 대표하는 여러 버전의 ApplePredicate를 정의할 수 있다. 
+```
+//무거운 사과만 선택
+public class AppleHeavyWeightPredicate implements ApplePredicate{
+	public boolean test(Apple apple){
+		return apple.getWeight() > 150;
+	}
+}
+//녹색 사과만 선택
+public class AppleGreenColorPredicate implements ApplePredicate{
+	public boolean test(Apple apple){
+		return “green”.equals(apple.getColor());
+	}
+}
+```
