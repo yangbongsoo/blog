@@ -2,9 +2,9 @@
 
 * [Introduction](README.md)
 * [Kakao인턴](kakaoc778_d134.md)
+   * [클린코더스 강의 정리](d074_b9b0_cf54_b354_c2a4_ac15_c758_c815_b9ac.md)
    * [Java8 in Action](java8_in_action.md)
    * [11](11.md)
-* [클린코더스 강의 정리](d074_b9b0_cf54_b354_c2a4_ac15_c758_c815_b9ac.md)
 * [NHN은 이렇게한다! 소프트웨어 품질관리](nhnc740_c774_b807_ac8c_d55c_b2e421_c18c_d504_d2b8_.md)
 * [What / Why / How Living Documentation](what__why__how_living_documentation.md)
 * [Specification by Example](specification_by_example.md)
