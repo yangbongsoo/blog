@@ -280,3 +280,5 @@ public void execute(Runnable r){
 	r.run();
 }
 ```
+<br>
+cf) `@FunctionalInterface`은 함수형 인터페이스임을 가리키는 애노테이션이다. 만약 실제로 함수형 인터페이스가 아니면 컴파일러가 에러를 발생시킨다. <br>
