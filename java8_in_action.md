@@ -224,4 +224,21 @@ Comparator<Apple> byWeight =
 **화살표** : 화살표(->)는 람다의 파라미터 리스트와 바디를 구분한다.<br>
 **람다의 바디** : 두 사과의 무게를 비교한다. 람다의 반환값에 해당하는 표현식이다.<br>
 
-자바8의 유효한 람다 표현식<br>
+자바8의 유효한 5가지 람다 표현식<br>
+`(String s) -> s.length()` <br>
+첫 번째 람다 표현식은 String 형식의 파라미터 하나를 가지며 int를 반환한다. 람다 표현식에는 return이 함축되어 있으므로 return 문을 명시적으로 사용하지 않아도 된다. <br>
+
+`(Apple a) -> a.getWeight() > 150` <br>
+두번째 람다 표현식은 Apple 형식의 파라미터를 가지며 boolean을 반환한다. <br>
+
+```
+(int x, int y) -> {
+	System.out.println(“Result:”);
+	System.out.println(x+y);
+```
+세 번째 람다 표현식은 int 형식의 파라미터 두 개를 가지며 리턴값이 없다(void 리턴). 이 예제에서 볼 수 있듯이 람다 표현식은 여러 행의 문장을 포함할 수 있다. <br>
+
+`() -> 42` <br>
+네 번째 람다 표현식은 파라미터가 없으며 int를 반환한다. <br>
+`(Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());`<br>
+다섯 번째 람다 표현식은 Apple 형식의 파라미터 두 개를 가지며 int를 반환한다. 
