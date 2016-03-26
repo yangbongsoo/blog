@@ -253,3 +253,4 @@ Comparator<Apple> byWeight =
 //“Iron Man”은 구문(statement)이 아니라 표현식(expression)이다. 
 (String s) -> “Iron Man” 또는 (String s) -> { return “Iron Man” }
 ```
+###어디에, 어떻게 람다를 사용할까?
