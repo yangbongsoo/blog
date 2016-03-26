@@ -254,3 +254,18 @@ Comparator<Apple> byWeight =
 (String s) -> “Iron Man” 또는 (String s) -> { return “Iron Man” }
 ```
 ###어디에, 어떻게 람다를 사용할까?
+**함수형 인터페이스**라는 문맥에서 람다 표현식을 사용할 수 있다. 함수형 인터페이스는 정확히 하나의 추상 메서드를 지정하는 인터페이스다. 지금까지 살펴본 자바 API의 함수형 인터페이스로 Comparator, Runnable 등이 있다. 
+```
+//java.util.Comparator 
+public interface Comparator<T>{
+	int compare(T o1, T o2);
+}
+
+//java.lang.Runnable 
+public interface Runnable{
+	void run();
+}
+```
+cf) 인터페이스는 디폴트 메서드(인터페이스의 메서드를 구현하지 않은 클래스를 고려해서 기본 구현을 제공하는 바디를 포함하는 메서드)를 포함할 수 있다. 많은 디폴트 메서드가 있더라도 추상 메서드가 오직 하나면 함수형 인터페이스다.  <br>
+
+람다 표현식으로 함수형 인터페이스의 추상 메서드 구현을 직접 전달할 수 있으므로 **전체 표현식을 함수형 인터페이스의 인스턴스로 취급**(기술적으로 따지면 함수형 인터페이스를 concrete 구현한 클래스의 인스턴스)할 수 있다. 
