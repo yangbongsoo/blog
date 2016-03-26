@@ -205,3 +205,6 @@ inventory.sort(new Comparator<Apple>{
 inventory.sort(
 	(Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
 ```
+##3장 - 람다 표현식
+###람다란 무엇인가
+람다 표현식은 메서드로 전달할 수 있는 익명 함수를 단순화한것이라고 할 수 있다. 
