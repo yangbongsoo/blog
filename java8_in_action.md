@@ -294,8 +294,8 @@ public String processFile() throws IOException{
 ```
 cf) 자바7에 새로 추가된 try-with-resources 구문을 사용했다. 이를 사용하면 자원을 명시적으로 닫을 필요가 없다. <br>
 
-현재 코드는 파일에서 한 번에 한 줄만 읽을 수 있다. 기존의 설정, 정리 과정은 재사용하고 processFile 메서드만 다른 동작을 다른 동작을 수행하도록 해보자. processFile의 동작을 파라미터화하는 것이다. 즉, processFile 메서드가 BufferedReader를 이용해서 다른 동작을 수행할 수 있도록 processFile 메서드로 동작을 전달해야 한다.
-`String result = processFile((BufferedReader br) -> br.readLine() + br.readLine());` 
+현재 코드는 파일에서 한 번에 한 줄만 읽을 수 있다. 기존의 설정, 정리 과정은 재사용하고 processFile 메서드만 다른 동작을 다른 동작을 수행하도록 해보자. processFile의 동작을 파라미터화하는 것이다. 즉, processFile 메서드가 BufferedReader를 이용해서 다른 동작을 수행할 수 있도록 processFile 메서드로 동작을 전달해야 한다.<br>
+`String result = processFile((BufferedReader br) -> br.readLine() + br.readLine());` <br>
 함수형 인터페이스 자리에 람다를 사용할 수 있다. 따라서 BufferedReader -> String과 IOException을 던질 수 있는 시그니처와 일치하는 함수형 인터페이스를 만들어야 한다.
 ```
 @FuntionalInterface
