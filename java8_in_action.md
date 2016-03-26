@@ -219,7 +219,6 @@ Comparator<Apple> byWeight = new Comparator<Apple>() {
 Comparator<Apple> byWeight =
         (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
 ```
-
 람다는 세 부분으로 이루어진다. <br>
 **파라미터 리스트** :  Comparator의 compare 메서드의 파라미터(두개의 사과).<br>
 **화살표** : 화살표(->)는 람다의 파라미터 리스트와 바디를 구분한다.<br>
