@@ -282,4 +282,36 @@ public void execute(Runnable r){
 ```
 <br>
 cf) `@FunctionalInterface`은 함수형 인터페이스임을 가리키는 애노테이션이다. 만약 실제로 함수형 인터페이스가 아니면 컴파일러가 에러를 발생시킨다. <br>
+###람다 활용: 실행 어라운드 패턴 
+자원 처리(예를 들면 DB의 파일 처리)에 사용하는 순환 패턴은 자원을 열고, 처리한 다음에, 자원을 닫는 순서로 이루어진다. 설정과 정리 과정은 대부분 비슷하다. **즉, 실제 자원을 처리하는 코드를 설정과 정리 두 과정이 둘러싸는 형태를 갖는데 이 같은 형식의 코드를 실행 어라운드 패턴이라고 부른다. **<br>
+```
+public String processFile() throws IOException{
+    try(BufferedReader br =
+            new BufferedReader(new FileReader("data.txt"))){
+        return br.readLine();
+    }
+}
+```
+cf) 자바7에 새로 추가된 try-with-resources 구문을 사용했다. 이를 사용하면 자원을 명시적으로 닫을 필요가 없다. <br>
 
+현재 코드는 파일에서 한 번에 한 줄만 읽을 수 있다. 기존의 설정, 정리 과정은 재사용하고 processFile 메서드만 다른 동작을 다른 동작을 수행하도록 해보자. processFile의 동작을 파라미터화하는 것이다. 즉, processFile 메서드가 BufferedReader를 이용해서 다른 동작을 수행할 수 있도록 processFile 메서드로 동작을 전달해야 한다.
+`String result = processFile((BufferedReader br) -> br.readLine() + br.readLine());` 
+함수형 인터페이스 자리에 람다를 사용할 수 있다. 따라서 BufferedReader -> String과 IOException을 던질 수 있는 시그니처와 일치하는 함수형 인터페이스를 만들어야 한다.
+```
+@FuntionalInterface
+public interface BufferedReaderProcessor{
+	String process(BufferedReader b) throws IOException;
+}
+
+public String processFile(BufferedReaderProcessor p) throws IOException{
+    try(BufferedReader br =
+            new BufferedReader(new FileReader("data.txt"))){
+        return p.process(br);
+    }
+}
+```
+이제 BufferedReaderProcessor에 정의된 process 메서드의 시그니처와 일치하는 다양한 람다를 전달할 수 있다. 
+```
+String oneLine = processFile((BufferedReader br) -> br.readLine());
+String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine());
+```
