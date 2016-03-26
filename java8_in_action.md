@@ -243,7 +243,7 @@ Comparator<Apple> byWeight =
 `(Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());`<br>
 다섯 번째 람다 표현식은 Apple 형식의 파라미터 두 개를 가지며 int를 반환한다. 
 ```
-//유효하지 않은 람다 표현식
+//cf) 유효하지 않은 람다 표현식
 (Integer i ) -> return “Alan” + i; 
 (String s) -> {“Iron Man”;}
 
