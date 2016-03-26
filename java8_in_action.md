@@ -208,3 +208,21 @@ inventory.sort(
 ##3장 - 람다 표현식
 ###람다란 무엇인가
 람다 표현식은 메서드로 전달할 수 있는 익명 함수를 단순화한것이라고 할 수 있다. 
+```
+Comparator<Apple> byWeight = new Comparator<Apple>() {
+    public int compare(Apple a1, Apple a2) {
+        return a1.getWeight().compareTo(a2.getWeight());
+    }
+};
+```
+```
+Comparator<Apple> byWeight =
+        (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
+```
+
+람다는 세 부분으로 이루어진다. <br>
+**파라미터 리스트** :  Comparator의 compare 메서드의 파라미터(두개의 사과).<br>
+**화살표** : 화살표(->)는 람다의 파라미터 리스트와 바디를 구분한다.<br>
+**람다의 바디** : 두 사과의 무게를 비교한다. 람다의 반환값에 해당하는 표현식이다.<br>
+
+자바8의 유효한 람다 표현식<br>
