@@ -412,4 +412,5 @@ inventory.sort((comparing(Apple::getWeight());
 **메서드 레퍼런스를 만드는 방법**<br>
 ![](change_methodreference.jpg)
 
+메서드 레퍼런스는 세 가지 유형으로 구분할 수 있다. ‘정적 메서드 레페런스’, ‘다양한 형식의 인스턴스 메서드 레퍼런스’, ‘기존 객체의 인스턴스 메서드 레퍼런스'
 
