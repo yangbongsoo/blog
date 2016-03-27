@@ -464,3 +464,39 @@ inventory.sort((a1,  a2) -> a1.getWeight().compareTo(a2.getWeight()));
 // 4단계 : 메서드 레퍼런스 사용
 inventory.sort(comparing(Apple::getWeight));
 ```
+
+###람다 표현식을 조합할 수 있는 유용한 메서드
+여러 개의 람다 표현식을 조합해서 복잡한 람다 표현식을 만들 수 있다(디폴트 메서드 덕분).
+**Comparator 조합**<br>
+``` 
+// 역정렬
+inventory.sort(comparing(Apple::getWeight)).reversed();
+
+// Comparator 연결
+inventory.sort(comparing(Apple::getWeight).reversed().thenComparing(Apple::getCountry));
+```
+
+**Predicate 조합**<br>
+```
+// 반전시킴
+Predicate<Apple> notRedApple = redApple.negate();
+
+// and 조합
+Predicate<Apple> redAndHeavyApple = redApple.and(a -> a.getWeight() > 150);
+```
+cf)  a.or(b).and(c)는 (a || b) && c 와 같다. <br>
+
+**Function 조합**<br>
+```
+// andThen - 주어진 함수를 먼저 적용한 결과를 다른 함수의 입력으로 전달하는 함수를 반환
+Function<Integer, Integer> f = x -> x+1;
+Function<Integer, Integer> g = x -> x*2;
+Function<Integer, Integer> h = f.andThen(g);;
+int result = h.apply(1); // 4를 반환 
+
+//compose - 인자로 주어진 함수를 먼저 실행한 다음에 그 결과를 외부 함수의 인수로 제공
+Function<Integer, Integer> f = x -> x+1;
+Function<Integer, Integer> g = x -> x*2;
+Function<Integer, Integer> h = f.compose(g);;
+int result = h.apply(1); // 3를 반환 
+```
