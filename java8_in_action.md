@@ -414,3 +414,13 @@ inventory.sort((comparing(Apple::getWeight());
 
 메서드 레퍼런스는 세 가지 유형으로 구분할 수 있다. ‘정적 메서드 레페런스’, ‘다양한 형식의 인스턴스 메서드 레퍼런스’, ‘기존 객체의 인스턴스 메서드 레퍼런스'<br>
 
+**생성자 레퍼런스**<br>
+ClassName :: new 처럼 클래스명과 new 키워드를 이용해서 기존 생성자의 레퍼런스를 만들 수 있다. 
+```
+Supplier<Apple> c1 = Apple :: new; // 디폴트 생성자 Apple()의 생성자 레퍼런스
+Apple a1 = c1.get(); // Supplier의 get 메서드를 호출해서 새로운 Apple 객체를 만들 수 있다.
+
+// 위 예제는 다음 코드와 같다.
+Supplier<Apple> c1 = () -> new Apple(); // 람다 표현식은 디폴트 생성자를 가진 Apple을 만든다.
+Apple a1 = c1.get(); // Supplier의 get 메서드를 호출해서 새로운 Apple 객체를 만들 수 있다.
+```
