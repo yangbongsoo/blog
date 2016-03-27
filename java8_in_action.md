@@ -326,3 +326,25 @@ String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine
 | 객체에서 선택/추출 | (String s) -> s.length() | `Function<String, Integer>`또는 `ToInteFunction<String>` |
 | 두 값 조합 | (int a, int b) -> a * b | IntBinaryOperator |
 | 두 객체 비교 | (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight()) | `BiFunction<Apple,Apple,Integer>` 또는 `ToIntBiFunction<Apple,Apple>` |
+<br>
+**예외, 람다, 함수형 인터페이스의 관계**<br>
+함수형 인터페이스는 확인된 예외를 던지는 동작을 허용하지 않는다. 그래서 예외를 던지를 람다 표현식을 만들려면 확인된 예외를 선언하는 함수형 인터페이스를 직접 정의하거나 람다를 try/catch 블록으로 감싸야 한다. 
+```
+@FunctionalInterface
+public interface BufferedReaderProcessor{
+	String process(BufferedReader b) throws IOException;
+}
+BufferedReaderProcessor p = (BufferedReader br) -> br.readLine();
+```
+위의 예제는 IOException을 명시적으로 선언하는 함수형 인터페이스 BufferedReaderProcessor 이다. 그러나 우리는 `Function<T, R>` 형식의 함수형 인터페이스를 기대하는 API를 사용하고 있으며 직접 함수형 인터페이스를 만들기 어려운 상황이다. 이런 상황에서는 아래 예제처럼 명시적으로 확인된 예외를 잡을 수 있다.
+```
+Function<BufferedReader, String> f = 
+	(BufferedReader b) -> {
+		try{
+			return b.readLine();
+		}
+		catch(IOException e){
+			throw new RuntimeException(e);
+		}
+	};
+```
