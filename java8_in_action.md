@@ -424,3 +424,15 @@ Apple a1 = c1.get(); // Supplier의 get 메서드를 호출해서 새로운 Appl
 Supplier<Apple> c1 = () -> new Apple(); // 람다 표현식은 디폴트 생성자를 가진 Apple을 만든다.
 Apple a1 = c1.get(); // Supplier의 get 메서드를 호출해서 새로운 Apple 객체를 만들 수 있다.
 ```
+
+<br>
+Apple(Integer weight) 라는 시그니처를 갖는 생성자는 Function 인터페이스의 시그니처와 같다. 
+```
+Function<Integer, Apple> c2 = Apple :: new; // Apple (Integer weight)의 생성자 레퍼런스
+Apple a2 = c2.apply(110); // Function의 apply 메서드를 무게를 인수로 호출해서 새로운 Apple 객체를 만들 수 있다.
+
+//위 예제는 다음 코드와 같다.
+Function<Integer, Apple> c2 = (weight) -> new Apple(weight); // 특정 무게의 사과를 만드는 람다 표현식
+Apple a2 = c2.apply(110); // Function의 apply 메서드를 무게를 인수로 호출해서 새로운 Apple 객체를 만들 수 있다.
+```
+
