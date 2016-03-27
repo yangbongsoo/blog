@@ -315,3 +315,14 @@ public String processFile(BufferedReaderProcessor p) throws IOException{
 String oneLine = processFile((BufferedReader br) -> br.readLine());
 String twoLines = processFile((BufferedReader br) -> br.readLine() + br.readLine());
 ```
+
+**람다와 함수형 인터페이스 예제**<br>
+
+| 사용 사례 | 람다 예제 | 대응하는 함수형 인터페이스 |
+| -- | -- | -- |
+| 불린 표현 | `(List<String> list)` -> list.isEmpty() | `Predicate<List<String>>` |
+| 객체 생성 | () -> new Apple(10) | `Supplier<Apple>` |
+| 객체에서 소비 | (Apple a) -> System.out.println(a.getWeight()) | `Consumer<Apple>` |
+| 객체에서 선택/추출 | (String s) -> s.length() | `Function<String, Integer>`또는 `ToInteFunction<String>` |
+| 두 값 조합 | (int a, int b) -> a * b | IntBinaryOperator |
+| 두 객체 비교 | (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight()) | `BiFunction<Apple,Apple,Integer>` 또는 `ToIntBiFunction<Apple,Apple>` |
