@@ -409,7 +409,7 @@ inventory.sort((comparing(Apple::getWeight());
 | (str, i) -> str.substring(i) | String :: substring |
 | (String s) -> System.out.println(s) | System.out :: println |
 <br>
-메서드 레퍼런스를 만드는 방법<br>
+**메서드 레퍼런스를 만드는 방법**<br>
 ![](change_methodreference.jpg)
 
 
