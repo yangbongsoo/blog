@@ -436,3 +436,31 @@ Function<Integer, Apple> c2 = (weight) -> new Apple(weight); // 특정 무게의
 Apple a2 = c2.apply(110); // Function의 apply 메서드를 무게를 인수로 호출해서 새로운 Apple 객체를 만들 수 있다.
 ```
 
+###람다, 메서드 레퍼런스 활용하기
+```
+// 1단계 
+public class AppleComparator implements Comparator<Apple>{
+	public int compare(Apple a1, Apple a2){
+		return a1.getWeight().compareTo(a2.getWeight());
+	}
+}
+inventory.sort(new AppleComparator());
+
+// 2단계: 익명 클래스 사용
+inventory.sort(new Comparator<Apple>(){
+	public int compare(Apple a1, Apple a2){
+		return a1.getWeight().compareTo(a2.getWeight());
+	}
+});
+
+// 3단계 : 람다 표현식 사용
+inventory.sort((Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight()));
+
+//형식 추론을 통해 더 간소화
+inventory.sort((a1,  a2) -> a1.getWeight().compareTo(a2.getWeight()));
+
+ inventory.sort(comparing((a) -> a.getWeight()));
+
+// 4단계 : 메서드 레퍼런스 사용
+inventory.sort(comparing(Apple::getWeight));
+```
