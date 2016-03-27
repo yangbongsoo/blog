@@ -360,3 +360,14 @@ Predicate<String> p = s -> list.add(s);
 // Consumer는 void 반환값을 갖는다. 
 Consumer<String> b = s -> list.add(s);
 ```
+
+**형식 추론**<br>
+```
+//형식을 추론하지 않음
+Comparator<Apple> c = (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight());
+//형식을 추론함
+Comparator<Apple> c = (a1,  a2) -> a1.getWeight().compareTo(a2.getWeight());
+
+//형식 추론한 다른 예제
+List<Apple> greenApples = filter(inventory, a -> “green”.equals(a.getColor()));
+```
