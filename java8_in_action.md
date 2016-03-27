@@ -399,3 +399,12 @@ inventory.sort((Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight()))
 // 메서드 레퍼런스와 java.util.Comparator.comparing을 활용한 코드 
 inventory.sort((comparing(Apple::getWeight()); 
 ```
+메서드 레퍼런스는 특정 메서드만을 호출하는 람다의 축약형이라고 생각할 수 있다. 예를 들어 `Apple::getWeight`는 Apple 클래스에 정의된 getWeight의 메서드 레퍼런스다. 실제로 메서드를 호출하는 것은 아니므로 괄호는 필요없다. 결과적으로 메서드 레퍼런스는 람다 표현식 `(Apple a) -> a.getWeight()`를 축약한 것이다. <br>
+람다와 메서드 레퍼런스 단축 표현 예제 <br>
+
+| 람다 | 메서드 레퍼런스 단축 표현 |
+| -- | -- |
+| (Apple a) -> a.getWeight() | Apple :: getWeight |
+| () -> Thread.currentThread().dumpStack() | Thread.currentThread() :: dumpStack |
+| (str, i) -> str.substring(i) | String :: substring |
+| (String s) -> System.out.println(s) | System.out :: println |
