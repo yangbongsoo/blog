@@ -350,3 +350,13 @@ Function<BufferedReader, String> f =
 ```
 ###형식 검사, 형식 추론, 제약
 람다 표현식 자체에는 람다가 어떤 함수형 인터페이스를 구현하는지의 정보가 포함되어 있지 않다. 람다가 사용되는 context를 이용해서 람다의 형식(type)을 추론할 수 있다. 
+![](type_inspection_process.jpg)
+
+**특별한 void 호환 규칙**<br>
+람다의 바디에 일반 표현식이 있으면 void를 반환하는 함수 디스크립터와 호환된다(물론 파라미터 리스트도 호환되어야 함). 예를 들어 List의 add 메서드는 boolean을 반환하지만  Consumer 컨텍스트(T -> void)에도 유효한 코드다. 
+```
+// Predicate는 불린 반환값을 갖는다.
+Predicate<String> p = s -> list.add(s);
+// Consumer는 void 반환값을 갖는다. 
+Consumer<String> b = s -> list.add(s);
+```
