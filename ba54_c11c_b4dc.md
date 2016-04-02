@@ -21,3 +21,10 @@ private static void sort(long a[], int offset, int length) {
 
 ###규칙39 : 필요하다면 방어적 복사본을 만들라 
 여러분이 만드는 클래스의 클라이언트가 불변식을 망가뜨리기 위해 최선을 다할 것이라는 가정하에, 방어적으로 프로그래밍해야 한다. 
+```
+//변경 불가능성이 보장되지 않는 변경 불가능 클래스 
+public fianl class Period{
+
+}
+
+```
