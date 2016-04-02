@@ -20,11 +20,56 @@ private static void sort(long a[], int offset, int length) {
 이번 절에서 다룬 내용을 잘못 받아들여 “인자에 제약을 두는 것은 바람직하다”고 믿어버리면 곤란하다. 메서드는 가능하면 일반적으로 적용될 수 있도록 설계해야 한다. 메서드가 받을 수 있는 읹에 제약이 적으면 적을수록 더 좋다. 
 
 ###규칙39 : 필요하다면 방어적 복사본을 만들라 
-여러분이 만드는 클래스의 클라이언트가 불변식을 망가뜨리기 위해 최선을 다할 것이라는 가정하에, 방어적으로 프로그래밍해야 한다. 
+여러분이 만드는 클래스의 클라이언트가 불변식을 망가뜨리기 위해 최선을 다할 것이라는 가정하에, 방어적으로 프로그래밍해야 한다. 아래의 클래스는 기간을 나타내는 객체에 대한 변경 불가능 클래스다. 
 ```
 //변경 불가능성이 보장되지 않는 변경 불가능 클래스 
 public fianl class Period{
+	private final Date start; // 기간의 시작 지점
+	private final Date end;  // 기간의 끝 지점. start보다 작은 값일 수 없다. 
 
+	//@throws IllegalArgumentException start가 end보다 뒤면 발생
+	//@throws NullPointerException start나 end가 null이면 발생 
+
+	public Period(Date start, Date end){
+		if(start.compareTo(end) > 0)
+			throw new IllegalArgumentException(start + “after” + end);
+		this.start = start;
+		this.end = end;
+	}
+
+	public Date start(){
+		return start;
+	}
+ 
+	public Date end(){
+		return end;
+	}
+
+	… // 이하 생략
+	
 }
-
 ```
+얼핏 변경이 불가능한 것으로 보이고, 기간 시작점이 기간 끝점 이후일 수 없다는 불변식도 만족되는 것처럼 보인다. 하지만 Date가 변경 가능 클래스라는 점을 이용하면 불변식을 깨트릴 수 있다.
+```
+// Period 객체의 내부 구조를 공격
+Date start = new Date();
+Date end = new Date();
+Period p = new Period(start, end);
+end.setYear(78); // p의 내부를 변경 ! 
+```
+**따라서 Period 객체의 내부를 보호하려면 생성자로 전달되는 변경 가능 객체를 반드시 방어적으로 복사해서 그 복사본을 Period 객체의 컴포넌트로 이용해야 한다. **
+```
+// 수정된 생성자 - 인자를 방어적으로 복사함
+public Period(Date start, Date end){
+	this.start = new Date(start.getTime());
+	this.end = new Date(end.getTime());
+
+	if(this.start.compareTo(this.end) > 0)
+		throw new IllegalArgumentException(this.start + “after” + this.end);
+	
+}
+```
+인자의 유효성을 검사하기 전에 방어적 복사본을 만들었다는 것에 유의하자. 유효성 검사는 복사본에 대해서 시행한다. 자연스러워 보이지 않을지도 모르나, 필요한 절차다. 인자를 검사한 직후 복사본이 만들어지기 직전까지의 시간, 그러니까 “취약 구간” 동안에 다른 스레드가 인자를 변경해 버리는 일을 막기 위한 것이다. (TICTOU 공격) <br>
+
+방어적 복사본을 만들 때 Date의 clone 메서드를 이요하지 않았다. Date 클래스는 final 클래스가 아니므로, clone 메서드가 반드시 java.util.Date 객체를 반환할 거라는 보장이 없다. 공격을 위해 특별히 설계된 하위 클래스 객체가 반환될 수도 있다. **이런 공격을 막으려면 인자로 전달된 객체의 자료형이 제 3자가 계승할 수 있는 자료형일 경우, 방어적 복사본을 만들 때  clone을 사용하지 않도록 해야 한다. **<br>
+
