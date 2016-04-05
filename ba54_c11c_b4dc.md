@@ -105,3 +105,34 @@ public Date end(){
 **인수 리스트(parameter list)를 길게 만들지 마라. **4개 이하가 되도록 애쓰라. 긴 인자 리스트를 짧게 줄이는 방법으로는 첫째, 여러 메서드로 나누는 방법이 있고 둘째, 도움 클래스를 만들어 인자들을 그룹별로 나누는 것이다. 보통 이 도움 클래스들은 static 멤버 클래스다(자주 등장하는 일련의 인자들이 어떤 별도 개체를 나타낼 때 쓰면 좋다). 셋째, 빌더 패턴이 있다. <br>
 **인자의 자료형으로는 클래스보다 인터페이스가 좋다.**<br>
 **인자 자료형으로 boolean을 쓰는 것보다는, 원소가 2개인 enum 자료형을 쓰는 것이 낫다.**<br> 
+
+###규칙 41 : 오버로딩할 때는 주의하라 
+아래의 프로그램 목적은 컬렉션을 종류별로(집합이냐, 리스트냐, 아니면 다른 종류의 컬렉션이냐) 분류하는 것이다.
+```
+//잘못된 프로그램
+public class CollectionClassifier {
+    public static String classify(Set<?> s){
+        return "Set";
+    }
+
+    public static String classify(List<?> lst){
+        return "List";
+    }
+
+    public static String classify(Collection<?> lst){
+        return "Unknown Collection";
+    }
+
+    public static void main(String[] args){
+        Collection<?>[] collections = {
+                new HashSet<String>(),
+                new ArrayList<BigInteger>(),
+                new HashMap<String, String>().values()
+        };
+
+        for(Collection<?> c : collections)
+            System.out.println(classify(c));
+    }
+}
+``` 
+이 프로그램이 Set, List, Unkwon Collection을 순서대로 출력하지 않을까 기대하겠지만 실제로는 Unknown Collection을 세 번 출력한다. 그 이유는 **classify 메서드가 오버로딩되어 있으며, 오버로딩된 메서드 가운데 어떤 것이 호출될지는 컴파일 시점에 결정되기 때문이다. **루프가 세 번 도는 동안, 인자의 컴파일 시점 자료형은 전부 `Collection<?>`으로 동일하다. 각 인자의 실행시점 자료형(runtime type)은 전부 다르지만, 선택 과정에는 영향을 끼치지 못한다.
