@@ -193,7 +193,7 @@ public class SetList {
 ```
 for(int i =0; i< 3; i++){
             set.remove(i);
-// 인자로 들어온 값을 지우고 싶기 때문에 remove(int)가 아닌 remove(E)형태가 되야 한다.
+            // 인자로 들어온 값을 지우고 싶기 때문에 remove(int)가 아닌 remove(E)형태가 되야 한다.
             list.remove(Integer.valueOf(i)); // 아니면 remove((Integer) i);
 }
  
