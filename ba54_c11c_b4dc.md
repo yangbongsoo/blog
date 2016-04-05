@@ -167,3 +167,35 @@ name 메서드는 Wine 클래스에 선언되어 있고, sparklingWine과 Champa
 오버로딩은 직관적인 예측에 반하므로 혼란스럽다. 따라서 오버로딩을 사용할 때는 혼란스럽지 않게 주의해야 한다. 혼란을 피하는 안전하고 보수적인 전략은, 같은 수의 인자를 갖는 두 개의 오버로딩 메서드를 API에 포함시키지 않는 것이다. 예를 들어 ObjectOutputStream의 경우를 생각해 보자. 이 메서드들은 writeBoolean(boolean), writeInt(int), writeLong(long) 같이 정의되어 있다. 이런 작명 패턴을 따르면 오버로딩에 비해 어떤 점이 좋을까? 각 메서드에 대응되는 read 메서드를 정의할 수 있게 된다. (readBoolean(), readInt(), readLong() 등을 정의할 수 있게 된다). <br>
 
 하지만 생성자에는 다른 이름을 사용할 수 없다. 생성자가 많다면, 그 생성자들은 항상 오버로딩된다. 그게 문제라면 생성자 대신 정적 팩터리 메서드를 사용하는 옵션을 사용할 수도 있다. 하지만 같은 수의 인자를 받는 오버로딩 메서드가 많더라도, 어떤 오버로딩 메서드가 주어진 인자 집합을 처리할 것인지가 분명히 결정된다면 프로그래머는 혼란을 겪지 않을 것이다. 그 조건은, 두 개의 오버로딩 메서드를 비교했을 때 그 형식 인자 가운데 적어도 하나가 “확실히 다르다”면 만족된다. 확실히 다르다라는 것은 두 자료형을 서로 형변환 할 수 없다면 확실히 다른 것이다. 예를 들어 ArrayList에는 int를 받는 생성자와 Collection을 인자로 받는 생성자가 있다. 어떤 상황에서라도 이 두 생성자 간에 혼란의 여지가 있으리라고는 보기 어렵다. <br>
+
+자바 1.5 이전에는 모든 기본 자료형은 참조 자료형과는 확실히 달랐다. 하지만 자동 객체화(autoboxing)라는 기능이 도입된 후 이제는 “확실히 다르다”라고 말할 수 없게 됐다. 
+```
+public class SetList {
+    public static void main(String[] args) {
+        Set<Integer> set = new TreeSet<>();
+        List<Integer> list = new ArrayList<>();
+
+        for(int i = -3 ; i < 3; i++){
+            set.add(i);
+            list.add(i);
+        }
+
+        for(int i =0; i< 3; i++){
+            set.remove(i);
+            list.remove(i);
+        }
+        System.out.println(set + " " + list);
+    }
+}
+```
+결과를 [-3, -2, -1] [-3, -2, -1] 이렇게 기대하지만 실상은 그렇지 않다. [-3, -2, -1] [-2, 0, 2] 가 출력된다. set.remove(i)는 인자의 값을 가진 모든 원소가 제거된다. 하지만 list.remove(i)는 해당 i번째 요소의 원소값을 지우게 된다. 그래서 해결을 하려면 Integer로 형변환하여 올바른 오버로딩을 하거나 Integer.valueOf를 적용해야 한다. 
+```
+for(int i =0; i< 3; i++){
+            set.remove(i);
+// 인자로 들어온 값을 지우고 싶기 때문에 remove(int)가 아닌 remove(E)형태가 되야 한다.
+            list.remove(Integer.valueOf(i)); // 아니면 remove((Integer) i);
+}
+ 
+```
+이런 일이 발생하는 원인은, `List<E>` 인터페이스에 remove(E)와 remove(int)라는 오버로딩 메서드 두 개가 존재하기 때문이다.(remove(E)는 인자로 들어온 값을 지우는 메서드, remove(int)는 인자 position의 값을 지우는 메서드) 제네릭이 도입된 자바 1.5 이전에는 List 인터페이스에 remove(E) 대신 remove(Object)가 있었다. Object와 int는 완전히 다른 자료형이므로 문제가 될 것이 없었다. 하지만 제네릭과 자동 객체화(autoboxing)가 도입되면서, E와 int는 더 이상 완전히 다르다고 말할 수 없게 되었다. <br>
+
