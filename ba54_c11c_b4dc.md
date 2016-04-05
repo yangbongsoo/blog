@@ -136,3 +136,31 @@ public class CollectionClassifier {
 }
 ``` 
 이 프로그램이 Set, List, Unkwon Collection을 순서대로 출력하지 않을까 기대하겠지만 실제로는 Unknown Collection을 세 번 출력한다. 그 이유는 **classify 메서드가 오버로딩되어 있으며, 오버로딩된 메서드 가운데 어떤 것이 호출될지는 컴파일 시점에 결정되기 때문이다. **루프가 세 번 도는 동안, 인자의 컴파일 시점 자료형은 전부 `Collection<?>`으로 동일하다. 각 인자의 실행시점 자료형(runtime type)은 전부 다르지만, 선택 과정에는 영향을 끼치지 못한다. 인자의 컴파일 시점 자료형이 `Collection<?>`이므로 호출되는 것은 항상 `classify(Collection<?>)` 메서드다. <br>
+
+이 예제 프로그램은 직관과는 반대로 동작한다. **오버로딩된 메서드는 정적(static)으로 선택되지만, 재정의된 메서드는 동적(dynamic)으로 선택되기 때문이다.** 재정의된 메서드의 경우 선택 기준은 메서드 호출 대상 객체의 자료형이다. 객체 자료형에 따라 실행 도중에 결정되는 것이다. 그렇다면 재정의된 메서드란 무엇인가? 상위 클래스에 선언된 메서드와 같은 시그니처를 갖는 하위 클래스 메서드가 재정의된 메서드다. 하위 클래스에서 재정의한 메서드를 하위 클래스 객체에 대해 호출하면, 해당 객체의 컴파일 시점 자료형과는 상관없이, 항상 하위 클래스의 재정의 메서드가 호출된다. 
+```
+class Wine {
+    String name() { return "wine";}
+}
+
+class SparklingWine extends Wine {
+    @Override String name() { return "sparklingWine"; }
+}
+
+class Champagne extends SparklingWine{
+    @Override String name() { return "champagne"; }
+}
+
+public class Overriding {
+    public static void main(String[] args) {
+        Wine[] wines = {
+                new Wine(), new SparklingWine(), new Champagne()
+        };
+
+        for(Wine wine : wines)
+            System.out.println(wine.name());
+    }
+}
+```
+name 메서드는 Wine 클래스에 선언되어 있고, sparklingWine과 Champagne은 그 메서드를 재정의한다. 기대대로 위의 프로그램은 순서대로 출력한다. 순환문의 매 루프마다 객체의 컴파일 시점 자료형은 항상 Wine이었는데도 말이다. **재정의 메서드 가운데 하나를 선택할 때 객체의 컴파일 시점 자료형은 영향을 주지 못한다. 오버로딩에서는 반대로 실행시점 자료형이 아무 영향도 주지 못한다.** 실행될 메서드는 컴파일 시에, 인자의 컴파일 시점 자료형만을 근거로 결정된다. <br>
+
