@@ -201,3 +201,42 @@ for(int i =0; i< 3; i++){
 이런 일이 발생하는 원인은, `List<E>` 인터페이스에 remove(E)와 remove(int)라는 오버로딩 메서드 두 개가 존재하기 때문이다.(remove(E)는 인자로 들어온 값을 지우는 메서드, remove(int)는 인자 position의 값을 지우는 메서드) 제네릭이 도입된 자바 1.5 이전에는 List 인터페이스에 remove(E) 대신 remove(Object)가 있었다. Object와 int는 완전히 다른 자료형이므로 문제가 될 것이 없었다. 하지만 제네릭과 자동 객체화(autoboxing)가 도입되면서, E와 int는 더 이상 완전히 다르다고 말할 수 없게 되었다. <br>
 
 인자 개수가 같은 오버로딩 메서드를 추가하는 것은 일반적으로 피해야 한다. 하지만 특히 생성자에 대해서라면 이 충고를 따를 수 없을 지도 모른다. 그럴 때는, 형변환만 추가하면 같은 인자 집합으로 여러 오버로딩 메서드를 호출할 수 있는 상황은 피하는 것이 좋다. 
+
+###규칙 42 : varargs는 신중히 사용하라 
+자바 1.5부터 추가된 varargs 메서드는 가변 인자 메서드라고 부른다. 이 메서드는 지정된 자료형의 인자를 0개 이상 받을 수 있다. 동작 원리는 이렇다. 우선 클라이언트에서 전달한 인자 수에 맞는 배열이 자동 생성되고, 모든 인자가 해당 배열에 대입된다. 그리고 마지막으로 해당 배열이 메서드에 인자로 전달된다.
+```
+//varargs의 간단한 사용 예 
+static int sum(int… args) {
+	int sum = 0;
+	for ( int arg : args )
+		sum += arg;
+	return sum; 
+}
+```
+그런데 때로는 0 이상이 아니라, 하나 이상의 인자가 필요할 때가 있다. 예를 들어 주어진 int 인자 가운데 최소치를 구해야 한다고 생각해 보자. 아래의 함수는 인자 없이 호출될 수 있다고 생각하면 깔끔하게 구현되지 않는다. 실행시점에 배열 길이를 검사해야만 한다.
+```
+// 하나 이상의 인자를 받아야 하는 varargs 메서드를 잘못 구현한 사례
+static int min(int … args){
+	if(args.length == 0)
+		throw new IllegalArgumentException(“Too few arguments”);
+	int min = args[0];
+	for(int i = 1; i < args.length; i++)
+		if(args[i] < min )
+			min = args[i];
+	return min;
+}
+```
+그러나 이 방법에는 몇 가지 문제가 있다. 클라이언트가 인자 없이 메서드를 호출하는 것이 가능할 뿐 아니라, 컴파일 시점이 아니라 실행 도중에 오류가 난다는 것이다. 또 한 가지 문제는 보기 흉한 코드라는 것이다. args의 유효성을 검사하는 코드를 명시적으로 넣어야 하고, min을 Integer.MAX_VALUE로 초기화하지 않는 한 for-each 문을 사용할 수도 없다. <br>
+
+다행히 더 좋은 방법이 있다. 메서드가 인자를 두 개 받도록 선언하는 것이다. 하나는 지정된 자료형을 갖는 일반 인자고, 다른 하나는 같은 자료형의 varargs 인자다. 이 해법은 앞서 살펴본 방법의 모든 문제를 해결한다. 
+```
+// 하나 이상의 인자를 받는 varargs 메서드를 제대로 구현한 사례 
+static int min(int firstArg, int … remainingArgs){
+	int min = firstArg;
+	for (int arg : remainingArgs) 
+		if(arg < min)
+			min = arg;
+	return min; 
+}
+```
+이 예제로 알 수 있듯, varargs는 임의 개수의 인자를 처리하는 메서드를 만들어야 할 때 효과적이다. varargs가 추가된 것은 자바 1.5부터 플랫폼에 추가된 printf 메서드와, varargs를 이용할 수 있도록 개선된 핵심 리플렉션 기능 때문이다. printf와 리플렉션은 varargs를 엄청나게 많이 이용한다. 
