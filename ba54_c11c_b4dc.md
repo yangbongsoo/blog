@@ -263,3 +263,9 @@ System.out.println(Arrays.asList(digits));  // [3, 1, 2, 3, 4, 1, 2, 6, 7, 5]
 // 배열을 출력하는 올바른 방법
 System.out.println(Arrays.toString(myArr));
 ```
+varargs는 정말로 임의 개수의 인자를 처리할 수 있는 메서드를 만들어야 할 때만 사용하라. 의심스런 메서드들은 아무 인자 리스트나 받을 수 있는 메서드들이다. 
+```
+ReturnType1 suspect1 (Object ... args) { }
+<T> ReturnType2 suspect2 (T ... args) { }
+```
+
