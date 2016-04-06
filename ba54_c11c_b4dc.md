@@ -241,3 +241,14 @@ static int min(int firstArg, int … remainingArgs){
 ```
 이 예제로 알 수 있듯, varargs는 임의 개수의 인자를 처리하는 메서드를 만들어야 할 때 효과적이다. varargs가 추가된 것은 자바 1.5부터 플랫폼에 추가된 printf 메서드와, varargs를 이용할 수 있도록 개선된 핵심 리플렉션 기능 때문이다. printf와 리플렉션은 varargs를 엄청나게 많이 이용한다. <br>
 
+**Arrays.asList**<br>
+Arrays.asList 이 메서드는 원래 여러 인자를 하나의 리스트로 합칠 목적으로 설계된 것이 아니었다. 그래서 varargs가 플랫폼에 추가되었을 때, 아래와 같은 코드를 지원할 수 있도록 Arrays.asList를 수정한 것은 좋은 생각 같았다. `List<String> homophones = Arrays.asList(“to”, “too”, “two”);`
+
+이 숙어는 객체 참조 자료형에 대해서만 동작했고 기본 자료형 값의 배열에 적용하면 원하는 것과 거리가 멀고 쓸모없는 값이 나온다. (자바 1.4에서는 컴파일 조차 안됐지만 1.5에서 Arrays.asList를 varargs 메서드로 바꾼 덕분에 오류나 경고 없이 컴파일 된다.)
+```
+int[] digits = {3,1,2,3,4,1,2,6,7,5};
+System.out.println(Arrays.asList(digits));  // [[I@4678f83a]
+
+Integer[] digits = {3,1,2,3,4,1,2,6,7,5};
+System.out.println(Arrays.asList(digits));  // [3, 1, 2, 3, 4, 1, 2, 6, 7, 5]
+```
