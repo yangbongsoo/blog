@@ -259,3 +259,7 @@ System.out.println(Arrays.asList(digits));  // [3, 1, 2, 3, 4, 1, 2, 6, 7, 5]
 기본 자료형에 이런 결과가 나오는 이유에 대해서 알아보자. Arrays.asList 메서드는 객체 참조를 모아 배열로 만드는데, 그 결과로 int 배열 digits에 대한 참조가 담긴 길이 1짜리 배열, 즉 배열의 배열이 만들어진다. `List<int[]>` 객체가 만들어지는 것이다. 이 리스트에 toString을 호출하면 다시 그 내부의 원소(int 배열)의 toString 메서드가 호출되는데, 방금 본 이상한 문자열은 그렇게 만들어지는 것이다. <br>  
 
 **그나마 다행인 것은 Arrays.asList를 사용하여 배열을 문자열로 변환하는 숙어는 이제 폐기되었다는 것이다. 뒤이어 나온 숙어는 좀 더 안정적이다. Arrays 클래스에는 어떤 자료형의 배열이라도 문자열로 변환할 수 있도록 설계된 Arrays.toString 메서드가 구비되었다(varargs 메서드가 아니다). Arrays.asList 대신 Arrays.toString을 사용하도록 프로그램을 고치면 원하는 결과를 얻을 수 있다. **<br>
+```
+// 배열을 출력하는 올바른 방법
+System.out.println(Arrays.toString(myArr));
+```
