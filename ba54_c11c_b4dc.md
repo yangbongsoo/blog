@@ -269,3 +269,28 @@ ReturnType1 suspect1 (Object ... args) { }
 <T> ReturnType2 suspect2 (T ... args) { }
 ```
 
+###규칙 43 : null 대신 빈 배열이나 컬렉션을 반환하라
+아래와 같이 정의된 메서드는 어렵지 않게 만날 수 있다.
+```
+private final List<Cheese> cheeseInStock = …;
+//@return 재고가 남은 모든 치즈를 반환. 치즈가 남지 않았을 때는 null을 반환
+public Cheese[] getCheeses() {
+	if (cheesesInStock.size() == 0)
+		return null;
+	...
+}
+```
+그런데 치즈 재고가 없는 상황을 특별하게 처리하도록 강제하는 코드는 바람직하지 않다. 클라이언트 입장에서는 null이 반환될 때를 대비한 코드를 만들어야 하기 때문이다. 아래의 예를 보자.
+```
+Cheese[] cheeses = shop.getCheeses();
+if( cheeses != null && Arrays.asList(cheeses).contains(Cheese.STILTON)
+	System.out.println(“Jolly good, just the thing.”);
+```
+null이 반환되지 않는다면 아래와 같이 할 수 있었을 것이다. 
+```
+if(Arrays.asList(cheeses).contains(Cheese.STILTON)
+	System.out.println(“Jolly good, just the thing.”);
+```
+빈배열이나 컬렉션을 반환하는 대신에 null을 반환하는 메서드를 사용하면 이런 상황을 겪게 된다. 이런 메서드는 오류를 쉽게 유발한다. 클라이언트가 null 처리를 잊어버릴 수 있기 때문이다. <br>
+
+배열 할당 비용을 피할 수 있으니 null을 반환해야 바람직한 것 아니냐는 주장도 있을 수 있으나, 이 주장은 두 가지 측면에서 틀렸다. 프로파일링 결과로 해당 메서드가 성능 저하의 주범이라는 것이 밝혀지지 않는 한, 그런 수준까지 성능 걱정을 하는 것은 바람직하지 않다는 것이 첫 번째다. **두 번째는, 길이가 0인 배열은 변경이 불가능 하므로 아무 제약없이 재사용 할 수 있다는 것이다.** 사실, 컬렉션에 들어 있는 원소를 배열에 퍼 나를 때 사용하는 표준적 숙어가 바로 이 규범을 따른다.
