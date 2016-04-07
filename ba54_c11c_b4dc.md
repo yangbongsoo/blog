@@ -295,3 +295,25 @@ if(Arrays.asList(cheeses).contains(Cheese.STILTON)
 
 배열 할당 비용을 피할 수 있으니 null을 반환해야 바람직한 것 아니냐는 주장도 있을 수 있으나, 이 주장은 두 가지 측면에서 틀렸다. 프로파일링 결과로 해당 메서드가 성능 저하의 주범이라는 것이 밝혀지지 않는 한, 그런 수준까지 성능 걱정을 하는 것은 바람직하지 않다는 것이 첫 번째다. **두 번째는, 길이가 0인 배열은 변경이 불가능 하므로 아무 제약없이 재사용 할 수 있다는 것이다.** 사실, 컬렉션에 들어 있는 원소를 배열에 퍼 나를 때 사용하는 표준적 숙어가 바로 이 규범을 따른다.
 
+```
+// 컬렉션에서 배열을 만들어 반환하는 올바른 방법
+private final List<Cheese> cheesesInStock = …;
+private static final Cheese[] EMPTY_CHEESE_ARRAY = new Cheese[0];
+// @return 재고가 남은 모든 치즈 목록을 배열로 만들어 반환 
+public Cheese[] getCheeses() { 
+	return cheesesInStock.toArray(EMPTY_CHEESE_ARRAY);
+}
+```
+위 숙어에서 toArray 메서드에 전달되는 빈 배열 상수는 반환값의 자료형을 명시하는 구실을 한다. 보통  toArray는 반환되는 원소가 담길 배열을 스스로 할당하는데, 컬렉션이 비어 있는 경우에는 인자로 주어진 빈 배열을 쓴다. 그리고 Collection.toArray(T[])의 명세를 보면, 인자로 주어진 배열이 컬렉션의 모든 원소를 담을 정도로 큰 경우에는 해당 배열을 반환값으로 사용한다고 되어 있다. 따라서 위의 숙어대로 하면 빈 배열은 절대로 자동 할당되지 않는다. 
+```
+// ArrayList의 toArray 구현에 
+public <T> T[] toArray(T[] a) {
+    if (a.length < size)
+        // Make a new array of a's runtime type, but my contents:
+        return (T[]) Arrays.copyOf(elementData, size, a.getClass());
+    System.arraycopy(elementData, 0, a, 0, size);
+    if (a.length > size)
+        a[size] = null;
+    return a;
+}
+```
