@@ -317,4 +317,13 @@ public <T> T[] toArray(T[] a) {
     return a;
 }
 ```
-
+마찬가지로, 컬렉션을 반환하는 메서드도 빈 컬렉션을 반환해야 할 때마다 동일한 변경 불가능 빈 객체를 반환하도록 구현할 수 있다. Collections.emptySet, emptyList, emptyMap 메서드가 그런 용도로 사용된다. 다음 예제를 보자. 
+```
+// 컬렉션 복사본을 반환하는 올바른 방법
+public List<Cheese> getCheeseList() {
+	if (cheesesInStock.isEmpty())
+		return Collections.emptyList(); //언제나 같은 리스트 반환
+	else
+		return new ArrayList<Cheese>(cheesesInStock);
+}
+```
