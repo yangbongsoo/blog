@@ -1,4 +1,4 @@
-# What / Why / How Living Documentation
+# What / Why Living Documentation
 
 ###[What is living documentation]
 원문 : http://searchsoftwarequality.techtarget.com/definition/living-documentation <br>
