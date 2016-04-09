@@ -357,4 +357,56 @@ E get(int indxe);
 
 문서화 주석의 요약문은 반드시 완벽한 문장일 필요가 없다. 메서드나 생성자의 경우, 요약문은 메서드가 무슨 일을 하는지 기술하는 완전한 동사구여야 한다. 클래스나 인터페이스의 요약문은 해당 클래스나 인터페이스로 만들어진 객체가 무엇을 나타내는지를 표현하는 명사구여야 한다. 필드의 요약문은 필드가 나타내는 것이 무엇인지를 설명하는 명사구여야 한다. <br>
 
+**제네릭, enum, 애노테이션 문서화 주석**<br>
+제네릭 자료형이나 메서드에 주석을 달 때는 모든 자료형 인자들을 설명해야 한다. 
+```
+/**
+ * An object that maps keys to values. A map cannot contain
+ * duplicate keys; each key can map to at most one value.
+ *
+ * (중간 생략)
+ *
+ * @param <K> the type of keys maintained by this map
+ * @param <V> the type of mapped values 
+ */
+public interface MyMap<K,V> {
+}
+```
+enum 자료형에 주석을 달 때는 자료형이나 public 메서드뿐 아니라 상수 각각에도 주석을 달아 주어야 한다.
+```
+/**
+ * 교향악단에서 쓰이는 악기 종류
+ */
+public enum OrchestraSection {
+    /** 플루트, 클라리넷, 오보에 관한 목관악기.*/ 
+    WOODWIND,
+
+    /** 프렌치 혼이나 트럼펫 같은 금관악기. */
+    BRASS,
+
+    /** 팀파니나 심벌즈 같은 타악기. */
+    PERCUSSION,
+
+    /** 바이올린이나 첼로 같은 현악기. */
+    STRING;
+}
+```
+애노테이션 자료형에 주석을 달 때는 자료형뿐 아니라 모든 멤버에도 주석을 달아야 한다. 멤버에는 마치 필드인 것처럼 명사구 주석을 달라. 자료형 요약문에는 동사구를 써서, 언제 이 자료형을 애노테이션으로 붙어야 하는지 설명하라. 
+```
+/**
+ * 지정된 예외를 반드시 발생시켜야 하는 테스트 메서드임을 명시. 
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface ExceptionTest{
+
+	/**
+         * 애노테이션이 붙은 테스트 메서드가 테스트를 통과하기 위해
+         * 반드시 발생시켜야 하는 예외. (이 Class 객체가 나타내는 자료형의 
+         * 하위 자료형이기만 하면 어떤 예외든 상관없다.)
+         */
+	Class<? extends Throwable> value();
+}
+```
+
 
