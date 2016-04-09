@@ -327,3 +327,30 @@ public List<Cheese> getCheeseList() {
 		return new ArrayList<Cheese>(cheesesInStock);
 }
 ```
+
+###규칙44 : 모든 API 요소에 문서화 주석을 달라 
+좋은 API 문서를 만들려면 API에 포함된 모든 클래스, 인터페이스, 생성자, 메서드, 그리고 필드 선언에 문서화 주석을 달아야 한다. 직렬화가 가능한 클래스라면 직렬화 형식도 밝혀야 한다. <br>
+
+**메서드 주석**<br>
+메서드에 대한 무서화 주석은 메서드와 클라이언트 사이의 규약을 간명하게 설명해야 한다. 계승을 위해 설계된 메서드가 아니라면 **메서드가 무엇을 하는지를 설명해야지 어떻게 그 일을 하는지를 설명해서는 안된다.** 아울러 문서화 주석에는 해당 메서드의 모든 선행조건과 후행조건을 나열해야 한다. 선행조건은 클라이언트가 메서드를 호출하려면 반드시 참이 되어야 하는 조건들이다. 후행조건은 메서드 실행이 성공적으로 끝난 다음에 만족되어야 하는 조건들이다. 보통 선행조건은 무점검 예외(unchecked exception)에 대한 @throws 태그를 통해 암묵적으로 기술한다. 관계된 인자의 @param 태그를 통해 명시할 수도 있다. <br>
+
+선행조건과 후행조건 외에도, 메서드는 부작용(side effect)에 대해서도 문서화 해야한다. 예를 들어 어떤 메서드가 후면 스레드(background thread)를 실행한다면 문서에는 그 사실이 명시되어야 한다. <br>
+
+관습상 @param, @return, @throws 태그 다음에 오는 구나 절에는 마침표를 찍지 않는다. 
+```
+/**
+ * Returns the element at the specified position in this list
+ * 
+ * <p>This method is <i>not</i> guaranteed to run in constant time. In some implementations it may run in time proportional to the element position.
+ *
+ * @param index index of element to return; must be
+ *              non-negative and less than the size of this list
+ * @return the element at the specified position in this list
+ * @throws IndexOutOfBoundsException if the index is out of range
+ *         ({@code index < 0 || index >= this.size()})
+ */
+E get(int indxe);
+```
+주석에 HTML 태그`<p> <i>`가 사용되었다는 것에 유의하자. Javadoc 유틸리티는 문서화 주석을 HTML 문서로 변환한다. @throws 절에 폼함된 코드 주변에 {@code} 태그가 사용된 것도 유의하자. 이 태그는 두 가지 일을 한다. 첫 번째는 해당 코드가 코드 서체로 표시되도록 하는 것이고 두 번째는 그 안에 포함된 모든 HTML 마크업이나 Javadoc 태그가 위력을 발휘하지 못하도록 하는 것이다. {@literal} 태그를 사용하면 그 태그 안에 포함된 HTML 마크업이나 Javadoc 태그는 전부 단순 문자로 취급된다. {@code} 태그와 유사하지만, 코드 서체로 표시되지는 않는다는 차이가 있다. <br>
+
+
