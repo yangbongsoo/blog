@@ -501,4 +501,3 @@ Function<Integer, Integer> g = x -> x*2;
 Function<Integer, Integer> h = f.compose(g);;
 int result = h.apply(1); // 3를 반환 
 ```
-
