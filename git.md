@@ -17,8 +17,9 @@ feature branch는 여러 개 존재할 수 있다. 여기에 속하는 branch는
 feature branch들은 오직 develop branch에 merge될 때만 관계성이 생긴다. 갈라져 나오는 것도 다시 merge하는 것도 오직 develop branch와 한다.<br>
 
 **release branch**<br>
-release branch는 develop branch에서 가라져 나와서 배포 준비를 하는 branch이다. 이 branch는 새로운 기능 추가는 더 하지 않고 오로지 버그 수정만 한다. 즉 배포본의 완성도를 높이는 branch이다. 당연히 수정된 버그는 develop branch로 merge되야 한다.
+release branch는 develop branch에서 가라져 나와서 배포 준비를 하는 branch이다. 이 branch는 새로운 기능 추가는 더 하지 않고 오로지 버그 수정만 한다. 즉 배포본의 완성도를 높이는 branch이다. 
 ![](feature-develop-releasebranch-relation.jpg)
+당연히 수정된 버그는 develop branch로 merge되야 한다.<br>
 
 **master branch**<br>
 master branch는 실제 배포되는 버전이 있는 branch이다. 이 branch는 오직 release와 hotfoot branch하고만 관계를 맺는다.
