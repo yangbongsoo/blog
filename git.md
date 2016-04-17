@@ -23,3 +23,4 @@ release branch는 develop branch에서 가라져 나와서 배포 준비를 하�
 
 **master branch**<br>
 master branch는 실제 배포되는 버전이 있는 branch이다. 이 branch는 오직 release와 hotfoot branch하고만 관계를 맺는다.
+![](master-branch.jpg)
