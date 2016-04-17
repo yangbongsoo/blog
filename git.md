@@ -18,3 +18,4 @@ feature branch들은 오직 develop branch에 merge될 때만 관계성이 생�
 
 **release branch**<br>
 release branch는 develop branch에서 가라져 나와서 배포 준비를 하는 branch이다. 이 branch는 새로운 기능 추가는 더 하지 않고 오로지 버그 수정만 한다. 즉 배포본의 완성도를 높이는 branch이다. 당연히 수정된 버그는 develop branch로 merge되야 한다.
+![](feature-develop-releasebranch-relation.jpg)
