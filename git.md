@@ -24,3 +24,6 @@ release branch는 develop branch에서 가라져 나와서 배포 준비를 하�
 **master branch**<br>
 master branch는 실제 배포되는 버전이 있는 branch이다. 이 branch는 오직 release와 hotfoot branch하고만 관계를 맺는다.
 ![](master-branch.jpg)
+
+**hotfix branch**<br>
+hotfix branch는 master branch, 즉 현재 배포 중인 코드에 버그가 있어 급히 수정할 때만 사용하는 branch이다. hotfix branch로 수정한 내용은 master와 develop branch에만 반영한다.
