@@ -27,3 +27,7 @@ master branch는 실제 배포되는 버전이 있는 branch이다. 이 branch�
 
 **hotfix branch**<br>
 hotfix branch는 master branch, 즉 현재 배포 중인 코드에 버그가 있어 급히 수정할 때만 사용하는 branch이다. hotfix branch로 수정한 내용은 master와 develop branch에만 반영한다.
+
+
+**정리**<br>
+develop branch를 중심으로 feature branch들을 통해 기능을 추가하고, release branch를 통해 배포 준비와 코드의 버그를 수정하며, master로 배포하고, hotfix로 배포된 버전의 버그를 수정해 master와 develop branch에 반영하는 것을 반복하는 것이 git-flow 작업 흐름이다. 
