@@ -13,3 +13,6 @@ develop branch는 하나만 존재한다. 여기에서 모든 개발이 시작�
 
 **feature branch**<br>
 feature branch는 여러 개 존재할 수 있다. 여기에 속하는 branch는 develop branch를 기반에 두고 새롭게 branch되어 새로운 기능 개발이나 버그 수정을 담당한다. 그리고 각각의 branch는 하나의 기능(의도)만을 맡는다. 따라서 branch의 이름을 제대로 짓는 것이 중요하다. 
+![](feature-develop-branch-relation.jpg)
+feature branch들은 오직 develop branch에 merge될 때만 관계성이 생긴다. 갈라져 나오는 것도 다시 merge하는 것도 오직 develop branch와 한다.<br>
+
