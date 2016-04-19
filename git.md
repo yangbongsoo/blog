@@ -43,3 +43,4 @@ develop branch를 중심으로 feature branch들을 통해 기능을 추가하�
 구체적으로 설명해보면 hotfix1 branch를 만든 이후에 master branch에 어떠한 커밋 내역이 있는 상태로 hotfix2, hotfix3 branch를 만들어서 각각 커밋을 했고, hotfix1 branch에도 다른 커밋 내역이 있는 상황이다. 이를 차례대로 master branch에 merge한다고 해보자.<br>
 
 먼저 hotfix1 branch를 merge해봤다.
+![](threebranchcase-firstmerge.jpg)
