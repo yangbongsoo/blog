@@ -45,3 +45,4 @@ develop branch를 중심으로 feature branch들을 통해 기능을 추가하�
 먼저 hotfix1 branch를 merge해봤다.
 ![](threebranchcase-firstmerge.jpg)
 이번에는 hotfix branch를 merge했다. 벌써 커밋 그래프가 상당히 꼬여가는 것이 보인다. 
+![](threebranchcase-secondmerge.jpg)
