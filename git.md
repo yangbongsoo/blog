@@ -33,4 +33,8 @@ hotfix branch는 master branch, 즉 현재 배포 중인 코드에 버그가 있
 **정리**<br>
 develop branch를 중심으로 feature branch들을 통해 기능을 추가하고, release branch를 통해 배포 준비와 코드의 버그를 수정하며, master로 배포하고, hotfix로 배포된 버전의 버그를 수정해 master와 develop branch에 반영하는 것을 반복하는 것이 git-flow 작업 흐름이다. 
 
-# Git-Rebase 
+# Git-Rebase
+아래 커밋 그래프는 일반적으로 merge했을 때의 모습이다. 
+
+
+하지만 두 개를 넘어서 세 개 이상의 branch가 하나의 master branch에 merge된다고 해보자.
