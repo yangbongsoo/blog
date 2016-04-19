@@ -39,3 +39,4 @@ develop branch를 중심으로 feature branch들을 통해 기능을 추가하�
 
 
 하지만 두 개를 넘어서 세 개 이상의 branch가 하나의 master branch에 merge된다고 해보자.
+![](threebranchcase.jpg)
