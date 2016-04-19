@@ -35,6 +35,7 @@ develop branch를 중심으로 feature branch들을 통해 기능을 추가하�
 
 # Git-Rebase
 아래 커밋 그래프는 일반적으로 merge했을 때의 모습이다. 
+![](basicworkflow.jpg)
 
 
 하지만 두 개를 넘어서 세 개 이상의 branch가 하나의 master branch에 merge된다고 해보자.
