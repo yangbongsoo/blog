@@ -47,3 +47,5 @@ develop branch를 중심으로 feature branch들을 통해 기능을 추가하�
 이번에는 hotfix2 branch를 merge했다. 벌써 커밋 그래프가 상당히 꼬여가는 것이 보인다. 
 ![](threebranchcase-secondmerge.jpg)
 이제 hotfix3 branch를 merge한 다음이다. 이제 그냥 보기만 해도 꽤 복잡해 보인다. 고작 세 개째인데 말이다. 
+![](threebranchcase-thirdmerge.jpg)
+
