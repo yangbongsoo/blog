@@ -51,3 +51,11 @@ develop branch를 중심으로 feature branch들을 통해 기능을 추가하�
 프로젝트 메머가 세 명 이상이면 혹은 동시에 개발 중인 기능이 여러 개라면 브랜치가 세 개 이상으로 생성되는 일은 매우 흔한 상황이다. 그럴 때마다 각자의 코드를 master branch에 반영하면 커밋 내역 그래프가 매울 알아보기 어려울 것이다. 하지만 git rebase 명령을 사용하면 이를 깔끔하게 정리할 수 있다(rebase는 단어 그대로 다시 base를 정하는 것이다).<br>
 
 **git-rebase 구체적인 과정**<br>
+최초 커밋 그래프는 다음과 같다. 
+![](rebase1.jpg)
+hotfix1 branch부터 정리해보겠다. master branch 앞으로 hotfix1 branch를 이동시키는 것이다. 따라서 `git checkout hotfix1` 명령을 실행해 master branch에서 hotfix1 branch로 체크아웃한다. 그리고 git rebase master 명령을 실행한다. 충돌이 나면 해결하기 위해 git rebase는 세 가지 옵션을 제공한다.
+```
+git rebase --continue : 충돌 생태를 해결한 후 계속 작업을 진행할 수 있게 한다.
+git rebase --skip : merge 대상 branch의 내용으로 강제 merge를 실행한다. 즉 여기서 명령을 실행하면 master branch를 강제로 merge한 상태가 된다. 또한 해당 branch에서는 다시 git rebase 명령을 실행할 수 없다. 
+git rebase --abort : git rebase 명령을 실행을 취소한다. 
+```
