@@ -62,3 +62,5 @@ git rebase --abort : git rebase 명령을 실행을 취소한다.
 명령을 실행하면 master branch의 공통 부모까지의 hotfix1 branch의 커밋을 master branch의 뒤에 차례대로 적용한다. 
 ![](rebase2.jpg)
 
+명령어를 자세히 살펴보면 더 쉽게 이해할 수 있다. `(hotfix) rebase (onto) master`라는 거다. 즉, 현재 작업중인 branch의 base를 master로 다시 설정하라는 말이다. <br>
+
