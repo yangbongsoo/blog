@@ -64,3 +64,7 @@ git rebase --abort : git rebase 명령을 실행을 취소한다.
 
 명령어를 자세히 살펴보면 더 쉽게 이해할 수 있다. `(hotfix) rebase (onto) master`라는 거다. 즉, 현재 작업중인 branch의 base를 master로 다시 설정하라는 말이다. <br>
 
+여기까지만이라면 단순하게 hotfix1과 master branch가 따로따로 있는 것에 불과하다. 말 그대로 hotfix1의 base를 다시 설정한 것과 같은 효과다. merge 해야만 비로소 master branch에 hotfix1 branch가 반영이 된다. 그런데 git rebase 명령을 실행하면 무조건 fast-forward가 가능하지만, 이런 경우 merge 커밋을 남기는 것도 좋다. `git merge hotfix1 --no-ff`라는 명령을 실행해 fast-forward를 하지 말라는 옵션을 주어서 merge를 실행하면 아래와 같은 그래프가 된다. 
+![](rebase3.jpg)
+ㄸ라서 `git checkout master` 명령을 실행해 master branch로 이동한 후 `git merge hotfix1 --no-ff`명령을 실행해 최종 merge를 해준다. 
+
