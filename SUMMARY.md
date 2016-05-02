@@ -6,6 +6,7 @@
    * [Java8 in Action](java8_in_action.md)
        * [Part1 기초](part1.md)
        * [Part2-1 함수형 데이터 처리](part2_d568_c218_d615_b370_c774_d130_cc98_b9ac.md)
+       * Part2-2 함수형 데이터 처리
    * [NHN은 이렇게한다! 소프트웨어 품질관리](nhnc740_c774_b807_ac8c_d55c_b2e421_c18c_d504_d2b8_.md)
    * [What / Why Living Documentation](what__why__how_living_documentation.md)
    * [Specification by Example](specification_by_example.md)
