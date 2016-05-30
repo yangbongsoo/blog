@@ -15,7 +15,7 @@
    * [Git-Flow / Git-Rebase](git.md)
    * [웹을 지탱하는 기술](c6f9_c744_c9c0_d0f1_d558_b294_ae30_c220.md)
    * [객체지향과 디자인패턴](ac1d_ccb4_c9c0_d5a5_acfc_b514_c790_c778_d328_d134.md)
-   * [Junit+Mockito vs groovy+spock](junit+mockito_vs_groovy+spock.md)
+   * [JUnit+Mockito vs groovy+spock](junit+mockito_vs_groovy+spock.md)
 * [토비의 스프링3.1](spring.md)
    * [정의, IoC/DI개념, Bean 라이프사이클](c815_c7582c_ioc__di_ac1c_b1502c_bean_b77c_c774_d50.md)
    * [오브젝트와 의존관계](c624_be0c_c81d_d2b8_c640_c758_c874_ad00_acc4.md)
