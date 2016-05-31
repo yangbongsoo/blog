@@ -12,3 +12,43 @@ Stub 은 테스트 과정에서 일어나는 호출에 대해 지정된 답변�
 Mock은 Mock 객체가 수신할 것으로 예상되는 호출들을 예측하여 미리 프로그래밍한 객체이다. 
 
 **example**<br>
+```
+1. Behavior verify
+
+//Let's import Mockito statically so that the code looks clearer
+import static org.mockito.Mockito.*;
+
+//mock creation
+List mockedList = mock(List.class);
+
+//using mock object
+mockedList.add("one");
+mockedList.clear();
+
+//verification
+verify(mockedList).add("one");
+verify(mockedList).clear();
+
+2. Stubbing
+
+//You can mock concrete classes, not only interfaces
+LinkedList mockedList = mock(LinkedList.class);
+
+//stubbing
+when(mockedList.get(0)).thenReturn("first");
+when(mockedList.get(1)).thenThrow(new RuntimeException());
+
+//following prints "first"
+System.out.println(mockedList.get(0));
+
+//following throws runtime exception
+System.out.println(mockedList.get(1));
+
+//following prints "null" because get(999) was not stubbed
+System.out.println(mockedList.get(999));
+
+//Although it is possible to verify a stubbed invocation, usually it's just redundant
+//If your code cares what get(0) returns then something else breaks (often before even verify() gets executed).
+//If your code doesn't care what get(0) returns then it should not be stubbed. Not convinced? See here.
+verify(mockedList).get(0);
+```
