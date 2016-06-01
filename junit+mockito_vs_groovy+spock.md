@@ -52,3 +52,10 @@ System.out.println(mockedList.get(999));
 //If your code doesn't care what get(0) returns then it should not be stubbed. Not convinced? See here.
 verify(mockedList).get(0);
 ```
+
+**Spring Boot 1.4 Testing Improvements**<br>
+참고 : https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4<br>
+
+
+
+
