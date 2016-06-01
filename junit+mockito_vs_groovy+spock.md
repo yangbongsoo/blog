@@ -56,6 +56,10 @@ verify(mockedList).get(0);
 **Spring Boot 1.4 Testing Improvements**<br>
 참고 : https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4<br>
 
+before
 
+![](스크린샷 2016-06-01 오후 8.36.38.jpg)
 
+after
+![](스크린샷 2016-06-01 오후 8.54.11.jpg)
 
