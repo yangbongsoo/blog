@@ -1,5 +1,10 @@
 # JUnit+Mockito vs groovy+spock
 
+발표 순서<br>
+다루지 않을 부분 : 테스트가 뭔가, 모키토가 뭔가, 단위테스트, 통합테스트가 뭔가
+1. Spring Boot 1.4 Test방식 변경부분 소개 
+2. 내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석  
+
 참고1 : http://d2.naver.com/helloworld/568425<br>
 참고2 : http://groovy-coder.com/?p=111<br>
 참고3 : http://kingori.egloos.com/4169398
