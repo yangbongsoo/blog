@@ -1,4 +1,4 @@
-# JUnit+Mockito vs groovy+spock
+# JUnit+Mockito vs Groovy+Spock
 
 발표 순서<br>
 다루지 않을 부분 : Test가 뭔가, Mockito가 뭔가, Unit Test, Integration Test가 뭔가
@@ -213,3 +213,6 @@ spy도 유사하다. `@SpyBean`을 통해 ApplicationContext에 존재하는 빈
     <version>1.0-groovy-2.4</version>
 </dependency>
 ```
+의존성 추가 
+
+
