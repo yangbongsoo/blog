@@ -298,4 +298,30 @@ class SpringBootSpockTestingApplicationSpecIT extends Specification {
     }
 }
 ```
+Spring Boot 1.4에서는 persistence layer 통합 테스트에 대한 간편한 방식을 소개했다`@DataJpaTest`은 persistence layer(구체적으로는 JPA)와 상호작용이 필요한 component들만 초기화해서 빠른 통합 테스트가 가능하다.
+```
+@ContextConfiguration
+@DataJpaTest
+class HistoricTemperatureDataRepositorySpecIT extends Specification {
 
+    @Autowired
+    HistoricTemperatureDataRepository historicTemperatureDataRepository
+
+    @Autowired
+    TestEntityManager testEntityManager
+
+    def "should load all data"() {
+        given: "one temperature entry"
+        int temperature = 5
+        HistoricTemperatureData data = new HistoricTemperatureData(temperature, new Timestamp(System.currentTimeMillis()))
+        testEntityManager.persist(data)
+
+        when: "loading data from repository"
+        def loadedData = historicTemperatureDataRepository.findAll()
+
+        then: "persisted data is loaded"
+        loadedData.first().temperature == temperature
+    }
+
+}
+```
