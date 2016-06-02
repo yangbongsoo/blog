@@ -88,7 +88,7 @@ public void testSomeMethod() {
 }
 ```
 
-**Spring Boot 1.3에서 ... **<br>
+**Spring Boot 1.3에서**<br>
 ```
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=MyApp.class, loader=SpringApplicationContextLoader.class)
@@ -135,7 +135,10 @@ public class MyTest {
 
 마지막으로 random port로 돌릴 수도 있고 `@WebIntegrationTest(randomPort=true)` 추가적인 프로퍼티 설정도 있다. `@IntegrationTest("myprop=myvalue")` or `@TestPropertySource(properties="myprop=myvalue")`
 
-**선택지가 너무 많아서 고통스럽다. **
+선택지가 너무 많아서 고통스럽다. 
+
+**Spring Boot 1.4에서는**<br>
+
 
 before
 
