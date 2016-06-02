@@ -4,8 +4,9 @@
 다루지 않을 부분 : Test가 뭔가, Mockito가 뭔가, Unit Test, Integration Test가 뭔가
 
 1. Spring Boot 1.4 Test방식 변경부분 소개 
-2. 내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
-3. 블로그에서 groovy를 이용한 통합테스트 방식  
+2. 블로그에서 groovy를 이용한 통합테스트 방식  
+3. 내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
+
 
 참고1 : http://d2.naver.com/helloworld/568425<br>
 참고2 : http://groovy-coder.com/?p=111<br>
@@ -62,7 +63,7 @@ System.out.println(mockedList.get(999));
 verify(mockedList).get(0);
 ```
 
-###1. Spring Boot 1.4 Test방식 변경부분 소개
+###Spring Boot 1.4 Test방식 변경부분 소개
 참고 : https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4<br>
 
 Spring Framework 4.3부터 생성자를 통한 주입에서 더이상 @Autowired가 필요 없어졌다. 생성자가 하나만 있다는 전제하에 Spring이 autowire target으로 본다.
@@ -204,13 +205,11 @@ public class SampleTestApplicationWebIntegrationTests {
 
 spy도 유사하다. `@SpyBean`을 통해 ApplicationContext에 존재하는 빈을 spy로 감싼다.
 
-
-
-
-before
-
-![](스크린샷 2016-06-01 오후 8.36.38.jpg)
-
-after
-![](스크린샷 2016-06-01 오후 8.54.11.jpg)
-
+###블로그에서 groovy를 이용한 통합테스트 방식
+```
+<dependency>
+    <groupId>org.spockframework</groupId>
+    <artifactId>spock-spring</artifactId>
+    <version>1.0-groovy-2.4</version>
+</dependency>
+```
