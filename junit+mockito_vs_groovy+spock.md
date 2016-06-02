@@ -88,7 +88,7 @@ public void testSomeMethod() {
 }
 ```
 
-
+**Spring Boot 1.3에서 ... **<br>
 
 
 before
