@@ -98,7 +98,30 @@ public class MyTest {
 
 }
 ```
+`@ContextConfiguration`과 `SpringApplicationContextLoader`를 조합해서 썼다.
 
+```
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(MyApp.class)
+public class MyTest {
+
+    // ...
+
+}
+```
+`@SpringApplicationConfiguration`을 쓸 수도 있었다.(이게 더 직관적으로 보여서 이걸 썼다.)
+
+```
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(MyApp.class)
+@IntegrationTest
+public class MyTest {
+
+    // ...
+
+}
+```
+`@IntegrationTest`을 쓰는 방법도 있었다. 또는 `@WebIntegrationTest(@IntegrationTest + @WebAppConfiguration)`
 
 before
 
