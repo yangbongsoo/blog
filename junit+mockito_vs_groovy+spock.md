@@ -9,7 +9,7 @@
 
 
 참고1 : http://d2.naver.com/helloworld/568425<br>
-참고2 : http://groovy-coder.com/?p=111<br>
+
 참고3 : http://kingori.egloos.com/4169398
 
 
@@ -206,6 +206,8 @@ public class SampleTestApplicationWebIntegrationTests {
 spy도 유사하다. `@SpyBean`을 통해 ApplicationContext에 존재하는 빈을 spy로 감싼다.
 
 ###블로그에서 groovy를 이용한 통합테스트 방식
+참고 : http://groovy-coder.com/?p=111<br>
+먼저 의존성 추가
 ```
 <dependency>
     <groupId>org.spockframework</groupId>
@@ -213,4 +215,6 @@ spy도 유사하다. `@SpyBean`을 통해 ApplicationContext에 존재하는 빈
     <version>1.0-groovy-2.4</version>
 </dependency>
 ```
-의존성 추가 
+
+
+
