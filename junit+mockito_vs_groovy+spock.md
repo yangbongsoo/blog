@@ -282,3 +282,20 @@ class ApplicationSpecWithoutAnnotation extends Specification {
 
 }
 ```
+근데 지금 Spring Boot 1.4는 Spock과 호환되지 않는다. spock-spring 플러그인이 `@SpringBootTest`를 인식하지 못한다. 그래서 `@SpringBootTest` 이전에 `@ContextConfiguration`이나 `@ContextHierarchy`를 추가해줘야 한다.<br>
+cf) `@DataJpaTest`,`@WebMvcTest`도 아직 지원안한다. 
+```
+@ContextConfiguration // not mentioned by docs, but had to include this for Spock to startup the Spring context
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class SpringBootSpockTestingApplicationSpecIT extends Specification {
+
+    @Autowired
+    WebApplicationContext context
+
+    def "should boot up without errors"() {
+        expect: "web application context exists"
+        context != null
+    }
+}
+```
+
