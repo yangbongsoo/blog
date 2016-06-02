@@ -4,7 +4,8 @@
 다루지 않을 부분 : Test가 뭔가, Mockito가 뭔가, Unit Test, Integration Test가 뭔가
 
 1. Spring Boot 1.4 Test방식 변경부분 소개 
-2. 내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석  
+2. 내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
+3. 블로그에서 groovy를 이용한 통합테스트 방식  
 
 참고1 : http://d2.naver.com/helloworld/568425<br>
 참고2 : http://groovy-coder.com/?p=111<br>
