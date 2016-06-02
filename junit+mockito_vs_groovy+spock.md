@@ -239,4 +239,4 @@ class HollandaiseTemperatureMonitorSpec extends Specification {
 
 }
 ```
-
+다음은 Spring을 쓰지 않고 groovy+spock으로 단위 테스트를 만든 예제다. 
