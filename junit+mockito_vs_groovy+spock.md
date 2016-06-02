@@ -134,6 +134,7 @@ public class MyTest {
 ```
 
 
+선택지가 너무 많아서 고통스럽다. 
 
 before
 
