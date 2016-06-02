@@ -207,14 +207,36 @@ spy도 유사하다. `@SpyBean`을 통해 ApplicationContext에 존재하는 빈
 
 ###블로그에서 groovy를 이용한 통합테스트 방식
 참고 : http://groovy-coder.com/?p=111<br>
-먼저 의존성 추가
-```
-<dependency>
-    <groupId>org.spockframework</groupId>
-    <artifactId>spock-spring</artifactId>
-    <version>1.0-groovy-2.4</version>
-</dependency>
-```
 
+올랑 소스를 만들기 위해서는 cooking temperature를 매우 정밀하게 조절해야 한다. 
+![](올랑.jpg)
 
+그래서 올랑 소스를 위해 애플리케이션에서 temperature monitoring 하는 system을 만든다고 해보자.
+```
+class HollandaiseTemperatureMonitorSpec extends Specification {
+
+    @Unroll
+    def "returns #temperatureOk for temperature #givenTemperature"() {
+        given: "a stub thermometer returning given givenTemperature"
+        Thermometer thermometer = Stub(Thermometer)
+        thermometer.currentTemperature() >> givenTemperature
+
+        and: "a monitor with the stubbed thermometer"
+        HollandaiseTemperatureMonitor watchman = new HollandaiseTemperatureMonitor(thermometer)
+
+        expect:
+        watchman.isTemperatureOk() == temperatureOk
+
+        where:
+        givenTemperature || temperatureOk
+        0                || false
+        100              || false
+        80               || true
+        45               || true
+        60               || true
+        -10              || false
+    }
+
+}
+```
 
