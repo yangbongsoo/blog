@@ -152,7 +152,54 @@ public class MyTest {
 
 만약 specific configuration을 load하고 싶으면 `@SpringBootTest`의 `classes`속성을 사용하면 된다. **`classes`속성을 생략하면 inner-classes에서 @Configuration을 제일 먼저 load하려 시도하고, 없다면 @SpringBootApplication class를 찾는다.**
 
+```
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
+public class MyTest {
+    
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Test
+    public void test() {
+        this.restTemplate.getForEntity(
+            "/{username}/vehicle", String.class, "Phil");
+    }
+
+}
+```
+`@SpringBootTest`가 사용되는곳에서는  `TestRestTemplate`이 빈으로 사용가능하다. 
+
+
 **Mocking and spying**<br>
+```
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+public class SampleTestApplicationWebIntegrationTests {
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @MockBean
+    private VehicleDetailsService vehicleDetailsService;
+
+    @Before
+    public void setup() {
+        given(this.vehicleDetailsService.
+            getVehicleDetails("123")
+        ).willReturn(
+            new VehicleDetails("Honda", "Civic"));
+    }
+
+    @Test
+    public void test() {
+        this.restTemplate.getForEntity("/{username}/vehicle", 
+            String.class, "sframework");
+    }
+
+}
+```
+
 
 
 before
