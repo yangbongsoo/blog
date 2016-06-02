@@ -148,7 +148,11 @@ public class MyTest {
 }
 ```
 `SpringRunner`는 기존의 `SpringJUnit4ClassRunner`의 새로운 이름이다. 그리고
-`@SpringBootTest`로 심플해졌다. 
+`@SpringBootTest`로 심플해졌다. `webEnvironment`속성은 테스트에서 Mock 서블릿 환경 또는 진짜 HTTP server(RANDOM_PORT or DEFINED_PORT)를 설정할 수 있다.
+
+만약 specific configuration을 load하고 싶으면 `@SpringBootTest`의 `classes`속성을 사용하면 된다. **`classes`속성을 생략하면 inner-classes에서 @Configuration을 제일 먼저 load하려 시도하고, 없다면 @SpringBootApplication class를 찾는다.**
+
+
 
 before
 
