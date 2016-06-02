@@ -322,6 +322,10 @@ class HistoricTemperatureDataRepositorySpecIT extends Specification {
         then: "persisted data is loaded"
         loadedData.first().temperature == temperature
     }
-
 }
 ```
+
+###내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
+
+용어 구분 
+![](스크린샷 2016-05-31 오전 11.10.05.jpg)
