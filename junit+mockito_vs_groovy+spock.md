@@ -239,4 +239,36 @@ class HollandaiseTemperatureMonitorSpec extends Specification {
 
 }
 ```
-다음은 Spring을 쓰지 않고 groovy+spock으로 단위 테스트를 만든 예제다. 
+다음은 Spring을 쓰지 않고 groovy+spock으로 단위 테스트를 만든 예제다. 흥미로운 점은 `Stub(Thermometer)`를 통해 spock feature Stub을 만들었고 `givenTemperature`를 리턴한다. 
+
+
+```
+@Service
+public class HollandaiseTemperatureMonitor {
+
+    /** Maximum hollandaise cooking temperature in degree celsius */
+    private static final int HOLLANDAISE_MAX_TEMPERATURE_THRESHOLD = 80;
+
+    /** Minimum hollandaise cooking temperature in degree celsius */
+    private static final int HOLLANDAISE_MIN_TEMPERATURE_THRESHOLD = 45;
+
+    private final Thermometer thermometer;
+
+    @Autowired
+    public HollandaiseTemperatureMonitor(Thermometer thermometer) {
+        this.thermometer = thermometer;
+    }
+
+    public boolean isTemperatureOk() {
+        int temperature = thermometer.currentTemperature();
+
+        boolean belowMinimumThreshold = temperature < HOLLANDAISE_MIN_TEMPERATURE_THRESHOLD;
+        boolean aboveMaximumThreshold = temperature > HOLLANDAISE_MAX_TEMPERATURE_THRESHOLD;
+        boolean outOfLimits = belowMinimumThreshold || aboveMaximumThreshold;
+
+        return !outOfLimits;
+    }
+
+}
+
+```
