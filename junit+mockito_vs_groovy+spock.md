@@ -138,7 +138,17 @@ public class MyTest {
 선택지가 너무 많아서 고통스럽다. 
 
 **Spring Boot 1.4에서는**<br>
+```
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
+public class MyTest {
 
+    // ...
+    
+}
+```
+`SpringRunner`는 기존의 `SpringJUnit4ClassRunner`의 새로운 이름이다. 그리고
+`@SpringBootTest`로 심플해졌다. 
 
 before
 
