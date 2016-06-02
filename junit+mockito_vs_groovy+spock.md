@@ -122,6 +122,18 @@ public class MyTest {
 }
 ```
 `@IntegrationTest`을 쓰는 방법도 있었다. 또는 `@WebIntegrationTest(@IntegrationTest + @WebAppConfiguration)`
+```
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(MyApp.class)
+@WebIntegrationTest
+public class MyTest {
+
+    // ...
+
+}
+```
+
+
 
 before
 
