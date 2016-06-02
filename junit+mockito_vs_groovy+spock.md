@@ -62,7 +62,7 @@ System.out.println(mockedList.get(999));
 verify(mockedList).get(0);
 ```
 
-**1. Spring Boot 1.4 Test방식 변경부분 소개** <br>
+###1. Spring Boot 1.4 Test방식 변경부분 소개
 참고 : https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4<br>
 
 Spring Framework 4.3부터 생성자를 통한 주입에서 더이상 @Autowired가 필요 없어졌다. 생성자가 하나만 있다는 전제하에 Spring이 autowire target으로 본다.
@@ -152,6 +152,7 @@ public class MyTest {
 
 만약 specific configuration을 load하고 싶으면 `@SpringBootTest`의 `classes`속성을 사용하면 된다. **`classes`속성을 생략하면 inner-classes에서 @Configuration을 제일 먼저 load하려 시도하고, 없다면 @SpringBootApplication class를 찾는다.**
 
+**Mocking and spying**<br>
 
 
 before
