@@ -60,8 +60,10 @@ System.out.println(mockedList.get(999));
 verify(mockedList).get(0);
 ```
 
-**Spring Boot 1.4 Testing Improvements**<br>
+**1. Spring Boot 1.4 Test방식 변경부분 소개** <br>
 참고 : https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4<br>
+
+
 
 before
 
