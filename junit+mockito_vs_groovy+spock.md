@@ -89,6 +89,15 @@ public void testSomeMethod() {
 ```
 
 **Spring Boot 1.3에서 ... **<br>
+```
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes=MyApp.class, loader=SpringApplicationContextLoader.class)
+public class MyTest {
+
+    // ...
+
+}
+```
 
 
 before
