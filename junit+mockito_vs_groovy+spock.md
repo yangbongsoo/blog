@@ -1,7 +1,7 @@
 # JUnit+Mockito vs Groovy+Spock
 
 발표 순서<br>
-다루지 않을 부분 : Test가 뭔가, Mockito가 뭔가, Unit Test, Integration Test가 뭔가
+다루지 않을 부분 : Mockito, Unit Test, Integration Test 개념
 
 1. Spring Boot 1.4 Test방식 변경부분 소개 
 2. 블로그에서 groovy를 이용한 통합테스트 방식  
