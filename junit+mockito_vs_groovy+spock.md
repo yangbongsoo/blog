@@ -199,6 +199,11 @@ public class SampleTestApplicationWebIntegrationTests {
 
 }
 ```
+위의 예에서 VehicleDetailsService Mockito mock을 만들고 ApplicationContext에 빈으로 주입시켰다. 그리고 setup 메서드에서 Stubbing behavior를 했다. 최종적으로 mock을 호출할 테스트를 만들었다. Mock들은 테스트마다 자동적으로 리셋되기 때문에 `@DirtiesContext`가 필요없다.
+(@DirtiesContext 사용은 applicationContext의 제어를 받지 않고 직접 통제하겠다는 것)
+
+spy도 유사하다. `@SpyBean`을 통해 ApplicationContext에 존재하는 빈을 spy로 감싼다.
+
 
 
 
