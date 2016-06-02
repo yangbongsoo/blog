@@ -11,6 +11,8 @@
 참고2 : http://groovy-coder.com/?p=111<br>
 참고3 : http://kingori.egloos.com/4169398
 
+
+###[용어정리]
 **Mock Object**<br>
 Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다. MockObject는 자신에게 전달된 인자를 검사할 수 있으며, 이를 테스트 코드로 전달할 수도 있다.
 
@@ -63,6 +65,27 @@ verify(mockedList).get(0);
 **1. Spring Boot 1.4 Test방식 변경부분 소개** <br>
 참고 : https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4<br>
 
+Spring Framework 4.3부터 생성자를 통한 주입에서 더이상 @Autowired가 필요 없어졌다. 생성자가 하나만 있다는 전제하에 Spring이 autowire target으로 본다.
+```
+@Component
+public class MyComponent {
+    
+    private final SomeService service;
+
+    public MyComponent(SomeService service) {
+        this.service = service;
+    }
+
+} 
+```
+```
+@Test
+public void testSomeMethod() {
+    SomeService service = mock(SomeService.class);
+    MyComponent component = new MyComponent(service);
+    // setup mock and class component methods
+}
+```
 
 
 before
