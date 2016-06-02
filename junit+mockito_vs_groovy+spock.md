@@ -78,6 +78,7 @@ public class MyComponent {
 
 } 
 ```
+그래서 MyComponent 테스트가 쉬워진다.
 ```
 @Test
 public void testSomeMethod() {
@@ -86,6 +87,8 @@ public void testSomeMethod() {
     // setup mock and class component methods
 }
 ```
+
+
 
 
 before
