@@ -8,55 +8,140 @@
 3. 내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
 
 cf) Spring Boot 1.4 Test방식 변경부분 소개 
-###[용어정리]
-**Mock Object**<br>
-Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다. MockObject는 자신에게 전달된 인자를 검사할 수 있으며, 이를 테스트 코드로 전달할 수도 있다.
 
-**stub**<br>
-Stub 은 테스트 과정에서 일어나는 호출에 대해 지정된 답변을 제공하고, 그 밖의 테스트를 위해 별도로 프로그래밍 되지 않은 질의에 대해서는 대게 아무런 대응을 하지 않는다. 또한 Stub은 email gateway stub 이 '보낸' 메시지를 기억하거나, '보낸' 메일 개수를 저장하는 것과 같이, 호출된 내용에 대한 정보를 기록할 수 있다. <br>
-Mock은 Mock 객체가 수신할 것으로 예상되는 호출들을 예측하여 미리 프로그래밍한 객체이다. 
 
-**example**<br>
+
+###블로그에서 groovy를 이용한 통합테스트 방식
+참고 : http://groovy-coder.com/?p=111<br>
+
+올랑(Hollandaise) 소스를 만들기 위해서는 cooking temperature를 매우 정밀하게 조절해야 한다. 
+![](올랑.jpg)
+
+그래서 올랑(Hollandaise) 소스를 위해 애플리케이션에서 temperature monitoring 하는 system을 만든다고 해보자.
 ```
-1. Behavior verify
+class HollandaiseTemperatureMonitorSpec extends Specification {
 
-//Let's import Mockito statically so that the code looks clearer
-import static org.mockito.Mockito.*;
+    @Unroll
+    def "returns #temperatureOk for temperature #givenTemperature"() {
+        given: "a stub thermometer returning given givenTemperature"
+        Thermometer thermometer = Stub(Thermometer)
+        thermometer.currentTemperature() >> givenTemperature
 
-//mock creation
-List mockedList = mock(List.class);
+        and: "a monitor with the stubbed thermometer"
+        HollandaiseTemperatureMonitor watchman = new HollandaiseTemperatureMonitor(thermometer)
 
-//using mock object
-mockedList.add("one");
-mockedList.clear();
+        expect:
+        watchman.isTemperatureOk() == temperatureOk
 
-//verification
-verify(mockedList).add("one");
-verify(mockedList).clear();
+        where:
+        givenTemperature || temperatureOk
+        0                || false
+        100              || false
+        80               || true
+        45               || true
+        60               || true
+        -10              || false
+    }
 
-2. Stubbing
-
-//You can mock concrete classes, not only interfaces
-LinkedList mockedList = mock(LinkedList.class);
-
-//stubbing
-when(mockedList.get(0)).thenReturn("first");
-when(mockedList.get(1)).thenThrow(new RuntimeException());
-
-//following prints "first"
-System.out.println(mockedList.get(0));
-
-//following throws runtime exception
-System.out.println(mockedList.get(1));
-
-//following prints "null" because get(999) was not stubbed
-System.out.println(mockedList.get(999));
-
-//Although it is possible to verify a stubbed invocation, usually it's just redundant
-//If your code cares what get(0) returns then something else breaks (often before even verify() gets executed).
-//If your code doesn't care what get(0) returns then it should not be stubbed. Not convinced? See here.
-verify(mockedList).get(0);
+}
 ```
+다음은 Spring을 쓰지 않고 groovy+spock으로 단위 테스트를 만든 예제다. 흥미로운 점은 `Stub(Thermometer)`를 통해 spock feature Stub을 만들었고 `givenTemperature`를 리턴한다. <br>
+
+production code HollandaiseTemperatureMonitor 클래스는 다음과 같다.
+```
+@Service
+public class HollandaiseTemperatureMonitor {
+
+    /** Maximum hollandaise cooking temperature in degree celsius */
+    private static final int HOLLANDAISE_MAX_TEMPERATURE_THRESHOLD = 80;
+
+    /** Minimum hollandaise cooking temperature in degree celsius */
+    private static final int HOLLANDAISE_MIN_TEMPERATURE_THRESHOLD = 45;
+
+    private final Thermometer thermometer;
+
+    @Autowired
+    public HollandaiseTemperatureMonitor(Thermometer thermometer) {
+        this.thermometer = thermometer;
+    }
+
+    public boolean isTemperatureOk() {
+        int temperature = thermometer.currentTemperature();
+
+        boolean belowMinimumThreshold = temperature < HOLLANDAISE_MIN_TEMPERATURE_THRESHOLD;
+        boolean aboveMaximumThreshold = temperature > HOLLANDAISE_MAX_TEMPERATURE_THRESHOLD;
+        boolean outOfLimits = belowMinimumThreshold || aboveMaximumThreshold;
+
+        return !outOfLimits;
+    }
+
+}
+
+```
+
+통합 테스트<br>
+```
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class ApplicationSpecWithoutAnnotation extends Specification {
+
+    @Autowired
+    WebApplicationContext context
+
+    def "should boot up without errors"() {
+        expect: "web application context exists"
+        context != null
+    }
+
+}
+```
+근데 지금 Spring Boot 1.4는 Spock과 호환되지 않는다. spock-spring 플러그인이 `@SpringBootTest`를 인식하지 못한다. 그래서 `@SpringBootTest` 이전에 `@ContextConfiguration`이나 `@ContextHierarchy`를 추가해줘야 한다.<br>
+cf) `@DataJpaTest`,`@WebMvcTest`도 아직 지원안한다. 
+```
+@ContextConfiguration // not mentioned by docs, but had to include this for Spock to startup the Spring context
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class SpringBootSpockTestingApplicationSpecIT extends Specification {
+
+    @Autowired
+    WebApplicationContext context
+
+    def "should boot up without errors"() {
+        expect: "web application context exists"
+        context != null
+    }
+}
+```
+Spring Boot 1.4에서는 persistence layer 통합 테스트에 대한 간편한 방식을 소개했다`@DataJpaTest`은 persistence layer(구체적으로는 JPA)와 상호작용이 필요한 component들만 초기화해서 빠른 통합 테스트가 가능하다.
+```
+@ContextConfiguration
+@DataJpaTest
+class HistoricTemperatureDataRepositorySpecIT extends Specification {
+
+    @Autowired
+    HistoricTemperatureDataRepository historicTemperatureDataRepository
+
+    @Autowired
+    TestEntityManager testEntityManager
+
+    def "should load all data"() {
+        given: "one temperature entry"
+        int temperature = 5
+        HistoricTemperatureData data = new HistoricTemperatureData(temperature, new Timestamp(System.currentTimeMillis()))
+        testEntityManager.persist(data)
+
+        when: "loading data from repository"
+        def loadedData = historicTemperatureDataRepository.findAll()
+
+        then: "persisted data is loaded"
+        loadedData.first().temperature == temperature
+    }
+}
+```
+
+###내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
+
+
+
+
 
 ###Spring Boot 1.4 Test방식 변경부분 소개
 참고 : https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4<br>
@@ -200,134 +285,52 @@ public class SampleTestApplicationWebIntegrationTests {
 
 spy도 유사하다. `@SpyBean`을 통해 ApplicationContext에 존재하는 빈을 spy로 감싼다.
 
-###블로그에서 groovy를 이용한 통합테스트 방식
-참고 : http://groovy-coder.com/?p=111<br>
+###[용어정리]
+**Mock Object**<br>
+Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다. MockObject는 자신에게 전달된 인자를 검사할 수 있으며, 이를 테스트 코드로 전달할 수도 있다.
 
-올랑(Hollandaise) 소스를 만들기 위해서는 cooking temperature를 매우 정밀하게 조절해야 한다. 
-![](올랑.jpg)
+**stub**<br>
+Stub 은 테스트 과정에서 일어나는 호출에 대해 지정된 답변을 제공하고, 그 밖의 테스트를 위해 별도로 프로그래밍 되지 않은 질의에 대해서는 대게 아무런 대응을 하지 않는다. 또한 Stub은 email gateway stub 이 '보낸' 메시지를 기억하거나, '보낸' 메일 개수를 저장하는 것과 같이, 호출된 내용에 대한 정보를 기록할 수 있다. <br>
+Mock은 Mock 객체가 수신할 것으로 예상되는 호출들을 예측하여 미리 프로그래밍한 객체이다. 
 
-그래서 올랑(Hollandaise) 소스를 위해 애플리케이션에서 temperature monitoring 하는 system을 만든다고 해보자.
+**example**<br>
 ```
-class HollandaiseTemperatureMonitorSpec extends Specification {
+1. Behavior verify
 
-    @Unroll
-    def "returns #temperatureOk for temperature #givenTemperature"() {
-        given: "a stub thermometer returning given givenTemperature"
-        Thermometer thermometer = Stub(Thermometer)
-        thermometer.currentTemperature() >> givenTemperature
+//Let's import Mockito statically so that the code looks clearer
+import static org.mockito.Mockito.*;
 
-        and: "a monitor with the stubbed thermometer"
-        HollandaiseTemperatureMonitor watchman = new HollandaiseTemperatureMonitor(thermometer)
+//mock creation
+List mockedList = mock(List.class);
 
-        expect:
-        watchman.isTemperatureOk() == temperatureOk
+//using mock object
+mockedList.add("one");
+mockedList.clear();
 
-        where:
-        givenTemperature || temperatureOk
-        0                || false
-        100              || false
-        80               || true
-        45               || true
-        60               || true
-        -10              || false
-    }
+//verification
+verify(mockedList).add("one");
+verify(mockedList).clear();
 
-}
+2. Stubbing
+
+//You can mock concrete classes, not only interfaces
+LinkedList mockedList = mock(LinkedList.class);
+
+//stubbing
+when(mockedList.get(0)).thenReturn("first");
+when(mockedList.get(1)).thenThrow(new RuntimeException());
+
+//following prints "first"
+System.out.println(mockedList.get(0));
+
+//following throws runtime exception
+System.out.println(mockedList.get(1));
+
+//following prints "null" because get(999) was not stubbed
+System.out.println(mockedList.get(999));
+
+//Although it is possible to verify a stubbed invocation, usually it's just redundant
+//If your code cares what get(0) returns then something else breaks (often before even verify() gets executed).
+//If your code doesn't care what get(0) returns then it should not be stubbed. Not convinced? See here.
+verify(mockedList).get(0);
 ```
-다음은 Spring을 쓰지 않고 groovy+spock으로 단위 테스트를 만든 예제다. 흥미로운 점은 `Stub(Thermometer)`를 통해 spock feature Stub을 만들었고 `givenTemperature`를 리턴한다. <br>
-
-production code HollandaiseTemperatureMonitor 클래스는 다음과 같다.
-```
-@Service
-public class HollandaiseTemperatureMonitor {
-
-    /** Maximum hollandaise cooking temperature in degree celsius */
-    private static final int HOLLANDAISE_MAX_TEMPERATURE_THRESHOLD = 80;
-
-    /** Minimum hollandaise cooking temperature in degree celsius */
-    private static final int HOLLANDAISE_MIN_TEMPERATURE_THRESHOLD = 45;
-
-    private final Thermometer thermometer;
-
-    @Autowired
-    public HollandaiseTemperatureMonitor(Thermometer thermometer) {
-        this.thermometer = thermometer;
-    }
-
-    public boolean isTemperatureOk() {
-        int temperature = thermometer.currentTemperature();
-
-        boolean belowMinimumThreshold = temperature < HOLLANDAISE_MIN_TEMPERATURE_THRESHOLD;
-        boolean aboveMaximumThreshold = temperature > HOLLANDAISE_MAX_TEMPERATURE_THRESHOLD;
-        boolean outOfLimits = belowMinimumThreshold || aboveMaximumThreshold;
-
-        return !outOfLimits;
-    }
-
-}
-
-```
-
-통합 테스트<br>
-```
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ApplicationSpecWithoutAnnotation extends Specification {
-
-    @Autowired
-    WebApplicationContext context
-
-    def "should boot up without errors"() {
-        expect: "web application context exists"
-        context != null
-    }
-
-}
-```
-근데 지금 Spring Boot 1.4는 Spock과 호환되지 않는다. spock-spring 플러그인이 `@SpringBootTest`를 인식하지 못한다. 그래서 `@SpringBootTest` 이전에 `@ContextConfiguration`이나 `@ContextHierarchy`를 추가해줘야 한다.<br>
-cf) `@DataJpaTest`,`@WebMvcTest`도 아직 지원안한다. 
-```
-@ContextConfiguration // not mentioned by docs, but had to include this for Spock to startup the Spring context
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class SpringBootSpockTestingApplicationSpecIT extends Specification {
-
-    @Autowired
-    WebApplicationContext context
-
-    def "should boot up without errors"() {
-        expect: "web application context exists"
-        context != null
-    }
-}
-```
-Spring Boot 1.4에서는 persistence layer 통합 테스트에 대한 간편한 방식을 소개했다`@DataJpaTest`은 persistence layer(구체적으로는 JPA)와 상호작용이 필요한 component들만 초기화해서 빠른 통합 테스트가 가능하다.
-```
-@ContextConfiguration
-@DataJpaTest
-class HistoricTemperatureDataRepositorySpecIT extends Specification {
-
-    @Autowired
-    HistoricTemperatureDataRepository historicTemperatureDataRepository
-
-    @Autowired
-    TestEntityManager testEntityManager
-
-    def "should load all data"() {
-        given: "one temperature entry"
-        int temperature = 5
-        HistoricTemperatureData data = new HistoricTemperatureData(temperature, new Timestamp(System.currentTimeMillis()))
-        testEntityManager.persist(data)
-
-        when: "loading data from repository"
-        def loadedData = historicTemperatureDataRepository.findAll()
-
-        then: "persisted data is loaded"
-        loadedData.first().temperature == temperature
-    }
-}
-```
-
-###내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
-
-용어 구분 
-![](스크린샷 2016-05-31 오전 11.10.05.jpg)
-
