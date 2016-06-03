@@ -3,11 +3,14 @@
 발표 순서<br>
 다루지 않을 부분 : Mockito, Unit Test, Integration Test 개념
 
-1. groovy+spock과 JUnit_Mockito의 문법 차이 설명
-2. 블로그에서 groovy를 이용한 통합테스트 방식 소개
+1. groovy+spock과 JUnit+Mockito의 문법 차이
+2. 블로그에서 groovy를 이용한 통합테스트 방식
 3. 내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
 
 cf) Spring Boot 1.4 Test방식 변경부분, mock과 stub차이
+
+
+###groovy+spock과 JUnit+Mockito의 문법 차이
 
 
 
