@@ -3,10 +3,11 @@
 발표 순서<br>
 다루지 않을 부분 : Mockito, Unit Test, Integration Test 개념
 
-1. Spring Boot 1.4 Test방식 변경부분 소개 
-2. 블로그에서 groovy를 이용한 통합테스트 방식  
+1. groovy+spock과 JUnit_Mockito의 문법 차이 설명
+2. 블로그에서 groovy를 이용한 통합테스트 방식 소개
 3. 내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
 
+cf) Spring Boot 1.4 Test방식 변경부분 소개 
 ###[용어정리]
 **Mock Object**<br>
 Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다. MockObject는 자신에게 전달된 인자를 검사할 수 있으며, 이를 테스트 코드로 전달할 수도 있다.
@@ -329,3 +330,4 @@ class HistoricTemperatureDataRepositorySpecIT extends Specification {
 
 용어 구분 
 ![](스크린샷 2016-05-31 오전 11.10.05.jpg)
+
