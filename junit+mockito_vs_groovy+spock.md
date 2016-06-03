@@ -7,7 +7,7 @@
 2. 블로그에서 groovy를 이용한 통합테스트 방식 소개
 3. 내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
 
-cf) Spring Boot 1.4 Test방식 변경부분 소개 
+cf) Spring Boot 1.4 Test방식 변경부분, mock과 stub차이
 
 
 
