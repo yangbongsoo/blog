@@ -6,7 +6,8 @@
 3. 내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
 
 cf) Spring Boot 1.4 Test방식 변경부분, mock과 stub차이
-###groovy+spock과 JUnit+Mockito의 문법 차이
+
+###문법 차이
 참고 : http://d2.naver.com/helloworld/568425
 
 
