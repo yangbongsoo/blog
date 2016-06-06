@@ -157,9 +157,26 @@ Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체�
 
 ###Spy
 Stub이나 Mock과는 다르게 Spy는 Dummy 객체가 아니다. Spy는 실제 일반 객체를 감싼것이다.
+```
+def "interface로 Spy 만들면 안된다."() {
+        given:
+        UserService service = Spy(UserService)
+        expect:
+        service.save(new User(name: 'Norman'))
+    }
+    
+결과 : Cannot invoke real method on interface based mock object    
+```
 
-
-
+```
+def "class로 Spy를 만들어야 된다."() {
+        given:
+        Transaction transaction = Stub(Transaction)
+        UserService service = Spy(UserServiceImpl, constructorArgs: [transaction])
+        expect:
+        service.save(new User(name: 'Norman'))
+    }
+```
 org.spockframework.mock.CannotCreateMockException: Cannot create mock for class spock.basic.UserServiceImpl. Mocking of non-interface types requires the CGLIB library. Please put cglib-nodep-2.2 or higher on the class path.
 ```
 <dependency>
