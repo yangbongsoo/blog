@@ -135,10 +135,11 @@ def "만약 리스트에 Integer 추가하면 예외처리"() {
         notThrown(IllegalArgumentException)
     }
 ```
-cf) JDK7에서 새롭게 소개된 Invokedynamic. 자바는 static type 언어라고 불리며, 이는 컴파일 타임에서 이미 멤버 변수들이나 함수 변수들의 타입이 반드시 명시적으로 지정돼야 함을 의미한다. 그에 반해 루비나 자바스크립트는 이른바 ‘duck-typing’이라고 하는 타입 시스템을 사용함으로써 컴파일 타임에서의 타입을 강제하지 않는다. Invokedynamic은 이러한 duck-typing을 JVM레벨에서 기본적으로 지원하면서 자바 외에 다른 언어들이 JVM이라는 플랫폼 위에서 최적화된 방식으로 실행될 수 있는 토대를 제공한다.
+cf) JDK7에서 새롭게 소개된 Invokedynamic. 자바는 static type 언어라고 불리며, 이는 컴파일 타임에서 이미 멤버 변수들이나 함수 변수들의 타입이 반드시 명시적으로 지정돼야 함을 의미한다. 그에 반해 루비나 자바스크립트는 이른바 ‘duck-typing’이라고 하는 타입 시스템을 사용함으로써 컴파일 타임에서의 타입을 강제하지 않는다. Invokedynamic은 이러한 duck-typing을 JVM레벨에서 기본적으로 지원하면서 자바 외에 다른 언어들이 JVM이라는 플랫폼 위에서 최적화된 방식으로 실행될 수 있는 토대를 제공한다.<br>
 
+###Checking interactions on Mock/Spies
 
-###블로그에서 groovy를 이용한 통합테스트 방식
+##블로그에서 groovy를 이용한 통합테스트 방식
 참고 : http://groovy-coder.com/?p=111<br>
 
 올랑(Hollandaise) 소스를 만들기 위해서는 cooking temperature를 매우 정밀하게 조절해야 한다. 
@@ -264,13 +265,13 @@ class HistoricTemperatureDataRepositorySpecIT extends Specification {
 }
 ```
 
-###내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
+##내가 만든 Java+Mockito 단위 테스트와 roovy-spock으로 만든 단위 테스트 비교분석
 
 
 
 
 
-###Spring Boot 1.4 Test방식 변경부분 소개
+##Spring Boot 1.4 Test방식 변경부분 소개
 참고 : https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4<br>
 
 Spring Framework 4.3부터 생성자를 통한 주입에서 더이상 @Autowired가 필요 없어졌다. 생성자가 하나만 있다는 전제하에 Spring이 autowire target으로 본다.
