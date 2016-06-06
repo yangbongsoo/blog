@@ -153,8 +153,25 @@ Dummy 객체 자체를 테스트하기보다 여러 인터페이스들이 연결
 **cf) Stub vs Mock **<br>
 Stub 은 테스트 과정에서 일어나는 호출에 대해 지정된 답변을 제공하고, 그 밖의 테스트를 위해 별도로 프로그래밍 되지 않은 질의에 대해서는 대게 아무런 대응을 하지 않는다.<br>
 
-Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다.
+Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다.<br>
 
+###Spy
+Unlike Stub or Mock a Spy is not exactly a dummy object.
+It’s fair to say that a Spy is rather a wrapper to a normal object.
+
+###
+```
+def "다양한 제곱 테스트"() {
+        expect:
+        Math.pow(base, 2) == expectedResult
+        
+        where:
+        base || expectedResult
+        2    || 4
+        3    || 9
+        10   || 100
+    }
+```
 ##블로그에서 groovy를 이용한 통합테스트 방식
 참고 : http://groovy-coder.com/?p=111<br>
 
