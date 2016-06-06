@@ -234,35 +234,6 @@ def "다양한 제곱 테스트"() {
 ![](올랑.jpg)
 
 그래서 올랑(Hollandaise) 소스를 위해 애플리케이션에서 temperature monitoring 하는 system을 만든다고 해보자.
-```
-class HollandaiseTemperatureMonitorSpec extends Specification {
-
-    @Unroll 
-    def "returns #temperatureOk for temperature #givenTemperature"() {
-        given: "a stub thermometer returning given givenTemperature"
-        Thermometer thermometer = Stub(Thermometer)
-        thermometer.currentTemperature() >> givenTemperature
-
-        and: "a monitor with the stubbed thermometer"
-        HollandaiseTemperatureMonitor watchman = new HollandaiseTemperatureMonitor(thermometer)
-
-        expect:
-        watchman.isTemperatureOk() == temperatureOk
-
-        where:
-        givenTemperature || temperatureOk
-        0                || false
-        100              || false
-        80               || true
-        45               || true
-        60               || true
-        -10              || false
-    }
-
-}
-```
-cf) @Unroll : Indicates that iterations of a data-driven feature should be made visible  as separate features to the outside world(테스트 구현에 영향을 미치지 않음)<br>
-
 production code HollandaiseTemperatureMonitor 클래스는 다음과 같다.
 ```
 @Service
@@ -294,6 +265,37 @@ public class HollandaiseTemperatureMonitor {
 }
 
 ```
+
+```
+class HollandaiseTemperatureMonitorSpec extends Specification {
+
+    @Unroll 
+    def "returns #temperatureOk for temperature #givenTemperature"() {
+        given: "a stub thermometer returning given givenTemperature"
+        Thermometer thermometer = Stub(Thermometer)
+        thermometer.currentTemperature() >> givenTemperature
+
+        and: "a monitor with the stubbed thermometer"
+        HollandaiseTemperatureMonitor watchman = new HollandaiseTemperatureMonitor(thermometer)
+
+        expect:
+        watchman.isTemperatureOk() == temperatureOk
+
+        where:
+        givenTemperature || temperatureOk
+        0                || false
+        100              || false
+        80               || true
+        45               || true
+        60               || true
+        -10              || false
+    }
+
+}
+```
+cf) @Unroll : Indicates that iterations of a data-driven feature should be made visible  as separate features to the outside world(테스트 구현에 영향을 미치지 않음)<br>
+
+
 
 통합 테스트<br>
 ```
