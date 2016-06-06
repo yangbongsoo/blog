@@ -1,9 +1,9 @@
 # JUnit+Mockito vs Groovy+Spock
 
 **발표 순서**<br>
-1. Spock기본적인 문법
+1. Spock 기본적인 문법
 2. 블로그에서 groovy를 이용한 통합테스트 방식
-3. Spock 적용 후기
+3. 간단한 Spock 적용 후기
 
 cf) 마지막부분에 Spring Boot 1.4 Test방식 소개
 
@@ -328,7 +328,7 @@ class SpringBootSpockTestingApplicationSpecIT extends Specification {
 }
 ```
 
-##Spock 적용 후기
+##간단한 Spock 적용 후기
 ###Name Inverter
 참고 : https://www.youtube.com/watch?v=czjWpmy3rkM<br>
 
