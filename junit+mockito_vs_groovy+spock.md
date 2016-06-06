@@ -213,6 +213,7 @@ Mocking of non-interface types requires the CGLIB library. Please put cglib-node
     <version>2.2</version>
 </dependency>
 ```
+
 ###where:
 ```
 def "다양한 제곱 테스트"() {
