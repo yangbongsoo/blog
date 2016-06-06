@@ -3,7 +3,7 @@
 **발표 순서**<br>
 1. Spock기본적인 문법
 2. 블로그에서 groovy를 이용한 통합테스트 방식
-3. Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
+3. Spock 적용 후기
 
 cf) 마지막부분에 Spring Boot 1.4 Test방식 소개
 
@@ -328,7 +328,7 @@ class SpringBootSpockTestingApplicationSpecIT extends Specification {
 }
 ```
 
-##Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교
+##Spock 적용 후기
 ###Name Inverter
 참고 : https://www.youtube.com/watch?v=czjWpmy3rkM<br>
 spock으로 진행해봤는데 에러가 났을 때 좀 더 친절한 메세지 외에는 장점을 못느꼈습니다(중요한건 리팩토링이지 명세가 아닌거 같습니다).
