@@ -1,11 +1,11 @@
 # JUnit+Mockito vs Groovy+Spock
 
-발표 순서<br>
-1. groovy+spock과 JUnit+Mockito의 문법 차이
+**발표 순서**<br>
+1. Spock기본적인 문법
 2. 블로그에서 groovy를 이용한 통합테스트 방식
-3. 내가 만든 Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
+3. Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
 
-cf) Spring Boot 1.4 Test방식 변경부분, mock과 stub차이
+cf) 마지막부분에 Spring Boot 1.4 Test방식 소개
 
 ##Spock
 참고 : http://thejavatar.com/testing-with-spock/
@@ -353,7 +353,7 @@ class HistoricTemperatureDataRepositorySpecIT extends Specification {
 }
 ```
 
-##내가 만든 Java+Mockito 단위 테스트와 roovy-spock으로 만든 단위 테스트 비교분석
+##Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
 
 
 
