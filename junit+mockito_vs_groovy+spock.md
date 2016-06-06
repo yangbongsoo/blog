@@ -137,7 +137,21 @@ def "만약 리스트에 Integer 추가하면 예외처리"() {
 ```
 cf) JDK7에서 새롭게 소개된 Invokedynamic. 자바는 static type 언어라고 불리며, 이는 컴파일 타임에서 이미 멤버 변수들이나 함수 변수들의 타입이 반드시 명시적으로 지정돼야 함을 의미한다. 그에 반해 루비나 자바스크립트는 이른바 ‘duck-typing’이라고 하는 타입 시스템을 사용함으로써 컴파일 타임에서의 타입을 강제하지 않는다. Invokedynamic은 이러한 duck-typing을 JVM레벨에서 기본적으로 지원하면서 자바 외에 다른 언어들이 JVM이라는 플랫폼 위에서 최적화된 방식으로 실행될 수 있는 토대를 제공한다.<br>
 
-###Checking interactions on Mock/Spies
+###Mock
+```
+def "creating example mocks"() {
+   given:
+      List list = Mock(List)
+ 
+      List list2 = Mock() // preffered way
+ 
+      def list3 = Mock(List)      
+}
+```
+**cf) Stub vs Mock **<br>
+Stub 은 테스트 과정에서 일어나는 호출에 대해 지정된 답변을 제공하고, 그 밖의 테스트를 위해 별도로 프로그래밍 되지 않은 질의에 대해서는 대게 아무런 대응을 하지 않는다.<br>
+
+Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다.
 
 ##블로그에서 groovy를 이용한 통합테스트 방식
 참고 : http://groovy-coder.com/?p=111<br>
