@@ -2,7 +2,7 @@
 
 **발표 순서**<br>
 1. Spock 기본적인 문법
-2. 블로그에서 groovy를 이용한 통합테스트 방식
+2. 블로그에서 groovy를 이용한 통합테스트 방식 소개
 3. 간단한 Spock 적용 후기
 
 cf) 마지막부분에 Spring Boot 1.4 Test방식 소개
@@ -227,7 +227,7 @@ def "다양한 제곱 테스트"() {
         10   || 100
     }
 ```
-##블로그에서 groovy를 이용한 통합테스트 방식
+##블로그에서 groovy를 이용한 통합테스트 방식 소개
 참고 : http://groovy-coder.com/?p=111<br>
 
 올랑(Hollandaise) 소스를 만들기 위해서는 cooking temperature를 매우 정밀하게 조절해야 한다. 
