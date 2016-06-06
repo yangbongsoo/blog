@@ -139,7 +139,7 @@ cf) JDK7에서 새롭게 소개된 Invokedynamic. 자바는 static type 언어�
 
 ###Mock
 ```
-def "creating example mocks"() {
+def "Mock 생성"() {
    given:
       List list = Mock(List)
  
