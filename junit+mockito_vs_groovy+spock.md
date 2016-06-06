@@ -156,10 +156,19 @@ Stub 은 테스트 과정에서 일어나는 호출에 대해 지정된 답변�
 Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다.<br>
 
 ###Spy
-Unlike Stub or Mock a Spy is not exactly a dummy object.
-It’s fair to say that a Spy is rather a wrapper to a normal object.
+Stub이나 Mock과는 다르게 Spy는 Dummy 객체가 아니다. Spy는 실제 일반 객체를 감싼것이다.
 
-###
+
+
+org.spockframework.mock.CannotCreateMockException: Cannot create mock for class spock.basic.UserServiceImpl. Mocking of non-interface types requires the CGLIB library. Please put cglib-nodep-2.2 or higher on the class path.
+```
+<dependency>
+    <groupId>cglib</groupId>
+    <artifactId>cglib</artifactId>
+    <version>2.2</version>
+</dependency>
+```
+###where:
 ```
 def "다양한 제곱 테스트"() {
         expect:
