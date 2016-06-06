@@ -291,11 +291,12 @@ class HollandaiseTemperatureMonitorSpec extends Specification {
 
 }
 ```
-cf) @Unroll : Indicates that iterations of a data-driven feature should be made visible  as separate features to the outside world(테스트 구현에 영향을 미치지 않음)<br>
+cf) @Unroll : Indicates that iterations of a data-driven feature should be made visible  as separate features to the outside world(IDEs, reports, etc.)<br>
+테스트 구현에 영향을 미치지 않음.<br>
 
 
 
-통합 테스트<br>
+**통합 테스트**<br>
 ```
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ApplicationSpecWithoutAnnotation extends Specification {
