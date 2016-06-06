@@ -31,9 +31,9 @@ cf) 마지막부분에 Spring Boot 1.4 Test방식 소개
 ![](스크린샷 2016-06-06 오후 3.21.46.jpg)
 ![](스크린샷 2016-06-06 오후 3.21.56.jpg)
 
-3개의 섹션으로 나눠진다(BDD에 기반해서 given when then).
+BDD에 기반해서 given: when: then: 3개의 섹션으로 나눠진다.
 
-cf) expect는 간단한 테스트할 때 
+cf) expect: 는 간단한 테스트할 때 
 ```
 class SpockNameInverterTest extends Specification{
     def "NameInverter 테스트"(){
@@ -43,7 +43,7 @@ class SpockNameInverterTest extends Specification{
     }
 
     private String invert(String name){
-        return null;
+        return "";
     }
 }
 ```
