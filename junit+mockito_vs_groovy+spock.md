@@ -361,7 +361,8 @@ spock으로 진행해봤는데 에러가 났을 때 좀 더 친절한 메세지 
 
 ![](스크린샷 2016-06-06 오후 7.35.41.jpg)
 
-###미담담 프로젝트 단위 테스트
+###미담 프로젝트 단위 테스트
+java+mockito
 ```
 @Mock
 MessageRepository messageRepository;
@@ -381,21 +382,42 @@ public void setUp() throws Exception {
 ```
 ```
 @Test(expected = NotStartException.class)
-    public void 시작안했는데_랜덤메세지를_호출하면_예외가_잘_발생하나_확인(){
-        // Given
-        messages = Arrays.asList(message1,message2,message3);
+public void 시작안했는데_랜덤메세지를_호출하면_예외가_잘_발생하나_확인(){
+    // Given
+    messages = Arrays.asList(message1,message2,message3);
 
-        // When
-        when(episodeCountRepository.findEpisodeCount()).thenReturn(3L);
-        when(messageRepository.findByEpisode(3L)).thenReturn(messages);
-        when(episodeCountRepository.findEventStatus()).thenReturn(true);
+    // When
+    when(episodeCountRepository.findEpisodeCount()).thenReturn(3L);
+    when(messageRepository.findByEpisode(3L)).thenReturn(messages);
+    when(episodeCountRepository.findEventStatus()).thenReturn(true);
 
-        MessageService messageServiceSpy = Mockito.spy(messageService);
-        when(messageServiceSpy.createRandom(3)).thenReturn(1);
-        when(messageServiceSpy.getMessageByRandom()).thenReturn(message1);
+    MessageService messageServiceSpy = Mockito.spy(messageService);
+    when(messageServiceSpy.createRandom(3)).thenReturn(1);
+    when(messageServiceSpy.getMessageByRandom()).thenReturn(message1);
 
-        // Then
-        messageServiceSpy.getMessageByRandom();
+    // Then
+    messageServiceSpy.getMessageByRandom();
+}
+```
+groovy+spock
+```
+def "시작안했는데 랜덤메세지를 호출하면 예외가 잘 발생하나 확인"(){
+        given:
+        List<Message> messages = messageFixture()
+        def mockMessageRepository = Mock(MessageRepository.class)
+        def mockEmployeeRepository = Mock(EmployeeRepository.class)
+        def mockEpisodeCountRepository = Mock(EpisodeCountRepository.class)
+        def messageService = new MessageService(mockMessageRepository,
+                mockEmployeeRepository, mockEpisodeCountRepository)
+
+        when:
+        mockMessageRepository.findByEpisode(3L) >> messages
+        mockEpisodeCountRepository.findEpisodeCount() >> 3L;
+        mockEpisodeCountRepository.findEventStatus() >> true
+        messageService.getMessageByRandom()
+        
+        then:
+        thrown(NotStartException.class)
     }
 ```
 
