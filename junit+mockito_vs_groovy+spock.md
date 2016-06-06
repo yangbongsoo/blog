@@ -10,7 +10,6 @@ cf) Spring Boot 1.4 Test방식 변경부분, mock과 stub차이
 ###문법 차이
 참고 : http://d2.naver.com/helloworld/568425
 
-
 ###블로그에서 groovy를 이용한 통합테스트 방식
 참고 : http://groovy-coder.com/?p=111<br>
 
