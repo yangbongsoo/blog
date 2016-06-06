@@ -7,7 +7,7 @@
 
 cf) Spring Boot 1.4 Test방식 변경부분, mock과 stub차이
 
-###Spock
+##Spock
 참고 : http://thejavatar.com/testing-with-spock/
 
 먼저 의존성 추가 
@@ -48,7 +48,7 @@ class SpockNameInverterTest extends Specification{
 }
 ```
 
-**Stub**
+###Stub
 ```
 def "creating example stubs"() {
    given:
@@ -59,6 +59,7 @@ def "creating example stubs"() {
       def list3 = Stub(List)      
 }
 ```
+타입
 ```
 def "Stub 사용법"() {
         given:
@@ -101,6 +102,9 @@ def "유저 이름이 Norman이면 exception, 유저이름이 R이면 정상처�
         notThrown(IllegalArgumentException)
     }
 ```
+
+wildcard
+
 
 ###블로그에서 groovy를 이용한 통합테스트 방식
 참고 : http://groovy-coder.com/?p=111<br>
