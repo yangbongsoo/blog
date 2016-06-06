@@ -1,13 +1,13 @@
 # JUnit+Mockito vs Groovy+Spock
 
 **발표 순서**<br>
-1. Spock 기본
-2. 블로그에서 소개한 Spock 통합테스트
+1. Spock기본적인 문법
+2. 블로그에서 groovy를 이용한 통합테스트 방식
 3. Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
 
 cf) 마지막부분에 Spring Boot 1.4 Test방식 소개
 
-##Spock 기본
+##Spock
 참고 : http://thejavatar.com/testing-with-spock/
 
 먼저 의존성 추가 
@@ -31,9 +31,9 @@ cf) 마지막부분에 Spring Boot 1.4 Test방식 소개
 ![](스크린샷 2016-06-06 오후 3.21.46.jpg)
 ![](스크린샷 2016-06-06 오후 3.21.56.jpg)
 
-BDD에 기반해서 given: when: then: 3개의 섹션으로 나눠진다.
+3개의 섹션으로 나눠진다(BDD에 기반해서 given when then).
 
-cf) expect: 는 간단한 테스트할 때 
+cf) expect는 간단한 테스트할 때 
 ```
 class SpockNameInverterTest extends Specification{
     def "NameInverter 테스트"(){
@@ -43,14 +43,14 @@ class SpockNameInverterTest extends Specification{
     }
 
     private String invert(String name){
-        return "";
+        return null;
     }
 }
 ```
 
 ###Stub
 ```
-def "Stub 생성"() {
+def "creating example stubs"() {
    given:
       List list = Stub(List)
  
@@ -138,9 +138,8 @@ def "만약 리스트에 Integer 추가하면 예외처리"() {
 cf) JDK7에서 새롭게 소개된 Invokedynamic. 자바는 static type 언어라고 불리며, 이는 컴파일 타임에서 이미 멤버 변수들이나 함수 변수들의 타입이 반드시 명시적으로 지정돼야 함을 의미한다. 그에 반해 루비나 자바스크립트는 이른바 ‘duck-typing’이라고 하는 타입 시스템을 사용함으로써 컴파일 타임에서의 타입을 강제하지 않는다. Invokedynamic은 이러한 duck-typing을 JVM레벨에서 기본적으로 지원하면서 자바 외에 다른 언어들이 JVM이라는 플랫폼 위에서 최적화된 방식으로 실행될 수 있는 토대를 제공한다.<br>
 
 ###Mock
-Dummy 객체 자체를 테스트하기보다 여러 인터페이스들이 연결되어 있는 특정 메서드를 체크하는게 더 관심있을 때 Mock이나 Spy를 쓴다. 
 ```
-def "Mock 생성"() {
+def "creating example mocks"() {
    given:
       List list = Mock(List)
  
@@ -149,11 +148,12 @@ def "Mock 생성"() {
       def list3 = Mock(List)      
 }
 ```
+Dummy 객체 자체를 테스트하기보다 여러 인터페이스들이 연결되어 있는 특정 메서드를 체크하는게 더 관심있을 때 Mock이나 Spy를 쓴다. 
 
 **cf) Stub vs Mock **<br>
 Stub 은 테스트 과정에서 일어나는 호출에 대해 지정된 답변을 제공하고, 그 밖의 테스트를 위해 별도로 프로그래밍 되지 않은 질의에 대해서는 대게 아무런 대응을 하지 않는다.<br>
 
-Mock Object는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다.<br>
+Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다.<br>
 
 ###Spy
 Stub이나 Mock과는 다르게 Spy는 Dummy 객체가 아니다. Spy는 실제 일반 객체를 감싼것이다. Spy를 만들 때는 interface로 만들지 않고 class로 만들어야 한다. 
@@ -202,7 +202,7 @@ def "class로 Spy를 만들어야 된다."() {
         service.save(new User(name: 'Norman'))
     }
 ```
-cf) 참고자료에서는 이렇게 하면 Spy객체가 만들어진다고 했는데 에러가 발생함. cglib 의존성 추가해주니 Spy 객체 생성됌.
+cf) 참고자료에서는 이렇게 하면 Spy객체가 만들어진다고 했는데 나는 에러가 발생함. cglib 의존성 추가해주니 Spy 객체 생성됌.
 ```
 org.spockframework.mock.CannotCreateMockException: Cannot create mock for class spock.basic.UserServiceImpl.
 Mocking of non-interface types requires the CGLIB library. Please put cglib-nodep-2.2 or higher on the class path.
@@ -227,17 +227,17 @@ def "다양한 제곱 테스트"() {
         10   || 100
     }
 ```
-##블로그에서 소개한 Spock 통합테스트
+##블로그에서 groovy를 이용한 통합테스트 방식
 참고 : http://groovy-coder.com/?p=111<br>
 
 올랑(Hollandaise) 소스를 만들기 위해서는 cooking temperature를 매우 정밀하게 조절해야 한다. 
 ![](올랑.jpg)
 
-그래서 올랑(Hollandaise) 소스를 위해 애플리케이션에서 temperature monitoring하는 system을 만든다고 해보자.
+그래서 올랑(Hollandaise) 소스를 위해 애플리케이션에서 temperature monitoring 하는 system을 만든다고 해보자.
 ```
 class HollandaiseTemperatureMonitorSpec extends Specification {
 
-    @Unroll
+    @Unroll 
     def "returns #temperatureOk for temperature #givenTemperature"() {
         given: "a stub thermometer returning given givenTemperature"
         Thermometer thermometer = Stub(Thermometer)
@@ -261,7 +261,7 @@ class HollandaiseTemperatureMonitorSpec extends Specification {
 
 }
 ```
-다음은 Spring을 쓰지 않고 groovy+spock으로 단위 테스트를 만든 예제다. 흥미로운 점은 `Stub(Thermometer)`를 통해 spock feature Stub을 만들었고 `givenTemperature`를 리턴한다. <br>
+cf) @Unroll : Indicates that iterations of a data-driven feature should be made visible  as separate features to the outside world(테스트 구현에 영향을 미치지 않음)<br>
 
 production code HollandaiseTemperatureMonitor 클래스는 다음과 같다.
 ```
