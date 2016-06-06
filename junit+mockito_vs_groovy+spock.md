@@ -138,6 +138,7 @@ def "만약 리스트에 Integer 추가하면 예외처리"() {
 cf) JDK7에서 새롭게 소개된 Invokedynamic. 자바는 static type 언어라고 불리며, 이는 컴파일 타임에서 이미 멤버 변수들이나 함수 변수들의 타입이 반드시 명시적으로 지정돼야 함을 의미한다. 그에 반해 루비나 자바스크립트는 이른바 ‘duck-typing’이라고 하는 타입 시스템을 사용함으로써 컴파일 타임에서의 타입을 강제하지 않는다. Invokedynamic은 이러한 duck-typing을 JVM레벨에서 기본적으로 지원하면서 자바 외에 다른 언어들이 JVM이라는 플랫폼 위에서 최적화된 방식으로 실행될 수 있는 토대를 제공한다.<br>
 
 ###Mock
+Dummy 객체 자체를 테스트하기보다 여러 인터페이스들이 연결되어 있는 특정 메서드를 체크하는게 더 관심있을 때 Mock이나 Spy를 쓴다. 
 ```
 def "Mock 생성"() {
    given:
@@ -148,12 +149,11 @@ def "Mock 생성"() {
       def list3 = Mock(List)      
 }
 ```
-Dummy 객체 자체를 테스트하기보다 여러 인터페이스들이 연결되어 있는 특정 메서드를 체크하는게 더 관심있을 때 Mock이나 Spy를 쓴다. 
 
 **cf) Stub vs Mock **<br>
 Stub 은 테스트 과정에서 일어나는 호출에 대해 지정된 답변을 제공하고, 그 밖의 테스트를 위해 별도로 프로그래밍 되지 않은 질의에 대해서는 대게 아무런 대응을 하지 않는다.<br>
 
-Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다.<br>
+Mock Object는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다.<br>
 
 ###Spy
 Stub이나 Mock과는 다르게 Spy는 Dummy 객체가 아니다. Spy는 실제 일반 객체를 감싼것이다. Spy를 만들 때는 interface로 만들지 않고 class로 만들어야 한다. 
@@ -202,7 +202,7 @@ def "class로 Spy를 만들어야 된다."() {
         service.save(new User(name: 'Norman'))
     }
 ```
-cf) 참고자료에서는 이렇게 하면 Spy객체가 만들어진다고 했는데 나는 에러가 발생함. cglib 의존성 추가해주니 Spy 객체 생성됌.
+cf) 참고자료에서는 이렇게 하면 Spy객체가 만들어진다고 했는데 에러가 발생함. cglib 의존성 추가해주니 Spy 객체 생성됌.
 ```
 org.spockframework.mock.CannotCreateMockException: Cannot create mock for class spock.basic.UserServiceImpl.
 Mocking of non-interface types requires the CGLIB library. Please put cglib-nodep-2.2 or higher on the class path.
