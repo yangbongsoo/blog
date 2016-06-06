@@ -354,7 +354,8 @@ class HistoricTemperatureDataRepositorySpecIT extends Specification {
 ```
 
 ##Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교
-name inverter 진행중 ...
+참고 : https://www.youtube.com/watch?v=czjWpmy3rkM<br>
+name inverter 를 spock으로 해봤는데 에러가 났을 때 좀 더 친절한 메세지 외에는 장점을 못느꼈음.
 ![](스크린샷 2016-06-06 오후 7.35.06.jpg)
 
 ![](스크린샷 2016-06-06 오후 7.35.41.jpg)
