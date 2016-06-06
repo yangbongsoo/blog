@@ -7,9 +7,46 @@
 
 cf) Spring Boot 1.4 Test방식 변경부분, mock과 stub차이
 
-###문법 차이
-참고 : http://d2.naver.com/helloworld/568425
+###Spock
+참고 : http://thejavatar.com/testing-with-spock/
 
+먼저 의존성 추가 
+```
+<dependency>
+    <groupId>org.spockframework</groupId>
+    <artifactId>spock-core</artifactId>
+    <version>1.0-groovy-2.4</version>
+</dependency>
+```
+스프링 프로젝트
+```
+<dependency>
+    <groupId>org.spockframework</groupId>
+    <artifactId>spock-spring</artifactId>
+    <version>1.0-groovy-2.4</version>
+</dependency>
+```
+
+첫 예제
+![](스크린샷 2016-06-06 오후 3.21.46.jpg)
+![](스크린샷 2016-06-06 오후 3.21.56.jpg)
+
+3개의 섹션으로 나눠진다(BDD에 기반해서 given when then).
+
+cf) expect 는 작은 부분 테스트할 때 
+```
+class SpockNameInverterTest extends Specification{
+    def "NameInverter 테스트"(){
+
+        expect:
+        invert(null) == ""
+    }
+
+    private String invert(String name){
+        return null;
+    }
+}
+```
 ###블로그에서 groovy를 이용한 통합테스트 방식
 참고 : http://groovy-coder.com/?p=111<br>
 
