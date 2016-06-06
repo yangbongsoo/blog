@@ -1,13 +1,13 @@
 # JUnit+Mockito vs Groovy+Spock
 
 **발표 순서**<br>
-1. Spock기본적인 문법
+1. Spock 기본
 2. 블로그에서 소개한 Spock 통합테스트
 3. Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
 
 cf) 마지막부분에 Spring Boot 1.4 Test방식 소개
 
-##Spock
+##Spock 기본
 참고 : http://thejavatar.com/testing-with-spock/
 
 먼저 의존성 추가 
