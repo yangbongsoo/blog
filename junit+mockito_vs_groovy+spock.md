@@ -202,8 +202,11 @@ def "class로 Spy를 만들어야 된다."() {
         service.save(new User(name: 'Norman'))
     }
 ```
-org.spockframework.mock.CannotCreateMockException: Cannot create mock for class spock.basic.UserServiceImpl. Mocking of non-interface types requires the CGLIB library. Please put cglib-nodep-2.2 or higher on the class path.
+cf) 참고자료에서는 이렇게 하면 Spy객체가 만들어진다고 했는데 나는 에러가 발생함. cglib 의존성 추가해주니 Spy 객체 생성됌.
 ```
+org.spockframework.mock.CannotCreateMockException: Cannot create mock for class spock.basic.UserServiceImpl.
+Mocking of non-interface types requires the CGLIB library. Please put cglib-nodep-2.2 or higher on the class path.
+
 <dependency>
     <groupId>cglib</groupId>
     <artifactId>cglib</artifactId>
