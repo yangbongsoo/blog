@@ -156,23 +156,48 @@ Stub 은 테스트 과정에서 일어나는 호출에 대해 지정된 답변�
 Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다.<br>
 
 ###Spy
-Stub이나 Mock과는 다르게 Spy는 Dummy 객체가 아니다. Spy는 실제 일반 객체를 감싼것이다.
+Stub이나 Mock과는 다르게 Spy는 Dummy 객체가 아니다. Spy는 실제 일반 객체를 감싼것이다. Spy를 만들 때는 interface로 만들지 않고 class로 만들어야 한다. 
 ```
 def "interface로 Spy 만들면 안된다."() {
         given:
         UserService service = Spy(UserService)
+        
         expect:
         service.save(new User(name: 'Norman'))
     }
     
 결과 : Cannot invoke real method on interface based mock object    
 ```
+아래의 예제는 Transaction 객체를 생성자 인수로 받는 UserServiceImpl 클래스를 Spy한다.
+```
+public interface Transaction { }
 
+public interface UserService {
+    boolean isServiceUp();
+    void save(User user);
+}
+
+public class UserServiceImpl implements UserService{
+
+    public UserServiceImpl(Transaction transaction) {  }
+
+    @Override
+    public boolean isServiceUp() {
+        return false;
+    }
+
+    @Override
+    public void save(User user) {
+        System.out.println("UserServiceImpl");
+    }
+}
+```
 ```
 def "class로 Spy를 만들어야 된다."() {
         given:
         Transaction transaction = Stub(Transaction)
         UserService service = Spy(UserServiceImpl, constructorArgs: [transaction])
+        
         expect:
         service.save(new User(name: 'Norman'))
     }
