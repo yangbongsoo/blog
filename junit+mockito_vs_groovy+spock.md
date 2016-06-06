@@ -354,13 +354,50 @@ class HistoricTemperatureDataRepositorySpecIT extends Specification {
 ```
 
 ##Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교
+###Name Inverter
 참고 : https://www.youtube.com/watch?v=czjWpmy3rkM<br>
-'name inverter' 를 spock으로 진행해봤는데 에러가 났을 때 좀 더 친절한 메세지 외에는 장점을 못느꼈습니다(중요한건 리팩토링이지 명세가 아닌거 같습니다).
+spock으로 진행해봤는데 에러가 났을 때 좀 더 친절한 메세지 외에는 장점을 못느꼈습니다(중요한건 리팩토링이지 명세가 아닌거 같습니다).
 ![](스크린샷 2016-06-06 오후 7.35.06.jpg)
 
 ![](스크린샷 2016-06-06 오후 7.35.41.jpg)
 
+###미담담 프로젝트 단위 테스트
+```
+@Mock
+MessageRepository messageRepository;
+@Mock
+EmployeeRepository employeeRepository;
+@Mock
+EpisodeCountRepository episodeCountRepository;
 
+@Before
+public void setUp() throws Exception {
+    MockitoAnnotations.initMocks(this);
+    messageService = new MessageService(messageRepository,
+            employeeRepository,
+            episodeCountRepository);
+    messageFixture();
+}
+```
+```
+@Test(expected = NotStartException.class)
+    public void 시작안했는데_랜덤메세지를_호출하면_예외가_잘_발생하나_확인(){
+        // Given
+        messages = Arrays.asList(message1,message2,message3);
+
+        // When
+        when(episodeCountRepository.findEpisodeCount()).thenReturn(3L);
+        when(messageRepository.findByEpisode(3L)).thenReturn(messages);
+        when(episodeCountRepository.findEventStatus()).thenReturn(true);
+
+        MessageService messageServiceSpy = Mockito.spy(messageService);
+        when(messageServiceSpy.createRandom(3)).thenReturn(1);
+        when(messageServiceSpy.getMessageByRandom()).thenReturn(message1);
+
+        // Then
+        messageServiceSpy.getMessageByRandom();
+    }
+```
 
 ##Spring Boot 1.4 Test방식 변경부분 소개
 참고 : https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4<br>
