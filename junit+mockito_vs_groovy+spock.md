@@ -148,6 +148,8 @@ def "creating example mocks"() {
       def list3 = Mock(List)      
 }
 ```
+Dummy 객체 자체를 테스트하기보다 여러 인터페이스들이 연결되어 있는 특정 메서드를 체크하는게 더 관심있을 때 Mock이나 Spy를 쓴다. 
+
 **cf) Stub vs Mock **<br>
 Stub 은 테스트 과정에서 일어나는 호출에 대해 지정된 답변을 제공하고, 그 밖의 테스트를 위해 별도로 프로그래밍 되지 않은 질의에 대해서는 대게 아무런 대응을 하지 않는다.<br>
 
