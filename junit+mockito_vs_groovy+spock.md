@@ -331,13 +331,14 @@ class SpringBootSpockTestingApplicationSpecIT extends Specification {
 ##Spock 적용 후기
 ###Name Inverter
 참고 : https://www.youtube.com/watch?v=czjWpmy3rkM<br>
+
 spock으로 진행해봤는데 에러가 났을 때 좀 더 친절한 메세지 외에는 장점을 못느꼈습니다(중요한건 리팩토링이지 명세가 아닌거 같습니다).
 ![](스크린샷 2016-06-06 오후 7.35.06.jpg)
 
 ![](스크린샷 2016-06-06 오후 7.35.41.jpg)
 
 ###미담 프로젝트 단위 테스트
-java+mockito
+**java+mockito**
 ```
 @Mock
 MessageRepository messageRepository;
@@ -374,7 +375,7 @@ public void 시작안했는데_랜덤메세지를_호출하면_예외가_잘_발
     messageServiceSpy.getMessageByRandom();
 }
 ```
-groovy+spock
+**groovy+spock**
 ```
 def "시작안했는데 랜덤메세지를 호출하면 예외가 잘 발생하나 확인"(){
         given:
@@ -395,6 +396,9 @@ def "시작안했는데 랜덤메세지를 호출하면 예외가 잘 발생하�
         thrown(NotStartException.class)
     }
 ```
+
+
+---
 
 ##Spring Boot 1.4 Test방식 변경부분 소개
 참고 : https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4<br>
