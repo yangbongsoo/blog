@@ -59,7 +59,7 @@ def "creating example stubs"() {
       def list3 = Stub(List)      
 }
 ```
-타입
+
 ```
 def "Stub 사용법"() {
         given:
@@ -103,7 +103,39 @@ def "유저 이름이 Norman이면 exception, 유저이름이 R이면 정상처�
     }
 ```
 
-wildcard
+**wildcard**
+```
+given:
+    // 모든 인자 허용 
+    list.contains(_) >> true
+ 
+    // 모든 Integer 인자 허용
+    list.add(_ as Integer) >> true
+ 
+    // null이 아니면 허용
+    list.add(!null) >> true
+ 
+    // someObject가 아니면 허용
+    list.add(!someObject) >> true
+```
+```
+def "만약 리스트에 Integer 추가하면 예외처리"() {
+        given:
+        List list = Stub()
+        list.add(_ as Integer) >> { throw new IllegalArgumentException() }
+
+        when:
+        list.add(2)
+        then:
+        thrown(IllegalArgumentException)
+
+        when:
+        list.add("String")
+        then:
+        notThrown(IllegalArgumentException)
+    }
+```
+cf) JDK7에서 새롭게 소개된 Invokedynamic. 자바는 static type 언어라고 불리며, 이는 컴파일 타임에서 이미 멤버 변수들이나 함수 변수들의 타입이 반드시 명시적으로 지정돼야 함을 의미한다. 그에 반해 루비나 자바스크립트는 이른바 ‘duck-typing’이라고 하는 타입 시스템을 사용함으로써 컴파일 타임에서의 타입을 강제하지 않는다. Invokedynamic은 이러한 duck-typing을 JVM레벨에서 기본적으로 지원하면서 자바 외에 다른 언어들이 JVM이라는 플랫폼 위에서 최적화된 방식으로 실행될 수 있는 토대를 제공한다.
 
 
 ###블로그에서 groovy를 이용한 통합테스트 방식
