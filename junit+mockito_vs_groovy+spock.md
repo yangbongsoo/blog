@@ -50,7 +50,7 @@ class SpockNameInverterTest extends Specification{
 
 ###Stub
 ```
-def "creating example stubs"() {
+def "Stub 생성"() {
    given:
       List list = Stub(List)
  
