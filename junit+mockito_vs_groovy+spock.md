@@ -33,7 +33,7 @@ cf) Spring Boot 1.4 Test방식 변경부분, mock과 stub차이
 
 3개의 섹션으로 나눠진다(BDD에 기반해서 given when then).
 
-cf) expect 는 작은 부분 테스트할 때 
+cf) expect는 간단한 테스트할 때 
 ```
 class SpockNameInverterTest extends Specification{
     def "NameInverter 테스트"(){
@@ -47,6 +47,61 @@ class SpockNameInverterTest extends Specification{
     }
 }
 ```
+
+**Stub**
+```
+def "creating example stubs"() {
+   given:
+      List list = Stub(List)
+ 
+      List list2 = Stub() // preffered way
+ 
+      def list3 = Stub(List)      
+}
+```
+```
+def "Stub 사용법"() {
+        given:
+        List list = Stub()
+        list.size() >> 3
+        
+        expect:
+        list.size() == 3
+    }
+```
+
+조금 더 난이도 있는 UserService 예제
+```
+public class User {
+    String name;
+}
+ 
+public interface UserService {
+    void save(User user);
+}
+```
+```
+def "유저 이름이 Norman이면 exception, 유저이름이 R이면 정상처리"() {
+        given:
+        UserService service = Stub()
+        service.save({ User user -> 'Norman' == user.name }) >> {
+            throw new IllegalArgumentException("We don't want you here, Norman!")
+        }
+
+        when:
+        User user = new User(name: 'Norman')
+        service.save(user)
+        then:
+        thrown(IllegalArgumentException)
+
+        when:
+        User user2 = new User(name: 'R')
+        service.save(user2)
+        then:
+        notThrown(IllegalArgumentException)
+    }
+```
+
 ###블로그에서 groovy를 이용한 통합테스트 방식
 참고 : http://groovy-coder.com/?p=111<br>
 
