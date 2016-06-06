@@ -1,13 +1,13 @@
 # JUnit+Mockito vs Groovy+Spock
 
 **발표 순서**<br>
-1. Spock기본적인 문법
-2. 블로그에서 groovy를 이용한 통합테스트 방식
-3. Spock 적용 후기
+1. Spock 기본
+2. 블로그에서 소개한 Spock 통합테스트
+3. Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교분석
 
 cf) 마지막부분에 Spring Boot 1.4 Test방식 소개
 
-##Spock
+##Spock 기본
 참고 : http://thejavatar.com/testing-with-spock/
 
 먼저 의존성 추가 
@@ -31,9 +31,9 @@ cf) 마지막부분에 Spring Boot 1.4 Test방식 소개
 ![](스크린샷 2016-06-06 오후 3.21.46.jpg)
 ![](스크린샷 2016-06-06 오후 3.21.56.jpg)
 
-3개의 섹션으로 나눠진다(BDD에 기반해서 given when then).
+BDD에 기반해서 given: when: then: 3개의 섹션으로 나눠진다.
 
-cf) expect는 간단한 테스트할 때 
+cf) expect: 는 간단한 테스트할 때 
 ```
 class SpockNameInverterTest extends Specification{
     def "NameInverter 테스트"(){
@@ -43,14 +43,14 @@ class SpockNameInverterTest extends Specification{
     }
 
     private String invert(String name){
-        return null;
+        return "";
     }
 }
 ```
 
 ###Stub
 ```
-def "creating example stubs"() {
+def "Stub 생성"() {
    given:
       List list = Stub(List)
  
@@ -138,8 +138,9 @@ def "만약 리스트에 Integer 추가하면 예외처리"() {
 cf) JDK7에서 새롭게 소개된 Invokedynamic. 자바는 static type 언어라고 불리며, 이는 컴파일 타임에서 이미 멤버 변수들이나 함수 변수들의 타입이 반드시 명시적으로 지정돼야 함을 의미한다. 그에 반해 루비나 자바스크립트는 이른바 ‘duck-typing’이라고 하는 타입 시스템을 사용함으로써 컴파일 타임에서의 타입을 강제하지 않는다. Invokedynamic은 이러한 duck-typing을 JVM레벨에서 기본적으로 지원하면서 자바 외에 다른 언어들이 JVM이라는 플랫폼 위에서 최적화된 방식으로 실행될 수 있는 토대를 제공한다.<br>
 
 ###Mock
+Dummy 객체 자체를 테스트하기보다 여러 인터페이스들이 연결되어 있는 특정 메서드를 체크하는게 더 관심있을 때 Mock이나 Spy를 쓴다. 
 ```
-def "creating example mocks"() {
+def "Mock 생성"() {
    given:
       List list = Mock(List)
  
@@ -148,12 +149,11 @@ def "creating example mocks"() {
       def list3 = Mock(List)      
 }
 ```
-Dummy 객체 자체를 테스트하기보다 여러 인터페이스들이 연결되어 있는 특정 메서드를 체크하는게 더 관심있을 때 Mock이나 Spy를 쓴다. 
 
 **cf) Stub vs Mock **<br>
 Stub 은 테스트 과정에서 일어나는 호출에 대해 지정된 답변을 제공하고, 그 밖의 테스트를 위해 별도로 프로그래밍 되지 않은 질의에 대해서는 대게 아무런 대응을 하지 않는다.<br>
 
-Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다.<br>
+Mock Object는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다.<br>
 
 ###Spy
 Stub이나 Mock과는 다르게 Spy는 Dummy 객체가 아니다. Spy는 실제 일반 객체를 감싼것이다. Spy를 만들 때는 interface로 만들지 않고 class로 만들어야 한다. 
@@ -202,7 +202,7 @@ def "class로 Spy를 만들어야 된다."() {
         service.save(new User(name: 'Norman'))
     }
 ```
-cf) 참고자료에서는 이렇게 하면 Spy객체가 만들어진다고 했는데 나는 에러가 발생함. cglib 의존성 추가해주니 Spy 객체 생성됌.
+cf) 참고자료에서는 이렇게 하면 Spy객체가 만들어진다고 했는데 에러가 발생함. cglib 의존성 추가해주니 Spy 객체 생성됌.
 ```
 org.spockframework.mock.CannotCreateMockException: Cannot create mock for class spock.basic.UserServiceImpl.
 Mocking of non-interface types requires the CGLIB library. Please put cglib-nodep-2.2 or higher on the class path.
@@ -227,14 +227,43 @@ def "다양한 제곱 테스트"() {
         10   || 100
     }
 ```
-##블로그에서 groovy를 이용한 통합테스트 방식
+##블로그에서 소개한 Spock 통합테스트
 참고 : http://groovy-coder.com/?p=111<br>
 
 올랑(Hollandaise) 소스를 만들기 위해서는 cooking temperature를 매우 정밀하게 조절해야 한다. 
 ![](올랑.jpg)
 
-그래서 올랑(Hollandaise) 소스를 위해 애플리케이션에서 temperature monitoring 하는 system을 만든다고 해보자.
-HollandaiseTemperatureMonitor 클래스(production code)는 다음과 같다.
+그래서 올랑(Hollandaise) 소스를 위해 애플리케이션에서 temperature monitoring하는 system을 만든다고 해보자.
+```
+class HollandaiseTemperatureMonitorSpec extends Specification {
+
+    @Unroll
+    def "returns #temperatureOk for temperature #givenTemperature"() {
+        given: "a stub thermometer returning given givenTemperature"
+        Thermometer thermometer = Stub(Thermometer)
+        thermometer.currentTemperature() >> givenTemperature
+
+        and: "a monitor with the stubbed thermometer"
+        HollandaiseTemperatureMonitor watchman = new HollandaiseTemperatureMonitor(thermometer)
+
+        expect:
+        watchman.isTemperatureOk() == temperatureOk
+
+        where:
+        givenTemperature || temperatureOk
+        0                || false
+        100              || false
+        80               || true
+        45               || true
+        60               || true
+        -10              || false
+    }
+
+}
+```
+다음은 Spring을 쓰지 않고 groovy+spock으로 단위 테스트를 만든 예제다. 흥미로운 점은 `Stub(Thermometer)`를 통해 spock feature Stub을 만들었고 `givenTemperature`를 리턴한다. <br>
+
+production code HollandaiseTemperatureMonitor 클래스는 다음과 같다.
 ```
 @Service
 public class HollandaiseTemperatureMonitor {
@@ -261,42 +290,12 @@ public class HollandaiseTemperatureMonitor {
 
         return !outOfLimits;
     }
-}
-```
-Spock을 이용한 단위 테스트
-```
-class HollandaiseTemperatureMonitorSpec extends Specification {
-
-    @Unroll 
-    def "returns #temperatureOk for temperature #givenTemperature"() {
-        given: "a stub thermometer returning given givenTemperature"
-        Thermometer thermometer = Stub(Thermometer)
-        thermometer.currentTemperature() >> givenTemperature
-
-        and: "a monitor with the stubbed thermometer"
-        HollandaiseTemperatureMonitor watchman = new HollandaiseTemperatureMonitor(thermometer)
-
-        expect:
-        watchman.isTemperatureOk() == temperatureOk
-
-        where:
-        givenTemperature || temperatureOk
-        0                || false
-        100              || false
-        80               || true
-        45               || true
-        60               || true
-        -10              || false
-    }
 
 }
+
 ```
-cf) @Unroll : Indicates that iterations of a data-driven feature should be made visible  as separate features to the outside world(IDEs, reports, etc.)<br>
-테스트 구현에 영향을 미치지 않음.<br>
 
-
-
-**통합 테스트**<br>
+통합 테스트<br>
 ```
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ApplicationSpecWithoutAnnotation extends Specification {
@@ -327,18 +326,43 @@ class SpringBootSpockTestingApplicationSpecIT extends Specification {
     }
 }
 ```
+Spring Boot 1.4에서는 persistence layer 통합 테스트에 대한 간편한 방식을 소개했다`@DataJpaTest`은 persistence layer(구체적으로는 JPA)와 상호작용이 필요한 component들만 초기화해서 빠른 통합 테스트가 가능하다.
+```
+@ContextConfiguration
+@DataJpaTest
+class HistoricTemperatureDataRepositorySpecIT extends Specification {
 
-##Spock 적용 후기
+    @Autowired
+    HistoricTemperatureDataRepository historicTemperatureDataRepository
+
+    @Autowired
+    TestEntityManager testEntityManager
+
+    def "should load all data"() {
+        given: "one temperature entry"
+        int temperature = 5
+        HistoricTemperatureData data = new HistoricTemperatureData(temperature, new Timestamp(System.currentTimeMillis()))
+        testEntityManager.persist(data)
+
+        when: "loading data from repository"
+        def loadedData = historicTemperatureDataRepository.findAll()
+
+        then: "persisted data is loaded"
+        loadedData.first().temperature == temperature
+    }
+}
+```
+
+##Java+Mockito 단위 테스트와 groovy-spock으로 만든 단위 테스트 비교
 ###Name Inverter
 참고 : https://www.youtube.com/watch?v=czjWpmy3rkM<br>
-
 spock으로 진행해봤는데 에러가 났을 때 좀 더 친절한 메세지 외에는 장점을 못느꼈습니다(중요한건 리팩토링이지 명세가 아닌거 같습니다).
 ![](스크린샷 2016-06-06 오후 7.35.06.jpg)
 
 ![](스크린샷 2016-06-06 오후 7.35.41.jpg)
 
 ###미담 프로젝트 단위 테스트
-**java+mockito**
+java+mockito
 ```
 @Mock
 MessageRepository messageRepository;
@@ -375,7 +399,7 @@ public void 시작안했는데_랜덤메세지를_호출하면_예외가_잘_발
     messageServiceSpy.getMessageByRandom();
 }
 ```
-**groovy+spock**
+groovy+spock
 ```
 def "시작안했는데 랜덤메세지를 호출하면 예외가 잘 발생하나 확인"(){
         given:
@@ -397,9 +421,6 @@ def "시작안했는데 랜덤메세지를 호출하면 예외가 잘 발생하�
     }
 ```
 
-
----
-
 ##Spring Boot 1.4 Test방식 변경부분 소개
 참고 : https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4<br>
 
@@ -413,7 +434,6 @@ public class MyComponent {
     public MyComponent(SomeService service) {
         this.service = service;
     }
-
 } 
 ```
 그래서 MyComponent 테스트가 쉬워진다.
@@ -542,6 +562,28 @@ public class SampleTestApplicationWebIntegrationTests {
 
 spy도 유사하다. `@SpyBean`을 통해 ApplicationContext에 존재하는 빈을 spy로 감싼다.
 
+**Testing the JPA slice**<br>
+```
+@RunWith(SpringRunner.class)
+@DataJpaTest
+public class UserRepositoryTests {
+
+    @Autowired
+    private TestEntityManager entityManager;
+
+    @Autowired
+    private UserRepository repository;
+
+    @Test
+    public void findByUsernameShouldReturnUser() {
+        this.entityManager.persist(new User("sboot", "123"));
+        User user = this.repository.findByUsername("sboot");
+        
+        assertThat(user.getUsername()).isEqualTo("sboot");
+        assertThat(user.getVin()).isEqualTo("123");
+    }
+}
+```
 ###[용어정리]
 **Mock Object**<br>
 Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다. MockObject는 자신에게 전달된 인자를 검사할 수 있으며, 이를 테스트 코드로 전달할 수도 있다.
