@@ -8,7 +8,8 @@
 cf) 마지막 부분에 Spring Boot 1.4 Test방식 소개
 
 ##Spock
-참고 : http://thejavatar.com/testing-with-spock/
+참고 : http://thejavatar.com/testing-with-spock/ <br>
+참고 : http://farenda.com/spock-framework-tutorial/<br>
 
 먼저 의존성 추가 
 ```
@@ -231,6 +232,7 @@ def "다양한 제곱 테스트"() {
 참고 : http://groovy-coder.com/?p=111<br>
 
 올랑(Hollandaise) 소스를 만들기 위해서는 cooking temperature를 매우 정밀하게 조절해야 한다. 
+
 ![](올랑.jpg)
 
 그래서 올랑(Hollandaise) 소스를 위해 애플리케이션에서 temperature monitoring 하는 system을 만든다고 해보자.
