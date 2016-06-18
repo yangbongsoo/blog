@@ -59,4 +59,4 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 ```
 ###Top Level Elements
 **Server**<br>
-이 요소는 단일 톰캣 서버를 정의하고 Logger와 ContextManager 설정요소를 포함한다. 추가적으로 서버 요소는 port, shutdown, className 속성을 지원한다.
+이 요소는 단일 톰캣 서버를 정의하고 Logger와 ContextManager 설정요소를 포함한다. 추가적으로 서버 요소는 port, shutdown, className 속성을 지원한다. 
