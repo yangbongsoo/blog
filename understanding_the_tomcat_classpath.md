@@ -29,5 +29,34 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 
 ###Server.xml
 `server.xml`은 메인 설정 파일이고 톰캣 startup 초기 설정을 명세하는 책임이 있다. `server.xml`파일의 요소들은 5가지 기본 카테고리에 속한다(Top Level Elements, Connectors, Containers, Nested Components, Global Settings). 
-
-가장 중요한 요소들을 알아보자. 
+```
+<!--  server.xml 의 root element, server의 shutdown port를 지정 함 -->
+<Server port="8005" shutdown="SHUTDOWN">  
+      |     <!--  server는 1개 이상의  service를 가질 수 있지만, 보통은 server.xml을 분리해서 관리-->
+      +---<Service  name="Catalina">   <!-- service는 독립적인 톰캣의 서비스 이다. -->
+                  |    <!-- Connector Client와 요청을 주고 응답을 받는 Interface이다. -->
+                  +---<Connector port="8080" protocol="HTTP/1.1">
+                  |    <!-- Connector 에는 HTTP와 AJP등이 있다. -->
+                  +---<Connector port="8009" protocol="AJP/1.3" >  <!-- Apache Jserv Protocol -->
+                  |    <!-- Engine은 적절한 Host로 처리를 넘기는 역할을 한다. -->
+                  +---<Engine name="Catalina" defaultHost="localhost">
+                              | <!-- Realm, Valve Component를 이용하면 Database연결, Single Sing On,
+                              +---<Realm>              Access Log등 부가기능을 이용 할 수 있다. -->
+                              |
+                              +---<Valve>
+                              | 
+                              +---<Logger>
+                              |   <!-- 가상 호스트를 정의한다. -->
+                              +---<Host appBase="webapps">
+                                          | <!-가상호스트에서 동작하는 하나의 웹 어플리케이션 이다. -->
+                                          +---<Context path="" docBase="C:\workspace\project\wiki ">
+                                          |
+                                          +---<Valve>
+                                          |
+                                          +---<Realm>
+                                          |
+                                          +---<Logger>
+```
+###Top Level Elements
+**Server**<br>
+이 요소는 단일 톰캣 서버를 정의하고 Logger와 ContextManager 설정요소를 포함한다. 추가적으로 서버 요소는 port, shutdown, className 속성을 지원한다.
