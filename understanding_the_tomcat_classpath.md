@@ -18,7 +18,7 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 ###How Tomcat Classpath Usage Differs From Standard Usage
 그럼 톰캣 classpath 사용이 표준 사용과는 어떻게 다른지 알아보자. 
 
-아파치 톰캣은 가능한 self-contained하고 직관적이고 자동적인것을 목표로 한다. 설정을 표준화하는 노력으로 그리고 웹 애플리케이션의 배포 효율적인 관리를 위한 ,반면에 보안과 namespace 이유로 다른 라이브러리 접근에 제한을 건다.
+아파치 톰캣은 설정을 표준화하는 노력과 웹 애플리케이션 배포의 효율적인 관리를 위해 가능한 self-contained하고 직관적이고 자동적인것을 목표로 한다. 반면에 보안과 namespace 이유로 다른 라이브러리 접근에 제한을 건다.
 
 
 
