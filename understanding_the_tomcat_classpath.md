@@ -63,4 +63,5 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 
 port 속성은 shutdown 명령을 위해서 사용된다. shutdown 속성은 문자열 명령어로, 특정 포트에 shutdown 할 트리거로 정의된다. className 속성은 어떤 자바 클래스 구현체가 사용될것인지 정의한다. 
 
-
+**Service**<br>
+This element, which can be nested inside a Server element, is used to contain one or multiple Connector components that share the same Engine component. The main function of this component is to define these components as a single service. The name of the service that will appear in logs is specified using the Service element's "name" attribute.
