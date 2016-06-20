@@ -60,3 +60,7 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 ###Top Level Elements
 **Server**<br>
 이 요소는 단일 톰캣 서버를 정의하고 Logger와 ContextManager 설정요소를 포함한다. 추가적으로 서버 요소는 port, shutdown, className 속성을 지원한다. 
+
+port 속성은 shutdown 명령을 위해서 사용된다. shutdown 속성은 문자열 명령어로, 특정 포트에 shutdown 할 트리거로 정의된다. className 속성은 어떤 자바 클래스 구현체가 사용될것인지 정의한다. 
+
+
