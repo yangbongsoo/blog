@@ -59,13 +59,18 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 ```
 ###Top Level Elements
 **Server**<br>
-이 태그는 단일 톰캣 서버를 정의하고 Logger와 ContextManager 설정요소를 포함한다. 추가적으로 Server 태그는 port, shutdown, className 속성을 지원한다. 
+이 태그는 단일 톰캣 서버를 정의하고 Logger와 ContextManager 설정요소를 포함한다. 추가적으로 port, shutdown, className 속성을 지원한다. 
 
 port 속성은 shutdown 명령을 위해서 사용된다. shutdown 속성은 문자열 명령어로, 특정 포트에 shutdown 할 트리거로 정의된다. className 속성은 어떤 자바 클래스 구현체가 사용될것인지 정의한다. 
 
 **Service**<br>
-Service 태그는 Server 태그 안에 있고, 같은 Engine 컴포넌트가 공유하는 하나 이상의 Connector 컴포넌트들을 포함하고 있다. 이 컴포넌트의 메인 기능은 이러한 컴포넌트들을 싱글 서비스로써 정의하는 것이다. 그리고 Service 태그의 name 속성은 로그 안에서 보여진다(ex Catalina). 
+Service 태그는 Server 태그 안에 있고, 같은 Engine 컴포넌트가 공유하는 하나 이상의 Connector 컴포넌트들을 포함하고 있다. 이 컴포넌트의 메인 기능은 이러한 컴포넌트들을 싱글 서비스로써 정의하는 것이다. 그리고 Service 태그의 name 속성은 로그 안에서 표현된다(ex Catalina). 
 
 **Connectors**<br>
-Service 태그에서 하나 이상의 Connector를 중첩함으로써 
-By nesting one Connector (or multiple Connectors) within a Service tag, you allow Catalina to forward requests from these ports to a single Engine component for processing. Tomcat allows you to define both HTTP and AJP connectors.
+Service 태그에서 하나 이상의 Connector를 중첩함으로써, processing을 위한 싱글 Engine 컴포넌트에 이러한 포트로 요청 할 수 있다. 톰캣은 HTTP와 AJP Connector 둘다 지원한다. 
+
+**HTTP Connector**<br>
+This element represents an HTTP/1.1 Connector, and provides Catalina with stand-alone web server functionality. This means that in addition to executing servlets and JSP pages, Catalina is able to listen to specific TCP ports for requests. Each Connector you define represents a single TCP port Catalina should listen to for HTTP requests. When configuring your HTTP connectors, pay close attention to the "minSpareThreads", "maxThreads", and "acceptCount" attributes. The "maxThreads" attribute is of particular importance. This attribute controls the maximum number of threads that can be created to handle requests exceeding the number of available threads. Setting this value too low will cause requests to stack inside the server socket, which will begin refusing connections once it is full. Comprehensive testing will help you avoid this problem.
+
+**AJP Connector**<br>
+This element represents a connector that is able to communicate with the AJP protocol. The main role of this element is to help Tomcat integrate with an installation of Apache. The most common reason why you would want this functionality is if you plan to use Apache to serve static content in front of Tomcat. This technique is intended to free up more power for dynamic page generation and load balancing, so if fast performance is a concern for your application, this is something to consider. AJP Connectors can also be used to expose Apache's SSL processing functionality to Tomcat.
