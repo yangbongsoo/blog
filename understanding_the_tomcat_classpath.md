@@ -59,12 +59,13 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 ```
 ###Top Level Elements
 **Server**<br>
-이 요소는 단일 톰캣 서버를 정의하고 Logger와 ContextManager 설정요소를 포함한다. 추가적으로 서버 요소는 port, shutdown, className 속성을 지원한다. 
+이 태그는 단일 톰캣 서버를 정의하고 Logger와 ContextManager 설정요소를 포함한다. 추가적으로 Server 태그는 port, shutdown, className 속성을 지원한다. 
 
 port 속성은 shutdown 명령을 위해서 사용된다. shutdown 속성은 문자열 명령어로, 특정 포트에 shutdown 할 트리거로 정의된다. className 속성은 어떤 자바 클래스 구현체가 사용될것인지 정의한다. 
 
 **Service**<br>
-Service 속성은 Server 요소 안에 있고, 같은 Engine 컴포넌트가 공유하는 하나 이상의 Connector 컴포넌트들을 포함하고 있다. 이 컴포넌트의 메인 기능은 이러한 컴포넌트들을 싱글 서비스로써 정의하는 것이다. 그리고 Service의 name 속성은 로그 안에서 보여진다(ex Catalina). 
+Service 태그는 Server 태그 안에 있고, 같은 Engine 컴포넌트가 공유하는 하나 이상의 Connector 컴포넌트들을 포함하고 있다. 이 컴포넌트의 메인 기능은 이러한 컴포넌트들을 싱글 서비스로써 정의하는 것이다. 그리고 Service 태그의 name 속성은 로그 안에서 보여진다(ex Catalina). 
 
 **Connectors**<br>
+Service 태그에서 하나 이상의 Connector를 중첩함으로써 
 By nesting one Connector (or multiple Connectors) within a Service tag, you allow Catalina to forward requests from these ports to a single Engine component for processing. Tomcat allows you to define both HTTP and AJP connectors.
