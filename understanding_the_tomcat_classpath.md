@@ -70,9 +70,7 @@ Service 태그는 Server 태그 안에 있고, 같은 Engine 컴포넌트가 공
 Service 태그에서 하나 이상의 Connector를 중첩함으로써, processing을 위한 싱글 Engine 컴포넌트에 이러한 포트로 요청 할 수 있다. 톰캣은 HTTP와 AJP Connector 둘다 지원한다. 
 
 **HTTP Connector**<br>
-HTTP/1.1 Connector이고 Catalina에 stand-alone 웹 서버 기능을 제공한다. 즉, servlet들과 JSP 외에도 Catalina는 요청을 위한 특정 TCP 포트를 사용할 수 있다는 걸 의미한다. 사용자가 정의한 각각의 Connector들은 싱글 TCP 포트 Catalina가 HTTP 요청을 들어야 한다. HTTP Connector들을 설정할 때, "minSpareThreads", "maxThreads", 그리고 "acceptCount" 속성에 주의를 기울여라. maxThreads 속성은 특히 중요하다. 이 속성은 최대 스레드(사용 가능한 스레드 수를 초과하는 요청을 제어하기 위해 생성된)개수를 제어한다. 
-
-Setting this value too low will cause requests to stack inside the server socket, which will begin refusing connections once it is full. Comprehensive testing will help you avoid this problem.
+HTTP/1.1 Connector이고 Catalina에 stand-alone 웹 서버 기능을 제공한다. 즉, servlet들과 JSP 외에도 Catalina는 요청을 위한 특정 TCP 포트를 사용할 수 있다는 걸 의미한다. 사용자가 정의한 각각의 Connector들은 싱글 TCP 포트 Catalina가 HTTP 요청을 들어야 한다. HTTP Connector들을 설정할 때, "minSpareThreads", "maxThreads", "acceptCount" 속성에 주의해라. 특히 maxThreads 속성은 중요하다. 이 속성은 최대 스레드(사용 가능한 스레드 수를 초과하는 요청을 제어하기 위해 생성된)개수를 제어한다. 이 속성값을 너무 낮게 잡으면 요청들이 서버 소켓 스택에 쌓이게 되고 다 차면 connection을 거부하게 된다. 
 
 **AJP Connector**<br>
 This element represents a connector that is able to communicate with the AJP protocol. The main role of this element is to help Tomcat integrate with an installation of Apache. The most common reason why you would want this functionality is if you plan to use Apache to serve static content in front of Tomcat. This technique is intended to free up more power for dynamic page generation and load balancing, so if fast performance is a concern for your application, this is something to consider. AJP Connectors can also be used to expose Apache's SSL processing functionality to Tomcat.
