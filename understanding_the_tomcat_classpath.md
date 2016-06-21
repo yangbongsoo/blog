@@ -80,9 +80,9 @@ HTTP/1.1 Connector이고 Catalina에 stand-alone 웹 서버 기능을 제공한�
 
 **Engine**<br>
 Engine 태그는 Service 태그 안에서, 하나 이상의 Connector들과 결합할 때 사용되고 부모 service와 관련된 모든 요청들을 처리할 책임이 있다. Engine 태그는 Service 태그 안에서만 사용될 수 있으며 한 개만 허용된다.
-"defaultHost" 속성에 주의해라. 이 속성은 server.xml에 설정되있지 않는 서버의 host names에 대한 요청을 처리할 책임이 있다.
-
-Pay close attention to the "defaultHost" attribute, which defines the Host element responsible for serving requests for host names on the server that are not configured in server.xml. This attribute must match the name of one of the Host elements nested inside the Engine element in question. Also, it's important to assign a unique, logical name to each of your Engine elements, using the "name" attribute. If a single Server element in your server.xml file includes multiple Service elements, you are required to assign a unique name to every Engine element.
+"defaultHost" 속성에 주의해라. 이 속성은 server.xml에 설정되있지 않는 서버의 host names에 대한 요청을 처리할 책임이 있다. 이 속성은 Engine 태그안에 있는 Host 태그들중 하나의 이름과 반드시 매칭되어야 한다.
+또한 
+ Also, it's important to assign a unique, logical name to each of your Engine elements, using the "name" attribute. If a single Server element in your server.xml file includes multiple Service elements, you are required to assign a unique name to every Engine element.
 
 **Host**<br>
 This element, which is nested inside of the Engine element, is used to associate server network names with Catalina servers. This element will only function properly if the virtual host in question is registered with the managing DNS of the domain in question.
