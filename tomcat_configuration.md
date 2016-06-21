@@ -67,4 +67,5 @@ Engine 태그는 Service 태그 안에서, 하나 이상의 Connector들과 결�
 Engine 태그안에 있는 Host 태그는 server network 이름과 Catalina 서버와 연결할 때 사용된다. 그리고 DNS에 가상 호스트가 등록되어 있을 때만 동작한다.
 
 **Context**<br>
+단일 웹 애플리케이션, 
 This element represents a single web application, and contains path information for directing requests to the appropriate application resources. When Catalina receives a request, it attempts to match the longest URI to the context path of a given Context until it finds the correct element to serve the request. The Context element can have a maximum of one nested instance per element of the utility elements Loader, Manager, Realm, Resources, and WatchedResource. Although Tomcat allows you to define Contexts within "TOMCAT-HOME/conf/server.xml", this should generally be avoided, as these central configuration settings cannot be reloaded without restarting Tomcat, which makes editing Context attributes more invasive than necessary.
