@@ -74,3 +74,16 @@ HTTP/1.1 Connector이고 Catalina에 stand-alone 웹 서버 기능을 제공한�
 
 **AJP Connector**<br>
 이 요소는 AJP protocol로 통신하고, 메인 역할은 아파치 설치와 톰캣 통합을 돕는 것이다. 이 기능을 쓰는 가장 공통된 이유는 톰캣 프론트의 정적 콘텐츠를 serve하기 위해 아파치를 사용할 때다. 이 기술은 동적 페이지 생성과 로드 밸런싱에 대한 더 많은 전력을 확보하기 위한 것이고, 빠른 성능이 필요하다면 고려해볼만 하다. AJP Connectors는 또한 아파치 톰캣 SSL 처리 기능을 표시 할 수 있다.
+
+**Containers**<br>
+이 요소들은 요청들이 올바르게 processing 되기 위해 Catalina에서 사용된다.
+
+**Engine**<br>
+This element is used in conjunction with one or more Connectors, nested within a Service element, and is responsible for processing all requests associated with its parent service. The Engine element can only be used if it is nested within a Service element, and only one Engine element is allowed within a given Service element.Pay close attention to the "defaultHost" attribute, which defines the Host element responsible for serving requests for host names on the server that are not configured in server.xml. This attribute must match the name of one of the Host elements nested inside the Engine element in question. Also, it's important to assign a unique, logical name to each of your Engine elements, using the "name" attribute. If a single Server element in your server.xml file includes multiple Service elements, you are required to assign a unique name to every Engine element.
+
+**Host**<br>
+This element, which is nested inside of the Engine element, is used to associate server network names with Catalina servers. This element will only function properly if the virtual host in question is registered with the managing DNS of the domain in question.
+One of the most useful features of the Host element is its ability to contain nested Alias elements, which are used to define multiple network names that should resolve to the same virtual host.
+
+**Context**<br>
+This element represents a single web application, and contains path information for directing requests to the appropriate application resources. When Catalina receives a request, it attempts to match the longest URI to the context path of a given Context until it finds the correct element to serve the request. The Context element can have a maximum of one nested instance per element of the utility elements Loader, Manager, Realm, Resources, and WatchedResource. Although Tomcat allows you to define Contexts within "TOMCAT-HOME/conf/server.xml", this should generally be avoided, as these central configuration settings cannot be reloaded without restarting Tomcat, which makes editing Context attributes more invasive than necessary.
