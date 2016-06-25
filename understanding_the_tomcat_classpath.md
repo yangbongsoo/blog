@@ -1,10 +1,12 @@
-참고 : https://www.mulesoft.com/tcat/tomcat-classpath
+#Understanding The Tomcat Classpath 
+
+원문 : https://www.mulesoft.com/tcat/tomcat-classpath
 
 아파치 톰캣 유저 포럼에 많은 공통된 질문들이 있다. 바로 **'웹 애플리케이션에 필요한 Jar 파일들을 포함시키기 위해 톰캣 classpath를 어떻게 설정해야 되는가'**이다. 
 
 어떻게 톰캣이 생성되고 classpath를 이용하는지 알아보자. 또한 classpath 관련된 이슈들을 하나하나 살펴보자. 
 
-#Why Classpaths Cause Trouble For Tomcat Users
+##Why Classpaths Cause Trouble For Tomcat Users
 classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들과 패키지들이 어디에 있는지 말해주는 argument다. classpath는 항상 프로그램 자체 외부 소스에서 셋팅된다. 이렇게 프로그램으로부터 classpath에 대한 책임을 분리시키는 것은 자바 코드가 추상적인 방식으로 클래스들과 패키지들을 참조할 수 있게 한다. 
 
 그런데 왜 많은 자바 개발자들이 classpath가 뭐고 어떻게 동작하는지 이해했음에도 불구하고 톰캣을 돌릴 때 문제가 생기는 걸까? 
@@ -15,7 +17,7 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 2. 톰캣이 classpath를 reslove하는 방법은 매 주요 릴리즈마다 조용히 바뀌어왔다. 
 3. 톰캣 문서와 디폴트 설정은 어떤 일을 달성하는 최고의 방법을 push한다. 만약 best way를 따르지 않으면 톰캣이 기술적으로 custom 설정을 지원해도 you're left in the dark. 그리고 outside dependencies, shared dependencies, 동일한 dependency의 여러 버전 같은 덜 공통적인 classpath 상황들에 대한 제어 방법을 제공하지 않는다.
 
-#How Tomcat Classpath Usage Differs From Standard Usage
+##How Tomcat Classpath UsageDiffers From Standard Usage
 그럼 톰캣 classpath 사용이 표준 사용과는 어떻게 다른지 알아보자. 
 
 아파치 톰캣은 **설정**을 표준화하는 노력과 웹 애플리케이션 배포의 효율적인 관리를 위해 가능한 self-contained하고 직관적이고 자동적인것을 목표로 한다. 반면에 보안과 namespace 이유로 다른 라이브러리 접근에 제한을 건다.
