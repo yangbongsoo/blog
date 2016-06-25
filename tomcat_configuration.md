@@ -1,5 +1,5 @@
 #Tomcat Configuration
-참고 : https://www.mulesoft.com/tcat/tomcat-configuration
+원문 : https://www.mulesoft.com/tcat/tomcat-configuration
 
 톰캣을 띄우고 서버를 돌리고 난 후 다음 step은 basic setting을 설정하는 것이다. 초기 설정 프로세스는 두개의 task(여기서 자세히 설명될것이다)로 구성되어 있다. 첫 번째는 톰캣 XML 설정파일을 편집하는 것이고, 두 번째는 적절한 환경 변수들을 정의하는 것이다. 
 
