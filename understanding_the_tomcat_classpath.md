@@ -14,8 +14,8 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 이 질문에 대한 3가지 답이 있고 우리는 각각에 대해서 자세히 알아볼 것이다.
 
 1. 톰캣은 다른 자바 프로그램들과 같은 방법으로 classpath를 resolve하지 않는다. 
-2. 톰캣이 classpath를 reslove하는 방법은 매 주요 릴리즈마다 조용히 바뀌어왔다. 
-3. 톰캣 문서와 디폴트 설정은 어떤 일을 달성하는 최고의 방법을 push한다. 만약 best way를 따르지 않으면 톰캣이 기술적으로 custom 설정을 지원해도 you're left in the dark. 그리고 outside dependencies, shared dependencies, 동일한 dependency의 여러 버전 같은 덜 공통적인 classpath 상황들에 대한 제어 방법을 제공하지 않는다.
+2. 톰캣이 classpath를 reslove하는 방법은 모든 주요 릴리즈마다 조용히 바뀌어왔다. 
+3. 톰캣 문서와 디폴트 설정은 어떤 일을 달성하는 best way을 강제한다. 만약 best way를 따르지 않으면 톰캣이 기술적으로 custom 설정을 지원해도 you're left in the dark. 그리고 outside dependencies, shared dependencies, 동일한 dependency의 여러 버전 같은 덜 공통적인 classpath 상황들에 대한 제어 방법을 제공하지 않는다.
 
 ##How Tomcat Classpath UsageDiffers From Standard Usage
 그럼 톰캣 classpath 사용이 표준 사용과는 어떻게 다른지 알아보자. 
