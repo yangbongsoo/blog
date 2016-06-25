@@ -28,9 +28,7 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 
 2. Startup.sh는 "start" 파라미터와 함께 Catalina.sh를 호출해서 system classpath를 overwrites하고 bootstrap.jar와 tomcat-juli.jar를 로드한다. 이러한 리소스들은 톰캣에서만 볼 수 있다.
 
-3. Class loader들은 각각 deployed Context로 만들어진다. deployed Context는 각 web 애플리케이션의 WEB-INF/classes 와 WEB-INF/lib에 있는 모든 클래스들과 JAR 파일들을 순서대로 로드한다. 이러한 리소스들은 그것들을 로드한 웹 애플리케이션에서만 볼 수 있다. 
+3. Class loader들은 각각 deployed Context로 만들어진다. deployed Context는 각 web 애플리케이션의 `WEB-INF/classes` 와 `WEB-INF/lib`에 있는 모든 클래스들과 JAR 파일들을 순서대로 로드한다. 이러한 리소스들은 그것들을 로드한 웹 애플리케이션에서만 볼 수 있다. 
 
-4. 
-Class loaders are created for each deployed Context, which load all classes and JAR files contained in each web application's WEB-INF/classes and WEB-INF/lib, respectively and in that order. These resources are only visible to the web application that loads them.
+4. The Common class loader는 `$CATALINA_HOME/lib`에 있는 모든 클래스들과 JAR 파일들을 로드한다. 이러한 리소스들은 톰캣과 모든 애플리케이션에서 볼 수 있다.
 
-The Common class loader loads all classes and JAR files contained in $CATALINA_HOME/lib. These resources are visible to all applications and to Tomcat. 
