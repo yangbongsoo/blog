@@ -25,7 +25,7 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 톰캣이 어떻게 classpath를 reslove하는지 이해하기 위해 startup process를 살펴보자. 
 1. JVM bootstrap loader가 코어 자바 라이브러리들을 로드한다(JVM은 JAVA_HOME 변수를 사용하여 코어 라이브러리들을 찾는다).
 2. Startup.sh는 "start" 파라미터와 함께 Catalina.sh를 호출해서 system classpath를 overwrites하고 bootstrap.jar와 tomcat-juli.jar를 로드한다. 이러한 리소스들은 톰캣에서만 볼 수 있다.
-3. Class loader들은 각각 deployed Context(모든 클래스들과 JAR 파일들을 로드하는 각 web 애플리케이션의 WEB-INF/classes 와 WEB-INF/lib에 포함되는)로 만들어진다. 각각 그 순서대로. 이러한 리소스들은 그것들을 로드한 웹 애플리케이션에서만 볼 수 있다.
+3. Class loader들은 각각 deployed Context로 만들어진다. deployed Context는 각 web 애플리케이션의 WEB-INF/classes 와 WEB-INF/lib에 있는 모든 클래스들과 JAR 파일들을 각각 그 순서대로 로드한다. 이러한 리소스들은 그것들을 로드한 웹 애플리케이션에서만 볼 수 있다.
 4. 
 Class loaders are created for each deployed Context, which load all classes and JAR files contained in each web application's WEB-INF/classes and WEB-INF/lib, respectively and in that order. These resources are only visible to the web application that loads them.
 
