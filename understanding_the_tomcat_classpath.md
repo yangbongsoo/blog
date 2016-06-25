@@ -22,9 +22,9 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 
 아파치 톰캣은 설정을 표준화하는 노력과 웹 애플리케이션 배포의 효율적인 관리를 위해 가능한 self-contained하고 직관적이고 자동적인것을 목표로 한다. 반면에 보안과 namespace 이유로 다른 라이브러리 접근에 제한을 건다.
 
-**톰캣 start 스크립트는 "system" 클래스로더를 만들 때 자바 classpath 환경변수를 무시하고 자신만의 classpath를 실행시킨다. 자바 classpath 환경변수(의존성 레파지토리들을 선언하는 전통적인 장소)를 사용하지 않는다.** 다시 말해, 시스템 환경변수에 추카적인 레파지토리를 선언했을 때 톰캣이 boot 될때마다 자신만의 환경변수로 그것을 덮어써버리게 된다. 
+**톰캣 start 스크립트는 "system" class loader를 만들 때 자바 classpath 환경변수를 무시하고 자신만의 classpath를 실행시킨다. 자바 classpath 환경변수(의존성 레파지토리들을 선언하는 전통적인 장소)를 사용하지 않는다.** 다시 말해, 아무리 시스템 환경변수에 추가적인 레파지토리를 선언해도 톰캣이 boot 될때마다 자신만의 환경변수로 그것을 덮어쓰게 된다. 
 
-톰캣이 어떻게 classpath를 reslove하는지 이해하기 위해 startup process를 살펴보자. 
+그렇다면 톰캣이 어떻게 classpath를 reslove하는지 이해하기 위해 startup process를 살펴보자. 
 
 1. JVM bootstrap loader가 코어 자바 라이브러리들을 로드한다(JVM은 JAVA_HOME 변수를 사용하여 코어 라이브러리들을 찾는다).
 
