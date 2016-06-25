@@ -32,3 +32,8 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 
 4. The Common class loader는 `$CATALINA_HOME/lib`에 있는 모든 클래스들과 JAR 파일들을 로드한다. 이러한 리소스들은 톰캣과 모든 애플리케이션에서 볼 수 있다.
 
+There you have it. Rather than resolving one classpath configured in one attribute in the standard location for a Java application, Tomcat resolves multiple classpaths configured using 4 or more attributes, only one of which is configured in the standard location.
+
+Ultimately, this is all designed to save you hassle, but if you're deviating from the standard use, it's easy to see how confusion can creep into the equation.
+
+Next, let's look at another source of this confusion: changes to classpath resolution from version to version.
