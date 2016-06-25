@@ -20,3 +20,7 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 
 아파치 톰캣은 **설정**을 표준화하는 노력과 웹 애플리케이션 배포의 효율적인 관리를 위해 가능한 self-contained하고 직관적이고 자동적인것을 목표로 한다. 반면에 보안과 namespace 이유로 다른 라이브러리 접근에 제한을 건다.
 
+**톰캣 start 스크립트는 "system" 클래스로더를 만들 때 자바 classpath 환경변수를 무시하고 자신만의 classpath를 실행시킨다. 자바 classpath 환경변수(의존성 레파지토리들을 선언하는 전통적인 장소)를 사용하지 않는다.** 다시 말해, 
+
+
+if you've been going mad trying to declare additional repositories in your system's environment variables, the reason you've been frustrated over and over is that Tomcat has been writing over your work every time it boots.
