@@ -23,11 +23,10 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 **톰캣 start 스크립트는 "system" 클래스로더를 만들 때 자바 classpath 환경변수를 무시하고 자신만의 classpath를 실행시킨다. 자바 classpath 환경변수(의존성 레파지토리들을 선언하는 전통적인 장소)를 사용하지 않는다.** 다시 말해, 시스템 환경변수에 추카적인 레파지토리를 선언했을 때 톰캣이 boot 될때마다 자신만의 환경변수로 그것을 덮어써버리게 된다. 
 
 톰캣이 어떻게 classpath를 reslove하는지 이해하기 위해 startup process를 살펴보자. 
-1. JVM bootstrap loader가 코어 자바 라이브러리들을 로드한다. 부수적으로 
-The JVM bootstrap loader loads the core Java libraries. Incidentally, this is the one place where environment variables do matter, as the JVM locates the core libraries using the JAVA_HOME variable.
-
-Startup.sh, calling Catalina.sh with the "start" parameter, overwrites the system classpath and loads bootstrap.jar and tomcat-juli.jar. These resources are only visible to Tomcat.
-
+1. JVM bootstrap loader가 코어 자바 라이브러리들을 로드한다(JVM은 JAVA_HOME 변수를 사용하여 코어 라이브러리들을 찾는다).
+2. Startup.sh는 "start" 파라미터와 함께 Catalina.sh를 호출해서 system classpath를 overwrites하고 bootstrap.jar와 tomcat-juli.jar를 로드한다. 이러한 리소스들은 톰캣에서만 볼 수 있다.
+3. Class loader들은 각각 deployed Context(모든 클래스들과 JAR 파일들을 로드하는 각 web 애플리케이션의 WEB-INF/classes 와 WEB-INF/lib에 포함되는)로 만들어진다. 각각 그 순서대로. 이러한 리소스들은 그것들을 로드한 웹 애플리케이션에서만 볼 수 있다.
+4. 
 Class loaders are created for each deployed Context, which load all classes and JAR files contained in each web application's WEB-INF/classes and WEB-INF/lib, respectively and in that order. These resources are only visible to the web application that loads them.
 
 The Common class loader loads all classes and JAR files contained in $CATALINA_HOME/lib. These resources are visible to all applications and to Tomcat. 
