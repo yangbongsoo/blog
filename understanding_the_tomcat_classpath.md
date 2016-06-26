@@ -87,11 +87,11 @@ server loader는 혼자 남지만 shared loader는 여전히 많은 유용한 �
 
 **문제 : 애플리케이션에 또다른 프레임워크와 함께 내장 톰캣 서버를 사용하고 있는데 애플리케이션에서 프레임워크 컴포넌트들을 접근하려고 할 때마다 classpath 에러가 발생한다.**
 
-이 문제는 이번 주제 범위에서 다소 벗어나있지만 공통적인 classpath와 관련된 질문이다. 여기에 에러의 원인이 무엇인지 간략한 개요가 있다.
+이 문제는 이번 주제 범위에서 다소 벗어나있지만 공통적인 classpath와 관련된 질문이다. 다음은 에러 원인에 대한 간략한 개요다.
+
+Spring 같은 프레임워크를 추가하는 애플리케이션에 내장된 톰캣은 프레임워크를 시작할 때, 애플리케이션의 `WEB-INF/lib` 디렉토리 안에 것을 로드하지 않고 System classloader를 사용해 코어 클래스를 로드한다.
 
 
-
-When embedded in an application that includes another core framework such as Wicket or Spring, Tomcat will load the core class using the System classloader when starting the framework, instead of loading it from the application's "WEB-INF/lib" directory.
 
 This is default behavior that makes sense when Tomcat is running as a standalone application container, but when embedded, it results in the resource being made unavailable to the web application.
 
