@@ -93,10 +93,9 @@ Spring 같은 프레임워크를 추가하는 애플리케이션에 내장된 �
 
 이것은 톰캣이 독립형 애플리케이션 컨테이너로써 돌아가는 기본 동작이다. 그러나 내장형일 때는 리소스를 웹 애플리케이션에서 이용할 수 없게 되는 결과를 낳는다.
 
-**Java class loading is "lazy"**즉, 어떤 클래스를 요청하는 첫 classloader는 그 라이프사이클의 나머지 클래스를 소유하고 있다. 만약 System classloader가 프레임워크 클래스를 처음으로 로드했다면 JVM은 
-추가적인 클래스의 인스턴스들을 classpath 에러를 유발시키는 생성되는 것을 막는다. 
+**Java class loading is "lazy"**즉, 어떤 클래스를 요청하는 첫 classloader는 그 라이프사이클의 나머지 클래스를 소유하고 있다. 만약 System classloader가 프레임워크 클래스를 처음으로 로드했다면 JVM은 classpath 에러를 발생시키는 원인을 생성하는 추가적인 클래스 인스턴스들을 막는다.
 
-만약 System classloader가 프레임워크 클래스를 처음으로 로드했다면 JVM은 classpath 에러를 발생시키는 원인을 생성하는 추가적인 클래스의 인스턴스들을 막는다. 
+System classloader의 클래스들은 웹 애플리케이션을 볼 수 없다.
 
 Java class loading is "lazy", which means that the first classloader that requests a certain class owns the class for the remainder of its lifecycle. If the System classloader, whose classes are not visible to the web application, loads the framework class first, the JVM will prevent additional instances of the class from being created, causing the classpath errors.
 
