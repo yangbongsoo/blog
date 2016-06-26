@@ -95,4 +95,6 @@ Spring 같은 프레임워크를 추가하는 애플리케이션에 내장된 �
 
 Java class loading is lazy. 즉, 어떤 클래스를 요청하는 첫 classloader는 그 라이프사이클의 나머지 클래스를 소유하고 있다. 만약 System classloader(System classloader의 클래스들은 웹 애플리케이션을 볼 수 없다)가 프레임워크 클래스를 처음으로 로드했다면 JVM은 classpath 에러를 발생시키는 원인이 되는 추가적인 클래스 인스턴스들을 막는다.
 
-The way to get around this problem is to add a custom bootstrap classloader to your application. Configure this classloader to load the appropriate libraries on behalf of your web application, and then trigger the start-up of the rest of the application as normal. This will resolve all classloader conflicts in favor of your application.
+이 문제는 애플리케이션에 custom bootstrap classloader를 추가함으로써 해결할 수 있다.
+
+Configure this classloader to load the appropriate libraries on behalf of your web application, and then trigger the start-up of the rest of the application as normal. This will resolve all classloader conflicts in favor of your application.
