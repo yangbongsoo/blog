@@ -51,8 +51,11 @@ Tomcat을 documentation이 추천하는 대로만 사용하면 classpath와 관�
 
 WAR들은 모든 라이브러리, 패키지들의 중복된 버전을 갖게 되고 standard Tomcat distribution에 포함되지 않은 여러 애플리케이션들 간에 JAR를 공유할 필요가 없다. 또한 외부 리소스를 호출할 필요도 없고, 웹 애플리케이션을 돌리기 위해 필요한 single JAR파일의 multiple 버전 같은 복잡한 상황도 발생하지 않는다. 
 
-and you won't have complex situations such as multiple versions of a single JAR files required for different portions of a web application to run.
+하지만 그렇게만 사용되지 않는게 현실이다. 이런 상황에 놓인 유저들에게는 `catalina.properties` 파일이 모든 문제의 답이다. 
 
-While using Tomcat exactly as designed is a nice thing to aim for in development, and certainly achievable with enough work and careful design, it's not always an option in the real world, where limited time and funds dictate how much time you have to fiddle around with your server configuration.
+##Configuring Tomcat Classpath Handling Via catalina.properties
 
-For users who are in this position, one file is the answer to all your problems: catalina.properties.
+Fortunately for users who don't want to use the default class loading methods, Tomcat's classpath options are not hard coded - they're read from Catalina's central properties file, $CATALINA_HOME/conf/catalina.properties.
+
+This file contains settings for all the loaders other than the bootstrap loader, which is handled by the JVM, and the system loader, which is also handled by the JVM, after its values have been re-written by Tomcat's startup script. Examining this file, you'll notice a few things:
+
