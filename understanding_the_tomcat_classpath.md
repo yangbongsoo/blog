@@ -47,3 +47,12 @@ Tomcat 4.x와 그 이전에서 "server" loader는 Catalina 클래스들을 로�
 Tomcat 5.x에서 "shared" loader는 `$CATALINA_HOME/shared/lib` 디렉토리에 위치해서, 애플리케이션들 간의 공유되는 클래스들을 로딩하는 책임이 있었다. 하지만 공유되는 의존성들을 dependent Contexts에서 간단하게 복제하는 쪽으로 유저들을 이끌면서 Tomcat 6에서 버려졌다. 결국 이 loader 또한 Common loader로 대체됐다. 추가적으로 Tomcat 5.x는 모든 Catalina 컴포넌트들을 로드하는 Catalina loader를 포함했었고 지금은 다시 Common loader가 제어한다.
 
 ##When You Can't Do Things The "Best" Way
+Tomcat을 documentation이 추천하는 대로만 사용하면 classpath와 관련된 문제는 발생하지 않는다. 
+
+WAR들은 모든 라이브러리, 패키지들의 중복된 버전을 갖게 되고 standard Tomcat distribution에 포함되지 않은 여러 애플리케이션들 간에 JAR를 공유할 필요가 없다. 또한 외부 리소스를 호출할 필요도 없고, 웹 애플리케이션을 돌리기 위해 필요한 single JAR파일의 multiple 버전 같은 복잡한 상황도 발생하지 않는다. 
+
+and you won't have complex situations such as multiple versions of a single JAR files required for different portions of a web application to run.
+
+While using Tomcat exactly as designed is a nice thing to aim for in development, and certainly achievable with enough work and careful design, it's not always an option in the real world, where limited time and funds dictate how much time you have to fiddle around with your server configuration.
+
+For users who are in this position, one file is the answer to all your problems: catalina.properties.
