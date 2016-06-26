@@ -57,7 +57,7 @@ WAR들은 모든 라이브러리, 패키지들의 중복된 버전을 갖게 되
 
 이 파일은 JVM이 제어하는 bootstrap loader 이외의 모든 loader들에 대한 설정을 포함하고 있고, 또 JVM이 제어하는 system loader는 톰캣 startup 스크립트에 의해 re-written된다. 
 
-이 파일을 살펴보면 몇가지 알 수 있다. 
+이 파일을 살펴보면 다음과 같은 사실을 알 수 있다.
 1. 서버와 Shared loader들은 그것 자체로 제거되지 않는다. 만약 속성들이 정의되지 않았다면 Commons loader가 제어한다.
 2. 다양한 loader들에 의해 로드된 클래스들과 JAR파일들은 자동적으로 로드되지 않고, simple wildcard syntax를 그룹으로 간단히 지정된다. 
 3. 이 파일에 외부 레파지토리를 명세할 수 없다.
