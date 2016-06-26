@@ -97,11 +97,11 @@ Java class loading is lazy. 즉, 어떤 클래스를 요청하는 첫 classloade
 
 이 문제는 애플리케이션에 custom bootstrap classloader를 추가함으로써 해결할 수 있다. 웹 애플리케이션을 대신해서 적절한 라이브러리들을 로드하기 위해 custom bootstrap classloader를 설정해라. 그리고 나머지는 정상적으로 start-up 시키면 애플리케이션의 모든 classloader 충돌을 해결할 수 있다. 
 
-문제 : 
+**문제 : WAR의 일부분으로 모든 의존성 패키지를 포함하는 standard 애플리케이션을 사용하고 있지만 여전히 클래스 definition error가 발생한다.** 
 
-Problem: I'm using a standard application that includes all of its package dependencies as part of the WAR or exploded deployment, but I'm still getting class definition errors.
+이 문제는 잘못 구현된 빌드나 배포 프로세스를 포함해 여러가지에 의해 발생할 수 있지만 대부분 웹 애플리케이션의 디렉토리 구조 때문에 발생한다.
 
-This problem may be caused by a number of things, including a poorly implemented build or deployment process, but it is most often caused by errors in the web application's directory structure.
+
 
 Java naming convention dictates that class names mirror the directory structure in which they are stored. For example, a class named com.mycompany.mygreat.class needs to be stored in the directory WEB-INF/classes/com/mycompany/.
 
