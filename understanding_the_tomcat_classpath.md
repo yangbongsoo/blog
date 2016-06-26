@@ -55,6 +55,8 @@ WAR들은 모든 라이브러리, 패키지들의 중복된 버전을 갖게 되
 
 ##Configuring Tomcat Classpath Handling Via catalina.properties
 
+다행히 default class loading methods 사용을 원치 않는 유저라면 톰캣 classpath option들을 하드코딩하지 않아도 된다. Catalina central properties 파일인 `$CATALINA_HOME/conf/catalina.properties`에서 읽어온다.
+
 Fortunately for users who don't want to use the default class loading methods, Tomcat's classpath options are not hard coded - they're read from Catalina's central properties file, $CATALINA_HOME/conf/catalina.properties.
 
 This file contains settings for all the loaders other than the bootstrap loader, which is handled by the JVM, and the system loader, which is also handled by the JVM, after its values have been re-written by Tomcat's startup script. Examining this file, you'll notice a few things:
