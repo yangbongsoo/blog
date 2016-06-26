@@ -74,15 +74,17 @@ server loader는 혼자 남지만 shared loader는 여전히 많은 유용한 �
 
 톰캣이 외부 레파지토리를 인식하려면 shared loader 아래의 `catalina.properties`에 syntax 맞게 선언해라. 
 
-- 클래스 레파지토리로서 폴더를 추가하려면 "path/to/foldername" 
-- 클래스 레파지토리로서 폴더안에 JAR 파일들을 추가하려면  "path/to/foldername/*.jar"
-- 클래스 레파지토리로서 단일 JAR 파일을 추가하려면 "file:/path/to/foldername/jarname.jar" 
-- 환경변수를 호출하려면 ${}를 사용해라 ex) ${VARIABLE_NAME}
+- 클래스 레파지토리로서 폴더를 추가하려면 `path/to/foldername` 
+- 클래스 레파지토리로서 폴더안에 JAR 파일들을 추가하려면  `path/to/foldername/*.jar`
+- 클래스 레파지토리로서 단일 JAR 파일을 추가하려면 `file:/path/to/foldername/jarname.jar`
+- 환경변수를 호출하려면 `${}`를 사용해라 ex) `${VARIABLE_NAME}`
 - 여러 리소스들을 선언하려면 각각의 entry를 콤마로 구분지어라. 
-- 모든 경로들은 상대 경로로 CATALINA_BASE or CATALINA_HOME를 이용할 수 있고 아예 절대 경로를 사용할 수도 있다.
+- 모든 경로들은 상대 경로로 `CATALINA_BASE` or `CATALINA_HOME`를 이용할 수 있고 아예 절대 경로를 사용할 수도 있다.
 
 **문제 : 다수의 애플리케이션이 하나의 JAR 파일을 공유하길 원한다. 그리고 그 JAR 파일은 톰캣 안에 있길 원한다.**
 
-As noted in the best practices section below, it is best not to include additional libraries other than common 3rd party libraries such as JDBC drivers in $CATALINA_HOME/lib, even though this will work in some situations. Instead, recreate the "/shared/lib" and "/shared/classes" directories used in Tomcat 5.x, and configure them in catalina.properties by editing the shared.loader attribute:
+아래에 best practices 절에서 언급했듯이 `$CATALINA_HOME/lib`안의 JDBC 드라이버들과 같은, 공통적인 서드파티 라이브러리들 말고는 추가적인 라이브러리들을 포함하지 않는게 best다. 대신에 `/shared/lib`과 `/shared/classes` 
+
+Instead, recreate the "/shared/lib" and "/shared/classes" directories used in Tomcat 5.x, and configure them in catalina.properties by editing the shared.loader attribute:
 
 `"shared/classes,shared/lib/*.jar"`
