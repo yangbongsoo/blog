@@ -117,13 +117,7 @@ Java naming convention은 클래스 이름들이, 자신들이 저장되는 디�
 
 이 문제를 해결하기 위해 4가지 접근방법이 있다. 하지만 그 중 어떤것도 단순히 classpath를 고치는 것으로 해결될 수 없고 그 중 어떤것도 고통에서 자유로울 순 없다. 
 
-첫째, 프레임워크 버전을 업데이트 해라. if this will bring the versions of the dependencies they rely upon into line with one another.
-
-이게 의존성의 버전을 가져올것이다. 그들은 기댄다. 
-
-First, you can try updating the versions of your framework, if this will bring the versions of the dependencies they rely upon into line with one another.
-
-
+첫째, 프레임워크 버전을 업데이트 해라. 
 
 둘째, 두개 이상의 custom classloader를 만들어라(각 JAR당 하나씩). 그리고 필요로하는 버전으로 클래스의 두개의 인스턴스를 만들기 위해 애플리케이션의 `WEB-INF/context.xml` 파일에 설정해라. 
 
