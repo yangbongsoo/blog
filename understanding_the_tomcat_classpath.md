@@ -121,9 +121,9 @@ Java naming convention은 클래스 이름들이, 자신들이 저장되는 디�
 
 둘째, 두개 이상의 custom classloader를 만들어라(각 JAR당 하나씩). 그리고 필요로하는 버전으로 클래스의 두개의 인스턴스를 만들기 위해 애플리케이션의 `WEB-INF/context.xml` 파일에 설정해라. 
 
+셋째, 프레임워크와 단일 JAR 파일에서 의존성을 패키징하기 위해 jarjar 유틸리티를 사용해라. 그러면 같이 함께 로드될 것이다. 이 방법은 이상적이진 않지만 동작은 할 것이다.
+ 
 
-
-Thirdly, you can use the jarjar utility to package the framework and its dependency in a single JAR file so they will be loaded together. This is a less-than-ideal solution, but it will work.
 
 Lastly, if you find yourself dealing with this kind of situation every other day, you should consider implementing an OSGi framework, which includes, among many other things, a number of methods designed specifically for situations where multiple versions of a single class must be run on a single JVM.
 
