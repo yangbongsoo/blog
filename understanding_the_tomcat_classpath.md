@@ -66,4 +66,10 @@ WAR들은 모든 라이브러리, 패키지들의 중복된 버전을 갖게 되
 
 server loader는 혼자 남지만 shared loader는 여전히 많은 유용한 애플리케이션들을 갖고 있다. (Note : shared loader는 Commons loader가 클래스 로딩을 끝낸 후에 start-up process에서 클래스들을 마지막으로 로드할 것이다.)
 
-Now that we've gotten to the bottom of Tomcat classpaths, let's look at some common problems and how to fix them.
+이제 톰캣 classpath에 대한 공통적인 문제를 어떻게 고쳐야 되는지 살펴보자.
+
+##Problems, Solutions, and Best Practices
+
+Problem: My application relies on an external repository, and I can't import it.
+
+To make Tomcat aware of an external repository, declare the file in catalina.properties under the shared loader, using the correct syntax. Syntax will vary based on the type of file or repository you are attempting to configure:
