@@ -57,7 +57,11 @@ WAR들은 모든 라이브러리, 패키지들의 중복된 버전을 갖게 되
 
 다행히 default class loading methods 사용을 원치 않는 유저라면 톰캣 classpath option들을 하드코딩하지 않아도 된다. Catalina central properties 파일인 `$CATALINA_HOME/conf/catalina.properties`에서 읽어온다.
 
-Fortunately for users who don't want to use the default class loading methods, Tomcat's classpath options are not hard coded - they're read from Catalina's central properties file, $CATALINA_HOME/conf/catalina.properties.
+이 파일은 JVM이 제어하는 bootstrap loader 이외의 모든 loader들에 대한 설정을 포함하고 있고, 또 JVM이 제어하는 system loader는 톰캣 startup 스크립트에 의해 re-written된다. 
 
-This file contains settings for all the loaders other than the bootstrap loader, which is handled by the JVM, and the system loader, which is also handled by the JVM, after its values have been re-written by Tomcat's startup script. Examining this file, you'll notice a few things:
+이 파일을 보면 몇가지 알 수 있다. 
+1. 서버와 Shared loader들은 그것 자체로 제거되지 않는다. 만약 속성들이 정의되지 않았다면 Commons loader가 제어한다.
 
+The classes and JARs loaded by the various loaders aren't "automatically" loaded, they're simply designated as a group with a simple wildcard syntax
+
+Nothing here says you can't specify an external repository here, and that's because you can, indeed, do so.
