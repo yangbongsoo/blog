@@ -37,3 +37,13 @@ classpath는 JVM에게 프로그램을 돌리기 위해 필요한 클래스들�
 자바 애플리케이션의 standard location에서 하나의 속성이 설정된 한 classpath를 reslove 하는 것보다, 톰캣은 4개 이상의 속성들이 설정된 다수의 classpath들을 resolve한다(그중 단 하나만이 standard location에서 설정된 것이다). 
 
 다음은 classpath resolution을 한 버전에서 다른 버전으로 바꿀 때 생기는 혼란에 대해서 살펴보자. 
+
+##How Tomcat Class Loading Has Changed From Version To Version
+
+이전 톰캣 버전에서 classloader hierachy는 약간씩 다르게 동작했다.
+
+Tomcat 4.x와 그 이전에서 "server" loader는 Catalina 클래스들을 로딩하는 책임이 있었다. 지금은 commons loader가 제어한다. 
+
+Tomcat 5.x에서 "shared" loader는 `$CATALINA_HOME/shared/lib` 디렉토리에 위치해서, 애플리케이션들 간의 공유되는 클래스들을 로딩하는 책임이 있었다. 하지만 공유되는 의존성들을 dependent Contexts에서 간단하게 복제하는 쪽으로 유저들을 이끌면서 Tomcat 6에서 버려졌다. 결국 이 loader 또한 Common loader로 대체됐다. 추가적으로 Tomcat 5.x는 모든 Catalina 컴포넌트들을 로드하는 Catalina loader를 포함했었고 지금은 다시 Common loader가 제어한다.
+
+##When You Can't Do Things The "Best" Way
