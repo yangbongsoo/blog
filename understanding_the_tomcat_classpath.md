@@ -70,7 +70,7 @@ server loader는 혼자 남지만 shared loader는 여전히 많은 유용한 �
 
 ##Problems, Solutions, and Best Practices
 
-**문제 : 내 애플리케이션이 외부 레파지토리를 의존하고 있는데 그걸 import 할 수가 없다.**
+**문제 : 애플리케이션이 외부 레파지토리를 의존하고 있는데 그걸 import 할 수가 없다.**
 
 톰캣이 외부 레파지토리를 인식하려면 shared loader 아래의 `catalina.properties`에 syntax 맞게 선언해라. 
 
@@ -83,8 +83,20 @@ server loader는 혼자 남지만 shared loader는 여전히 많은 유용한 �
 
 **문제 : 다수의 애플리케이션이 하나의 JAR 파일을 공유하길 원한다. 그리고 그 JAR 파일은 톰캣 안에 있길 원한다.**
 
-아래에 best practices 절에서 언급했듯이 `$CATALINA_HOME/lib`안의 JDBC 드라이버들과 같은, 공통적인 서드파티 라이브러리들 말고는 추가적인 라이브러리들을 포함하지 않는게 best다. 대신에 `/shared/lib`과 `/shared/classes` 
+아래에 best practices 절에서 언급했듯이 `$CATALINA_HOME/lib`안의 JDBC 드라이버들과 같은, 공통적인 서드파티 라이브러리들 말고는 추가적인 라이브러리들을 포함하지 않는게 best다. 대신에 Tomcat 5.x에서 사용되는 `/shared/lib`과 `/shared/classes` 디렉토리를 만들고 catalina.properties에서 shared.loader 속성을 설정해라. `"shared/classes,shared/lib/*.jar"`
 
-Instead, recreate the "/shared/lib" and "/shared/classes" directories used in Tomcat 5.x, and configure them in catalina.properties by editing the shared.loader attribute:
+**문제 : 애플리케이션에 또다른 프레임워크와 함께 내장 톰캣 서버를 사용하고 있는데 애플리케이션에서 프레임워크 컴포넌트들을 접근하려고 할 때마다 classpath 에러가 발생한다.**
 
-`"shared/classes,shared/lib/*.jar"`
+
+
+This problem is somewhat outside the scope of this article, but as it is a common classpath-related question, here is a brief rundown of what is causing your errors.
+
+When embedded in an application that includes another core framework such as Wicket or Spring, Tomcat will load the core class using the System classloader when starting the framework, instead of loading it from the application's "WEB-INF/lib" directory.
+
+This is default behavior that makes sense when Tomcat is running as a standalone application container, but when embedded, it results in the resource being made unavailable to the web application.
+
+Java class loading is "lazy", which means that the first classloader that requests a certain class owns the class for the remainder of its lifecycle. If the System classloader, whose classes are not visible to the web application, loads the framework class first, the JVM will prevent additional instances of the class from being created, causing the classpath errors.
+
+The way to get around this problem is to add a custom bootstrap classloader to your application. Configure this classloader to load the appropriate libraries on behalf of your web application, and then trigger the start-up of the rest of the application as normal. This will resolve all classloader conflicts in favor of your application.
+
+
