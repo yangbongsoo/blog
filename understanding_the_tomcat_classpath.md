@@ -64,8 +64,6 @@ WAR들은 모든 라이브러리, 패키지들의 중복된 버전을 갖게 되
 2. 다양한 loader들에 의해 로드된 클래스들과 JAR파일들은 자동적으로 로드되지 않고, simple wildcard syntax를 그룹으로 간단히 지정된다. 
 3. 이 파일에 외부 레파지토리를 명세할 수 없다.
 
-server loader는 단독으로 있어야 한다. 그러나 shared loader는 여전히 많은 유용한 애플리케이션들을 갖고 있다. (Note : shared loader는 Commons loader가 클래스 로딩을 끝낸 후에 start-up process에서 클래스들을 마지막으로 로드할 것이다.)
-
-The server loader should be left alone, but the shared loader still has many useful applications. (Note: The shared loader will load its classes last during the start-up process, after the Commons loader has finished loading its classes.)
+server loader는 혼자 남지만 shared loader는 여전히 많은 유용한 애플리케이션들을 갖고 있다. (Note : shared loader는 Commons loader가 클래스 로딩을 끝낸 후에 start-up process에서 클래스들을 마지막으로 로드할 것이다.)
 
 Now that we've gotten to the bottom of Tomcat classpaths, let's look at some common problems and how to fix them.
