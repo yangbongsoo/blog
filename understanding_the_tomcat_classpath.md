@@ -91,12 +91,9 @@ server loader는 혼자 남지만 shared loader는 여전히 많은 유용한 �
 
 Spring 같은 프레임워크를 추가하는 애플리케이션에 내장된 톰캣은 프레임워크를 시작할 때, 애플리케이션의 `WEB-INF/lib` 디렉토리 안에 것을 로드하지 않고 System classloader를 사용해 코어 클래스를 로드한다.
 
+이것은 톰캣이 독립형 애플리케이션 컨테이너로써 돌아가는 기본 동작이다. 그러나 내장형일 때는 리소스를 웹 애플리케이션에서 이용할 수 없게 되는 결과를 낳는다.
 
-
-This is default behavior that makes sense when Tomcat is running as a standalone application container, but when embedded, it results in the resource being made unavailable to the web application.
-
+자바 클래스는 지연 로딩
 Java class loading is "lazy", which means that the first classloader that requests a certain class owns the class for the remainder of its lifecycle. If the System classloader, whose classes are not visible to the web application, loads the framework class first, the JVM will prevent additional instances of the class from being created, causing the classpath errors.
 
 The way to get around this problem is to add a custom bootstrap classloader to your application. Configure this classloader to load the appropriate libraries on behalf of your web application, and then trigger the start-up of the rest of the application as normal. This will resolve all classloader conflicts in favor of your application.
-
-
