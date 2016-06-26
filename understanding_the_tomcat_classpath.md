@@ -70,6 +70,6 @@ server loader는 혼자 남지만 shared loader는 여전히 많은 유용한 �
 
 ##Problems, Solutions, and Best Practices
 
-Problem: My application relies on an external repository, and I can't import it.
+**문제: 내 애플리케이션이 외부 레파지토리를 의존하고 있는데 그걸 import할 수 가 없다.**
 
 To make Tomcat aware of an external repository, declare the file in catalina.properties under the shared loader, using the correct syntax. Syntax will vary based on the type of file or repository you are attempting to configure:
