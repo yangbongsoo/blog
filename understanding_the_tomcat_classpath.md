@@ -119,6 +119,12 @@ Java naming convention은 클래스 이름들이, 자신들이 저장되는 디�
 
 첫째, 프레임워크 버전을 업데이트 해라. if this will bring the versions of the dependencies they rely upon into line with one another.
 
+이게 의존성의 버전을 가져올것이다. 그들은 기댄다. 
+
+First, you can try updating the versions of your framework, if this will bring the versions of the dependencies they rely upon into line with one another.
+
+
+
 둘째, 두개 이상의 custom classloader를 만들어라(각 JAR당 하나씩). 그리고 필요로하는 버전으로 클래스의 두개의 인스턴스를 만들기 위해 애플리케이션의 `WEB-INF/context.xml` 파일에 설정해라. 
 
 셋째, 프레임워크와 단일 JAR 파일에서 의존성을 패키징하기 위해 jarjar 유틸리티를 사용해라. 그러면 같이 함께 로드될 것이다. 이 방법은 이상적이진 않지만 동작은 할 것이다.
