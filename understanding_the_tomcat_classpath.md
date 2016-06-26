@@ -117,4 +117,18 @@ Java naming convention은 클래스 이름들이, 자신들이 저장되는 디�
 
 이 문제를 해결하기 위해 4가지 접근방법이 있다. 하지만 그 중 어떤것도 단순히 classpath를 고치는 것으로 해결될 수 없고 그 중 어떤것도 고통에서 자유로울 순 없다. 
 
+First, you can try updating the versions of your framework, if this will bring the versions of the dependencies they rely upon into line with one another.
 
+Secondly, you can attempt to create two or more custom classloaders, one for each JAR, and configure them in your application's "WEB-INF/context.xml" file, to create two separate instances of the class with the versions you need.
+
+Thirdly, you can use the jarjar utility to package the framework and its dependency in a single JAR file so they will be loaded together. This is a less-than-ideal solution, but it will work.
+
+Lastly, if you find yourself dealing with this kind of situation every other day, you should consider implementing an OSGi framework, which includes, among many other things, a number of methods designed specifically for situations where multiple versions of a single class must be run on a single JVM.
+
+##Best Practices
+
+Avoid loading libraries and packages other than the standard ones distributed with Tomcat using the Commons Loader. This can cause compatibility errors. If you need to share a single library or package between multiple applications, create "shared/lib" and "shared/classes" directories and configure them under the Shared loader in catalina.properties
+
+An exception to this rule is any common third party shared library, such as a JDBC driver. These should be placed directly into $CATALINA_HOME/lib
+
+When possible, it is a good idea to use Apache Tomcat as recommended by its developers, as this represents conformance to the Servlet specification. If you're finding that you have to configure classpath rather frequently, you may want to re-think your development process.
