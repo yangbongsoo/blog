@@ -101,8 +101,6 @@ Java class loading is lazy. 즉, 어떤 클래스를 요청하는 첫 classloade
 
 이 문제는 잘못 구현된 빌드나 배포 프로세스를 포함해 여러가지에 의해 발생할 수 있지만 대부분 웹 애플리케이션의 디렉토리 구조 때문에 발생한다.
 
-
-
-Java naming convention dictates that class names mirror the directory structure in which they are stored. For example, a class named com.mycompany.mygreat.class needs to be stored in the directory WEB-INF/classes/com/mycompany/.
+Java naming convention은 클래스 이름들이, 자신들이 저장되는 디렉터리 구조를 반영하도록 한다. 예를 들어 `com.mycompany.mygreat.class` 클래스는 `WEB-INF/classes/com/mycompany/` 디렉토리에 저장될 필요가 있다.
 
 Often just a missing period in the code can cause an error that seems to be classpath-related. Always check for the simplest solution to a problem before blaming Tomcat!
