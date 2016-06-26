@@ -83,7 +83,7 @@ server loader는 혼자 남지만 shared loader는 여전히 많은 유용한 �
 
 **문제 : 다수의 애플리케이션이 하나의 JAR 파일을 공유하길 원한다. 그리고 그 JAR 파일은 톰캣 안에 있길 원한다.**
 
-아래에 best practices 절에서 언급했듯이 `$CATALINA_HOME/lib`안의 JDBC 드라이버들과 같은, 공통적인 서드파티 라이브러리들 말고는 추가적인 라이브러리들을 포함하지 않는게 best다. 대신에 Tomcat 5.x에서 사용되는 `/shared/lib`과 `/shared/classes` 디렉토리를 만들고 catalina.properties에서 shared.loader 속성을 설정해라. `"shared/classes,shared/lib/*.jar"`
+`$CATALINA_HOME/lib`안의 JDBC 드라이버들과 같은, 공통적인 서드파티 라이브러리들 말고는 추가적인 라이브러리들을 포함하지 않는게 best다. 대신에 Tomcat 5.x에서 사용되는 `/shared/lib`과 `/shared/classes` 디렉토리를 만들고 catalina.properties에서 shared.loader 속성을 설정해라. `"shared/classes,shared/lib/*.jar"`
 
 **문제 : 애플리케이션에 또다른 프레임워크와 함께 내장 톰캣 서버를 사용하고 있는데 애플리케이션에서 프레임워크 컴포넌트들을 접근하려고 할 때마다 classpath 에러가 발생한다.**
 
