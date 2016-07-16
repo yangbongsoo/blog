@@ -20,14 +20,14 @@ try {
 	SecurityContextHolder.clearContext();
 }
 ```
-**하지만 대부분은 스프링 시큐리티가 제공한는 SecurityContextPersistenceFilter 클래스의 기능을 활용해서 SecurityContext를 설정하기 위한 코드 양을 줄일 수 있다.** 여러 보안 필터 체인 중 가장 먼저 적용해서 SecurityContext에 Authentication 객체를 보관한다. 이후 스프링 시큐리티는 SecurityContext를 이용해서 현재 접속한 사용자의 Authentication 객체를 구하고, Authentication 객체가 표현하는 주체가 접속한 자원에 접근할 수 있는지 여부를 판단하게 된다. 
+**하지만 대부분은 스프링 시큐리티가 제공한는 SecurityContextPersistenceFilter 클래스의 기능을 활용해서 SecurityContext를 설정하기 위한 코드 양을 줄일 수 있다.** (여러 보안 필터 체인 중 가장 먼저 적용해서 SecurityContext에 Authentication 객체를 보관한다) 이후 스프링 시큐리티는 SecurityContext를 이용해서 현재 접속한 사용자의 Authentication 객체를 구하고, 그 객체가 표현하는 주체가 접속한 자원에 접근할 수 있는지 여부를 판단하게 된다. 
 
 **Authentication 인터페이스**<br>
 스프링 시큐리티가 제공하는 코드가 아닌 우리가 만든 코드에서 직접 o.s.s.core.Authentication 객체를 사용해야 할 때가 있다. 이런 경우에는 앞서 살펴본 SecurityContextHolder를 이용해서 Authentication 객체를 구하면 된다.
 ```
 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 ```
-Authentication 객체를 구했다면, Authentication 객체가 제공하는 메서드를 이용해서 필요한 정보를 구할 수 있다. 이들 메서드는 다음과 같다.
+Authentication 객체를 구했다면, 객체가 제공하는 메서드를 이용해서 필요한 정보를 구할 수 있다. 메서드는 다음과 같다.
 ```
 String getName() : 이름을 구한다.
 Object getCrendentials() : 인증 대상 주체를 증명하는 값을 구한다. 비밀번호 등이 이에 해당된다.
