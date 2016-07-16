@@ -37,7 +37,7 @@ boolean isAuthenticated() : 인증 여부를 리턴한다.
 void setAuthenticated(boolean authenticated) : 인증 여부를 설정한다.
 Collection<? extends GrantedAuthority> getAuthorities() : 주체가 가진 권한 목록을 구한다. GrantedAuthority가 권한을 의미한다.
 ```
-Authentication 타입은 다음의 두 가지 목적으로 사용된다.
+Authentication 타입은 두 가지 목적으로 사용된다.
 1. AuthenticationManager에 인증을 요청할 때 필요한 정보를 담는 목적
   1. 스프링 시큐리티는 인증을 위한 목적으로 Authentication 객체를 사용한다. 다시 말해 AuthenticationManager를 사용해서 인증을 처리하는데, 이 AuthenticationManager가 입력으로 받는 값의 타입이 Authentication이다. 
 2. 현재 접속한 사용자에 대한 정보를 표현하기 위한 목적 
