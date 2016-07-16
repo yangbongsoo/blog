@@ -61,8 +61,17 @@ GrantedAuthority authority = new SimpleGrantedAuthority("USER_MANAGER");
 ```
 
 ###보안 필터 체인
-web.xml설정에서 
+
+이미 존재하는 xml 설정 기반 스프링 애플리케이션이라면, web.xml설정에서 
 ```
+<context-param>
+  <param-name>contextConfigLocation</param-name>
+  <param-value>classpath:/spring-security.xml</param-value>
+</context-param>
+
+...
+
+
 <filter>
   <filter-name>springSecurityFilterChain</filter-name>
   <filter-class>
@@ -73,10 +82,29 @@ web.xml설정에서
   <filter-name>springSecurityFilterChain</filter-name>
   <url-pattern>/*</url-pattern>
 </filter-mapping>
+
+...
 ```
-**이름이 springSecurityFilterChain인 DelegatingFilterProxy를 서블릿 필터로 등록한다.** 이 필터는 스프링 빈 객체를 필터로 쓰고 싶을 때 사용하는데, 위 설정에서 사용할 스프링 빈의 이름을 springSecurityFilterChain으로 설정했다.  
+**이름이 springSecurityFilterChain인 DelegatingFilterProxy를 서블릿 필터로 등록한다.** 이 필터는 **스프링 빈 객체를 필터로 쓰고 싶을 때 사용**하는데, 위 설정에서 사용할 스프링 빈의 이름을 springSecurityFilterChain으로 설정했다. 하지만  springSecurityFilterChain 이라는 이름을 갖는 스프링 빈을 설정한 적은 없다. 실제 springSecurityFilterChain 이라는 이름의 스프링 빈은 spring-security.xml 설정의 스프링 시큐리티 네임스페이스를 처리하는 과정에서 등록된다. **스프링 시큐리티 네임스페이스를 사용하면 내부적으로 FilterChainProxy 객체를 스프링 빈으로 등록하는데 이 FilterChainProxy 빈의 이름이 springSecurityFilterChain이다.** 스프링 시큐리티의 웹 모듈은 여러 서블릿 필터를 이용해서 접근 제어, 로그인/로그아웃 등의 기능을 제공하는데, FilterChainProxy는 이들 보안 관련 서블릿 필터들을 묶어서 실행해주는 기능을 제공한다.
 
 cf) 스프링 시큐리티가 제공하는 JSP용 커스텀 태그 라이브러리가 정상 작동하려면 스프링 시큐리티의 주요 구성 요소가 루트 애플리케이션에 위치해야 한다.
+
+FilterChainProxy가 여러 보안 관련 서블릿 필터를 묶어서 실행한다고 했는데, 그렇다면 보안 관련 서블릿 필터는 또 어디에 있을까? 바로 spring-security.xml 파일에서 보안 관련 서블릿 필터를 생성하기 위한 설정을 했다.
+```
+<sec:http use-expressions="true">
+  <sec:intercept-url pattern="/admin/**"
+        access="hasAuthority('ROLE_ADMIN')"/>
+  <sec:intercept-url pattern="/manager/**"
+        access="hasRole('ROLE_MANAGER')"/>
+  <sec:intercept-url pattern="/member/**"
+        access="isAuthenticated()"/>
+  <sec:intercept-url pattern="/**"
+        access="permitAll"/>
+  <sec:form-login />
+  <sec:logout />
+</sec:http>
+```
+스프링 시큐리티 네임스페이스 핸들러는 입력받은 설정 정보를 이용해서 보안 관련 서블릿 필터 체인을 생성한다. 예를 들어, `<intercept-url>` 태그로 입력받은 설정을 사용해서 FilterSecurityInterceptor 필터를 생성하고, `<form-login>`설정을 이용해서 폼 기반 로그인 요청을 처리하는 UsernamePasswordAuthenticationFilter를 생성한다. 비슷하게 `<logout>` 설정은 LogoutFilter 필터를 생성하는데 사용된다. 이렇게 생성한 필터는 체인을 형성하고, FilterChainProxy는 클라이언트의 웹 요청이 들어오면 이 체인을 이용해서 접근 제어를 하게 된다. 
 
 spring security 의존성 
 ```
