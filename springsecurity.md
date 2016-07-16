@@ -87,7 +87,9 @@ GrantedAuthority authority = new SimpleGrantedAuthority("USER_MANAGER");
 
 ...
 ```
-**이름이 springSecurityFilterChain인 DelegatingFilterProxy를 서블릿 필터로 등록한다.** 이 필터는 **스프링 빈 객체를 필터로 쓰고 싶을 때 사용**하는데, 위 설정에서 사용할 스프링 빈의 이름을 springSecurityFilterChain으로 설정했다. 하지만  springSecurityFilterChain 이라는 이름을 갖는 스프링 빈을 설정한 적은 없다. 실제 springSecurityFilterChain 이라는 이름의 스프링 빈은 spring-security.xml 설정의 스프링 시큐리티 네임스페이스를 처리하는 과정에서 등록된다. **스프링 시큐리티 네임스페이스를 사용하면 내부적으로 FilterChainProxy 객체를 스프링 빈으로 등록하는데 이 FilterChainProxy 빈의 이름이 springSecurityFilterChain이다.** 스프링 시큐리티의 웹 모듈은 여러 서블릿 필터를 이용해서 접근 제어, 로그인/로그아웃 등의 기능을 제공하는데, FilterChainProxy는 이들 보안 관련 서블릿 필터들을 묶어서 실행해주는 기능을 제공한다.
+**이름이 springSecurityFilterChain인 DelegatingFilterProxy를 서블릿 필터로 등록한다.** 이 필터는 **스프링 빈 객체를 필터로 쓰고 싶을 때 사용**하는데, 위 설정에서 사용할 스프링 빈의 이름을 springSecurityFilterChain으로 설정했다. 
+
+하지만  springSecurityFilterChain 이름을 갖는 스프링 빈을 설정한 적은 없다. 실제 springSecurityFilterChain 이름의 스프링 빈은 spring-security.xml 설정의 스프링 시큐리티 네임스페이스를 처리하는 과정에서 등록된다. **스프링 시큐리티 네임스페이스를 사용하면 내부적으로 FilterChainProxy 객체를 스프링 빈으로 등록하는데 이 FilterChainProxy 빈의 이름이 springSecurityFilterChain이다.** 스프링 시큐리티의 웹 모듈은 여러 서블릿 필터를 이용해서 접근 제어, 로그인/로그아웃 등의 기능을 제공하는데, FilterChainProxy는 이들 보안 관련 서블릿 필터들을 묶어서 실행해주는 기능을 제공한다.
 
 cf) 스프링 시큐리티가 제공하는 JSP용 커스텀 태그 라이브러리가 정상 작동하려면 스프링 시큐리티의 주요 구성 요소가 루트 애플리케이션에 위치해야 한다.
 
