@@ -106,7 +106,7 @@ FilterChainProxy가 여러 보안 관련 서블릿 필터를 묶어서 실행한
 ```
 스프링 시큐리티 네임스페이스 핸들러는 입력받은 설정 정보를 이용해서 보안 관련 서블릿 필터 체인을 생성한다. 예를 들어, `<intercept-url>` 태그로 입력받은 설정을 사용해서 FilterSecurityInterceptor 필터를 생성하고, `<form-login>`설정을 이용해서 폼 기반 로그인 요청을 처리하는 UsernamePasswordAuthenticationFilter를 생성한다. 비슷하게 `<logout>` 설정은 LogoutFilter 필터를 생성하는데 사용된다. 이렇게 생성한 필터는 체인을 형성하고, FilterChainProxy는 클라이언트의 웹 요청이 들어오면 이 체인을 이용해서 접근 제어를 하게 된다. 
 
-spring security 의존성 
+spring security 의존성 추가
 ```
 <dependency>
 	<groupId>org.springframework.security</groupId>
