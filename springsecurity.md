@@ -89,7 +89,9 @@ GrantedAuthority authority = new SimpleGrantedAuthority("USER_MANAGER");
 ```
 **이름이 springSecurityFilterChain인 DelegatingFilterProxy를 서블릿 필터로 등록한다.** 이 필터는 **스프링 빈 객체를 필터로 쓰고 싶을 때 사용**하는데, 위 설정에서 사용할 스프링 빈의 이름을 springSecurityFilterChain으로 설정했다. 
 
-하지만  springSecurityFilterChain 이름을 갖는 스프링 빈을 설정한 적은 없다. 실제 springSecurityFilterChain 이름의 빈은 spring-security.xml 설정의 스프링 시큐리티 네임스페이스를 처리하는 과정에서 등록된다. **스프링 시큐리티 네임스페이스를 사용하면 내부적으로 FilterChainProxy 객체를 스프링 빈으로 등록하는데 이 FilterChainProxy 빈의 이름이 springSecurityFilterChain이다.** 스프링 시큐리티의 웹 모듈은 여러 서블릿 필터를 이용해서 접근 제어, 로그인/로그아웃 등의 기능을 제공하는데, FilterChainProxy는 이들 보안 관련 서블릿 필터들을 묶어서 실행해주는 기능을 제공한다.
+하지만  springSecurityFilterChain 이름을 갖는 스프링 빈을 설정한 적은 없다. 실제 springSecurityFilterChain 이름의 빈은 spring-security.xml 설정의 스프링 시큐리티 네임스페이스를 처리하는 과정에서 등록된다. **스프링 시큐리티 네임스페이스를 사용하면 내부적으로 FilterChainProxy 객체를 스프링 빈으로 등록하는데 이 FilterChainProxy 빈의 이름이 springSecurityFilterChain이다.** 
+
+스프링 시큐리티의 웹 모듈은 여러 서블릿 필터를 이용해서 접근 제어, 로그인/로그아웃 등의 기능을 제공하는데, FilterChainProxy는 이들 보안 관련 서블릿 필터들을 묶어서 실행해주는 기능을 제공한다.
 
 cf) 스프링 시큐리티가 제공하는 JSP용 커스텀 태그 라이브러리가 정상 작동하려면 스프링 시큐리티의 주요 구성 요소가 루트 애플리케이션에 위치해야 한다.
 
@@ -108,9 +110,21 @@ FilterChainProxy가 여러 보안 관련 서블릿 필터를 묶어서 실행한
   <sec:logout />
 </sec:http>
 ```
-스프링 시큐리티 네임스페이스 핸들러는 입력받은 설정 정보를 이용해서 보안 관련 서블릿 필터 체인을 생성한다. 예를 들어, `<intercept-url>` 태그로 입력받은 설정을 사용해서 FilterSecurityInterceptor 필터를 생성하고, `<form-login>`설정을 이용해서 폼 기반 로그인 요청을 처리하는 UsernamePasswordAuthenticationFilter를 생성한다. 비슷하게 `<logout>` 설정은 LogoutFilter 필터를 생성하는데 사용된다. 이렇게 생성한 필터는 체인을 형성하고, FilterChainProxy는 클라이언트의 웹 요청이 들어오면 이 체인을 이용해서 접근 제어를 하게 된다. 
+스프링 시큐리티 네임스페이스 핸들러는 입력받은 설정 정보를 이용해서 보안 관련 서블릿 필터 체인을 생성한다. 예를 들어, `<intercept-url>` 태그로 입력받은 설정을 사용해서 FilterSecurityInterceptor 필터를 생성하고, `<form-login>`설정을 이용해서 폼 기반 로그인 요청을 처리하는 UsernamePasswordAuthenticationFilter를 생성한다. 비슷하게 `<logout>` 설정은 LogoutFilter를 생성하는데 사용된다. 이렇게 생성한 필터는 체인을 형성하고, FilterChainProxy는 클라이언트의 웹 요청이 들어오면 이 체인을 이용해서 접근 제어를 하게 된다. 
 
-spring security 의존성 추가
+web.xml에 설정한 DelegatingFilterProxy는 스프링 시큐리티가 생성하는 FilterChainProxy에 필터 처리를 위임하는데, 이 FilterChainProxy는 다시 여러 필터를 체인 형식으로 갖고 있는 SecurityFilterChain에 처리를 위임한다. 
+
+###AuthenticationManager의 인증 처리
+스프링 시큐리티는 인증이 필요할 때 AuthenticationManager를 이용한다. 
+```
+public interface AuthenticationManager {
+  Authentication authenticate(Authentication authentication) throws AuthenticationException;
+}
+```
+이늦ㅇ에 성공하면 인증 정보를 담은 Authentication 객체를 리턴하고 그렇지 않을 경우 exception을 발생시킨다.
+
+
+cf) spring security 의존성 추가
 ```
 <dependency>
 	<groupId>org.springframework.security</groupId>
