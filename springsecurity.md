@@ -42,3 +42,40 @@ Authentication 타입은 다음의 두 가지 목적으로 사용된다.
 
 예를 들어 스프링 시큐리티는 **UsernamePasswordAuthenticationToken** 클래스를 제공하고 있는데, 이 클래스는 사용자 아이디와 암호를 이용해서 인증을 처리할 때 사용되는 Authentication 구현체다. 또한 **AnonymousAuthenticationToken** 클래스를 제공하고 있는데 이 클래스는 아직 인증을 거치지 않은 사용자를 표현하기 위한 구현체로 사용된다. 스프링 시큐리티가 이미 다양한 상황에 맞게 사용할 수 있는 Authentication 구현 클래스를 제공하고 있지만, 필요에 따라 직접 알맞은 Authentication 구현체를 구현해야 할 때도 있다.
 
+**GrantedAuthority 인터페이스**<br>
+o.s.s.core.GrantedAuthority 인터페이스는 권한을 표현할 때 사용된다. 앞서 Authentication 인터페이스의 getAuthorities() 메서드는 사용자가 가진 권한 목록을 리턴한다고 했는데, 이때 GrantedAuthority를 사용했다. 
+```
+public interface GrantedAuthority extends Serializable {
+  String getAuthority();
+}
+```
+GrantedAuthority의 getAuthority() 메서드의 리턴 타입은 String인데, 이는 스프링 시큐리티가 모든 권한을 문자열로 표현한다는 것을 의미한다.
+```
+// 접근 권한을 설정한 코드
+<sec:intercept-url pattern="/admin/usermanager/**"
+    access="hasAuthority('USER_MANAGER')"/>
+```
+SimpleGrantedAuthority 클래스는 GrantedAuthority 타입의 객체를 직접 생성해야 할 때 사용할 수 있는 클래스로서, 이 클래스는 생성자를 이용해서 String 타입의 권한 값을 전달받는다.
+```
+GrantedAuthority authority = new SimpleGrantedAuthority("USER_MANAGER");
+```
+
+###보안 필터 체인
+web.xml설정에서 
+```
+<filter>
+  <filter-name>springSecurityFilterChain</filter-name>
+  <filter-class>
+    org.springframework.web.filter.DelegatingFilterProxy
+  </filter-class>
+</filter>
+<filter-mapping>
+  <filter-name>springSecurityFilterChain</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+```
+**이름이 springSecurityFilterChain인 DelegatingFilterProxy를 서블릿 필터로 등록한다.** 이 필터는 스프링 빈 객체를 필터로 쓰고 싶을 때 사용하는데, 위 설정에서 사용할 스프링 빈의 이름을 springSecurityFilterChain으로 설정했다.  
+
+cf) 스프링 시큐리티가 제공하는 JSP용 커스텀 태그 라이브러리가 정상 작동하려면 스프링 시큐리티의 주요 구성 요소가 루트 애플리케이션에 위치해야 한다.
+
+
