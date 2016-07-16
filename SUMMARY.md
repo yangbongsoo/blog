@@ -18,6 +18,7 @@
    * [JUnit+Mockito vs Groovy+Spock](junit+mockito_vs_groovy+spock.md)
    * [Understanding The Tomcat Classpath](understanding_the_tomcat_classpath.md)
    * [Tomcat Configuration](tomcat_configuration.md)
+   * SpringSecurity
 * [토비의 스프링3.1](spring.md)
    * [정의, IoC/DI개념, Bean 라이프사이클](c815_c7582c_ioc__di_ac1c_b1502c_bean_b77c_c774_d50.md)
    * [오브젝트와 의존관계](c624_be0c_c81d_d2b8_c640_c758_c874_ad00_acc4.md)
