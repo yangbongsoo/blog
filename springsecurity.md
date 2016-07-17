@@ -1,8 +1,8 @@
 # Spring 4.0 프로그래밍 ch16 Spring Security (최범균 저)
 ###보안 관련 3요소
 **접근 주체(principal)** : 보호된 대상에 접근하는 사용자.<br>
-**인증(Authenticate)** : 현재 사용자가 누구인지 확인하는 과정. 일반적으로  id/pw를 이용해서 인증을 처리.<br>
-**인가(Authorize)** : 현재 사용자가 특정 URL 등을 사용할 권한이 있는지 검사.
+**인증(AuthenticationManager와 매칭)** : 현재 사용자가 누구인지 확인하는 과정. 일반적으로  id/pw를 이용해서 인증을 처리.<br>
+**인가(SecurityInterceptor와 매칭)** : 현재 사용자가 특정 URL 등을 사용할 권한이 있는지 검사.
 
 o.s.s.core.Authentication은 스프링 시큐리티에서 현재 애플리케이션에 접근한 사용자(더 정확하게는 웹 브라우저, REST로 접근한 외부 시스템 등)의 보안 관련 정보를 보관하는 역할을 한다. 예를 들어, Authentication은 사용자의 인증 여부, 사용자가 가진 권한(authority), 이름 및 접근 주체(principal)에 대한 정보를 제공한다. 스프링 시큐리티는 이 정보를 이용해서 사용자가 요청한 자원(URL 등)에 접근 할 수 있는지 여부를 판단한다.
 
