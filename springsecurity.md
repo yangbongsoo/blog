@@ -126,6 +126,8 @@ public interface AuthenticationManager {
 인증에 성공하면 인증 정보를 담은 Authentication 객체를 리턴하고 그렇지 않을 경우 exception을 발생시킨다.
 
 
+
+---
 cf) spring security 의존성 추가
 ```
 <dependency>
