@@ -1,7 +1,4 @@
 # Spring 4.0 프로그래밍 ch16 Spring Security (최범균 저)
-참고 : http://docs.spring.io/spring-security/site/docs/current/guides/html5/index.html
-http://docs.spring.io/spring-security/site/docs/current/guides/html5/helloworld-boot.html
-
 o.s.s.core.Authentication은 스프링 시큐리티에서 현재 애플리케이션에 접근한 사용자(더 정확하게는 웹 브라우저, REST로 접근한 외부 시스템 등)의 보안 관련 정보를 보관하는 역할을 한다. 예를 들어, Authentication은 사용자의 인증 여부, 사용자가 가진 권한(authority), 이름 및 접근 주체(principal)에 대한 정보를 제공한다. 스프링 시큐리티는 이 정보를 이용해서 사용자가 요청한 자원(URL 등)에 접근 할 수 있는지 여부를 판단한다.
 
 스프링 시큐리티가 Authentication을 사용하려면 다음과 같다.
@@ -141,3 +138,7 @@ cf) spring security 의존성 추가
 compile 'org.springframework.security:spring-security-web:4.1.1.RELEASE'
 compile 'org.springframework.security:spring-security-config:4.1.1.RELEASE'
 ```
+
+참고자료 : http://www.slideshare.net/madvirus/ss-36809454
+http://docs.spring.io/spring-security/site/docs/current/guides/html5/index.html
+http://docs.spring.io/spring-security/site/docs/current/guides/html5/helloworld-boot.html
