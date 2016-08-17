@@ -1,6 +1,5 @@
 {
     "plugins": [
-        "-code-highlighter",
         "-code_tomorrow_scheme"
     ],
     "pluginsConfig": {}
