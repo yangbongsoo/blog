@@ -1,7 +1,8 @@
 {
     "plugins": [
         "codeblock",
-        "code-editor"
-    ],
-    "pluginsConfig": {}
+        "code-editor",
+        "code-highlighter",
+        "code_tomorrow_scheme"
+    ]
 }
