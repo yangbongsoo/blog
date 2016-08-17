@@ -1,8 +1,7 @@
 {
     "plugins": [
         "code-editor",
-        "code-highlighter",
-        "code_tomorrow_scheme"
+        "code-highlighter"
     ],
     "pluginsConfig": {}
 }
