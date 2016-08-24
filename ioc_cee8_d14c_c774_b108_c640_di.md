@@ -189,8 +189,12 @@ public void serviceRequestFormSubmit(HttpServletRequest request) {
 **ObjectFactory, ObjectFactoryCreatingFactoryBean**<br>
 직접 애플리케이션 컨텍스트를 사용하지 않으려면 중간에 컨텍스트에 getBean()을 호출해주는 역할을 맡을 오브젝트를 두면 된다. 가장 쉽게 생각해볼 수 있는 것은 바로 팩토리다. 팩토리를 이용하는 이유는 오브젝트를 요구하면서 오브젝트를 어떻게 생성하거나 가져오는지에는 신경 쓰지 않을 수 있기 때문이다. ApplicationContext를 DI 받아서 getBean()을 호출해 원하는 프로토타입 빈을 가져오는 방식으로 동작하는 팩토리를 하나 만들어서 빈으로 등록해두고, 이 팩토리 역할을 하는 빈을 DI 받아서 필요할 때 getObject()와 같은 메서드를 호출해 빈을 가져올 수 있도록 만드는 방법이 있다.<br>
 
-스프링이 제공하는 ObjectFactory 인터페이스와 ObjectFactory 인터페이스를 구현한 팩토리를 만들어주는 특별한 빈 클래스를 사용해보자. 
-
+스프링이 제공하는 ObjectFactory 인터페이스와 ObjectFactory 인터페이스를 구현한 팩토리를 만들어주는 특별한 빈 클래스를 사용해보자. 스프링의 ObjectFactory 인터페이스는 타입 파라미터와 getObject()라는 간단한 팩토리 메서드를 갖고 있다.
+```
+ObjectFactory<ServiceRequest> factory = ...;
+ServiceRequest request = factory.getObject();
+```
+ObjectFactory는 비록 스프링이 제공하는 인터페이스이지만 평범하고 간단한 메서드만 갖고 있기 때문에 복잡한 ApplicationContext를 직접 사용하는 것보다 훨씬 깔끔하고 테스트하기도 편하다. ObjectFactory의 구현 클래스는 이미 스프링이 제공해주고 있다. 프로토타입처럼 컨텍스트에서 매번 빈을 가져와야 하는 구조의 팩토리를 만들 때 손쉽게 사용할 수 있도록 만들어져 있다. 클래스의 이름은 ObjectFactoryCreatingFactoryBean이다. ObjectFactory를 만들어주는 팩토리 빈이라는 뜻이다. 
 
 
 
