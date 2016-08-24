@@ -50,7 +50,12 @@ public void serviceRequestFormSubmit (HttpServletRequest request) {
 ```
 ServiceRequest 서비스 계층
 public void addNewServiceRequest(ServiceRequest serviceRequest) {
-  Customer customer = this.customerDao.findCustomerByNo(~~)
+  Customer customer = this.customerDao.findCustomerByNo(serviceRequest.getCustomberNo());
+  ...
+  this.serviceRequestDao.add(serviceRequest, customer);
+  
+  this.emailService.sendEmail(customer.getEmail(), 
+    "A/S 접수가 정상적으로 처리되었습니다.");
 }
 ```
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
