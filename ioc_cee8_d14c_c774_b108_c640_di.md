@@ -74,5 +74,17 @@ public class ServiceRequest {
   Customer customer;
   String productNo;
   String description;
+  ...
 }
 ```
+ServiceRequest는 customerNo 값 대신 Customer 오브젝트 자체를 참조하게 한다. ServiceRequest가 좀 더 도메인 모델에 가깝게 만들어졌으니, 서비스 계층의 코드는 다음과 같이 바꿀 수 있다.
+```
+수정된 서비스 계층 코드
+
+public void addNewServiceRequest(ServiceRequest serviceRequest) {
+  this.serviceRequestDao.add(serviceRequest);
+  this.emailService.sendEmail(serviceRequest.getCustomer().getEmail(),
+    "A/S 접수가 정상적으로 처리되었습니다.");
+}
+```
+
