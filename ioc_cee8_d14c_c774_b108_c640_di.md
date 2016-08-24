@@ -68,4 +68,11 @@ Customer customer =  this.customerDao.getCustomer(serviceRequest.getCustomerId()
 ```
 이는 전형적인 데이터 중심의 아키텍처가 만들어내는 구조다. 비록 ServiceRequest 오브젝트에 폼 정보가 담겨 있긴 하지만, 도메인 모델을 반영하고 있다고 보기 힘들다. 모델 관점으로 보자면 서비스 요청 클래스인 ServiceRequest는 Customer라는 고객 클래스와 연결되어 있어야지, 폼에서 어떻게 입력받는지에 따라 달라지는 customerNo나 customerId 같은 값에 의존하고 있으면 안된다.<br>
 
-그렇다면 이 구조를 좀 더 오브젝트 중심의 구조로 만들고, 좀 더 객체지향적으로 바꾸려면 어떻게 해야 할까? 일단 웹 컨트롤러는 같은 웹 프레젠테이션 계층의 뷰에서 만들어주는 폼과 밀접하게 연결되어 있는 것이 자연스럽고 별문제가 되지 않는다. 대신 서비스 계층의 ServiceRequestService는 ServiceRequest 오브젝트에 담긴 서비스 요청 내역과 함께 서비스를 신청한 고객정보를 Customer 오브젝트로 전달받아야 한다. 그래야만 프레젠테이션 계층의 입력 방식에 따라서 비지니스 로직을 담당하는 코드가 휘둘리지 않고 독립적으로 존재할 수 있다.
+그렇다면 이 구조를 좀 더 오브젝트 중심의 구조로 만들고, 좀 더 객체지향적으로 바꾸려면 어떻게 해야 할까? 일단 웹 컨트롤러는 같은 웹 프레젠테이션 계층의 뷰에서 만들어주는 폼과 밀접하게 연결되어 있는 것이 자연스럽고 별문제가 되지 않는다. 대신 서비스 계층의 ServiceRequestService는 ServiceRequest 오브젝트에 담긴 서비스 요청 내역과 함께 서비스를 신청한 고객정보를 Customer 오브젝트로 전달받아야 한다. 그래야만 프레젠테이션 계층의 입력 방식에 따라서 비지니스 로직을 담당하는 코드가 휘둘리지 않고 독립적으로 존재할 수 있다. 따라서 ServiceRequest를 다음과 같이 변경해야 한다.
+```
+public class ServiceRequest {
+  Customer customer;
+  String productNo;
+  String description;
+}
+```
