@@ -181,7 +181,13 @@ public void serviceRequestFormSubmit(HttpServletRequest request) {
 
 프로토타입 빈은 DI 될 대상이 여러 군데라면 각기 다른 오브젝트가 생성된다. 하지만 ServiceRequest 처럼 같은 컨트롤러에서도 매번 요청이 있을 때마다 새롭게 오브젝트가 만들어져야 하는 경우에는 적합하지 않다. new 키워드를 대신하기 위해 사용되는 것이 프로토타입의 용도라고 본다면, DI는 프로토타입 빈을 사용하기에 적합한 방법이 아니다. 따라서 코드 내에서 필요할 때마다 컨테이너에게 요청해서 새로운 오브젝트를 만들어야 한다. DL 방식으로 사용해야 한다는 뜻이다. **프로토타입 빈이 DI 방식으로 사용되는 경우는 매우 드물다. **<br>
 
-앞에서 ApplicationContext를 DI 받아둔 뒤에 코드에서 getBean() 메서드를 직접 호출하는 방법을 사용했다. 가장 단순하고 직접적인 방식이며, 사용하기도 별로 어렵지 않다. 반면에 스프링의 API가 일반 애플리케이션 코드에서 사용된다는 사실이 불편하게 느껴질 수도 있다. 게다가 단위 테스트를 작성하려면 ApplicationContext라는 거대한 인터페이스의 목 오브젝트를 만들어야 하는 부담도 뒤따른다. 스프링은 프로토타입 빈처럼 DL 방식을 코드에서 사용해야 할 경우를 위해 직접 ApplicationContext를 이용하는 것 외에도 다양한 방법을 제공하고 있다. 
+앞에서 ApplicationContext를 DI 받아둔 뒤에 코드에서 getBean() 메서드를 직접 호출하는 방법을 사용했다. 가장 단순하고 직접적인 방식이며, 사용하기도 별로 어렵지 않다. 반면에 스프링의 API가 일반 애플리케이션 코드에서 사용된다는 사실이 불편하게 느껴질 수도 있다. 게다가 단위 테스트를 작성하려면 ApplicationContext라는 거대한 인터페이스의 목 오브젝트를 만들어야 하는 부담도 뒤따른다. 스프링은 프로토타입 빈처럼 DL 방식을 코드에서 사용해야 할 경우를 위해 직접 ApplicationContext를 이용하는 것 외에도 다양한 방법을 제공하고 있다.<br>
+
+**ApplicationContext, BeanFactory**<br>
+이미 사용했던 방법이다. @Autowired나 @Resorce를 이용해 ApplicationContext 또는 BeanFactory를 DI 받은 후에 getBean() 메서드를 직접 호출해서 빈을 가져오는 방법이다.<br>
+
+**ObjectFactory, ObjectFactoryCreatingFactoryBean**<br>
+직접 애플리케이션 컨텍스트를 사용하지 않으려면 중간에 컨텍스트에 getBean()을 호출해주는 역할을 맡을 오브젝트를 두면 된다.
 
 
 
