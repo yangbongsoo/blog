@@ -87,4 +87,4 @@ public void addNewServiceRequest(ServiceRequest serviceRequest) {
     "A/S 접수가 정상적으로 처리되었습니다.");
 }
 ```
-
+폼에서 입력받은 고객번호로 고객을 찾아오는 번거로운 작업을 생략할 수 있게 됐다. serviceRequestDao에도 ServiceRequest 타입의 오브젝트만 전달하면 된다. 
