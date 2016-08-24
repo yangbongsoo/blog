@@ -138,6 +138,8 @@ public void serviceRequestFormSubmit(HttpServletRequest request) {
   ...
 }
 ```
+애플리케이션 컨텍스트에서 가져온 ServiceRequest 오브젝트는 CustomerDao가 DI된 상태이기 때문에 setCustomerByCustomerNo()가 호출되면 DAO를 이용해 Customer 오브젝트를 저장해주게 만들 수 있다.<br>
+
 
 
 
