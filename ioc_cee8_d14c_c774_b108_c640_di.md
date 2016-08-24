@@ -106,3 +106,4 @@ public class ServiceRequest {
   }
 }
 ```
+ServiceRequest가 CustomerDao를 DI 받아서 사용할 수 있다면 문제는 간단해진다. 폼에서 고객번호를 입력바닸다면 웹 컨트롤러에서는 setCustomerByCustomerNo() 메서드를 통해 ServiceRequest 오브젝트에 전달해주기만 하면 된다.
