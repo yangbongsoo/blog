@@ -23,5 +23,34 @@ IoC의 기본 개념은 애플리케이션을 구성하는 핵심 오브젝트�
 사용자의 요청에 따라 매번 독립적인 오브젝트를 만들어야 하는데, 매번 새롭게 만들어지는 오브젝트가 컨테이너 내의 빈을 사용해야 하는 경우가 있다. DI가 필요한 오브젝트라는 뜻이다. 오브젝트에 DI를 적용하려면 컨테이너가 오브젝트를 만들게 해야 한다. 바로 이런 경우에 프로토타입 빈이 유용하다. 프로토타입 빈은 오브젝트의 생성과 DI 작업까지 마친 후에 컨테이너가 돌려준다.<br>
 
 콜센터에서 고객의 A/S 신청을 받아서 접수하는 기능을 만든다고 생각해보자. 이때 등록 폼에서 고객번호를 입력받는다. 이렇게 입력받은 고객번호는 다른 입력 필드와 함께 폼 정보를 담는 오브젝트에 담겨서 서비스 계층으로 전달되어 A/S 신청 접수 기능에서 사용될 것이다.
-  
+```
+A/S 신청 폼 클래스
+
+public class ServiceRequest {
+  String customerNo;
+  String productNo;
+  String description;
+}
+```
+ServiceRequest의 오브젝트는 매번 신청을 받을 때마다 새롭게 만들어지고, 폼의 정보를 담아서 서비스 계층으로 전달될 것이다. 웹 요청을 받아 처리하는 웹 컨트롤러에서는 아래와 같이 매번 new 연산자로 ServiceRequest 클래스의 오브젝트를 생성하고, 폼 요청 정보를 넣은 뒤 서비스 계층으로 전달해줘야 한다.
+```
+ServiceRequest 웹 컨트롤러 
+
+public void serviceRequestFormSubmit (HttpServletRequest request) {
+    ServiceRequest serviceRequest = new ServiceRequest(); // 매 요청마다 새로운 객체를 생성한다.
+    serviceRequest.setCustomerNo(request.getParameter("custno"));
+    ...
+    this.serviceRequestService.addNewServiceRequest(serviceRequest);
+    ...
+}
+```
+이 웹 컨트롤러는 매우 단순하고 원시적이다. 스프링의 웹 프레임워크를 사용하면 훨씬 세련되고 깔끔하게 만들 수 있지만, 일단은 어떤 식으로 동작하는지 설명하기 위한 코드라고 생각하고 보자. 일단 여기까지는 아무런 문제가 없다. 폼으로부터 요청이 있을 때마다 새로운 오브젝트를 만들고 폼의 필드에 입력된 고객번호를 저장하는 것은 자연스러운 일이다. <br>
+
+이번엔 서비스 계층의 구현을 살펴보자. 콜 센터의 업무를 담당하는 서비스 오브젝트에서는 새로운 A/S 요청이 접수되면 접수된 내용을 DB에 저장하고 신청한 고객에게 이메일로 접수 안내 메일을 보내주도록 되어 있다. 폼에서는 단지 문자열로 된 고객번호를 받았을 뿐이지만 CustomerDao에게 요청하면 고객정보를 모두 가져올 수 있다. CustomerDao에서 가져온 고객정보는 Customer 오브젝트에 담겨 있을 것이고, 이를 이용해 이메일을 발송할 수도 있다. 서비스 계층의 ServiceRequestService 클래스에는 아래와 같은 코드가 만들어질 것이다.
+```
+ServiceRequest 서비스 계층
+public void addNewServiceRequest(ServiceRequest serviceRequest) {
+  Customer customer = this.customerDao.findCustomerByNo(~~)
+}
+```
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
