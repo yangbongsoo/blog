@@ -156,6 +156,27 @@ public class ServiceRequest {
  }
 }
 ```
+이제 ServiceRequestService의 A/S 신청 접수를 처리하는 메서드는 아래와 같이 구체적인 통보 방식에 매이지 않고 ServiceRequest 오브젝트에게 통보를 보내라는 요청만 하는 깔끔한 코드로 만들 수 있다.
+```
+public void addNewServiceRequest(ServiceRequest serviceRequest) {
+  this.serviceRequestDao.add(serviceRequest);
+  serviceRequest.notifyServiceRequestRegistration(); // 구체적인 통보 작업은 ServiceRequest에서 알아서 담당하게 한다.
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
