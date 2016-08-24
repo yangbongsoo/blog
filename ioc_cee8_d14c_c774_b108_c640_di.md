@@ -91,4 +91,18 @@ public void addNewServiceRequest(ServiceRequest serviceRequest) {
 
 그러나 아직 해결해야 할 가장 큰 문제가 남아 있다. 폼에서는 문자열로 된 고객번호를 입력받을 텐데 그것을 어떻게 Customer 오브젝트로 바꿔서 ServiceRequest에 넣어 줄 수 있을까? 답은 간단하다. customerNo를 가지고 CustomerDao에 요청해서 Customer 오브젝트를 찾아오면 된다. 이전에는 그것을 ServiceRequestService의 메서드에서 처리했는데, 이제는 어디서 해야 할까? 일단 생각해볼 수 있는 건, 웹 컨트롤러에서 CustomerDao를 사용해 Customer를 찾은 뒤에 이를 ServiceRequest에 전달하는 것이다. 이것도 그리 나쁜 방법은 아니다. 하지만 그보다 나은 방법은 ServiceRequest 자신이 처리하는 것이다.<br>
 
+만약 ServiceRequest가 CustomerDao에 접근할 수 있다면 어떨까? 그렇다면 다음과 같이 ServiceRequest 코드를 만들 수 있다.
+```
+Customer를 검색할 수 있는 기능을 가진 ServiceRequest
 
+public class ServiceRequest {
+  Customer customer;
+  ...
+  @Autowired
+  CustomerDao customerDao; 
+  
+  public void setCustomerByCustomerNo(String customerNo) {
+    this.customer = customerDao.findCustomerByNo(customerNo);
+  }
+}
+```
