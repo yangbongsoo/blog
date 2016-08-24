@@ -194,9 +194,26 @@ public void serviceRequestFormSubmit(HttpServletRequest request) {
 ObjectFactory<ServiceRequest> factory = ...;
 ServiceRequest request = factory.getObject();
 ```
-ObjectFactory는 비록 스프링이 제공하는 인터페이스이지만 평범하고 간단한 메서드만 갖고 있기 때문에 복잡한 ApplicationContext를 직접 사용하는 것보다 훨씬 깔끔하고 테스트하기도 편하다. ObjectFactory의 구현 클래스는 이미 스프링이 제공해주고 있다. 프로토타입처럼 컨텍스트에서 매번 빈을 가져와야 하는 구조의 팩토리를 만들 때 손쉽게 사용할 수 있도록 만들어져 있다. 클래스의 이름은 ObjectFactoryCreatingFactoryBean이다. ObjectFactory를 만들어주는 팩토리 빈이라는 뜻이다. 
+ObjectFactory는 비록 스프링이 제공하는 인터페이스이지만 평범하고 간단한 메서드만 갖고 있기 때문에 복잡한 ApplicationContext를 직접 사용하는 것보다 훨씬 깔끔하고 테스트하기도 편하다. ObjectFactory의 구현 클래스는 이미 스프링이 제공해주고 있다. 프로토타입처럼 컨텍스트에서 매번 빈을 가져와야 하는 구조의 팩토리를 만들 때 손쉽게 사용할 수 있도록 만들어져 있다. 클래스의 이름은 ObjectFactoryCreatingFactoryBean이다. ObjectFactory를 만들어주는 팩토리 빈이라는 뜻이다.<br>
 
-
+사용 방법은 아래와 같이 getBean()으로 가져올 빈의 이름을 넣어서 등록해주면 된다. 이 빈은 FactoryBean이기 때문에 실제 빈의 오브젝트는 ObjectFactory 타입이 된다.
+```
+<bean id="serviceRequestFactory" class= "org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+  <property name="targetBeanName" value="serviceRequest"/>
+</bean>
+```
+cf) 여기서 value는 팩토리 메서드에서 getBean()으로 가져올 빈의 이름을 넣는다.
+```
+@Configuration
+public class ObjectFactoryConfig {
+  @Bean
+  public ObjectFactoryCreatingFactoryBean serviceRequestFactory() {
+    ObjectFactoryCreatingFactoryBean factoryBean = new ObjectFactoryCreatingFactoryBean();
+    factoryBean.setTargetBeanName("serviceRequest");
+    return factoryBean;
+  }
+}
+```
 
 
 
