@@ -106,4 +106,12 @@ public class ServiceRequest {
   }
 }
 ```
-ServiceRequest가 CustomerDao를 DI 받아서 사용할 수 있다면 문제는 간단해진다. 폼에서 고객번호를 입력바닸다면 웹 컨트롤러에서는 setCustomerByCustomerNo() 메서드를 통해 ServiceRequest 오브젝트에 전달해주기만 하면 된다.
+ServiceRequest가 CustomerDao를 DI 받아서 사용할 수 있다면 문제는 간단해진다. 폼에서 고객번호를 입력받았다면 웹 컨트롤러에서는 setCustomerByCustomerNo() 메서드를 통해 ServiceRequest 오브젝트에 전달해주기만 하면 된다. 이렇게 하면 ServiceRequestService는 ServiceRequest의 customer 오브젝트가 어떻게 만들어졌는지에 대해서는 전혀 신경쓰지 않아도 된다. 단지 A/S 신청정보에는 그것을 신청한 고객정보가 도메인 모델을 따르는 오브젝트로 만들어져 있으리라 기대하고 사용할 뿐이다.<br>
+
+폼에서 입력받는 것이 고객번호가 아니라 고객검색 팝업이나 AJAX를 통해 구한 고객의 ID라면, 다음과 같은 메서드를 ServiceRequest에 추가해주고 컨트롤러를 통해 id 값을 넣어주게만 하면 그만이다.
+```
+public void setCustomerByCustomerId(int customerId) {
+  this.customer = this.customerDao.getCustomer(customerId);
+}
+```
+폼에서 고객정보를 입력받는 방법을 어떻게 변경하든 ServiceRequest를 사용하는 서비스 계층이나 DAO의 코드는 전혀 영향을 받지 않는다. 이제 남은 문제는 컨트롤러에서 new 키워드로 직접 생성하는 ServiceRequest 오브젝트에 어떻게 DI를 적용해서 Customer
