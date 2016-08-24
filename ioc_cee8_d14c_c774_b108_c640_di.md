@@ -163,7 +163,21 @@ public void addNewServiceRequest(ServiceRequest serviceRequest) {
   serviceRequest.notifyServiceRequestRegistration(); // 구체적인 통보 작업은 ServiceRequest에서 알아서 담당하게 한다.
 }
 ```
+![](스크린샷 2016-08-24 오후 4.54.54.jpg)
+ServiceRequest를 프로토타입 빈으로 변경하면서 새롭게 바뀐 의존관계다. 이렇게 매번 새롭게 오브젝트를 만들면서 DI도 함께 적용하려고 할 때 사용할 수 있는게 바로 프로토타입 빈이다. 한번 컨테이너로부터 생성해서 가져온 이후에는 new로 직접 생성한 오ㅡ젝트처럼 평범하게 사용하면 된다. 빈으로 만들어진 오브젝트이기 때문에 DI를 통해 주입된 다른 빈을 자유롭게 이용할 수 있다.
 
+###프로토타입 빈의 DL 전략
+앞에서 ServiceRequest를 프로토타입 빈으로 만들고 컨트롤러에서 가져오도록, ApplicationContext를 이용해 getBean() 메서드를 호출하는 방식을 이용했다. 즉 DL을 사용한 것이다. 번거롭게 DL 방식을 쓰지 않고 프로토타입 빈을 직접 DI 해서 사용하는 건 어떨까? 예를 들어 아래 처럼 컨트롤러에서 ServiceRequest를 직접 DI 받게 만들고 이를 사용하면 어떻게 될까?
+```
+@Autowired
+ServiceRequest serviceRequest;
+
+public void serviceRequestFormSubmit(HttpServletRequest request) {
+  this.serviceRequest.setCustomerNo(request.getParameter("custno"));
+  ...
+}
+```
+이 코드를 테스트해보면 일단 정상적으로 동작하는 것처럼 보이지만 운영 시스템에 적용하면 매우 심각한 문제가 발견된다. 왜 그럴까? 웹 컨트롤러도 다른 대부분의 빈처럼 싱글톤이다. 따라서 단 한 번만 만들어진다. 문제는 DI 작업은 빈 오브젝트가 처음 만들어질 때 단 한 번만 진행된다는 점이다. 따라서 아무리 ServiceRequest 빈을 프로토타입으로 만들었다고 하더라도 컨트롤러에 DI 하기 위해 컨테이너에 요청할 때 딱 한번만 오브젝트가 생성되고 더 이상 새로운 ServiceRequest 오브젝트는 만들어지지 않는다. 결국 여러 사용자가 동시에 요청을보내면 serviceRequest 오브젝트 하나가 공유되어 서로 데이터를 덮어써 버리는 문제가 발생한다.<br>
 
 
 
