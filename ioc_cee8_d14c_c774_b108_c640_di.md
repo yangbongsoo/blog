@@ -214,7 +214,17 @@ public class ObjectFactoryConfig {
   }
 }
 ```
+이제 serviceRequestFactory 빈을 ServiceRequest를 사용할 컨트롤러에 DI 해주고 아래와 같이 사용하면 된다.
+```
+@Resource // ObjectFactory 타입은 여러개 있을 수 있으므로 이름으로 빈을 지정하는 편이 낫다.
+private ObjectFactory<ServiceRequest> serviceRequestFactory;
 
+public void serviceRequestFormSubmit(HttpServletRequest request) {
+  ServiceRequest serviceRequest = this.serviceRequestFactory.getObject();
+  serviceRequest.setCustomerByCustomerNo(request.getParameter("custno"));
+  ...
+}
+```
 
 
 
