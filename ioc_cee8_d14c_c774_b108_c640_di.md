@@ -125,4 +125,28 @@ public class ServiceRequest {
 ```
 <bean id="serviceRequest" class="...ServiceRequest" scope="prototype">
 ```
-다음으로는 컨트롤러에서 ServiceRequest 오브젝트를 new로 생성하는 대신 프로토타입으로 선언된 serviceRequest 빈을 가져오게 만들어야 한다. 프로토타입 빈은 컨테이너에 빈을 요청할 때마다 새로운 오브젝트가 생성된다고 했다.
+다음으로는 컨트롤러에서 ServiceRequest 오브젝트를 new로 생성하는 대신 프로토타입으로 선언된 serviceRequest 빈을 가져오게 만들어야 한다. 프로토타입 빈은 컨테이너에 빈을 요청할 때마다 새로운 오브젝트가 생성된다고 했다. 컨테이너에 빈을 요청하는 방법이 여러 가지가 있겠지만, 일단 가장 간단하게 아래와 같이 컨트롤러에 애플리케이션 컨텍스트를 DI 받아둔 다음 getBean() 메서드로 요청하도록 만들어보자.
+```
+컨텍스트를 이용해 프로토타입 빈을 가져오는 코드
+
+@Autowired
+ApplicationContext context;
+
+public void serviceRequestFormSubmit(HttpServletRequest request) {
+  ServiceRequest serviceRequest = this.context.getBean(ServiceRequest.class);
+  serviceRequest.setCustomerByCustomerNo(request.getParameter("custno"));
+  ...
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
