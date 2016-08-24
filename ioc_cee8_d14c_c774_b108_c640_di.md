@@ -114,4 +114,4 @@ public void setCustomerByCustomerId(int customerId) {
   this.customer = this.customerDao.getCustomer(customerId);
 }
 ```
-폼에서 고객정보를 입력받는 방법을 어떻게 변경하든 ServiceRequest를 사용하는 서비스 계층이나 DAO의 코드는 전혀 영향을 받지 않는다. 이제 남은 문제는 컨트롤러에서 new 키워드로 직접 생성하는 ServiceRequest 오브젝트에 어떻게 DI를 적용해서 Customer
+폼에서 고객정보를 입력받는 방법을 어떻게 변경하든 ServiceRequest를 사용하는 서비스 계층이나 DAO의 코드는 전혀 영향을 받지 않는다. 이제 남은 문제는 컨트롤러에서 new 키워드로 직접 생성하는 ServiceRequest 오브젝트에 어떻게 DI를 적용해서 CustomerDao를 주입할 것인가이다. DI를 적용하려면 결국 컨테이너에 오브젝트 생성을 맡겨야 한다. 또한 컨테이너가 만드는 빈이지만 매번 같은 오브젝트를 돌려주는 것이 아니라 new로 생성하듯이 새로운 오브젝트가 만들어지게 해야 한다. 바로 프로토타입 스코프 빈이 필요할 때다. 
