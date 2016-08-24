@@ -87,4 +87,6 @@ public void addNewServiceRequest(ServiceRequest serviceRequest) {
     "A/S 접수가 정상적으로 처리되었습니다.");
 }
 ```
-폼에서 입력받은 고객번호로 고객을 찾아오는 번거로운 작업을 생략할 수 있게 됐다. serviceRequestDao에도 ServiceRequest 타입의 오브젝트만 전달하면 된다. 
+폼에서 입력받은 고객번호로 고객을 찾아오는 번거로운 작업을 생략할 수 있게 됐다. serviceRequestDao에도 ServiceRequest 타입의 오브젝트만 전달하면 된다. DAO가 A/S 신청정보를 저장할 때 필요한 id와 같은 고객정보는 ServiceRequest의 customer 필드를 통해 가져올 수 있다. DAO는 물론이고 서비스 오브젝트도 폼의 입력방식에서 완전히 자유로워졌다.<br>
+
+그러나 아직 해결해야 할 가장 큰 문제가 남아 있다. 
