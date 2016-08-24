@@ -187,7 +187,7 @@ public void serviceRequestFormSubmit(HttpServletRequest request) {
 이미 사용했던 방법이다. @Autowired나 @Resorce를 이용해 ApplicationContext 또는 BeanFactory를 DI 받은 후에 getBean() 메서드를 직접 호출해서 빈을 가져오는 방법이다.<br>
 
 **ObjectFactory, ObjectFactoryCreatingFactoryBean**<br>
-직접 애플리케이션 컨텍스트를 사용하지 않으려면 중간에 컨텍스트에 getBean()을 호출해주는 역할을 맡을 오브젝트를 두면 된다.
+직접 애플리케이션 컨텍스트를 사용하지 않으려면 중간에 컨텍스트에 getBean()을 호출해주는 역할을 맡을 오브젝트를 두면 된다. 가장 쉽게 생각해볼 수 있는 것은 바로 팩토리다. 팩토리를 이용하는 이유는 오브젝트를 요구하면서 오브젝트를 어떻게 생성하거나 가져오는지에는 신경 쓰지 않을 수 있기 때문이다. 
 
 
 
