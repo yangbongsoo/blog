@@ -140,7 +140,22 @@ public void serviceRequestFormSubmit(HttpServletRequest request) {
 ```
 애플리케이션 컨텍스트에서 가져온 ServiceRequest 오브젝트는 CustomerDao가 DI된 상태이기 때문에 setCustomerByCustomerNo()가 호출되면 DAO를 이용해 Customer 오브젝트를 저장해주게 만들 수 있다.<br>
 
-이번엔 EmailService에 대해서도 생각해보자. 고객의 A/S 신청이 접수된 것을 통보 해주는 방법을 ServiceRequestService 대신 ServiceRequest가 담당하면 어떨까? 고객이 가입할 때 A/S 관련 통보 방법을 지정할 수 있게 해뒀다면 Customer 정보에서 이를 확인하고, 적절한 방법으로 고객에게 메세지를 보내주는 작업을 ServiceRequest에 두는 것도 나쁘지 않다. 
+이번엔 EmailService에 대해서도 생각해보자. 고객의 A/S 신청이 접수된 것을 통보 해주는 방법을 ServiceRequestService 대신 ServiceRequest가 담당하면 어떨까? 고객이 가입할 때 A/S 관련 통보 방법을 지정할 수 있게 해뒀다면 Customer 정보에서 이를 확인하고, 적절한 방법으로 고객에게 메세지를 보내주는 작업을 ServiceRequest에 두는 것도 나쁘지 않다. ServiceRequest도 이제 자유롭게 DI 받을 수 있는 빈이 됐으니 EmailService를 이용할 수 있다.
+```
+public class ServiceRequest {
+  Customer customer;
+  @Autowired
+  EmailService emailService;
+  ... 
+ 
+ public void notifyServiceRequestRegistration() { // A/S 요청이 등록됐음을 통보해주는 기능을 가진 메서드
+   if (this.customer.serviceNotificationMethod == NotificationMethod.EMAIL) { 
+     this.emailService.sendEmail(customer.getEmail(),
+       "A/S 접수가 정상적으로 처리되었습니다.");
+   }
+ }
+}
+```
 
 
 
