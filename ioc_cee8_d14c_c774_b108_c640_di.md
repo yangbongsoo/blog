@@ -125,3 +125,4 @@ public class ServiceRequest {
 ```
 <bean id="serviceRequest" class="...ServiceRequest" scope="prototype">
 ```
+다음으로는 컨트롤러에서 ServiceRequest 오브젝트를 new로 생성하는 대신 프로토타입으로 선언된 serviceRequest 빈을 가져오게 만들어야 한다. 프로토타입 빈은 컨테이너에 빈을 요청할 때마다 새로운 오브젝트가 생성된다고 했다.
