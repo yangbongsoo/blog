@@ -58,4 +58,6 @@ public void addNewServiceRequest(ServiceRequest serviceRequest) {
     "A/S 접수가 정상적으로 처리되었습니다.");
 }
 ```
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+이런 코드가 자연스럽게 느껴질지도 모르겠다. ServiceRequest를 단지 폼의 정보를 전달해주는 DTO와 같은 데이터 저장용 오브젝트로 취급하고, 그 정보를 이용해 실제 비지니스 로직을 처리할 때 필요한 정보는 다시 서비스 계층의 오브젝트가 직접 찾아오게 만드는 것이다.
+![](오브젝트사용방식.jpg)
+위 그림은 ServiceRequest가 폼의 정보를 담고 사용되는 구조를 나타낸다. 코드에서 new로 생성하는 ServiceRequest를 제외한 나머지 오브젝트는 스프링이 관리하는 싱글톤 빈이다. 
