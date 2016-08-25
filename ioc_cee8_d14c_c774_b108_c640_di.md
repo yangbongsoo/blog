@@ -252,15 +252,32 @@ ServiceRequestFactory serviceRequestFactory;
 public void serviceRequestFormSubmit(HttpServletRequest request) {
   ServiceRequest serviceRequest = this.serviceRequestFactory.getServiceFactory();
   serviceRequest.setCustomerByCustomerNo(request.getParameter("custno"));
+  ...
 }
 ```
 
 **메서드 주입**<br>
 ApplicationContext를 직접 이용하는 방법은 스프링 API에 의존적인 코드를 만드는 불편함이 있다. 반면에 ObjectFactory나 ServiceLocatorFactoryBean을 사용하면 코드는 깔끔해지지만 빈을 새로 추가해야 하는 번거로움이 있다. 이 두 가지 단점을 모두 극복할 수 있도록 스프링이 제공해주는 또 다른 DL 전략은 메서드 주입이다.<br>
 
-메서드 주입은 @Autowired를 메서드에 붙여서 메서드 파라미터에 의해 DI 되게 하는 메서드를 이용한 주입 방식과 혼동하면 안된다. 메서드 주입은 메서드를 통한 주입이 아니라 메서드 코드 자체를 주입하는 것을 말한다. 메서드 주입은 일정한 규칙을 따르는 추상 메서드를 작성해두면 ApplicationContext와 getBean() 메서드를 사용해서 새로운 프로토타입 빈을 가져오는 기능을 담당하는 메서드를 런타임 시에 추가해주는 기술이다. 
+메서드 주입은 @Autowired를 메서드에 붙여서 메서드 파라미터에 의해 DI 되게 하는 메서드를 이용한 주입 방식과 혼동하면 안된다. 메서드 주입은 메서드를 통한 주입이 아니라 메서드 코드 자체를 주입하는 것을 말한다. 메서드 주입은 일정한 규칙을 따르는 추상 메서드를 작성해두면 ApplicationContext와 getBean() 메서드를 사용해서 새로운 프로토타입 빈을 가져오는 기능을 담당하는 메서드를 런타임 시에 추가해주는 기술이다. <br>
 
+컨트롤러 클래스에 아래와 같이 추상 메서드를 선언해둔다. 팩토리 역할을 하는 메서드라고 보면 된다.
+그리고 이 메서드를 사용해 새로운 빈 오브젝트를 가져오도록 코드를 작성한다.
+```
+abstract public ServiceRequest getServiceRequest();
 
+public void serviceRequestFormSubmit(HttpServletRequest request) {
+  ServiceRequest serviceRequest = this.getServiceFactory();
+  serviceRequest.setCustomerByCustomerNo(request.getParameter("custno"));
+  ...
+}
+```
+추상 메서드를 가졌으므로 당연히 클래스도 추상 클래스로 정의돼야 한다. 이제 이 추상 클래스를 확장해서 getServiceRequest()라는 추상 메서드를 주입해주도록 스프링 빈을 다음과 같이 정의한다.
+```
+<bean id="serviceRequestController" class="...ServiceRequestController">
+  <lookup-method name="getServiceRequest" bean="serviceRequest"/>
+</bean>
+```
 
 
 
