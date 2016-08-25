@@ -236,8 +236,24 @@ public interface ServiceRequestFactory {
   ServiceRequest getServiceFactory();
 }
 ```
+이렇게 정의한 인터페이스를 이용해 스프링의 ServiceLocatorFactoryBean으로 아래와 같이 빈을 등록해주면 된다.
+```
+<bean class="org.springframework.beans.factory.config.ServiceLocatorFactoryBean">
+  <property name="serviceLocatorInterface" value=".. ServiceRequestFactory" /> //팩토리 인터페이스를 지정한다. 빈의 실제 타입이 된다.
+</bean>
+```
+범용적으로 사용하는 ObjectFactory와 달리 ServiceRequest 전용으로 만든 인터페이스가 이 빈의 타입이 되기 때문에 @Autowired를 이용해 타입으로 가져올 수 있다. 빈을 이름으로 접근할 필요가 없을 때는 위의 빈 선언처럼 id를 생략할 수도 있다. 컨트롤러에서 사용할 때는 아래와 같이 팩토리 인터페이스 타입으로 DI 받아서 사용하면 된다. 타입 파라미터를 사용해야 하는 ObjectFactory보다 코드가 한결 깔끔하다.
+```
+팩토리 인터페이스를 사용하는 컨트롤러 코드
 
+@Autowired
+ServiceRequestFactory serviceRequestFactory;
 
+public void serviceRequestFormSubmit(HttpServletRequest request) {
+  ServiceRequest serviceRequest = this.serviceRequestFactory.getServiceFactory();
+  serviceRequest.setCustomerByCustomerNo(request.getParameter("custno"));
+}
+```
 
 
 
