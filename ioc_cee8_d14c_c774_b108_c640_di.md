@@ -278,6 +278,10 @@ public void serviceRequestFormSubmit(HttpServletRequest request) {
   <lookup-method name="getServiceRequest" bean="serviceRequest"/>
 </bean>
 ```
+`<lookup-method>`라는 태그의 name이 스프링이 구현해줄 추상 메서드의 이름이고, bean 애트리뷰트는 메서드에서 getBean()으로 가져올 빈의 이름이다. 이렇게 설정해두면 스프링은 추상 클래스를 상속해서 getServiceRequest() 메서드를 완성하고 상속한 클래스를 빈으로 등록해둔다.<br>
+
+메서드 주입 방식은 그 자체로 스프링 API에 의존적이 아니므로 스프링 외의 환경에 가져다 사용할 수도 있고 컨테이너의 도움 없이 단위 테스트를 할 수도 있다. 지금까지 살펴본 것중에서 가장 고급 방식이지만 불편한 점도 있다. 클래스 자체가 추상 클래스이므로 테스트에서 사용할 때 상속을 통해 추상 메서드를 오버라이드한 뒤에 사용해야 한다는 번거로움이 있다. 단위 테스트를 많이 작성할 것이라면 메서드 주입 방법은 장점보다 단점이 더 많을 수 있다.<br>
+
 
 
 
