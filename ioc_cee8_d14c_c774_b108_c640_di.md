@@ -255,6 +255,9 @@ public void serviceRequestFormSubmit(HttpServletRequest request) {
 }
 ```
 
+**메서드 주입**<br>
+ApplicationContext를 직접 이용하는 방법은 스프링 API에 의존적인 코드를 만드는 불편함이 있다. 반면에 ObjectFactory나 ServiceLocatorFactoryBean을 사용하면 코드는 깔끔해지지만 빈을 새로 추가해야 하는 번거로움이 있다. 이 두 가지 단점을 모두 극복할 수 있도록 스프링이 제공해주는 또 다른 DL 전략은 메서드 주입이다.<br>
+
 
 
 
