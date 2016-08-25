@@ -283,7 +283,7 @@ public void serviceRequestFormSubmit(HttpServletRequest request) {
 메서드 주입 방식은 그 자체로 스프링 API에 의존적이 아니므로 스프링 외의 환경에 가져다 사용할 수도 있고 컨테이너의 도움 없이 단위 테스트를 할 수도 있다. 지금까지 살펴본 것중에서 가장 고급 방식이지만 불편한 점도 있다. 클래스 자체가 추상 클래스이므로 테스트에서 사용할 때 상속을 통해 추상 메서드를 오버라이드한 뒤에 사용해야 한다는 번거로움이 있다. 단위 테스트를 많이 작성할 것이라면 메서드 주입 방법은 장점보다 단점이 더 많을 수 있다.<br>
 
 **`Provider<T>`**<br>
-마지막으로 살펴볼 프로토타입 빈을 DL 하는 방법은 가장 최근에 소개된 것이다. @Inject와 함께 JSR-330에 추가된 표준 인터페이스인 Provider를 이용하는 것이다. Provider는 ObjectFactory와 거의 유사하게 `<T>`타입 파라미터와 get()이라는 팩토리 메서드를 가진 인터페이스다. 기본 개념과 사용 방법은 ObjectFactory와 거의 유사하지만 ObjectFactoryCreatingFactoryBean을 이용해 빈을 등록해주지 않아도 되기 때문에 사용이 편리하다. Provider 인터페이스를 @Inject, @Autowired, @Resource 중의 하나를 이용해 DI 되도록 지정해주기만 하면 스프링이 자동으로 Provider를 구현한 오브젝트를 생성해서 주입해주기 때문이다.
+마지막으로 살펴볼 프로토타입 빈을 DL 하는 방법은 가장 최근에 소개된 것이다. @Inject와 함께 JSR-330에 추가된 표준 인터페이스인 Provider를 이용하는 것이다. Provider는 ObjectFactory와 거의 유사하게 `<T>`타입 파라미터와 get()이라는 팩토리 메서드를 가진 인터페이스다. 기본 개념과 사용 방법은 ObjectFactory와 거의 유사하지만 ObjectFactoryCreatingFactoryBean을 이용해 빈을 등록해주지 않아도 되기 때문에 사용이 편리하다. Provider 인터페이스를 @Inject, @Autowired, @Resource 중의 하나를 이용해 DI 되도록 지정해주기만 하면 스프링이 자동으로 Provider를 구현한 오브젝트를 생성해서 주입해주기 때문이다. 오브젝트 팩토리 주입이라고 생각해도 좋을 것이다. 
 
 
 
