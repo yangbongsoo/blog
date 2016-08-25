@@ -228,7 +228,14 @@ public void serviceRequestFormSubmit(HttpServletRequest request) {
 ObjectFactory는 프로토타입 빈뿐 아니라 DL을 이용해 빈을 가져와야 하는 모든 경우에 적용할 수 있다.<br>
 
 **ServiceLocatorFactoryBean**<br>
-ObjectFactory가 단순하고 깔끔하지만 프레임워크의 인터페이스를 애플리케이션 코드에서 사용하는 것이 맘에 들지 않을 수 있다. 또는 기존에 만들어둔 팩토리 인터페이스를 활용하고 싶을지도 모르겠다. 이럴 땐 ObjectFactoryCreatingFactoryBean 대신 ServiceLocatorFactoryBean을 사용하면 된다.
+ObjectFactory가 단순하고 깔끔하지만 프레임워크의 인터페이스를 애플리케이션 코드에서 사용하는 것이 맘에 들지 않을 수 있다. 또는 기존에 만들어둔 팩토리 인터페이스를 활용하고 싶을지도 모르겠다. 이럴 땐 ObjectFactoryCreatingFactoryBean 대신 ServiceLocatorFactoryBean을 사용하면 된다.<br>
+
+ServiceLocatorFactoryBean은 ObjectFactory처럼 스프링이 미리 정의해둔 인터페이스를 사용하지 않아도 된다. DL 방식으로 가져올 빈을 리턴하는 임의의 이름을 가진 메서드가 정의된 인터페이스가 있으면 된다. 메서드 이름은 어떻게 지어도 상관없다. 
+```
+public interface ServiceRequestFactory {
+  ServiceRequest getServiceFactory();
+}
+```
 
 
 
