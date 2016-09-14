@@ -2,6 +2,7 @@
 ##트랜잭션 코드의 분리
 ###1. 데코레이터 패턴을 이용한 분리
 ![](스크린샷 2016-09-14 오후 4.09.11.jpg)
+UserService 인터페이스를 도입해서 순수 비지니스로직을 담당하는 UserServiceImpl과 트랜잭션 처리를 담당하는 UserServiceTx로 나눈다.
 ```
 public interface UserService {
   void add(User user);
@@ -54,4 +55,25 @@ public class UserServiceImpl implements UserService {
   ...
 }
 ```
+```
+<bean id="userService" class="springbook.user.service.UserServiceTx">
+  <property name="transactionManager" ref="transactionManager" />
+  <property name="userService" ref="userServiceImpl" />
+</bean>
+
+<bean id="userServiceImpl" class="springbook.user.service.UserServiceImpl">
+  <property name="userDao" ref="userDao" />
+  <property name="mailSender" ref="mailSender" />
+</bean>
+
+...
+```
+
+
+
+
+
+
+
+
 
