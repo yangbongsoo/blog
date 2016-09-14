@@ -183,7 +183,23 @@ public class TransactionHandler implements InvocationHandler {
   }
 }
 ```
-
+```
+@Test
+public void upgradeAllOrNothing() throws Exception {
+  ...
+  TransactionHandler txHandler = new TransactionHandler();
+  txHandler.setTarget(testUserService);
+  txHandler.setTransactionManager(transactionManager);
+  txHandler.setPattern("upgradeLevels");
+  
+  UserService txUserService = (UserService)Proxy.newProxyInstance(
+    getClass().getClassLoader(),
+    new Class[] { UserService.class },
+    txHandler
+  );
+  ...
+}
+```
 
 
 
