@@ -130,6 +130,14 @@ public class UppercaseHandler implements InvocationHandler {
 ```
 Hello 인터페이스의 모든 메서드는 결과가 String 타입이므로 메서드 호출의 결과를 String 타입으로 변환해도 안전하다. 타깃 오브젝트의 메서드 호출이 끝났으면 프록시가 제공하려는 부가기능인 리턴 값을 대문자로 바꾸는 작업을 수행하고 결과를 리턴한다. 리턴된 값은 다이내믹 프록시가 받아서 최종적으로 클라이언트에게 전달될 것이다.<br>
 
+이제 이 InvocationHandler를 사용하고 Hello 인터페이스를 구현하는 프록시를 만들어보자. 다이내믹 프록시의 생성은 Proxy 클래스의 newProxyInstance() 정적 팩토리 메서드를 이용하면 된다.
+```
+Hello proxiedHello = (Hello)Proxy.newProxyInstance(
+  getClass().getClassLoader(),
+  new Class[] { Hello.class},
+  new UppercaseHandler(new HelloTarget())
+);
+```
 
 
 
