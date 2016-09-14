@@ -87,7 +87,51 @@ public class UserServiceImpl implements UserService {
 ```
 public Object invoke(Object proxy, Method method, Object[] args)
 ```
-invoke() 메서드는 리플렉션의 Method 인터페이스를 파라미터로 받는다. 메서드를 호출할 때 전달되는 파라미터도 args로 받는다. 다이내믹 프록시 오브젝트는 클라이언트의 모든 요청을 리플렉션 정보로 변환해서 InvocationHandler 구현 오브젝트의 invoke() 메서드로 넘기는 것이다. 타깃 인터페이스의 모든 메서드 요청이 하나의 메서드로 집중되기 때문에 중복되는 기능을 효과적으로 제공할 수 있다.
+invoke() 메서드는 리플렉션의 Method 인터페이스를 파라미터로 받는다. 메서드를 호출할 때 전달되는 파라미터도 args로 받는다. 다이내믹 프록시 오브젝트는 클라이언트의 모든 요청을 리플렉션 정보로 변환해서 InvocationHandler 구현 오브젝트의 invoke() 메서드로 넘기는 것이다. 타깃 인터페이스의 모든 메서드 요청이 하나의 메서드로 집중되기 때문에 중복되는 기능을 효과적으로 제공할 수 있다.<br>
+![](스크린샷 2016-09-14 오후 4.57.53.jpg)
+간단한 예를 통해 다시 살펴보자. 
+```
+interface Hello {
+  String sayHello(String name);
+  String sayHi(String name);
+  String sayThankYou(String name);
+}
+```
+위와 같은 Hello 인터페이스가 있고 이를 구현한 타깃 클래스는 다음과 같다.
+```
+public class HelloTarget implements Hello {
+  public String sayHello(String name) {
+    return "Hello" + name;
+  }
+  
+  public String sayHi(String name) {
+    return "Hi" + name;
+  }
+  
+  public String sayThankYou(String name) {
+    return "Thank You" + name;
+  }
+}
+```
+이제 다이내믹 프록시를 위해 InvocationHandler 인터페이스를 구현한 부가기능 코드를 만들어보자(부가기능은 모든 글자를 대문자로 만드는 것이다).
+```
+public class UppercaseHandler implements InvocationHandler {
+  Hello target;
+  
+  public UppercaseHandler(Hello target) {
+    this.target = target;
+  }
+  
+  public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    String ret = (String)method.invoke(target, args);
+    return ret.toUpperCase();
+  }
+}
+```
+Hello 인터페이스의 모든 메서드는 결과가 String 타입이므로 메서드 호출의 결과를 String 타입으로 변환해도 안전하다. 타깃 오브젝트의 메서드 호출이 끝났으면 프록시가 제공하려는 부가기능인 리턴 값을 대문자로 바꾸는 작업을 수행하고 결과를 리턴한다. 리턴된 값은 다이내믹 프록시가 받아서 최종적으로 클라이언트에게 전달될 것이다.<br>
+
+
+
 
 
 
