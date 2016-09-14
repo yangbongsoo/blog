@@ -178,7 +178,9 @@ public void deleteAll() throws SQLException{
 **jdbcContext의 분리**<br>
 전략 패턴의 구조로 보자면 UserDao의 메서드가 클라이언트이고, 익명 내부 클래스로 만들어지는 것이 개별적인 전략이고, jdbcContextWithStatementStrategy() 메서드는 컨텍스트다. 컨텍스트 메서드는 UserDao 내의 PreparedStatement를 실행하는 기능을 가진 메서드에서 공유할 수 있다. 그런데 JDBC의 일반적인 작업 흐름을 담고 있는 jdbcContextWithStatementStrategy()는 다른 DAO에서도 사용 가능하다. 그러니 jdbcContextWithStatementStrategy()를 UserDao 클래스 밖으로 독립시켜서 모든 DAO가 사용할 수 있게 해보자.<br>
 
+###템플릿과 콜백
 
+###스프링의 JdbcTemplate
 
 
 
