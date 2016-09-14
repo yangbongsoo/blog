@@ -141,7 +141,30 @@ Hello proxiedHello = (Hello)Proxy.newProxyInstance(
   new UppercaseHandler(new HelloTarget())
 );
 ```
-사용 방법을 자세히 살펴보자. 첫 번째 파라미터는 클래스 로더를 제공해야 한다. 다이내믹 프록시가 정의되는 클래스 로더를 지정하는 것이다. 두 번째 파라미터는 다이내믹 프록시가 구현해야 할 인터페이스다. 
+사용 방법을 자세히 살펴보자. 첫 번째 파라미터는 클래스 로더를 제공해야 한다. 다이내믹 프록시가 정의되는 클래스 로더를 지정하는 것이다. 두 번째 파라미터는 다이내믹 프록시가 구현해야 할 인터페이스다. 다이내믹 프록시는 한 번에 하나 이상의 인터페이스를 구현할 수도 있다. 따라서 인터페이스의 배열을 사용한다. 마지막 파라미터로는 부가기능과 위임 관련 코드를 담고 있는 InvocationHandler 구현 오브젝트를 제공해야 한다. Hello 타입의 타깃 오브젝트를 생성자로 받고, 모든 메서드 호출의 리턴 값을 대문자로 바꿔주는 UppercaseHandler 오브젝트를 전달했다.<br>
+
+이제 이 방법을 이용해서 트랜잭션에 적용해보자.
+```
+public class TransactionHandler implements InvocationHandler {
+  private Object target;
+  private PlatformTransactionManager transactionManager;
+  private String pattern;
+  
+  public void setTarget(Object target) {
+    this.target = target;
+  }
+  
+  public void setTransactionManager(PlatformTransactionManager transactionManager) {
+    this.transactionManager = transactionManager;
+  }
+  
+  public void setPattern(String pattern) {
+    this.pattern = pattern;
+  }
+  
+  public Object 
+}
+```
 
 
 
