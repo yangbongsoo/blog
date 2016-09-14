@@ -109,7 +109,8 @@ public void add(User user) throws SQLException {
   jdbcContextWithStatementStrategy(st);
 }
 ```
-**로컬 클래스**<br>
+이 두 가지 문제를 해결할 수 있는 방법을 생각해보자.
+###로컬 클래스
 StatementStrategy 전략 클래스를 매번 독립된 파일로 만들지 말고 UserDao 클래스 안에 내부 클래스로 정의해버리는 간단한 방법이 있다. 
 
 ```
@@ -134,8 +135,7 @@ public void add(final User user) throws SQLException{
     
 }
 ```
-
-**익명 내부 클래스**<br>
+###익명 내부 클래스
 클래스 선언과 오브젝트 생성이 결합된 형태로 만들어지며, 클래스를 재사용할 필요가 없고 구현한 인터페이스 타입으로만 사용할 경우에 유용하다. 
 
 익명 내부 클래스는 선언과 동시에 오브젝트를 생성한다. 이름이 없기 때문에 클래스 자신의 타입을 가질 수 없고, 구현한 인터페이스 타입의 변수에만 저장할 수 있다. 
