@@ -9,6 +9,7 @@ public interface UserService {
   void upgradeLevels();
 }
 ```
+UserServiceTx에서는 트랜잭션 경계설정을 통해 트랜잭션 작업을 수행하고 실질적인 비지니스로직은 주입받은 userServiceImpl에게 위임하는 구조다.
 ```
 public class UserServiceTx implements UserService {
   UserService userService;
@@ -55,6 +56,7 @@ public class UserServiceImpl implements UserService {
   ...
 }
 ```
+그리고 아래와 같이 클라이언트가 UserServiceTx 빈을 호출해서 사용하도록 만든다. 따라서 userService라는 대표적인 빈 아이디는 UserServiceTx 클래스로 정의된 빈에게 부여해준다.  
 ```
 <bean id="userService" class="springbook.user.service.UserServiceTx">
   <property name="transactionManager" ref="transactionManager" />
