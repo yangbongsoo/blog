@@ -218,6 +218,27 @@ FactoryBean 인터페이스를 구현한 클래스를 스프링 빈으로 만들
 스프링은 트랜잭션 기술과 메일 발송 기술에 적용했던 서비스 추상화를 프록시 기술에도 동일하게 적용하고 있다. 자바에는 JDK에서 제공하는 다이내믹 프록시 외에도 편리하게 프록시를 만들 수 있도록 지원해주는 다양한 기술이 존재한다. 따라서 스프링은 일관된 방법으로 프록시를 만들 수 있게 도와주는 추상 레이어를 제공한다. 생성된 프록시는 스프링의 빈으로 등록돼야 한다. **스프링은 프록시 오브젝트를 생성해주는 기술을 추상화한 팩토리 빈을 제공해준다.** 스프링의 ProxyFactoryBean은 프록시를 생성해서 빈 오브젝트로 등록하게 해주는 팩토리 빈이다. ProxyFactoryBean은 순수하게 프록시를 생성하는 작업만을 담당하고, 프록시를 통해 제공해줄 부가기능은 별도의 빈에 둘 수 있다.<br>
 
 ProxyFactoryBean이 생성하는 프록시에서 사용할 부가기능은 MethodInterceptor 인터페이스를 구현해서 만든다. MethodInterceptor는 InvocationHandler와 비슷하지만 한 가지 다른 점이 있다. InvocationHandler의 invoke() 메서드는 타깃 오브젝트에 대한 정보를 제공하지 않는다. 따라서 타깃은 InvocationHandler를 구현한 클래스가 직접 알고 있어야 한다. 반면에 MethodInterceptor의 invoke() 메서드는 ProxyFactoryBean으로부터 타깃 오브젝트에 대한 정보까지도 함께 제공받는다. 그 차이 덕분에 MethodInterceptor는 타깃 오브젝트에 상관없이 독립적으로 만들어질 수 있다. 따라서 MethodInterceptor 오브젝트는 타깃이 다른 여러 프록시에서 함께 사용할 수 있고, 싱글톤 빈으로 등록 가능하다.
+```
+@Test
+public void proxyFactoryBean() {
+  ProxyFactoryBean pfBean = new ProxyFactoryBean();
+  // 타깃 설정
+  pfBean.setTarget(new HelloTarget());
+  // 부가기능을 담은 어드바이스를 추가한다. 여러 개를 추가할 수도 있다.
+  pfBean.addAdvice(new UppercaseAdvice());
+  // FactoryBean 이므로 getObject()로 생성된 프록시를 가져온다.
+  Hello proxiedHello = (Hello) pfBean.getObject();
+  assertThat(proxiedHello.sayHi("Toby"), is("HI TOBY"));
+}
 
+static class UppercaseAdvice implements MethodInterceptor {
+  public Object invoke(MethodInvocation invocation) throws Throwable {
+    // 리플렉션의 Method와 달리 메서드 실행 시 타깃 오브젝트를 전달할 필요가 없다.
+    // MethodInvocation은 메서드 정보와 함께 타깃 오브젝트를 알고 있기 때문이다.
+    String ret = (String)invocation.proceed();
+    return ret.toUpperCase();
+  }
+}
+```
 
 
