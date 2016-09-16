@@ -258,9 +258,39 @@ public void deleteAll() throws SQLExcetpion {
 }
 ```
 ###스프링의 JdbcTemplate
+스프링이 제공하는 JDBC 코드용 기본 템플릿은 JdbcTemplate이다. 앞에서 만들었던 JdbcContext와 유사하지만 훨씬 강력하고 편리한 기능을 제공해준다. 
+```
+public class UserDao {
+  ...
+  private JdbcTemplate jdbcTemplate;
+  
+  public void setDataSource(DataSource dataSource) {
+    this.jdbcTemplate = new JdbcTemplate(dataSource);
+    this.dataSource = dataSource;
+  }
+}
+```
+이제 템플릿을 사용할 준비가 됐다.<br>
 
-
-
+**update()**<br>
+deleteAll()에 먼저 적용해보자. deleteAll()에 처음 적용했던 콜백은 StatementStrategy 인터페이스의 makePreparedStatement() 메서드다. 이에 대응되는 JdbcTemplate의 콜백은 PreparedStatementCreator 인터페이스의 createPreparedStatement() 메서드다. 
+```
+public void deleteAll() {
+  this.jdbcTemplate.update(
+    new PreparedStatementCreator() {
+      public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+        return con.prepareStatement("delete from users");
+      }
+    }
+  );
+}
+```
+앞에서 만들었던 executeSql()은 SQL 문장만 전달하면 미리 준비된 콜백을 만들어서 템플릿을 호출하는 것까지 한 번에 해주는 편리한 메서드였다. JdbcTemplate에도 기능이 비슷한 메서드가 존재한다. 콜백을 받는 update() 메서드와 이름은 동일한데 파라미터로 SQL 문장을 전달한다는 것만 다르다.
+```
+public void deleteAll() {
+  this.jdbcTemplate.update("delete from users");
+}
+```
 
 
 
