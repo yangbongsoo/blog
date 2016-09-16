@@ -292,5 +292,7 @@ public void deleteAll() {
 }
 ```
 
+**queryForInt()**<br>
+
 
 
