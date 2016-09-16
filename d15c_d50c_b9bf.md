@@ -234,7 +234,29 @@ public class UserDao {
 cf) 콜백 : 실행되는 것을 목적으로 다른 오브젝트의 메서드에 전달되는 오브젝트를 말한다. 파라미터로 전달되지만 값을 참조하기 위한 것이 아니라 특정 로직을 담은 메서드를 실행시키기 위해 사용한다.<br>
 ![](스크린샷 2016-09-16 오후 11.09.22.jpg)
 
-그런데 템플릿/콜백 방식에서 한 가지 아쉬운 점이 있다. DAO 메서드에서 매번 익명 내부 클래스를 사용하기 때문에 상대적으로 코드를 작성하고 읽기가 조금 불편하다는 점이다. 그래서 이번에는 복잡한 익명 내부 클래스의 사용을 최소화할 수 있는 방법을 찾아보자.
+그런데 템플릿/콜백 방식에서 한 가지 아쉬운 점이 있다. DAO 메서드에서 매번 익명 내부 클래스를 사용하기 때문에 상대적으로 코드를 작성하고 읽기가 조금 불편하다는 점이다. 그래서 이번에는 복잡한 익명 내부 클래스의 사용을 최소화할 수 있는 방법을 찾아보자.<br>
+
+재사용 가능한 콜백을 템플릿 클래스 안으로 옮기자. 엄밀히 말해서 템플릿은 JdbcContext 클래스가 아니라 workWithStatementStrategy() 메서드이므로 옮긴다고 해도 문제 될 것은 없다.
+```
+public class JdbcContext {
+  ...
+  public void executeSql(final String query) throws SQLException {
+    workWithStatementStrategy(
+      new StatementStrategy() {
+        public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
+          return c.prepareStatement(query);
+        }
+      }
+    );
+  }
+}
+```
+executeSql() 메서드가 JdbcContext로 이동했으니 UserDao의 메서드에서도 아래와 같이 jdbcContext를 통해 executeSql() 메서드를 호출하도록 수정해야 한다.
+```
+public void deleteAll() throws SQLExcetpion {
+  this.jdbcContext.executeSql("delete froms users");
+}
+```
 ###스프링의 JdbcTemplate
 
 
