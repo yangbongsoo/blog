@@ -204,7 +204,30 @@ public class JdbcContext {
   }
 }
 ```
-
+다음은 UserDao가 분리된 JdbcContext를 DI 받아서 사용할 수 있게 만든다.
+```
+public class UserDao {
+  ...
+  
+  private JdbcContext jdbcContext;
+  
+  public void setJdbcContext(JdbcContext jdbcContext) {
+    this.jdbcContext = jdbcContext;
+  }
+  
+  public void add(final User user) throws SQLException {
+    this.jdbcContext.workWithStatementStrategy(
+      new StatementStrategy() { ... }
+    );
+  }
+  
+  public void deleteAll() throws SQLExcetion {
+    this.jdbcContext.workWithStatementStrategy(
+      new StatementStrategy() { ... }
+    );
+  }
+}
+```
 ###템플릿과 콜백
 
 ###스프링의 JdbcTemplate
