@@ -293,6 +293,23 @@ public void deleteAll() {
 ```
 
 **queryForInt()**<br>
-
+다음은 아직 템플릿/콜백 방식을 적용하지 않았던 getCount 메서드에 JdbcTemplate을 적용해보자.
+```
+public int getCount() throws SQLException {
+  Connection c = dataSource.getConnection();
+  
+  PreparedStatement ps = c.prepareStatement("select count(*) from users");
+  
+  ResultSet rs = ps.executeQuery();
+  rs.next();
+  int count = rs.getInt(1);
+  
+  rs.close();
+  ps.close();
+  c.close();
+  
+  return count;
+}
+```
 
 
