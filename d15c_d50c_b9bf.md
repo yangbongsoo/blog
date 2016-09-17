@@ -336,6 +336,10 @@ public int getCount() {
 JdbcTemplate은 스프링이 제공하는 클래스이지만 DI 컨테이너를 굳이 필요로 하지 않는다. 직접 JdbcTemplate 오브젝트를 생성하고 필요한 DataSource를 전달해주기만 하면 JdbcTemplate의 모든 기능을 자유롭게 활용할 수 있다.<br>
 
 **queryForObject()**<br>
+이번엔 id를 통해 User 정보를 갖고오는 get() 메서드에 JdbcTemplate을 적용해보자. 문제는 ResultSet에서 getCount()처럼 단순한 값이 아니라 복잡한 User 오브젝트로 만들어야 한다. 즉, ResultSet의 결과를 User 오브젝트를 만들어 프로퍼티에 넣어줘야 한다.<br>
+
+이를 위해 getCount()에 적용했던 ResultExtractor 콜백 대신 RowMapper 콜백을 사용하겠다. ResultExtractor와 RowMapper 모두 템플릿으로부터 ResultSet을 전달받고, 필요한 정보를 추출해서 리턴하는 방식으로 동작한다. 다른 점은 ResultExtractor은 ResultSet을 한 번 전달받아 알아서 추출 작업을 모두 진행하고 최종 결과만 리턴해주면 되는 데 반해, RowMapper는 ResultSet의 로우 하나를 매핑하기 위해 사용되기 때문에 여러 번 호출될 수 있다는 점이다.<br>
+
 
 
 
