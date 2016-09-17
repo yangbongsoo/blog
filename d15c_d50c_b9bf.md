@@ -391,5 +391,28 @@ public List<User> getAll() {
 quert()는 결과가 없을 경우에 queryForObject()처럼 예외를 던지지는 않는다. 대신 크기가 0인 `List<T>` 오브젝트를 돌려준다.<br>
 
 **중복 제거**<br>
-get()과 getAll()을 보면 사용한 RowMapper의 내용이 똑같다는 사실을 알 수 있다. 사용되는 상황은 다르지만 ResultSet 로우 하나를 User 오브젝트 하나로 변환해주는 동일한 기능을 가진 콜백이다.
+get()과 getAll()을 보면 사용한 RowMapper의 내용이 똑같다는 사실을 알 수 있다. 사용되는 상황은 다르지만 ResultSet 로우 하나를 User 오브젝트 하나로 변환해주는 동일한 기능을 가진 콜백이다. RowMapper 콜백은 하나만 만들어서 공유하자.
+```
+public class UserDao {
+  private RowMapper<User> userMapper =
+    new RowMapper<User>() {
+      public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+        User user = new User();
+        user.setId(rs.getString("id"));
+        user.setName(rs.getString("name"));
+        user.setPassword(rs.getString("password"));
+        return user;
+      }
+    };
+}
+```
+인스턴스 변수에 저장해둔 userMapper 콜백 오브젝트는 아래와 같이 get()과 getAll()에서 사용하면 된다.
+```
+public User get(String id) {
+  return this.jdbcTemplate.queryForObject("select * from users where id = ?", new Object[] {id}, this.userMapper);
+}
 
+public List<User> getAll() {
+  return this.jdbcTemplate.query("select * from users order by id", this.userMapper);
+}
+```
