@@ -327,3 +327,16 @@ public int getCount() {
   );
 }
 ```
+위의 콜백 오브젝트 코드는 재사용하기 좋은 구조다. SQL을 가지고 PreparedStatement를 만드는 첫 번째 콜백은 이미 재사용 방법을 알아봤다. 두 번째 콜백도 간단하다. SQL의 실행 결과가 하나의 정수 값이 되는 경우는 자주 볼 수 있다. 클라이언트에서 콜백의 작업을 위해 특별히 제공할 값도 없어서 단순하다. 손쉽게 ResultSetExtractor 콜백을 템플릿 안으로 옮겨 재활용할 수 있다. JdbcTemplate은 이런 기능을 가진 콜백을 내장하고 있는 queryForInt()라는 편리한 메서드를 제공한다. Integer 타입의 결과를 가져올 수 있는 SQL 문장만 전달해주면 된다.
+```
+public int getCount() {
+  return this.jdbcTemplate.queryForInt("select count(*) from users");
+}
+```
+JdbcTemplate은 스프링이 제공하는 클래스이지만 DI 컨테이너를 굳이 필요로 하지 않는다. 직접 JdbcTemplate 오브젝트를 생성하고 필요한 DataSource를 전달해주기만 하면 JdbcTemplate의 모든 기능을 자유롭게 활용할 수 있다.<br>
+
+**queryForObject()**<br>
+
+
+
+
