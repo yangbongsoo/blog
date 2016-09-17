@@ -311,5 +311,5 @@ public int getCount() throws SQLException {
   return count;
 }
 ```
-
+getCount()는 SQL 쿼리를 실행하고 ResultSet을 통해 결과 값을 가져오는 코드다. 이런 작업 흐름을 가진 코드에서 사용할 수 있는 템플릿은 PreparedStatementCreator 콜백과 ResultSetExtractor 콜백을 파라미터로 받는 query() 메서드다. ResultSetExtractor 콜백은 
 
