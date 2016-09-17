@@ -291,6 +291,18 @@ public void deleteAll() {
   this.jdbcTemplate.update("delete from users");
 }
 ```
+JdbcTemplate은 add() 메서드에 대한 편리한 메서드도 제공된다. 치환자를 가진 SQL로 PreparedStatement를 만들고 함께 제공하는 파라미터를 순서대로 바인딩해주는 기능을 가진 update() 메서드를 사용할 수 있다. SQL과 함께 가변인자로 선언된 파라미터를 제공해주면 된다. 현재 add() 메서드에서 만드는 콜백은 아래와 같이 PreparedStatement를 만드는 것과 파라미터를 바인딩하는 두 가지 작업을 수행한다.
+```
+PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values(?,?,?)");
+ps.setString(1, user.getId());
+ps.setString(2, user.getName());
+ps.setString(3, user.getPassword());
+```
+이를 JdbcTemplate에서 제공하는 편리한 메서드로 바꿔보면 다음과 같이 간단하게 바꿀수 있다. PreparedStatement를 만들 때 사용하는 SQL은 동일하며 바인딩할 파라미터는 순서대로 넣어주면 된다.
+```
+this.jdbcTemplate.update("insert into users(id, name, password) values(?,?,?)",
+    user.getId(), user.getName(), user.getPassword());
+```
 
 **queryForInt()**<br>
 다음은 아직 템플릿/콜백 방식을 적용하지 않았던 getCount 메서드에 JdbcTemplate을 적용해보자.
@@ -338,9 +350,23 @@ JdbcTemplate은 스프링이 제공하는 클래스이지만 DI 컨테이너를 
 **queryForObject()**<br>
 이번엔 id를 통해 User 정보를 갖고오는 get() 메서드에 JdbcTemplate을 적용해보자. 문제는 ResultSet에서 getCount()처럼 단순한 값이 아니라 복잡한 User 오브젝트로 만들어야 한다. 즉, ResultSet의 결과를 User 오브젝트를 만들어 프로퍼티에 넣어줘야 한다.<br>
 
-이를 위해 getCount()에 적용했던 ResultExtractor 콜백 대신 RowMapper 콜백을 사용하겠다. ResultExtractor와 RowMapper 모두 템플릿으로부터 ResultSet을 전달받고, 필요한 정보를 추출해서 리턴하는 방식으로 동작한다. 다른 점은 ResultExtractor은 ResultSet을 한 번 전달받아 알아서 추출 작업을 모두 진행하고 최종 결과만 리턴해주면 되는 데 반해, RowMapper는 ResultSet의 로우 하나를 매핑하기 위해 사용되기 때문에 여러 번 호출될 수 있다는 점이다.<br>
-
-
+이를 위해 getCount()에 적용했던 ResultExtractor 콜백 대신 RowMapper 콜백을 사용하겠다. ResultExtractor와 RowMapper 모두 템플릿으로부터 ResultSet을 전달받고, 필요한 정보를 추출해서 리턴하는 방식으로 동작한다. 다른 점은 ResultExtractor은 ResultSet을 한 번 전달받아 알아서 추출 작업을 모두 진행하고 최종 결과만 리턴해주면 되는 데 반해, RowMapper는 ResultSet의 로우 하나를 매핑하기 위해 사용되기 때문에 여러 번 호출될 수 있다는 점이다.
+```
+public User get(String id) {
+  return this.jdbcTemplate.queryForObject("select * from users where id = ?",
+  new Object[] {id}, // SQL에 바인딩할 파라미터 값
+  new RowMapper<User>() {
+    public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+      User user = new User();
+      user.setId(rs.getString("id"));
+      user.setName(rs.getString("name"));
+      user.setPassword(rs.getString("password"));
+      return user;
+    }
+  });
+}
+```
+첫 번째 파라미터는 PreparedStatement를 만들기 위한 SQL이고, 두 번째는 여기에 바인딩할 값들이다. 
 
 
 
