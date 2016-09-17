@@ -366,7 +366,7 @@ public User get(String id) {
   });
 }
 ```
-첫 번째 파라미터는 PreparedStatement를 만들기 위한 SQL이고, 두 번째는 여기에 바인딩할 값들이다. 
+첫 번째 파라미터는 PreparedStatement를 만들기 위한 SQL이고, 두 번째는 여기에 바인딩할 값들이다. update() 에서처럼 가변인자를 사용하면 좋겠지만 뒤에 다른 파라미터가 있기 때문에 가변인자 대신 Object 타입 배열을 사용해야 한다. 배열 초기화 블록을 사용해서 SQL의 ?에 바인딩할 id 값을 전달한다. queryForObject() 내부에서 이 두 가지 파라미터를 사용하는 PreparedStatement 콜백이 만들어질 것이다.
 
 
 
