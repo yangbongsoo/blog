@@ -388,5 +388,8 @@ public List<User> getAll() {
   });
 }
 ```
-quert()는 결과가 없을 경우에 queryForObject()처럼 예외를 던지지는 않는다. 대신 크기가 0인 `List<T>` 오브젝트를 돌려준다.
+quert()는 결과가 없을 경우에 queryForObject()처럼 예외를 던지지는 않는다. 대신 크기가 0인 `List<T>` 오브젝트를 돌려준다.<br>
+
+**중복 제거**<br>
+get()과 getAll()을 보면 사용한 RowMapper의 내용이 똑같다는 사실을 알 수 있다. 사용되는 상황은 다르지만 ResultSet 로우 하나를 User 오브젝트 하나로 변환해주는 동일한 기능을 가진 콜백이다.
 
