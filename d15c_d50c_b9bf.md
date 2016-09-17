@@ -370,7 +370,23 @@ public User get(String id) {
 
 queryForObject()는 SQL을 실행하면 한 개의 로우만 얻을 것이라고 기대한다. 그리고 ResultSet의 next()를 실행해서 첫 번째 로우로 이동시킨 후에 RowMapper 콜백을 호출한다. 이미 RowMapper가 호출되는 시점에서 ResultSet은 첫 번째 로우를 가리키고 있으므로 다시 rx.next()를 호출할 필요는 없다. RowMapper에서는 현재 ResultSet이 가리키고 있는 로우의 내용을 User 오브젝트에 그대로 담아서 리턴해주기만 하면 된다. RowMapper가 리턴한 User 오브젝트는 queryForObject() 메서드의 리턴 값으로 get() 메서드에 전달된다.<br>
 
-이렇게만 해도 일단 User 오브젝트를 조회하는 get() 메서드의 기본 기능은 충분히 구현됐다. 하지만 get() 메서드에는 한 가지 더 고려해야 할 게 있다. queryForObject()를 이용할 때 조회 결과가 없는 예외상황을 어떻게 처리해야 할까? 이를 위해 특별히 해줄 것은 없다. 이미 queryForObject()는 SQL을 실행해서 받은 로우의 개수가 하나가 아니라면 예외를 던지도록 만들어져 있다. 이때 던져지는 예외가 바로 EmptyResultDataAccessException이다.
+이렇게만 해도 일단 User 오브젝트를 조회하는 get() 메서드의 기본 기능은 충분히 구현됐다. 하지만 get() 메서드에는 한 가지 더 고려해야 할 게 있다. queryForObject()를 이용할 때 조회 결과가 없는 예외상황을 어떻게 처리해야 할까? 이를 위해 특별히 해줄 것은 없다. 이미 queryForObject()는 SQL을 실행해서 받은 로우의 개수가 하나가 아니라면 예외를 던지도록 만들어져 있다. 이때 던져지는 예외가 바로 EmptyResultDataAccessException이다.<br>
 
-
+**query**<br>
+앞에서 사용한 queryForObject()는 쿼리의 결과가 로우 하나일 때 사용하고, query()는 여러 개의 로우가 결과로 나오는 일반적인 경우에 쓸 수 있다. query()의 리턴 타입은 `List<T>`다.
+```
+public List<User> getAll() {
+  return this.jdbcTemplate.query("select * from users order by id",
+  new RowMapper<User>() {
+    public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+      User user = new User();
+      user.setId(rs.getString("id"));
+      user.setName(rs.getString("name"));
+      user.setPassword(rs.getString("password"));
+      return user;
+    }
+  });
+}
+```
+quert()는 결과가 없을 경우에 queryForObject()처럼 예외를 던지지는 않는다. 대신 크기가 0인 `List<T>` 오브젝트를 돌려준다.
 
