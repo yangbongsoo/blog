@@ -311,5 +311,19 @@ public int getCount() throws SQLException {
   return count;
 }
 ```
-getCount()는 SQL 쿼리를 실행하고 ResultSet을 통해 결과 값을 가져오는 코드다. 이런 작업 흐름을 가진 코드에서 사용할 수 있는 템플릿은 PreparedStatementCreator 콜백과 ResultSetExtractor 콜백을 파라미터로 받는 query() 메서드다. ResultSetExtractor 콜백은 
-
+getCount()는 SQL 쿼리를 실행하고 ResultSet을 통해 결과 값을 가져오는 코드다. 이런 작업 흐름을 가진 코드에서 사용할 수 있는 템플릿은 PreparedStatementCreator 콜백과 ResultSetExtractor 콜백을 파라미터로 받는 query() 메서드다. ResultSetExtractor 콜백은 템플릿이 제공하는 ResultSet을 이용해 원하는 값을 추출해서 템플릿에 전달하면, 템플릿은 나머지 작업을 수행한 뒤에 그 값을 query() 메서드의 리턴 값으로 돌려준다.
+```
+public int getCount() {
+  return this.jdbcTemplate.query(new PreparedStatementCreator() {
+    public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+      return con.prepareStatement("select count(*) from users");
+    }
+    }, new ResultSetExtractor<Integer>() {
+      public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {
+        rs.next();
+        return rs.getInt(1);
+      }
+    }
+  );
+}
+```
