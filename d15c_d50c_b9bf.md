@@ -368,7 +368,9 @@ public User get(String id) {
 ```
 첫 번째 파라미터는 PreparedStatement를 만들기 위한 SQL이고, 두 번째는 여기에 바인딩할 값들이다. update() 에서처럼 가변인자를 사용하면 좋겠지만 뒤에 다른 파라미터가 있기 때문에 가변인자 대신 Object 타입 배열을 사용해야 한다. 배열 초기화 블록을 사용해서 SQL의 ?에 바인딩할 id 값을 전달한다. queryForObject() 내부에서 이 두 가지 파라미터를 사용하는 PreparedStatement 콜백이 만들어질 것이다.<br>
 
-queryForObject()는 SQL을 실행하면 한 개의 로우만 얻을 것이라고 기대한다. 그리고 ResultSet의 next()를 실행해서 첫 번째 로우로 이동시킨 후에 RowMapper 콜백을 호출한다. 이미 RowMapper가 호출되는 시점에서 ResultSet은 첫 번째 로우를 가리키고 있으므로 다시 rx.next()를 호출할 필요는 없다. RowMapper에서는 현재 ResultSet이 가리키고 있는 로우의 내용을 User 오브젝트에 그대로 담아서 리턴해주기만 하면 된다. RowMapper가 리턴한 User 오브젝트는 queryForObject() 메서드의 리턴 값으로 get() 메서드에 전달된다.
+queryForObject()는 SQL을 실행하면 한 개의 로우만 얻을 것이라고 기대한다. 그리고 ResultSet의 next()를 실행해서 첫 번째 로우로 이동시킨 후에 RowMapper 콜백을 호출한다. 이미 RowMapper가 호출되는 시점에서 ResultSet은 첫 번째 로우를 가리키고 있으므로 다시 rx.next()를 호출할 필요는 없다. RowMapper에서는 현재 ResultSet이 가리키고 있는 로우의 내용을 User 오브젝트에 그대로 담아서 리턴해주기만 하면 된다. RowMapper가 리턴한 User 오브젝트는 queryForObject() 메서드의 리턴 값으로 get() 메서드에 전달된다.<br>
+
+이렇게만 해도 일단 User 오브젝트를 조회하는 get() 메서드의 기본 기능은 충분히 구현됐다. 하지만 get() 메서드에는 한 가지 더 고려해야 할 게 있다. queryForObject()를 이용할 때 조회 결과가 없는 예외상황을 어떻게 처리해야 할까? 이를 위해 특별히 해줄 것은 없다. 이미 queryForObject()는 SQL을 실행해서 받은 로우의 개수가 하나가 아니라면 예외를 던지도록 만들어져 있다. 이때 던져지는 예외가 바로 EmptyResultDataAccessException이다.
 
 
 
