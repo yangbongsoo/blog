@@ -390,6 +390,8 @@ DefaultAdvisorAutoProxyCreator 등록은 다음 한 줄이면 충분하다.
   <property name="mailSender" ref="mailSender" />
 </bean>
 ```
+###AOP
+
 ##5. 트랜잭션 속성
 
 
