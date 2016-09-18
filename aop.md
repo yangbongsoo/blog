@@ -307,6 +307,20 @@ public class TransactionAdvice implements MethodInterceptor {
   <property name="pointcut" ref="transactionPointcut" />
 </bean>
 ```
+이제 ProxyFactoryBean을 등록할 차례다. 아래와 같이 프로퍼티에 타깃 빈과 어드바이저 빈을 지정해주면 된다.
+```
+<bean id="userService class="org.springframework.aop.framework.ProxyFactoryBean">
+  <property name="target" ref="userServiceImpl" />
+  <property name="interceptorNames">
+    <list>
+      <value>transactionAdvisor</value>
+    </list>
+  </property>
+</bean>
+```
+어드바이저는 interceptorNames라는 프로퍼티를 통해 넣는다. 프로퍼티 이름이 advisor가 아닌 이유는 어드바이스와 어드바이저를 혼합해서 설정할 수 있도록 하기 위해서다. 그래서 property 태그의 ref 애트리뷰트를 통한 설정 대신 list와 value 태크를 통해 여러 개의 값을 넣을 수 있도록 하고 있다. value 태그에는 어드바이스 또는 어드바이저로 설정한 빈의 아이디를 넣으면 된다. 한 개 이상을 넣을 수 있다.<br>
+
+
 ##4. 스프링 AOP
 ##5. 트랜잭션 속성
 
