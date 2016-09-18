@@ -536,10 +536,11 @@ public @interface Transactional {
 
 타깃 클래스에서도 @Transactional을 발견하지 못하면, 스프링은 메서드가 선언된 인터페이스로 넘어간다. 인터페이스에서도 먼저 메서드를 확인한다. 따라서 [2]와 [3]에 @Transactional이 부여됐는지 확인하고 있다면 이 속성을 적용한다. 인터페이스 메서드에도 없다면 마지막 단계인 인터페이스 타입 [1]의 위치에 애노테이션이 있는지 확인한다.<br>
 
+기본적으로 @Transactional 적용 대상은 클라이언트가 사용하는 인터페이스가 정의한 메서드이므로 @Transactional도 타깃 클래스보다는 인터페이스에 두는 게 바람직하다. 하지만 인터페이스를 사용하는 프록시 방식의 AOP가 아닌 다른 방식으로 트랜잭션을 적용하면 인터페이스에 정의한 @Transactional은 무시되기 때문에 안전하게 타깃 클래스에 @Transactional을 두는 방법을 권장한다.<br>
 
+**트랜잭션 애노테이션 사용을 위한 설정**<br>
+```
+<tx:annotation-driven />
 
-
-
-
-
-
+@EnableTransactionManagement
+```
