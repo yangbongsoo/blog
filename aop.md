@@ -337,6 +337,18 @@ public class TransactionAdvice implements MethodInterceptor {
 
 적용할 빈을 선정하는 로직이 추가된 포인트컷이 담긴 어드바이저를 등록하고 빈 후처리기를 사용하면 일일이 ProxyFactoryBean 빈을 등록하지 않아도 타깃 오브젝트에 자동으로 프록시가 적용되게 할 수 있다. 마지막 남은 번거로운 ProxyFactoryBean 설정 문제를 말끔하게 해결해주는 놀라운 방법이다.<br>
 
+**확장된 포인트컷**<br>
+지금까지 포인트컷이란 타깃 오브젝트의 메서드 중에서 어떤 메서드에 부가기능을 적용할지를 선정해주는 역할을 한다고 했다. 그러나 포인트컷은 등록된 빈 중에서 어떤 빈에 프록시를 적용할지를 선택하는 기능이 또 있다.
+```
+public interface Pointcut {
+  ClassFilter getClassFilter(); // 프록시를 적용할 클래스인지 확인해준다.
+  MethodMatcher getMethodMatcher(); // 어드바이스를 적용할 메서드인지 확인해준다.
+}
+```
+
+**클래스 필터를 적용한 포인트컷 작성**<br>
+
+**어드바이저를 이용하는 자동 프록시 생성기 등록**<br>
 
 ##5. 트랜잭션 속성
 
