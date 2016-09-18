@@ -240,5 +240,11 @@ static class UppercaseAdvice implements MethodInterceptor {
   }
 }
 ```
+**어드바이스 : 타깃이 필요 없는 순수한 부가기능**<br>
+InvocationHandler를 구현했을 때와 달리 MethodInterceptor를 구현한 UppercaseAdvice에는 타깃 오브젝트가 등장하지 않는다. MethodInterceptor로는 메서드 정보와 함께 타깃 오브젝트가 담긴 MethodInvocation 오브젝트가 전달된다. MethodInvocation은 일종의 콜백 오브젝트로, proceed() 메서드를 실행하면 타깃 오브젝트의 메서드를 내부적으로 실행해주는 기능이 있다(MethodInvocation 구현 클래스는 일종의 공유 가능한 템플릿처럼 동작).
+
+
+
+
 
 
