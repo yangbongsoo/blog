@@ -248,8 +248,21 @@ InvocationHandler를 구현했을 때와 달리 MethodInterceptor를 구현한 U
 ![](스크린샷 2016-09-18 오후 2.08.27.jpg)
 스프링은 부가기능을 제공하는 오브젝트를 어드바이스라고 부르고, 메서드 선정 알고리즘을 담은 오브젝트를 포인트컷이라고 부른다. 어드바이스와 포인트컷은 모두 프록시에 DI로 주입돼서 사용된다. 두 가지 모두 여러 프록시에서 공유가 가능하도록 만들어지기 때문에 스프링의 싱글톤 빈으로 등록이 가능하다.<br>
 
-
-
+프록시는 클라이언트로부터 요청을 받으면 먼저 포인트컷에게 부가기능을 부여할 메서드인지를 확인해달라고 요청한다. 포인트컷은 Pointcut 인터페이스를 구현해서 만들면 된다. 프록시는 포인트컷으로부터 부가기능을 적용할 대상 메서드인지 확인받으면, MethodInterceptor 타입의 어드바이스를 호출한다.
+```
+@Test
+public void pointcutAdvisor() {
+  ProxyFactoryBean pfBean = new ProxyFactoryBean();
+  pfBean.setTarget(new HelloTarget());
+  
+  NameMatchMethodPointcut pointcut = new NameMatchMethodPointcut();
+  pointcut.setMappedName("sayH*");
+  
+  //포인트컷과 어드바이스를 Advisor로 묶어서 한번에 추가
+  pfBean.addAdvisor(new DefaultPointcutAdvisor(pointcut, new UppercaseAdvice()));
+  Hello proxiedHello = (Hello) pfBean.getObject();
+}
+```
 
 ##4. 스프링 AOP
 ##5. 트랜잭션 속성
