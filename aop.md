@@ -337,6 +337,7 @@ public class TransactionAdvice implements MethodInterceptor {
 
 적용할 빈을 선정하는 로직이 추가된 포인트컷이 담긴 어드바이저를 등록하고 빈 후처리기를 사용하면 일일이 ProxyFactoryBean 빈을 등록하지 않아도 타깃 오브젝트에 자동으로 프록시가 적용되게 할 수 있다. 마지막 남은 번거로운 ProxyFactoryBean 설정 문제를 말끔하게 해결해주는 놀라운 방법이다.<br>
 
+**확장된 포인트컷**<br>
 
 ##5. 트랜잭션 속성
 
