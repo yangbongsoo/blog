@@ -467,19 +467,11 @@ DefaultTransactionDefinition이 구현하고 있는 TransactionDefinition 인터
 TransactionInterceptor는 PlatformTransactionManager와 Properties 타입의 두 가지 프로퍼티를 갖고 있다. 트랜잭션 매니저 프로퍼티는 잘 알고 있지만 Properties 타입의 프로퍼티는 처음 보는 것이다.<br>
 
 Properties 타입인 두 번째 프로퍼티 이름은 transactionAttributes로, 트랜잭션 속성을 정의한 프로퍼티다. 트랜잭션 속성은 TransactionDefinition의 네 가지 기본 항목에 rollbackOn()이라는 메서드를 하나 더 갖고 있는 TransactionAttribute 인터페이스로 정의된다. rollbackOn() 메서드는 어떤 예외가 발생하면 롤백을 할 것인가를 결정하는 메서드다. 이 TransactionAttribute를 이용하면 트랜잭션 부가기능의 동작 방식을 모두 제어할 수 있다.<br>
-```
-public Object invoke(MethodInvocation invocation) throws Throwable {
-    TransactionStatus status = this.transactionManager.getTransaction(new DefaultTransactionDefinition());
-    try {
-      Object ret = invocation.proceed();
-      this.transactionManager.commit(status);
-      return ret;
-    } catch (RuntimeException e) {
-      this.transactionManager.rollback(status);
-      throw e;
-    }
-  }
-```
+![](스크린샷 2016-09-18 오후 11.35.08.jpg)
 
+위 트랜잭션 경계설정 코드를 다시 살펴보면 트랜잭션 부가기능의 동작방식을 변경할 수 있는 곳이 두 군데 있다는 사실을 알 수 있다. TransactionAdvice는 RuntimeException이 발생하는 경우에만 트랜잭션을 롤백시킨다. 하지만 런타임 예외가 아닌 경우에는 트랜잭션이 제대로 처리되지 않고 메서드를 빠져나가게 되어 있다. UserService는 런타임 예외만 던진다는 사실을 알기 때문에 일단 이렇게 정의해도 상관없지만, 체크 예외를 던지는 타깃에 사용한다면 문제가 될 수 있다. 그렇다면 런타임 예외만이 아니라 모든 종류의 예외에 대해 트랜잭션을 롤백 시키도록 해야 할까? 그래서는 안 된다. 비지니스 로직상의 예외 경우를 나타내기 위해 타깃 오브젝트가 체크 예외를 던지는 경우에는 DB 트랜잭션은 커밋시켜야 하기 때문이다. 2장에서 설명했듯이 일부 체크 예외는 정상적인 작업 흐름 안에서 사용될 수도 있다.<br>
 
+스프링이 제공하는 TransactionInterceptor에는 기본적으로 두 가지 종류의 예외 처리 방식이 있다. 런타임 예외가 발생하면 트랜잭션은 롤백된다. 반면에 타깃 메서드가 런타임 예외가 아닌 체크 예외를 던지는 경우에는 이것을 예외상황으로 해석하지 않고 일종의 비지니스 로직에 따른, 의미가 있는 리턴 방식의 한 가지로 인식해서 트랜잭션을 커밋해버린다.
 ##6. 애노테이션 트랜잭션 속성과 포인트컷
+
+
