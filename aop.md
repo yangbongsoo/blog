@@ -263,8 +263,53 @@ public void pointcutAdvisor() {
   Hello proxiedHello = (Hello) pfBean.getObject();
 }
 ```
+포인트컷이 필요 없을 때는 ProxyFactoryBean의 addAdvice() 메서드를 호출해서 어드바이스만 등록하면 됐다. 그런데 포인트컷을 함께 등록할 때는 어드바이스와 포인트컷을 Advisor 타입으로 묶어서 addAdvisor() 메서드를 호출해야 한다. 왜 굳이 별개의 오브젝트로 묶어서 등록해야 할까? 그 이유는 ProxyFactoryBean에는 여러 개의 어드바이스와 포인트컷이 추가될 수 있기 때문이다. 포인트컷과 어드바이스를 따로 등록하면 어떤 어드바이스(부가기능)에 대해 어떤 포인트컷(메서드 선정)을 적용할지 애매해지기 때문이다. 그래서 이 둘을 Advisor 타입의 오브젝트에 담아서 조합을 만들어 등록하는 것이다.<br>
+`어드바이저 = 포인트컷(메서드 선정 알고리즘) + 어드바이스(부가기능)`<br>
 
+**ProxyFactoryBean을 이용해 트랜잭션 기능 적용**<br>
+```
+public class TransactionAdvice implements MethodInterceptor {
+  PlatformTransactionManager transactionManager;
+  
+  public void setTransactionManager(PlatformTransactionManager transactionManager) {
+    this.transactionManager = transactionManager;
+  }
+  
+  public Object invoke(MethodInvocation invocation) throws Throwable {
+    TransactionStatus status = this.transactionManager.getTransaction(new DefaultTransactionDefinition());
+    try {
+      Object ret = invocation.proceed();
+      this.transactionManager.commit(status);
+      return ret;
+    } catch (RuntimeException e) {
+      this.transactionManager.rollback(status);
+      throw e;
+    }
+  }
+}
+```
+트랜잭션 어드바이스 빈 설정
+```
+<bean id="transactionAdvice" class="xxx.xxx.service.TransactionAdvice">
+  <property name="transactionManager" ref="transactionManager" />
+</bean>
+```
+포인트컷 빈 설정
+```
+<bean id="transactionPointcut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+  <property name="mappedName" ref="upgrade*" />
+</bean>
+```
+어드바이저 빈 설정
+```
+<bean id="transactionAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+  <property name="advice" ref="transactionAdvice" />
+  <property name="pointcut" ref="transactionPointcut" />
+</bean>
+```
 ##4. 스프링 AOP
 ##5. 트랜잭션 속성
+
+
 
 
