@@ -345,9 +345,29 @@ public interface Pointcut {
   MethodMatcher getMethodMatcher(); // 어드바이스를 적용할 메서드인지 확인해준다.
 }
 ```
+ProxyFactoryBean에서는 굳이 클래스 레벨의 필터는 필요 없었지만, 모든 빈에 대해 프록시 자동 적용 대상을 선별해야 하는 빈 후처리기인 DefaultAdvisorAutoProxyCreator는 클래스와 메서드 선정 알고리즘을 모두 갖고 있는 포인트컷이 필요하다. 그런 포인트컷과 어드바이스가 결합되어 있는 어드바이저가 등록되어 있어야 한다.<br>
 
 **클래스 필터를 적용한 포인트컷 작성**<br>
-
+만들어야 할 클래스는 하나 뿐이다. 메서드 이름만 비교하던 포인트컷인 NameMethodPointcut을 상속해서 프로퍼티로 주어진 이름 패턴을 가지고 클래스 이름을 비교하는 ClassFilter를 추가하도록 만들 것이다.
+```
+public class NameMatchClassMethodPointcut extends NameMatchMethodPointcut {
+  public void setMappedClassName(String mappedClassName) {
+    this.setClassFilter(new SimpleClassFilter(mappedClassName));
+  }
+  
+  static class SimpleClassFilter implements ClassFilter {
+    String mappedName;
+    
+    private SimpleClassFilter(String mappedName) {
+      this.mappedName = mappedName;
+    }
+    
+    public boolean matches(Class<?> clazz) {
+      return PatternMatchUtils.simpleMatch(mappedName, clazz.getSimpleName());
+    }
+  }
+}
+```
 **어드바이저를 이용하는 자동 프록시 생성기 등록**<br>
 
 ##5. 트랜잭션 속성
