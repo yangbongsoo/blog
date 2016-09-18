@@ -407,7 +407,7 @@ DefaultAdvisorAutoProxyCreator 등록은 다음 한 줄이면 충분하다.
   <aop:advisor advice-reg="transactionAdvice" pointcut-ref="transactionPointcut" />
 </aop:config>
 ```
-`<aop:config>`(AspectJAdvisorAutoProxyCreator를 빈으로 등록해준다) `<aop:pointcut>`(AspectJExpressionPointcut을 빈으로 등록해준다) `<aop:advisor>`(DefaultBeanFactoryPointcutAdvisor를 빈으로 등록해준다) 
+`<aop:config>` : AspectJAdvisorAutoProxyCreator를 빈으로 등록해준다. `<aop:pointcut>` : AspectJExpressionPointcut을 빈으로 등록해준다. `<aop:advisor>` : DefaultBeanFactoryPointcutAdvisor를 빈으로 등록해준다.
 ##5. 트랜잭션 속성
 
 
