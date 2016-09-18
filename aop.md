@@ -369,7 +369,11 @@ public class NameMatchClassMethodPointcut extends NameMatchMethodPointcut {
 }
 ```
 **어드바이저를 이용하는 자동 프록시 생성기 등록**<br>
-
+적용할 자동 프록시 생성기인 DefaultAdvisorAutoProxyCreator는 등록된 빈 중에서 Advisor 인터페이스를 구현한 것을 모두 찾는다. 그리고 생성되는 모든 빈에 대해 어드바이저의 포인트컷을 적용해보면서 프록시 적용 대상을 선정한다. 빈 클래스가 프록시 선정 대상이라면 프록시를 만들어 원래 빈 오브젝트와 바꿔치기한다. 원래 빈 오브젝트는 프록시 뒤에 연결돼서 프록시를 통해서만 접근 가능하게 바뀌는 것이다. 따라서 타깃 빈에 의존한다고 정의한 다른 빈들은 프록시 오브젝트를 대신 DI 받게 될 것이다.<br>
+DefaultAdvisorAutoProxyCreator 등록은 다음 한 줄이면 충분하다. 
+```
+<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
+```
 ##5. 트랜잭션 속성
 
 
