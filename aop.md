@@ -398,8 +398,16 @@ DefaultAdvisorAutoProxyCreator 등록은 다음 한 줄이면 충분하다.
 
 위의 그림을 보면 왼쪽은 애스펙트로 부가기능을 분리하기 전의 상태다. 핵심기능은 깔끔한 설계를 통해서 모듈화되어 있고, 객체지향적인 장점을 잘 살릴 수 있도록 만들었지만, 부가기능이 핵심기능의 모듈에 침투해 들어가면서 설계와 코드가 모두 지저분해졌다.<br>
 
-오른쪽 그림은 이렇게 핵심기능 코드 사이에 침투한 부가기능을 독립적인 모듈인 애스펙트로 구분해낸 것이다. 이렇게 애플리케이션의 핵심적인 기능에서 부가적인 기능을 분리해서 애스펙트라는 독특한 모듈로 만들어서 설계하고 개발하는 방법을 AOP라고 부른다.
+오른쪽 그림은 이렇게 핵심기능 코드 사이에 침투한 부가기능을 독립적인 모듈인 애스펙트로 구분해낸 것이다. 이렇게 애플리케이션의 핵심적인 기능에서 부가적인 기능을 분리해서 애스펙트라는 독특한 모듈로 만들어서 설계하고 개발하는 방법을 AOP라고 부른다.<br>
 
+**AOP 네임스페이스**<br>
+```
+<aop:config>
+  <aop:pointcut id="transactionPointcut" expression="execution(* *..*ServiceImpl.upgrade*(..))" />
+  <aop:advisor advice-reg="transactionAdvice" pointcut-ref="transactionPointcut" />
+</aop:config>
+```
+`<aop:config>`(AspectJAdvisorAutoProxyCreator를 빈으로 등록해준다) `<aop:pointcut>`(AspectJExpressionPointcut을 빈으로 등록해준다) `<aop:advisor>`(DefaultBeanFactoryPointcutAdvisor를 빈으로 등록해준다) 
 ##5. 트랜잭션 속성
 
 
