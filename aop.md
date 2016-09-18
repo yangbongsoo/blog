@@ -390,7 +390,8 @@ DefaultAdvisorAutoProxyCreator 등록은 다음 한 줄이면 충분하다.
   <property name="mailSender" ref="mailSender" />
 </bean>
 ```
-###AOP
+###AOP : 애스펙트 지향 프로그래밍
+애스팩트란 그 자체로 애플리케이션의 핵심기능을 담고 있지는 않지만, 애플리케이션을 구성하는 중요한 한 가지 요소이고, 핵심기능에 부가되어 의미를 갖는 특별한 모듈을 가리킨다.
 
 ##5. 트랜잭션 속성
 
