@@ -374,6 +374,22 @@ DefaultAdvisorAutoProxyCreator 등록은 다음 한 줄이면 충분하다.
 ```
 <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
 ```
+**포인트컷 등록**<br>
+아래와 같이 기존의 포인트컷 설정을 삭제하고 새로 만든 클래스 필터 지원 포인트컷을 빈으로 등록한다. ServiceImpl로 이름이 끝나는 클래스와 upgrade로 시작하는 메서드를 선정해주는 포인트컷이다.
+```
+<bean id="transactionPointcut" class="xx.xx.NameMatchClassMethodPointcut">
+  <property name="mappedClassName" value="*ServiceImpl" />
+  <property name="mappedName" value="upgrade*" />
+</bean>
+```
+**ProxyFactoryBean 제거와 서비스 빈의 원상복구**<br>
+프록시를 도입했던 때부터 아이디를 바꾸고 프록시에 DI 돼서 간접적으로 사용돼야 했던 userServiceImpl 빈의 아이디를 이제는 당당하게 userService로 되돌려놓을 수 있다. 더 이상 명시적인 프록시 팩토리 빈을 등록하지 않기 때문이다. 마지막으로 남았던 ProxyFactoryBean 타입의 빈은 삭제해버려도 좋다.
+```
+<bean id="userService class="xx.xx.UserServiceImpl">
+  <property name="userDao" ref="userDao" />
+  <property name="mailSender" ref="mailSender" />
+</bean>
+```
 ##5. 트랜잭션 속성
 
 
