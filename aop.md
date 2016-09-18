@@ -1,6 +1,7 @@
 스프링에 적용된 가장 인기 있는 AOP 적용 대상은 바로 선언적 트랜잭션 기능이다. 
 ##1. 데코레이터 패턴을 이용한 트랜잭션 코드 분리
 ![](스크린샷 2016-09-14 오후 4.09.11.jpg)
+
 UserService 인터페이스를 도입해서 순수 비지니스로직을 담당하는 UserServiceImpl과 트랜잭션 처리를 담당하는 UserServiceTx로 나눈다.
 ```
 public interface UserService {
@@ -88,6 +89,7 @@ public Object invoke(Object proxy, Method method, Object[] args)
 ```
 invoke() 메서드는 리플렉션의 Method 인터페이스를 파라미터로 받는다. 메서드를 호출할 때 전달되는 파라미터도 args로 받는다. 다이내믹 프록시 오브젝트는 클라이언트의 모든 요청을 리플렉션 정보로 변환해서 InvocationHandler 구현 오브젝트의 invoke() 메서드로 넘기는 것이다. 타깃 인터페이스의 모든 메서드 요청이 하나의 메서드로 집중되기 때문에 중복되는 기능을 효과적으로 제공할 수 있다.<br>
 ![](스크린샷 2016-09-14 오후 4.57.53.jpg)
+
 간단한 예를 통해 다시 살펴보자. 
 ```
 interface Hello {
@@ -246,6 +248,7 @@ InvocationHandler를 구현했을 때와 달리 MethodInterceptor를 구현한 U
 
 **포인트컷 : 부가기능 적용 대상 메서드 선정 방법**<br>
 ![](스크린샷 2016-09-18 오후 2.08.27.jpg)
+
 스프링은 부가기능을 제공하는 오브젝트를 어드바이스라고 부르고, 메서드 선정 알고리즘을 담은 오브젝트를 포인트컷이라고 부른다. 어드바이스와 포인트컷은 모두 프록시에 DI로 주입돼서 사용된다. 두 가지 모두 여러 프록시에서 공유가 가능하도록 만들어지기 때문에 스프링의 싱글톤 빈으로 등록이 가능하다.<br>
 
 프록시는 클라이언트로부터 요청을 받으면 먼저 포인트컷에게 부가기능을 부여할 메서드인지를 확인해달라고 요청한다. 포인트컷은 Pointcut 인터페이스를 구현해서 만들면 된다. 프록시는 포인트컷으로부터 부가기능을 적용할 대상 메서드인지 확인받으면, MethodInterceptor 타입의 어드바이스를 호출한다.
@@ -322,6 +325,7 @@ public class TransactionAdvice implements MethodInterceptor {
 
 **어드바이스와 포인트컷의 재사용**<br>
 ![](스크린샷 2016-09-18 오후 3.01.20.jpg)
+
 위의 그림은 ProxyFactoryBean을 이용해서 많은 수의 서비스 빈에게 트랜잭션 부가기능을 적용했을 때의 구조다. 트랜잭션 부가기능을 담은 TransactionAdvice는 하나만 만들어서 싱글톤 빈으로 등록해주면, DI 설정을 통해 모든 서비스에 적용이 가능하다. 메서드 선정 방식이 달라지는 경우만 포인트컷의 설정을 따로 등록하고 어드바이저로 조합해서 적용해주면 된다.
 ##4. 스프링 AOP
 아직 한 가지 해결할 과제가 남아 있다. 부가기능의 적용이 필요한 타깃 오브젝트마다 거의 비슷한 내용의 ProxyFactoryBean 빈 설정정보를 추가해주는 부분이다. 새로운 타깃이 등장했다고 해서 코드를 손댈 필요는 없어졌지만, 설정은 매번 복사하고 붙이고 target 프로퍼티의 내용을 수정해줘야 한다. 이런 류의 중복은 어떻게 제거할까?<br>
@@ -332,7 +336,9 @@ public class TransactionAdvice implements MethodInterceptor {
 그중에서 관심을 가질 만한 확장 포인트는 바로 BeanPostProcessor 인터페이스를 구현해서 만드는 빈 후처리기다. 빈 후처리기는 이름 그대로 스프링 빈 오브젝트로 만들어지고 난 후에, 빈 오브젝트를 다시 가공할 수 있게 해준다. 여기서는 스프링이 제공하는 빈 후처리기 중의 하나인 DefaultAdvisorAutoProxyCreator를 살펴보겠다. 이름을 보면 알 수 있듯이 DefaultAdvisorAutoProxyCreator는 어드바이저를 이용한 자동 프록시 생성기다.<br>
 
 빈 후처리기를 스프링에 적용하는 방법은 간단하다. 빈 후처리기 자체를 빈으로 등록하는 것이다. 스프링은 빈 후처리기가 빈으로 등록되어 있으면 빈 오브젝트가 생성될 때마다 빈 후처리기에 보내서 후처리 작업을 요청한다. 빈 후처리기는 빈 오브젝트의 프로퍼티를 강제로 수정할 수도 있고 별도의 초기화 작업을 수행할 수도 있다. 심지어는 만들어진 빈 오브젝트 자체를 바꿔치기 할 수도 있다. 따라서 스프링이 설정을 참고해서 만든 오브젝트가 아닌 다른 오브젝트를 빈으로 등록시키는 것이 가능하다. 이를 잘 이용하면 스프링이 생성하는 빈 오브젝트의 일부를 프록시로 포장하고, 프록시를 빈으로 대신 등록할 수도 있다. 바로 이것이 자동 프록시 생성 빈 후처리기다.
+
 ![](스크린샷 2016-09-18 오후 4.00.56.jpg)
+
 위의 그림은 빈 후처리기를 이용한 자동 프록시 생성 방법을 설명한다. DefaultAdvisorAutoProxyCreator 빈 후처리기가 등록되어 있으면 스프링은 빈 오브젝트를 만들 때마다 후처리기에게 빈을 보낸다. DefaultAdvisorAutoProxyCreator는 빈으로 등록된 모든 어드바이저 내의 포인트컷을 이용해 전달받은 빈이 프록시 적용 대상인지 확인한다. 프록시 적용 대상이면 그때는 내장된 프록시 생성기에게 현재 빈에 대한 프록시를 만들게 하고, 만들어진 프록시에 어드바이저를 연결해준다. 빈 후처리기는 프록시가 생성되면 원래 컨테이너가 전달해준 빈 오브젝트 대신 프록시 오브젝트를 컨테이너에게 돌려준다. 컨테이너는 최종적으로 빈 후처리기가 돌려준 오브젝트를 빈으로 등록하고 사용한다.<br>
 
 적용할 빈을 선정하는 로직이 추가된 포인트컷이 담긴 어드바이저를 등록하고 빈 후처리기를 사용하면 일일이 ProxyFactoryBean 빈을 등록하지 않아도 타깃 오브젝트에 자동으로 프록시가 적용되게 할 수 있다. 마지막 남은 번거로운 ProxyFactoryBean 설정 문제를 말끔하게 해결해주는 놀라운 방법이다.<br>
@@ -394,6 +400,7 @@ DefaultAdvisorAutoProxyCreator 등록은 다음 한 줄이면 충분하다.
 애스팩트란 그 자체로 애플리케이션의 핵심기능을 담고 있지는 않지만, 애플리케이션을 구성하는 중요한 한 가지 요소이고, 핵심기능에 부가되어 의미를 갖는 특별한 모듈을 가리킨다.<br>
 
 애스팩트는 그 단어의 의미대로 애플리케이션을 구성하는 한 가지 측면이라고 생각 할 수 있다.
+
 ![](스크린샷 2016-09-18 오후 9.59.42.jpg)
 
 위의 그림을 보면 왼쪽은 애스펙트로 부가기능을 분리하기 전의 상태다. 핵심기능은 깔끔한 설계를 통해서 모듈화되어 있고, 객체지향적인 장점을 잘 살릴 수 있도록 만들었지만, 부가기능이 핵심기능의 모듈에 침투해 들어가면서 설계와 코드가 모두 지저분해졌다.<br>
@@ -409,9 +416,29 @@ DefaultAdvisorAutoProxyCreator 등록은 다음 한 줄이면 충분하다.
 ```
 `<aop:config>` : AspectJAdvisorAutoProxyCreator를 빈으로 등록해준다. `<aop:pointcut>` : AspectJExpressionPointcut을 빈으로 등록해준다. `<aop:advisor>` : DefaultBeanFactoryPointcutAdvisor를 빈으로 등록해준다.
 ##5. 트랜잭션 속성
+PlatformTransactionManager로 대표되는 스프링의 트랜잭션 추상화를 설명하면서 그냥 넘어간 게 한 가지 있다. 트랜잭션 매니저에서 트랜잭션을 가져올 때 사용한 DefaultTransactionDefinition 오브젝트다.
+```
+public Object invoke(MethodInvocation invocation) throws Throwable {
+    TransactionStatus status = this.transactionManager.getTransaction(new DefaultTransactionDefinition());
+    try {
+      Object ret = invocation.proceed();
+      this.transactionManager.commit(status);
+      return ret;
+    } catch (RuntimeException e) {
+      this.transactionManager.rollback(status);
+      throw e;
+    }
+  }
+```
+트랜잭션을 시작한다고 하지 않고 트랜잭션을 가져온다고 하는 이유는 차차 설명하기로 하고, 일단 트랜잭션을 가져올 때 파라미터로 트랜잭션 매니저에게 전달하는 DefaultTransactionDefinition의 용도가 무엇인지 알아보자.<br>
 
+DefaultTransactionDefinition이 구현하고 있는 TransactionDefinition 인터페이스는 트랜잭션의 동작방식에 영향을 줄 수 있는 네 가지 속성을 정의하고 있다.<br>
 
+**트랜잭션 전파**<br>
+트랜잭션의 경계에서 이미 진행 중인 트랜잭션이 있을 때 또는 없을 때, 어떻게 동작할 것인가를 결정하는 방식을 말한다.
 
+![](스크린샷 2016-09-18 오후 10.33.33.jpg)
 
+ㅇ
 
 
