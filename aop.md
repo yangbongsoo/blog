@@ -457,7 +457,29 @@ DefaultTransactionDefinition이 구현하고 있는 TransactionDefinition 인터
 트랜잭션을 수행하는 제한시간(timeout)을 설정할 수 있다. DefaultTransactionDefinition의 기본 설정은 제한시간이 없다는 것이다. 제한시간은 트랜잭션을 직접 시작할 수 있는 PROPAGATION_REQUIRED나 PROPAGATION_REQUIRES_NEW와 함께 사용해야만 의미가 있다.<br>
 
 **읽기전용**<br>
-일긱전용으로 설정해두면 트랜잭션 내에서 데이터를 조작하는 시도를 막아줄 수 있다. 또한 데이터 액세스 기술에 따라서 성능이 향상될 수도 있다.
+읽기전용으로 설정해두면 트랜잭션 내에서 데이터를 조작하는 시도를 막아줄 수 있다. 또한 데이터 액세스 기술에 따라서 성능이 향상될 수도 있다.<br>
+
+트랜잭션 정의를 수정하려면 어떻게 해야 할까? TransactionDefinition 오브젝트를 생성하고 사용하는 코드는 트랜잭션 경계설정 기능을 가진 TransactionAdvice다. 트랜잭션 정의를 바꾸고 싶으면 디폴트 속성을 갖고 있는 DefaultTransactionDefinition을 사용하는 대신 외부에서 정의된 TransactionDefinition 오브젝트를 DI 받아서 사용하도록 만들면 된다. TransactionDefinition 타입의 빈을 정의해두면 프로퍼티를 통해 원하는 속성을 지정해줄 수 있다. 하지만 이 방법으로 트랜잭션 속성을 변경하면 TransactionAdvice를 사용하는 모든 트랜잭션의 속성이 한꺼번에 바뀐다는 문제가 있다. 원하는 메서드만 선택해서 독자적인 트랜잭션 정의를 적용할 수 있는 방법은 없을까?<br>
+
+**트랜잭션 인터셉터와 트랜잭션 속성**<br>
+스프링에는 편리하게 트랜잭션 경계설정 어드바이스로 사용할 수 있도록 만들어진 TransactionInterceptor가 존재한다. TransactionInterceptor 어드바이스의 동작방식은 기존에 만들었던 TransactionAdvice와 다르지 않다. 다만 트랜잭션 정의를 메서드 이름 패턴을 이용해서 다르게 지정할 수 있는 방법을 추가로 제공해줄 뿐이다.<br>
+
+TransactionInterceptor는 PlatformTransactionManager와 Properties 타입의 두 가지 프로퍼티를 갖고 있다. 트랜잭션 매니저 프로퍼티는 잘 알고 있지만 Properties 타입의 프로퍼티는 처음 보는 것이다.<br>
+
+Properties 타입인 두 번째 프로퍼티 이름은 transactionAttributes로, 트랜잭션 속성을 정의한 프로퍼티다. 트랜잭션 속성은 TransactionDefinition의 네 가지 기본 항목에 rollbackOn()이라는 메서드를 하나 더 갖고 있는 TransactionAttribute 인터페이스로 정의된다. rollbackOn() 메서드는 어떤 예외가 발생하면 롤백을 할 것인가를 결정하는 메서드다. 이 TransactionAttribute를 이용하면 트랜잭션 부가기능의 동작 방식을 모두 제어할 수 있다.<br>
+```
+public Object invoke(MethodInvocation invocation) throws Throwable {
+    TransactionStatus status = this.transactionManager.getTransaction(new DefaultTransactionDefinition());
+    try {
+      Object ret = invocation.proceed();
+      this.transactionManager.commit(status);
+      return ret;
+    } catch (RuntimeException e) {
+      this.transactionManager.rollback(status);
+      throw e;
+    }
+  }
+```
 
 
-
+##6. 애노테이션 트랜잭션 속성과 포인트컷
