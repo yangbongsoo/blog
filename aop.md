@@ -497,5 +497,35 @@ cf) readOnly나 timeout 등은 트랜잭션이 처음 시작될 때가 아니라
 
 타깃 안에서의 호출에는 프록시가 적용되지 않는 문제를 해결할 수 있는 방법은 두 가지가 있다. 하나는 스프링 API를 이용해 프록시 오브젝트에 대한 레퍼런스를 가져온 뒤에 같은 오브젝트의 메서드 호출도 프록시를 이용하도록 강제하는 방법이다. 하지만 별로 추천되지 않는다(스프링 API와 프록시 호출 코드 등장은 바람직하지 않다). 다른 방법은 AspectJ와 같은 타깃의 바이트코드를 직접 조작하는 방식의 AOP 기술을 적용하는 것이다.
 ##6. 애노테이션 트랜잭션 속성과 포인트컷
+###@Transactional
+```
+// 애노테이션을 사용할 대상을 지정한다. 여기에 사용된 메서드와 타입(클래스, 인터페이스)처럼 한 개 이상의 대상을 지정할 수 있다.
+@Target({ElementType.METHOD, ElementType.TYPE})
+// 애노테이션 정보가 언제까지 유지되는지를 지정한다. 이렇게 설정하면 런타임 때도 애노테이션 정보를 리플렉션을 통해 얻을 수 있다.
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited //상속을 통해서도 애노테이션 정보를 얻을 수 있게 한다.
+@Documented
+public @interface Transactional {
+    @AliasFor("transactionManager")
+    String value() default "";
+    @AliasFor("value")
+    String transactionManager() default "";
+    Propagation propagation() default Propagation.REQUIRED;
+    Isolation isolation() default Isolation.DEFAULT;
+    int timeout() default -1;
+    boolean readOnly() default false;
+    Class<? extends Throwable>[] rollbackFor() default {};
+    String[] rollbackForClassName() default {};
+    Class<? extends Throwable>[] noRollbackFor() default {};
+    String[] noRollbackForClassName() default {};
+}
+```
+@Transactional 애노테이션을 트랜잭션 속성정보로 사용하도록 지정하면 스프링은 @Transactional이 부여된 모든 오브젝트를 자동으로 타깃 오브젝트로 인식한다. 이때 사용되는 포인트컷은 TransactionAttributeSourcePointcut이다. TransactionAttributeSourcePointcut은 스스로 표현식과 같은 선정기준을 갖고 있진 않다. 대신 @Transactional이 타입 레벨이든 메서드 레벨이든 상관없이 부여된 빈 오브젝트를 모두 찾아서 포인트컷의 선정 결과로 돌려준다. @Transactional은 기본적으로 트랜잭션 속성을 정의하는 것이지만, 동시에 포인트컷의 자동등록에도 사용된다.<br>
+![](스크린샷 2016-09-19 오전 12.25.53.jpg)
+
+위의 그림은 @Transactional 애노테이션을 사용했을 때 어드바이저의 동작방식을 보여준다. TransactionInterceptor는 메서드 이름 패턴을 통해 부여되는 일괄적인 트랜잭션 속성정보 대신 @Transactional 애노테이션의 엘리먼트에서 트랜잭션 속성을 가져오는 AnnotationTransactionAttributeSource를 사용한다. @Transactional은 메서드마다 다르게 설정할 수도 있으므로 매우 유연한 트랜잭션 속성 설정이 가능해진다. <br>
+
+동시에 포인트컷도 @Transactional을 통한 트랜잭션 속성정보를 참조하도록 만든다. @Transactional로 트랜잭션 속성이 부여된 오브젝트라면 포인트컷의 선정 대상이기도 하기 때문이다. 
+
 
 
