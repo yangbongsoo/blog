@@ -48,7 +48,7 @@ develop branch를 중심으로 feature branch들을 통해 기능을 추가하�
 ![](threebranchcase-secondmerge.jpg)
 이제 hotfix3 branch를 merge한 다음이다. 이제 그냥 보기만 해도 꽤 복잡해 보인다. 고작 세 개째인데 말이다. 
 ![](threebranchcase-thirdmerge.jpg)
-프로젝트 멤버가 세 명 이상이면 혹은 동시에 개발 중인 기능이 여러 개라면 브랜치가 세 개 이상으로 생성되는 일은 매우 흔한 상황이다. 그럴 때마다 각자의 코드를 master branch에 반영하면 커밋 내역 그래프가 매울 알아보기 어려울 것이다. 하지만 git rebase 명령을 사용하면 이를 깔끔하게 정리할 수 있다(rebase는 단어 그대로 다시 base를 정하는 것이다).<br>
+프로젝트 멤버가 세 명 이상이면 혹은 동시에 개발 중인 기능이 여러 개라면 브랜치가 세 개 이상으로 생성되는 일은 매우 흔한 상황이다. 그럴 때마다 각자의 코드를 master branch에 반영하면 커밋 내역 그래프가 매우 알아보기 어려울 것이다. 하지만 git rebase 명령을 사용하면 이를 깔끔하게 정리할 수 있다(rebase는 단어 그대로 다시 base를 정하는 것이다).<br>
 
 **git-rebase 구체적인 과정**<br>
 최초 커밋 그래프는 다음과 같다. 
