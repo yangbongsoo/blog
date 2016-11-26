@@ -1,7 +1,7 @@
 # Git-Flow 
 참고 : http://nvie.com/posts/a-successful-git-branching-model/ <br>
 
-이 작업 흐름 모델은 branch 그룹에 역할을 부여하고 각 branch의 상호작용을 엄격하게 제한한다. 이 모델은 branch를 5 가지 역할로 나눈다.<br>
+이 작업 흐름 모델은 branch 그룹에 역할을 부여하고 branch들간의 상호작용을 엄격하게 제한한다. 이 모델은 branch를 5 가지 역할로 나눈다.<br>
 1. develop branch
 2. feature branch
 3. release branch
