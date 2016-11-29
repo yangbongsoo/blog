@@ -169,7 +169,7 @@ cache-period: 웹 브라우저에 캐시 시간 관련 응답 헤더를 전송�
 
 1.x : 모든걸 `<bean> </bean>`으로 <br>
 2.0.x : `<tx:annotation-driven`<br>
-2.5x : @service, @Repository 같이 설정 `<context:component-scan base-package="~"`<br>
+2.5x : @Service, @Repository 같이 설정 `<context:component-scan base-package="~"`<br>
 3.0.x : @Configuration, @Bean <br>
 3.1.x : @Enable~ ex) @EnableTransactionManagement
 
