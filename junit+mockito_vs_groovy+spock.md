@@ -1,4 +1,4 @@
-# JUnit+Mockito vs Groovy+Spock
+# JUnit+Mockito vs Groovy+Spoc# JUnit+Mockito vs Groovy+Spock
 
 **발표 순서**<br>
 1. Spock 기본적인 문법
@@ -156,8 +156,9 @@ Stub 은 테스트 과정에서 일어나는 호출에 대해 지정된 답변�
 
 Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다.<br>
 
-cf) 토비의 스프링에서 stub과 mock 비교<br>
-
+cf) 토비의 스프링에서 Stub과 Mock 비교<br>
+Stub은 테스트 대상 Object의 의존객체로 존재하면서 테스트 동안에 코드가 정상적으로 수행할 수 있도록 돕는다.<br>
+때론 테스트 대상 Object가 의존 Object에게 출력한 값에 관심이 있거나, 의존 Object를 얼마나 사용했는가 하는 커뮤니케이션 행위 자체에 관심이 있을 수 있다. 문제는 이 정보를 테스트에서는 직접 알 수가 없기 때문에 목 객체를 만들어서 사용해야 한다.
 
 ###Spy
 Stub이나 Mock과는 다르게 Spy는 Dummy 객체가 아니다. Spy는 실제 일반 객체를 감싼것이다. Spy를 만들 때는 interface로 만들지 않고 class로 만들어야 한다. 
