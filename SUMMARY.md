@@ -18,7 +18,6 @@
 * [JUnit+Mockito vs Groovy+Spock](junit+mockito_vs_groovy+spock.md)
 * [Understanding The Tomcat Classpath](understanding_the_tomcat_classpath.md)
 * [Tomcat Configuration](tomcat_configuration.md)
-* [네이버를 만든 기술, 자바편](b124_c774_bc84_b97c_b9cc_b4e0_ae30_c2202c_c790_bc14_d3b8.md)
 * [객체지향의 사실과 오해](ac1d_ccb4_c9c0_d5a5_c758_c0ac_c2e4_acfc_c624_d574.md)
 * [Effective Java](effective_java.md)
     * [객체의 생성과 삭제](ac1d_ccb4_c758_c0dd_c131_acfc_c0ad_c81c.md)
