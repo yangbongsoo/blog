@@ -2,6 +2,7 @@
 
 * [Introduction](README.md)
 * [자바 병렬 프로그래밍\(작업중\)](자바-병렬-프로그래밍작업중.md)
+    * [1부 기본 원리](1부-기본-원리.md)
 * [Kakao인턴](kakaoc778_d134.md)
     * [클린코더스 강의 정리](d074_b9b0_cf54_b354_c2a4_ac15_c758_c815_b9ac.md)
     * [Spring 작업 이슈](spring_c791_c5c5_c774_c288.md)
