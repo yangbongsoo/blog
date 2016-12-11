@@ -43,8 +43,9 @@
     * [IoC 컨테이너와 DI](ioc_cee8_d14c_c774_b108_c640_di.md)
 * [Java의 정석](javac758_c815_c11d.md)
 * [실용주의프로그래머\/익스트림프로그래밍](c2e4_c6a9_c8fc_c758_d504_b85c_adf8_b798_ba38_c775_c2a4_d2b8_b9bc_d504_b85c_adf8_b798_bc0d.md)
-* [What \/ Why Living Documentation](what__why__how_living_documentation.md)
+* [애자일적용후기](c560_c790_c77c_c801_c6a9_d6c4_ae30.md)
 * [객체지향과 디자인패턴](ac1d_ccb4_c9c0_d5a5_acfc_b514_c790_c778_d328_d134.md)
+* [What \/ Why Living Documentation](what__why__how_living_documentation.md)
 * [JUnit+Mockito vs Groovy+Spock](junit+mockito_vs_groovy+spock.md)
 * [Understanding The Tomcat Classpath](understanding_the_tomcat_classpath.md)
 * [Pinpoint](pinpoint.md)
@@ -59,7 +60,5 @@
 * [Amazon Cognito\(Android-DynamoDB\)](android-dynamodb.md)
     * [DynamoDB](dynamodb2.md)
     * [Android적용 후기](androidc801_c6a9_d6c4_ae30.md)
-* [애자일적용후기](c560_c790_c77c_c801_c6a9_d6c4_ae30.md)
 * [DB](db.md)
-* [자료구조&알고리즘](c790_b8cc_ad6c_c87026_c54c_ace0_b9ac_c998.md)
 
