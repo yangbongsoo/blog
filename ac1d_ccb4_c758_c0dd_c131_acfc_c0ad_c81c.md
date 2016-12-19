@@ -438,7 +438,7 @@ public class Person{
 ```
 이렇게 개선된 Person 클래스는 Calendar, TimeZone 그리고 Date 객체를 클래스가 초기화 될 때 한 번만 만든다. 
 
-JDK 1.5부터는 쓸데없이 객체르 만들 새로운 방법이 더 생겼다. **autoboxing**을 통해 자바의 기본 자료형과 그 객체 표현형을 섞어 사용할 수 있다. 둘 간의 변환은 자동으로 이뤄진다.
+JDK 1.5부터는 쓸데없이 객체를 만들 새로운 방법이 더 생겼다. **autoboxing**을 통해 자바의 기본 자료형과 그 객체 표현형을 섞어 사용할 수 있다. 둘 간의 변환은 자동으로 이뤄진다.
 ```
 public static void main(String[] args){
     Long sum = 0L;
