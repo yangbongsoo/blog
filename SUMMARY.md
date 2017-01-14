@@ -4,7 +4,7 @@
 * [자바 병렬 프로그래밍\(작업중\)](자바-병렬-프로그래밍작업중.md)
     * [1부 기본 원리](1부-기본-원리.md)
 * [클린코더스 강의 정리](d074_b9b0_cf54_b354_c2a4_ac15_c758_c815_b9ac.md)
-* [Spring 작업 이슈\(카카오 인턴\)](spring_c791_c5c5_c774_c288.md)
+* [Spring 작업 이슈](spring_c791_c5c5_c774_c288.md)
 * [Java8 in Action](java8_in_action.md)
     * [Part1 기초](part1.md)
     * [Part2-1 함수형 데이터 처리](part2_d568_c218_d615_b370_c774_d130_cc98_b9ac.md)
