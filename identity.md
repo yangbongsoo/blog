@@ -8,13 +8,23 @@ Single Sign On을 지원하기 위한 프로토콜이나 방법은 여러가지�
 그중 대표적인 방법으로 CAS,SAML,OAuth등이 있는데, CAS는 쿠기를 기반으로 하기 때문에 같은 도메인명 (xxx.domain.com yyy.domain.com) 사이에서만 SSO가 가능하다. (그만큼 구현도 쉽다.) OAuth는 현재 B2C쪽에 많이 사용되는 프로토콜이고, 그리고 마지막으로 SAML 있다. cross domain간 SSO 구현이 가능하며, OAuth 만큼이나 많이 사용되고 있다.
 
 ###Facebook OAuth
+![](/developerfacebook.PNG)
 
 ![](apitokenflow.PNG)
-![](apioauthflow.PNG)
-![](/fblogin.PNG)
-![](/fbscope.PNG)
+
+![](/oauthsetting.PNG)
+
 ![](/fbsdk.PNG)
-                                                                                                                                                                                                                                                                               
+
+![](apioauthflow.PNG)
+
+![](/fblogin.PNG)
+
+![](/fbscope.PNG)
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 ###원문
 위키 : https://ko.wikipedia.org/wiki/%ED%86%B5%ED%95%A9_%EC%9D%B8%EC%A6%9D 
 조대협 블로그 : http://bcho.tistory.com/755
