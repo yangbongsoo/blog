@@ -38,6 +38,7 @@ Shibboleth - java stack으로 구현이 되어 있으며, terracotta를 이용�
 WSO2 identity server - 앞에서도 언급하였듯이, 확장성에 문제가 있는 것으로 보이며, 자체 OSGi 컨테이너인 carbon 엔진 위에서 동작한다. SAML 뿐만 아니라 OAuth,STS 서비스를 추가 지원하며, Provisioning protocol인 SCIM도 함께 지원한다. 오픈 소스이지만, 제품 완성도가 매우 높고, 사용이 매우 쉽다. (모니터링,관리 기능등이 강점)
 Open AM - Sun IDM을 모태로 하여, 현재 오픈소스화 되었다. 아무래도 enterprise 제품을 기반으로 하다 보니 복잡도가 상대적으로 높다.
 CAS - TBD
+
 **[원문]**
 
 위키 : https://ko.wikipedia.org/wiki/%ED%86%B5%ED%95%A9_%EC%9D%B8%EC%A6%9D 
