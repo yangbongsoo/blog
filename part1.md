@@ -410,7 +410,8 @@ Comparator<Apple> c = (a1,  a2) -> a1.getWeight().compareTo(a2.getWeight());
 //형식 추론한 다른 예제
 List<Apple> greenApples = filter(inventory, a -> “green”.equals(a.getColor()));
 ```
-**지역 변수 사용**<br>
+**지역 변수 사용**
+
 람다 표현식에서는 자유 변수(파라미터로 넘겨진 변수가 아니라 외부에서 정의된 변수)를 활용할 수 있다. 이와 같은 동작을 람다 캡쳐링이라고 부른다. 
 ```java
 int portNumber = 123;
