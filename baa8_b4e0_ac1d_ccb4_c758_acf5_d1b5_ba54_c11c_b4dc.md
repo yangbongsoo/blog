@@ -15,14 +15,15 @@ Object에 정의된 비-final 메서드(equals, hashCode, toString, clone, final
 
 **equals를 재정하는 것이 바람직할 때** : 객체 동일성(object equality)이 아닌 논리적 동일성(logical equality)의 개념을 지원하는 클래스일 때, 그리고 상위 클래스의 equals가 하위 클래스의 필요를 충족하지 못할 때 재정의해야 한다. 
 
-**equals 메서드는 동치 관계를 구현한다.**<br>
+**equals 메서드는 동치 관계를 구현한다.**
 
-**반사성:** null이 아닌 참조 x가 있을 때, x.equals(x)는 true를 반환한다.<br> 모든 객체는 자기 자신과 같아야 한다는 뜻이다. 
+**반사성:** null이 아닌 참조 x가 있을 때, x.equals(x)는 true를 반환한다.
+모든 객체는 자기 자신과 같아야 한다는 뜻이다. 
 
-**대칭성:** null이 아닌 참조 x와 y가 있을 때, x.equals(y)는 y.equals(x)가 true일 때만 true를 반환한다. <br>
+**대칭성:** null이 아닌 참조 x와 y가 있을 때, x.equals(y)는 y.equals(x)가 true일 때만 true를 반환한다.
 두 객체에게 서로 같은지 물으면 같은 답이 나와야 한다는 것이다. 
 
-```
+```java
 //대칭성 위반 클래스!!
 public final class CaseInsensitiveString{
     private final String s;
@@ -47,7 +48,7 @@ public final class CaseInsensitiveString{
 }
 ```
 
-```
+```java
 CaseInsensitiveString cis = new CaseInsensitiveString("Polish");
 String s = "polish";
 ```
@@ -55,7 +56,7 @@ String s = "polish";
 **cis.equals(s)는 True**를 반환할 것이다. 하지만 **s.equals(cis)는 false**를 반환한다. 왜냐하면 String은 CaseInsensitiveString이 뭔지 모르기 때문이다. 
 
 그러므로 이 문제를 방지하려면 CaseInsensitiveString의 equals 메서드가 String 객체와 상호작용하지 않도록 해야 한다. 
-```
+```java
 @Override
 public boolean equals(Object o){
     return o instanceof CaseInsensitiveString &&
@@ -63,11 +64,11 @@ public boolean equals(Object o){
 }
 ```
 
-**추이성:** null이 아닌 참조 x,y,z가 있을 때, x.equals(y)가 true이고 y.equals(z)가 true이면 x.equals(z)도 true이다. <br>
+**추이성:** null이 아닌 참조 x,y,z가 있을 때, x.equals(y)가 true이고 y.equals(z)가 true이면 x.equals(z)도 true이다.
 
 상위 클래스에 없는 새로운 값 컴포넌트를 하위 클래스에 추가하는 상황을 생각해 보자. 다시 말해 equals가 비교할 새로운 정보를 추가한다는 뜻이다. 
 
-```
+```java
 public class Point{
     private final int x;
     private final int y;
@@ -89,7 +90,7 @@ public class Point{
 
 ```
 이 클래스를 계승하여, 색상 정보를 추가해보자. 
-```
+```java
 public class ColorPoint extends Point{
     private final Color color; 
     
@@ -100,7 +101,7 @@ public class ColorPoint extends Point{
 }
 ```
 **ColorPoint 클래스의 equals 구현은 어떻게 해야 할까?** 구현을 생략한다면 Point의 equals가 그대로 상속되어서 추가된 색상 정보는 비교하지 못한다. 
-```
+```java
 //대칭성 위반 !!
 @Override
 public boolean equals(Object o){
@@ -112,7 +113,7 @@ public boolean equals(Object o){
 ```
 
 위와 같이 equals를 구현했다면, 아래 코드에서 대칭성이 어떻게 위반되는것이 명확하게 확인된다.
-```
+```java
 Point p = new Point(1,2);
 ColorPoint cp = new ColorPoint(1,2,Color.RED);
 
@@ -121,7 +122,7 @@ cp.equals(p); // false 왜냐면 ColorPoint의 equals에서 color가 같을 수�
 ```
 
 그렇다면 ColorPoint의 equals를 수정해서 Point 객체와 비교할때는 색상 정보를 무시하도록 하면 어떻게 될까? 
-```
+```java
 //추이성 위반!!
 @Override
 public boolean equals(Object o){
@@ -137,18 +138,18 @@ public boolean equals(Object o){
 }
 ```
 이렇게 하면 대칭성은 보존되지만 추이성은 깨진다. 
-```
+```java
 ColorPoint p1 = new ColorPoint(1, 2, Color.RED);
 Point p2 = new Point(1, 2);
 ColorPoint p3 = new ColorPoint(1, 2, Color.BLUE);
 ```
 p1.equals(p2)와 p2.equals(p3)는 모두 true를 반환하지만 p1.equals(p3)는 false를 반환한다. 
 
-**이 문제의 해결책은 무엇인가?**<br>
+**이 문제의 해결책은 무엇인가?**
 사실 이것은 객체 지향 언어에서 동치 관계를 구현할 때 발생하는 본질적 문제다. `객체 생성가능 클래스를 계승하여 새로운 값 컴포넌트를 추가하면서 equals 규악을 어기지 않을 방법은 없다.`
 
 equals 메서드를 구현할 때 instanceof 대신 getClass 메서드를 사용하면 기존 클래스를 확장하여 새로운 값 컴포넌트를 추가하더라도 equals 규약을 준수할 수 있다?
-```
+```java
 //리스코프 대체 원칙 위반
 @Override public boolean equals(Object o){
     if(o == null || o.getClass() != getClass())
@@ -158,7 +159,7 @@ equals 메서드를 구현할 때 instanceof 대신 getClass 메서드를 사용
 }
 ```
 이렇게 하면 같은 클래스의 객체만 비교하게 된다. 하지만 아래의 예제를 보면 올바르지 않다는 것을 알 수 있다. 
-```
+```java
 //단위 원 상의 모든 점을 포함하도록 unitCircle 초기화 
 private static final Set<Point> uniCircle;
 static{
@@ -173,7 +174,7 @@ public static boolean onUnitCircle(Point p){
     return unitCircle.contatins(p); 
 }
 ```
-```
+```java
 public class CounterPoint extends Point{
     private static final AtomicInteger counter = new AtomicInteger();
     
@@ -190,7 +191,7 @@ public class CounterPoint extends Point{
 이는 onUnitCircle 메서드가 이용하는 HashSet 같은 컬렉션이 객체 포함여부를 판단할 때 equals를 사용하기 때문이며, CounterPoint객체는 어떤 Point객체와도 같을 수 없기 때문이다. 
 
 객체 생성 가능 클래스를 계승해서 새로운 값 컴포넌트를 추가할 만족스러운 방법이 없긴 하지만, 문제를 깔끔하게 피할 수 있는 방법은 하나 있다. **Point를 계승해서 ColorPoint를 만드는 대신, ColorPoint안에 private Point 필드를 두고, public 뷰(view) 메서드를 하나 만드는 것이다.** 이 뷰 메서드는 ColorPoint가 가리키는 위치를 Point 객체로 반환한다. 
-```
+```java
 //equals 규약을 위반하지 않으면서 값 컴포넌트 추가 
 public class ColorPoint{
     private final Point point; 
@@ -226,12 +227,12 @@ abstract로 선언된 클래스와 값 필드를 추가하는 것은 equals 규�
 
 신뢰성이 보장되지 않는 자원들을 비교하는 equals를 구현하는 것을 삼가라. 예를 들어 java.net.URL의 equals 메서드는 URL에 대응되는 호스트의 IP 주소를 비교하여 equals의 반환값을 결정한다. 문제는 호스트명을 IP 주소로 변환하려면 네트워크에 접속해야 하므로, 언제나 같은 결과가 나온다는 보장이 없다는 것이다. 
 
-**Null에 대한 비 동치성:** null이 아닌 참조 x에 대해서, x.equals(null)은 항상 false이다.<br>
+**Null에 대한 비 동치성:** null이 아닌 참조 x에 대해서, x.equals(null)은 항상 false이다.
 
 instanceof 연산자는 첫 번째 피연산자가 null이면 두 번째 피연산자의 자료형에 상관없이 무조건 false를 반환하므로 따로 null인지 검사할 필요없다.
 
 **String클래스의 equals 메서드**
-```
+```java
 public boolean equals(Object anObject){
     if(this == anObject){ //1번 
         return true; 
@@ -277,7 +278,7 @@ hashCode 일반 규약
 `protected native Object clone() throws CloneNotSupportedException;`
 
 cf) native 키워드는 자바가 아닌 언어(보통 C나 C++)로 구현한 후 자바에서 사용하려고 할때 이용하는 키워드이다. 자바로 구현하기 까다로운 것을 다른 언어로 구현해서, 자바에서 사용하기 위한 방법이다. 
-```
+```java
 //Clone 사용 예시 만들어봤다. 
 public class CloneTest implements Cloneable{
     private final int a;
@@ -303,7 +304,7 @@ public class CloneTest implements Cloneable{
 }
 
 ```
-```
+```java
 public static void main(String[] args){
     CloneTest clone1 = new CloneTest();
     CloneTest clone2 = clone1.clone(); //복사 
@@ -311,7 +312,8 @@ public static void main(String[] args){
 ```
 Cloneable 인터페이스는 복제를 허용하는 객체라는 것을 알리는 목적으로 사용하는 믹스인(Mixin) 인터페이스이다.(Cloneable 인터페이스는 아무런 추상 메서드도 가지고 있지 않다.)
 
-믹스인(Mixin)이란 "원래 타입"에 어떤 부가적인 행위를 추가로 구현했다는 것을 나타내는 타입.<br>ex) Comparable 인터페이스 
+믹스인(Mixin)이란 "원래 타입"에 어떤 부가적인 행위를 추가로 구현했다는 것을 나타내는 타입.
+ex) Comparable 인터페이스 
 
  Object 클래스의 protected 메서드인 clone을 사용할 것인지의 여부를 결정한다. 어떤 클래스에서 Cloneable 인터페이스를 implements하고 clone 메서드를 호출하면, 그 클래스 객체의 복제본을 만들어 반환한다. 이때 복제 객체는 원본 객체와 같은 필드를 가지며, 필드의 값도 복사된다. 
  
@@ -328,7 +330,7 @@ Cloneable 인터페이스는 복제를 허용하는 객체라는 것을 알리�
  compareTo 규약을 준수하지 않는 클래스는 비교연산에 기반한 클래스들을 오동작시킬 수 있다. 이런 클래스로는 TressSet이나 TreeMap 같은 정렬된 컬렉션과, Arrays와 Collections같은 유틸리티 클래스들이 있다. 탐색과 정렬 알고리즘을 포함하는 클래스들이다. 
  
  **저자의 강력한 권고사항 :** `(x.compareTo(y) == 0) == (x.equals(y)) `
- <br>일반적으로, Comparable 인터페이스를 구현하면서 이 조건을 만족하지 않는 클래스는 반드시 그 사실을 명시해야 한다. 이렇게 적을 것을 추천한다. "주의: 이 클래스의 객체들은 equals에 부합하지 않는 자연적 순서를 따른다."
+일반적으로, Comparable 인터페이스를 구현하면서 이 조건을 만족하지 않는 클래스는 반드시 그 사실을 명시해야 한다. 이렇게 적을 것을 추천한다. "주의: 이 클래스의 객체들은 equals에 부합하지 않는 자연적 순서를 따른다."
  
- ex) BigDecimal 클래스<br>
+ ex) BigDecimal 클래스
  이 클래스의 compareTo 메서드는 equals에 부합하지 않는다. HashSet 객체를 만들어 거기에 new BigDecimal("1.0")과 new BigDecimal("1.00")로 만든 객체들을 추가해 보자. 그러면 집합에는 두 개의 객체가 추가된다. 이 두 객체를 equals로 비교하면 서로 다르다고 판정되기 때문이다. 하지만 HashSet 대신 TreeSet을 사용하면 집합에는 하나의 객체만 삽입된다. compareTo로 비교하면 그 두 객체는 같은 객체이기 때문이다. 
