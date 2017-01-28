@@ -4,7 +4,7 @@
 ###규칙1 : 생성자 대신 정적 팩터리 메서드를 사용할 수 없는지 생각해보라
 
 클래스를 통해 객체를 만드는 일반적인 방법(public 생성자 이용)말고 또 다른 방법이 있다. 바로 **public static factory method**를 만드는 것이다. 
-```
+```java
 public static Boolean valueOf(boolean b){
     return b ? Boolean.TRUE : Boolean.FALSE;
 }
@@ -27,7 +27,7 @@ JDBC와 같은 서비스 제공자 프레임워크의 근간을 이루는 것이
 4. 서비스 제공자 인터페이스(옵션) : Driver (서비스 제공자가 구현하고 서비스 구현체의 객체를 생성하기 위한 것이다. 서비스 제공자 인터페이스가 없는 경우 구현체는 클래스 이름으로 등록되며 자바의 리플렉션 기능을 통해 객체로 만들어진다.)
 
 
-```
+```java
 Connection conn = null;  
 
 try{
@@ -41,7 +41,7 @@ try{
     ...
 ```
 
-```
+```java
 //서비스 제공자 인터페이스의 대략적인 모습
 
 //서비스 인터페이스 ex)Connection
@@ -88,11 +88,11 @@ public class Services{
 ```
 
 **네 번째 장점은, 형인자 자료형(parameterized type)객체를 만들 때 편하다는 점이다.**
-```
+```java
 Map<String, List<String>> m = new HashMap<String, List<String>>();
 ```
 이처럼 자료형 명세를 중복하면, 형인자가 늘어남에 따라 길고 복잡한 코드가 만들어진다. 하지만 정적 팩토리 메서드를 사용하면 컴파일러가 형인자를 스스로 알아내도록 할 수 있다. 이런 기법을 자료형 유추라고 부른다.
-```
+```java
 public static <K, V> HashMap<K, v> newInstance(){
     return new HashMap<K,V>();
 }
@@ -101,7 +101,7 @@ public static <K, V> HashMap<K, v> newInstance(){
 Map<String, List<String>> m = HashMap.newInstance(); 
 ```
 JDK 1.7부터는 생성자를 호출할 때도 자료형 유추를 사용할 수 있다.
-```
+```java
 Map<String, List<String>> myMap = new HashMap<>();
 ```
 
@@ -129,9 +129,9 @@ newType : newInstance와 같지만, 반환될 객체의 클래스와 다른 클�
 ###규칙2 : 생성자 인자가 많을 때는 Builder 패턴 적용을 고려하라
 선택적 인자가 많은 상황에서 어떤 생성자나 정적 팩토리 메서드가 적합할까?
 
-**점층적 생성자 패턴**<br>
+**점층적 생성자 패턴**
 필수 인자만 받는 생성자를 하나 정의하고, 선택적 인자를 하나 받는 생성자를 추가하고 거기에 두개의 선택적 인자를 받는 생성자를 추가하는 식으로 생성자들을 쌓아 올리듯 추가하는 것이다.
-```
+```java
 public class NutritionFacts{
     private final int servingSize; //필수
     private final int servings; //필수
@@ -170,8 +170,8 @@ public class NutritionFacts{
 ```
 이 방식은 인자 수가 늘어나면 클라이언트 코드를 작성하기가 어려워지고, 무엇보다 읽기 어려운 코드가 되고 만다. 대체 그 많은 인자가 무슨 값인지 알 수 없게 되고, 그 의미를 알려면 인자를 주의깊게 세어보아야 한다. 
 
-**자바빈 패턴**<br>
-```
+**자바빈 패턴**
+```java
 public class NutritionFacts{
     //필드는 기본값으로 초기화(기본값이 있는 경우만)
     private int servingSize = -1;
@@ -193,7 +193,7 @@ public class NutritionFacts{
 }
 ```
 이 패턴에는 점층적 생성자 패턴에 있던 문제는 없다. 작성해야 하는 코드의 양이 조금 많아질 수는 있지만 객체를 생성하기도 쉬우며, 읽기도 좋다. 
-```
+```java
 NutritionFacts cocaCola = new NutritionFacts();
 cocaCola.setServingSize(240);
 cocaCola.setServings(8);
@@ -203,11 +203,11 @@ cocaCola.setCarbohydrate(27);
 ```
 그러나 자바빈 패턴에는 심각한 단점이 있다. 1회의 함수 호출로 객체 생성을 끝낼 수 없으므로, 객체 일관성이 일시적으로 깨질 수 있다는 것이다. 또한 자바빈 패턴으로는 변경 불가능 클래스를 만들 수 없다는 것이다. 
 
-**빌더(Builder)패턴**<br>
+**빌더(Builder)패턴**
 점층적 생성자 패턴의 안전성과 자바빈 패턴의 가독성을 결합한 패턴이다. 
 
 필요한 객체를 직접 생성하는 대신, 클라이언트는 먼저 필수 인자들을 생성자에(또는 정적 팩토리 메서드에) 전부 전달하여 빌더 객체(builder object)를 만든다. 그런 다음 빌더 객체에 정의된 설정 메서드들을 호출하여 선택적 인자들을 추가해 나간다. 그리고 마지막으로 아무런 인자 없이 build 메서드를 호출하여 변경 불가능 객체를 만드는 것이다. 빌더 클래스는 빌더가 만드는 객체 클래스의 정적 멤버 클래스로 정의한다.
-```
+```java
 public class NutritionFacts {
 
 	private final int servingSize;
@@ -269,7 +269,7 @@ public class NutritionFacts {
 }
 ```
 NutritionFacts 객체가 변경 불가능하다는 사실, 그리고 모든 인자의 기본값이 한곳에 모여 있다는 것에 유의해라. 빌더에 정의된 설정 메서드는 빌더 객체 자신을 반환하므로, 설정 메서드를 호출하는 코드는 계속 이어서 쓸 수 있다.
-```
+```java
 NutirtionFacts cocaCola = new NutritionFacts.Builder(240,8).calories(100)
                                             .sodium(35).carbohydrate(27).build();
 ```
@@ -282,7 +282,7 @@ NutirtionFacts cocaCola = new NutritionFacts.Builder(240,8).calories(100)
 JDK 1.5 이전에는 싱글턴을 구현하는 방법이 두 가지였다. 두 방법 다 생성자는 private로 선언하고, 싱글턴 객체는 정적(static) 멤버를 통해 이용한다. 
 
 첫 번째 방법 - 필드
-```
+```java
 public class Elvis {
 	public static final Elvis INSTANCE = new Elvis();  //public 필드로 선언
 
@@ -302,7 +302,7 @@ public class Elvis {
 ```
 
 두 번째 방법 - 메서드
-```
+```java
 public class Elvis {
 	private static final Elvis INSTANCE; //private 필드로 선언
 
@@ -327,7 +327,7 @@ public class Elvis {
 }
 ```
 private 생성자이기 때문에 클라이언트가 이 상태를 변경할 방법은 없지만 주의할 것이 하나 있다. `AccessibleObject.setAccessible`메서드의 도움을 받아 권한을 획득한 클라이언트는 리플렉션(reflection)기능을 통해 private 생성자를 호출 할 수 있다는 것이다.
-```
+```java
 import java.lang.relfect.Constructor;
 
 public class PrivateInvoker{
@@ -348,7 +348,7 @@ class Private{
 리플렉션 기능을 이용하면 메모리에 적재된 클래스의 정보를 가져오는 프로그램을 작성할 수 있다. Class 객체가 주어지면, 해당 객체가 나타내는 클래스의 생성자, 메서드, 필드 등을 나타내는 Constructor, Method, Field 객체들을 가져올 수 있는데, 이 객체들을 사용하면 클래스의 멤버 이름이나 필드 자료형, 메서드 시그너처 등의 정보들을 얻어낼 수 있다.
 
 싱글턴 클래스를 직렬화 가능(Serializable) 클래스로 만들려면 클래스 선언에 implements Serializable을 추가하는 것으로는 부족하다. 싱글턴 특성을 유지하려면 모든 필드를 transient로 선언하고 readResolve 메서드를 추가해야 한다. 그렇지 않으면 serialize된 객체가 역직렬화될 때마다 새로운 객체가 생기게 된다. 
-```
+```java
 //싱글턴 상태를 유지하기 위한 readResolve 구현
 private Object readResolve(){
     //동일한 Elvis 객체가 반환되도록 하는 동시에, 가짜 Elvis 객체는
@@ -357,8 +357,8 @@ private Object readResolve(){
 }
 ```
 
-**JDK 1.5부터는 싱글턴을 구현할 때 새로운 방법을 사용할 수 있다. 원소가 하나뿐인 enum 자료형을 정의하는 것이다.**<br>
-```
+**JDK 1.5부터는 싱글턴을 구현할 때 새로운 방법을 사용할 수 있다. 원소가 하나뿐인 enum 자료형을 정의하는 것이다.**
+```java
 public enum Elvis{
     INSTNACE;
     
@@ -379,20 +379,19 @@ public static void main(String[] args){
 
 cf) 유틸리티 클래스 외에도 정적 메서드나 필드만 모은 클래스를 만들고 싶을 때 사용
 
-
 ###규칙5 : 불필요한 객체는 만들지 말라 
-```
+```java
 String s = new String("abc"); 
 ```
 위의 문장은 실행될 때마다 String 객체를 만든다 만일 위의 문장이 순환문이나 자주 호출되는 메서드 안에 있다면, 수백만 개의 String 객체가 쓸데없이 만들어질 것이다. 
 
-```
+```java
 String s = "abc";
 ```
 이렇게 하면 실행할 때마다 객체를 만드는 대신, 동일한 String 객체를 사용한다. 게다가 같은 가상 머신에서 실행되는 모든 코드가 해당 객체를 재사용하게 된다.
 
 Person 클래스는 어떤 사람이 베이비 붐 세대에 속하는지 아닌지를 알려주는 isBabyBoomer 메서드(1946년과 1964년 사이에 태어난 사람이면 참을 반환)를 갖고 있다.
-```
+```java
 public class Person{
     private final Date birthDate;
     
@@ -413,7 +412,7 @@ public class Person{
 }
 ```
 위에 보인 isBabyBoomer 메서드는 호출될 때마다 Calendar 객체 하나, TimeZone 객체 하나, 그리고 Date 객체 두 개를 쓸데없이 만들어 댄다. 이렇게 비효율적인 코드는 정적 초기화 블록을 통해 개선하는 것이 좋다. 
-```
+```java
 public class Person{
     private final Date birthDate;
 
@@ -443,7 +442,7 @@ public class Person{
 이렇게 개선된 Person 클래스는 Calendar, TimeZone 그리고 Date 객체를 클래스가 초기화 될 때 한 번만 만든다. 
 
 JDK 1.5부터는 쓸데없이 객체를 만들 새로운 방법이 더 생겼다. **autoboxing**을 통해 자바의 기본 자료형과 그 객체 표현형을 섞어 사용할 수 있다. 둘 간의 변환은 자동으로 이뤄진다.
-```
+```java
 public static void main(String[] args){
     Long sum = 0L;
     for(long i = 0; i< Integer.MAX_VALUE; i++){
@@ -454,14 +453,13 @@ public static void main(String[] args){
 ```
 sum은 long이 아니라 Long으로 선언되어 있는데 그 덕에 long i가 Long sum에 더해질때마다 하나씩 객체가 생긴다. 
 
-
 ###규칙6 : 유효기간이 지난 객체 참조는 폐기하라 
 **스택이 커졌다가 줄어들면서** 제거한 객체들을 GC가 처리하지 못하는 경우가 있다. 첨자 값이 size보다 작은 곳에 있는 요소들은 실제로 쓰이는 참조들이지만, 나머지 영역에 있는 참조들은 그렇지 않다. 문제는 남아있는 객체를 통해 참조되는 다른 객체들도 쓰레기 수집에서 제외된다. 
 ![](stack.PNG)
 
 
 이런 문제는 간단히 고칠 수 있다. 쓸 일 없는 객체 참조는 무조건 null로 만드는 것이다.
-```
+```java
 public Object pop(){
     if(size ==0)
         throw new EmptyStackException();
@@ -476,22 +474,22 @@ public Object pop(){
 **캐시도 메모리 누수가 흔히 발생하는 장소다. 메모리 누수가 흔히 발견되는 또 한곳은 리스너 등의 역호출자(callback)다.**
 
 ###규칙7 : 종료자 사용을 피하라 
-종료자의 한 가지 단점은, 즉시 실행되리라는 보장이 전혀 없다는 것이다(JVM은 종료자를 천천히 실행한다).<br>
+종료자의 한 가지 단점은, 즉시 실행되리라는 보장이 전혀 없다는 것이다(JVM은 종료자를 천천히 실행한다).
 
-System.gc나 System.runFinalization 같은 메서드에 마음이 흔들리면 곤란하다. 이런 메서드들은 종료자가 실행될 가능성을 높여주긴 하지만 보장하진 않는다. 종료자 실행을 보장하는 메서드들은 System.runFinalizersOnExit와 Runtime.runFinalizersOnExit 뿐인데, 이들 메서드는 심각한 결함을 갖고 있어서 이미 명세에서 폐기되었다.<br>
+System.gc나 System.runFinalization 같은 메서드에 마음이 흔들리면 곤란하다. 이런 메서드들은 종료자가 실행될 가능성을 높여주긴 하지만 보장하진 않는다. 종료자 실행을 보장하는 메서드들은 System.runFinalizersOnExit와 Runtime.runFinalizersOnExit 뿐인데, 이들 메서드는 심각한 결함을 갖고 있어서 이미 명세에서 폐기되었다.
 
-아직도 종료자 사용을 피해야겠다는 확신이 들지 않는다면 이런 문제도 한번 고려해보자. 종료 처리 도중에 무점검 예외가 던져지면, 해당 예외는 무시되며 종료 과정은 중단된다. 이런 예외는 객체의 상태를 망가뜨릴 수 있다. 일반적으로는 무점검 예외가 발생하면 스레드는 종료되고 스택 추적 정보가 표시되지만 종료자 안에서는 아니다. 경고 문구조차 출력되지 않는다.<br>
+아직도 종료자 사용을 피해야겠다는 확신이 들지 않는다면 이런 문제도 한번 고려해보자. 종료 처리 도중에 무점검 예외가 던져지면, 해당 예외는 무시되며 종료 과정은 중단된다. 이런 예외는 객체의 상태를 망가뜨릴 수 있다. 일반적으로는 무점검 예외가 발생하면 스레드는 종료되고 스택 추적 정보가 표시되지만 종료자 안에서는 아니다. 경고 문구조차 출력되지 않는다.
 
-그렇다면 파일이나 스레드처럼 명시적으로 반환하거나 삭제해야 하는 자원을 포함하는 객체의 클래스는 어떻게 작성해야 하는 것일까? 그냥 **명시적인 종료 메서드(termination method)를 하나 정의**하고, 더 이상 필요하지 않는 객체라면 클라이언트가 해당 메서드를 호출하도록 하라. 한 가지 명심할 것은 종료 여부를 객체 안에 보관해야 한다는것. 즉, 유효하지 않은 객체임을 표시하는 private 필드를 하나 두고, 모든 메서드 맨 앞에 해당 필드를 검사하는 코드를 두어 이미 종료된 객체에 메서드를 호출하면 IllegalStateException이 던져지도록 해야 한다는 것이다. 이런 명시적 종료 메서드의 예로는 OutputStream이나 InputStream, java.sql.Connection에 정의된 close 메서드가 있다. <br>
+그렇다면 파일이나 스레드처럼 명시적으로 반환하거나 삭제해야 하는 자원을 포함하는 객체의 클래스는 어떻게 작성해야 하는 것일까? 그냥 **명시적인 종료 메서드(termination method)를 하나 정의**하고, 더 이상 필요하지 않는 객체라면 클라이언트가 해당 메서드를 호출하도록 하라. 한 가지 명심할 것은 종료 여부를 객체 안에 보관해야 한다는것. 즉, 유효하지 않은 객체임을 표시하는 private 필드를 하나 두고, 모든 메서드 맨 앞에 해당 필드를 검사하는 코드를 두어 이미 종료된 객체에 메서드를 호출하면 IllegalStateException이 던져지도록 해야 한다는 것이다. 이런 명시적 종료 메서드의 예로는 OutputStream이나 InputStream, java.sql.Connection에 정의된 close 메서드가 있다. 
 
-이런 명시적 종료 메서드는 보통 try-finally 문과 함께 쓰인다. 객체 종료를 보장하기 위해서다. 명시적 종료 메서드를 finally 문 안에서 호출하도록 해 놓으면 객체 사용 과정에서 예외가 던져져도 종료 메서드가 실행되도록 만들 수 있다.<br>
+이런 명시적 종료 메서드는 보통 try-finally 문과 함께 쓰인다. 객체 종료를 보장하기 위해서다. 명시적 종료 메서드를 finally 문 안에서 호출하도록 해 놓으면 객체 사용 과정에서 예외가 던져져도 종료 메서드가 실행되도록 만들 수 있다.
 
-종료자가 적합한 곳이 두 군데 정도 있는데 하나는, 명시적 종료 메서드 호출(close)을 잊은 경우에 대비하는 안전망으로서의 역할이다. 하지만 종료자는 그런 자원을 발견하게 될 경우 반드시 경고 메시지를 로그로 남겨야 한다.<br>
+종료자가 적합한 곳이 두 군데 정도 있는데 하나는, 명시적 종료 메서드 호출(close)을 잊은 경우에 대비하는 안전망으로서의 역할이다. 하지만 종료자는 그런 자원을 발견하게 될 경우 반드시 경고 메시지를 로그로 남겨야 한다.
 
-두 번째 경우는 네이티브 피어(native peer)와 연결된 객체를 다룰 때다.네이티브 피어는 일반 자바 객체가 네이티브 메서드를 통해 기능 수행을 위임하는 네이티브 객체를 말한다. 네이티브 피어가 중요한 자원을 점유하고 있지 않다고 가정한다면, 종료자는 그런 객체의 반환에 걸맞다.<br>
+두 번째 경우는 네이티브 피어(native peer)와 연결된 객체를 다룰 때다.네이티브 피어는 일반 자바 객체가 네이티브 메서드를 통해 기능 수행을 위임하는 네이티브 객체를 말한다. 네이티브 피어가 중요한 자원을 점유하고 있지 않다고 가정한다면, 종료자는 그런 객체의 반환에 걸맞다.
 
 굳이 종료자를 사용해야 하는 드문 상황에 처했다면 super.finalize 호출은 잊지 말자. "종료자 연결(finalizer chaining)"이 자동으로 이루어지지 않는다. 만일 (Object가 아닌) 어떤 클래스가 종료자를 갖고 있고 하위 클래스가 해당 메서드를 재정의하는 경우, 하위 클래스의 종료자는 상위 클래스의 종료자를 명시적으로 호출해야 한다. 이때 하위 클래스의 상태는 try 블록 안에서 종료시켜야 하고, 상위 클래스 종료자는 finally 블록 안에서 호출해야 한다. 그래야 하위 클래스의 종료 과정에서 예외가 발생해도 상위 클래스 종료자는 반드시 호출되도록 할 수 있다.
-```
+```java
 // 수동 종료자 연결
 @Override
 protected void finalize() throws Throwable {
@@ -503,7 +501,7 @@ protected void finalize() throws Throwable {
 }
 ```
 하위 클래스에서 상위 클래스 종료자를 재정의하면서 상위 클래스 종료자 호출을 잊으면, 상위 클래스 종료자는 절대로 호출되지 않는다. 이런 멍청한 하위 클래스 덕에 생기는 문제를 방지하는 한 가지 방법은, 종료되어야 하는 모든 객체마다 여벌의 객체를 하나 더 만드는 것이다. 종료되어야 하는 객체의 클래스 안에 종료자를 정의하는 대신, 익명 클래스안에 종료자를 정의하는 것이다. 이 익명 클래스의 목적은 해당 클래스의 객체를 포함하는 객체를 종료시키는 것이다. 이 익명 클래스로 만든 객체는 종료 보호자라고 부르는데, 종료되어야 하는 객체 안에 하나씩 넣는다. 종료 보호자의 바깥 객체에는 종료 보호자를 참조하는 private 필드가 있다. 따라서 바깥 객체에 대한 모든 참조가 사라지는 순간, 종료 보호자의 종료자도 실행 가능한 상태가 된다. 이 보호자 객체의 종료자는 필요한 종료 작업을, 마치 바깥 객체의 종료자인 것처럼 수행한다.
-```
+```java
 // 종료 보호자 숙어
 public class Foo {
   // 이 객체는 바깥 객체(Foo 객체)를 종료시키는 역할만 한다.
