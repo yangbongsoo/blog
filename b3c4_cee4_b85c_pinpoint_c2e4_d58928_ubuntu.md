@@ -1,13 +1,13 @@
 **원본 : Yous님 블로그 https://yous.be/2015/05/05/using-pinpoint-with-docker/**
 
-**사전준비**<br>
-Quickstart 스크립트로 샘플 Pinpoint instance를 실행시키는 것이 이번 포스팅의 목표다. <br>
+**사전준비**
+Quickstart 스크립트로 샘플 Pinpoint instance를 실행시키는 것이 이번 포스팅의 목표다.
 
-pinpoint : https://github.com/naver/pinpoint/tree/master/quickstart<br>
+pinpoint : https://github.com/naver/pinpoint/tree/master/quickstart
 도커 : https://www.docker.com/
 
-###요약(빠른설치)<br>
-AWS EC2를 생성하고<br>
+###요약(빠른설치)
+AWS EC2를 생성하고
 **cf) 주의!! AWS 1년 무료 t2.micro(메모리 1G)는 스펙이 딸려서 Pinpoint감당 못함 최소 t2.small로 해야함.**
 
 
@@ -39,13 +39,9 @@ quickstart/bin/start-testapp.sh &
 ```
 그럼 Web UI : http://address:28080 TetsAPP : http://address:28081를 통해 확인할 수 있다. 
 
+###디테일한 설명
 
-
----
-
-###디테일한 설명 <br>
-
-**요구사항**<br>
+**요구사항**
 첫번째로 Docker를 설치한다. 
 ```
 wget -qO- https://get.docker.com/ | sh
@@ -54,10 +50,11 @@ Docker가 정확하게 설치됐는지 확인해보자.
 ```
 sudo docker run hello-world
 ```
-디테일한 부분은 Docker의 installation guides를 참고하자.<br> https://docs.docker.com/installation/#installation
+디테일한 부분은 Docker의 installation guides를 참고하자. https://docs.docker.com/installation/#installation
 
-**Dockerfile 살펴보기**<br>
-https://github.com/yous/pinpoint-docker <br>
+**Dockerfile 살펴보기**
+https://github.com/yous/pinpoint-docker
+
 여기서 Dockerfile을 볼 수 있다. 이제부터 Dockerfile을 한줄한줄 살펴보자. 
 
 ```
@@ -84,17 +81,17 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y java-package fakeroot
 ENV DEBIAN_FRONTED noninteractive
 ```
 하지만 우리는 `ENV`를 설정(환경 변수 설정을 의미)하면 빌드가 끝난 뒤에도 이 설정이 남아있게 되므로 추가하지 않았다. 우리가 Docker 이미지를 `docker run -i -t ... bash`
-로 실행 시킬 때 Docker는 interactive하기 때문에 `DEBIAN_FRONTED`설정은 틀리게 된다. 그러므로 항상 inline으로 설정해야한다. 이부분에 대한 더 자세한 내용은 아래 주소를 참고하자. <br>
-https://github.com/docker/docker/issues/4032<br>
+로 실행 시킬 때 Docker는 interactive하기 때문에 `DEBIAN_FRONTED`설정은 틀리게 된다. 그러므로 항상 inline으로 설정해야한다. 이부분에 대한 더 자세한 내용은 아래 주소를 참고하자.
+https://github.com/docker/docker/issues/4032
 
 ```
 RUN useradd pinpoint -m
 ```
 pinpoint의 설치 가이드를 보면 JDK6과 JDK7+를 설치해야한다. Java를 설치하기 위해 우리는 non-root user가 필요하다. 그래서 user `pinpoint`를 추가했고 `-m`으로  홈 디렉토리를 만든다. 추가된 user로 Java를 설치한다. 
 
-cf) debian 계열(우분투)의 경우 useradd / adduser 모두 사용할 수 있지만 차이가 있다.<br>
-useradd : 순수 계정만 생성해주고, 기본 셸인 sh가 할당된다.(홈 디렉토리 / 패스워드 등을 따로 설정해줘야함)<br>
-adduser : 계정생성 및 비밀번호와 사용자 정보를 입력받아 계정을 생성하고, 사용자가 설정한 기본 셸을 사용자의 셸로 지정해주고 홈 디렉토리도 만들어 준다. <br>
+cf) debian 계열(우분투)의 경우 useradd / adduser 모두 사용할 수 있지만 차이가 있다.
+useradd : 순수 계정만 생성해주고, 기본 셸인 sh가 할당된다.(홈 디렉토리 / 패스워드 등을 따로 설정해줘야함)
+adduser : 계정생성 및 비밀번호와 사용자 정보를 입력받아 계정을 생성하고, 사용자가 설정한 기본 셸을 사용자의 셸로 지정해주고 홈 디렉토리도 만들어 준다. 
 -m 옵션 : 홈 디렉토리를 지정할 때 사용(-d 옵션과 쓰임)
 
 ```
@@ -144,7 +141,7 @@ ADD http://www.apache.org/dist//maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-
 ```
 RUN [ $(md5sum apache-maven-3.2.5-bin.tar.gz | grep --only-matching -m 1 '^[0-9a-f]*') = $(cat apache-maven-3.2.5-bin.tar.gz.md5) ]
 ```
-`apache-maven-3.2.5-bin.tar.gz`과 `apache-maven-3.2.5-bin-tar.gz.md5`의 MD5 checksum을 매치시킨다. <br>
+`apache-maven-3.2.5-bin.tar.gz`과 `apache-maven-3.2.5-bin-tar.gz.md5`의 MD5 checksum을 매치시킨다. 
 cf) MD5 checksum이란 다운이 이상없이 됐는지 확인하는 용도다. 자세한 설명 : http://mytory.net/archives/96/
 
 ```
@@ -185,7 +182,7 @@ VOLUME [/pinpoint]
 ```
 `VOLUME`은 디렉토리의 내용을 컨테이너에 저장하지 않고 호스트에 저장하도록 설정한다. 
 
-**Docker 실행하기**<br>
+**Docker 실행하기**
 이제 Docker 이미지를 pull할 수 있다.
 ```
 docker pull yous/pinpoint
@@ -213,25 +210,25 @@ docker run -i -t -p 28080:28080 -p 28081:28081 -p 28082:28082 \
   --cap-add SYS_PTRACE --security-opt apparmor:unconfined yous/pinpoint bash
 ```
 
-**QuickStart**<br>
+**QuickStart**
 지금까지 Pinpoint를 위한 Docker 이미지를 만들었다. 이제 QuickStart 스크립트를 돌릴 수 있다. Pinpoint 가이드에서 언급한대로 몇개의 추가적인 스크립트를 돌려야한다. 
 
-**Install & Start HBase**<br>
-Download & Start : `quickstart/bin/start-hbase.sh`<br>
-Initialize Tables : `quickstart/bin/init-hbase.sh`<br>
+**Install & Start HBase**
+Download & Start : `quickstart/bin/start-hbase.sh`
+Initialize Tables : `quickstart/bin/init-hbase.sh`
 
-**Start Pinpoint Daemons**<br>
-Collector : `quickstart/bin/start-collector.sh`<br>
-Web UI : `quickstart/bin/start-web.sh`<br>
-TestAPP : `quickstart/bin/start-testapp.sh`<br>
+**Start Pinpoint Daemons**
+Collector : `quickstart/bin/start-collector.sh`
+Web UI : `quickstart/bin/start-web.sh`
+TestAPP : `quickstart/bin/start-testapp.sh`
 
 HBase와 3개의 데몬들을 돌리면 아래의 주소로 Pinpoint TestApp에 대한 APM을 확인할 수 있다.
 
-Web UI : http://address:28080<br>
-TetsAPP : http://address:28081<br>
+Web UI : http://address:28080
+TetsAPP : http://address:28081
 
-**Stopping**<br>
-HBase : `quickstart/bin/stop-hbase.sh`<br>
-Collector : `quickstart/bin/stop-collector.sh`<br>
-Web UI : `quickstart/bin/stop-web.sh`<br>
-TestAPP : `quickstart/bin/stop-testapp.sh`<br>
+**Stopping**
+HBase : `quickstart/bin/stop-hbase.sh`
+Collector : `quickstart/bin/stop-collector.sh`
+Web UI : `quickstart/bin/stop-web.sh`
+TestAPP : `quickstart/bin/stop-testapp.sh`
