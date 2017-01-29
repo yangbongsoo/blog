@@ -1,8 +1,8 @@
 빅데이터로 통하는 NoSQL은 다양한 데이터 구조를 갖는다. 그리고 Key/Value, Column Family, Graph, Document 등 다양한 형태의 데이터베이스로 분류된다. 
 
-가장 기본이 되는 Key/Value Store <br>
-Key/Value Store에서 컬럼 개념을 확장하여 생성된 Column Family <br>
-문서 저장에 적합한 Document Store <br>
+가장 기본이 되는 Key/Value Store
+Key/Value Store에서 컬럼 개념을 확장하여 생성된 Column Family
+문서 저장에 적합한 Document Store
 네트워크 구조인 Graph 
 
 RDBMS는 row 별로 데이터가 보관되고 조회된다. 관계형 모델의 모든 기준은 row 단위이다. 
@@ -11,7 +11,7 @@ NoSQL에서 가장 기본이 되는 것은 Key/Value Store이다.
 
 Column Family 모델은 Key/Value 모델의 확장이다.
 
-**RDB 모델 **<br>
+**RDB 모델 **
 데이터를 수평적으로 배열하는 구조
 
 |  | 사번 | 성명 | 성별 | 최종학력 |
@@ -19,7 +19,7 @@ Column Family 모델은 Key/Value 모델의 확장이다.
 | row1 | 1001 | 홍,길동 | 남 | 하버드대학교 |
 | row2 | 1004 | 김,천사 | 여 | 옥스포드대학교 |
 
-**Column Family 모델**<br>
+**Column Family 모델**
 데이터를 수직적으로 쌓아가는 구조
 
 | row key(사번) | Columns(컬럼명) | Value(값) |
@@ -58,15 +58,15 @@ SQL 데이터베이스에서는 가장 어려운 점이고 가장 중요한 특�
 1. 테이블의 Key 와 Index 를 결정
 2. Read/Write 처리량을 결정
 
-**주로 사용되는 기**능 <br>
-Get/Put/Update/Delete/BatchGet <br>
-Scan (전체 테이블을 싹쓸이로 긁어옴) <br> 
-Query(Hash + 범위 키만) <br>
+**주로 사용되는 기능**
+Get/Put/Update/Delete/BatchGet
+Scan (전체 테이블을 싹쓸이로 긁어옴)
+Query(Hash + 범위 키만)
 
-**테이블 디자인을 위한 요소 (1)**<br>
+**테이블 디자인을 위한 요소 (1)**
 
 Table 
-* 기본 키로 "Hash key" or "Hash key & Range key"를 선택 <br>
+* 기본 키로 "Hash key" or "Hash key & Range key"를 선택
 
 기본 키 : Hash key
 * Hash key 단체로 데이터를 고유하게 식별할 수 있는 경우 사용 
@@ -77,7 +77,7 @@ Table
 Local Secondary Indexes
 * Range key 이외에 필터 검색을 위한 키를 가질 수 있음
 
-**테이블 디자인을 위한 요소 (2)**<br>
+**테이블 디자인을 위한 요소 (2)**
 
 Attributes
 * 데이터의 내용. Hash key에 해당하는 Attributes 이외에는 미리 정의할 필요는 없다. 또한 레코드에서 Attributes가 불규칙하더라도 문제 없다. 
@@ -101,7 +101,7 @@ Hash key + Range key
 * 복합 기본 키 
 * Range key는 sort가 있음 
 
-샘플(1) 상품 카탈로그 <br>
+샘플(1) 상품 카탈로그
 
 스키마 
 * 테이블명 Products
@@ -113,17 +113,18 @@ Hash key + Range key
 
 #AWS Documentation > AWS Mobile SDK > Android Developer Guide > Amazon DynamoDB
 
-이 섹션은 AWS Mobile SDK(Android)를 사용하여 DynamoDB를 시작하기 위한 가이드를 step-by-step으로 제공한다. <br>
-http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/dynamodb_om.html<br><br>
-코드 샘플 <br>
+이 섹션은 AWS Mobile SDK(Android)를 사용하여 DynamoDB를 시작하기 위한 가이드를 step-by-step으로 제공한다.
+http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/dynamodb_om.html
+
+코드 샘플
 https://github.com/awslabs/aws-sdk-android-samples
 
-AWS-SDK-Android<br>
+AWS-SDK-Android
 https://github.com/aws/aws-sdk-android
 
 ###Include JAR Files in Your Project (내 프로젝트에 라이브러리 추가하기)
 
-* **gradle 방식** 
+**gradle 방식** 
 
     ```
     dependencies {
@@ -134,7 +135,7 @@ https://github.com/aws/aws-sdk-android
     }
     ```
     
-    dependencies 풀 리스트
+dependencies 풀 리스트
 
 | Dependency | Build.gradle Value |
 | -- | -- |
@@ -155,9 +156,9 @@ https://github.com/aws/aws-sdk-android
 | Amazon SNS | com.amazonaws:aws-android-sdk-sns:2.+ |
 | Amazon SQS | com.amazonaws:aws-android-sdk-sqs:2.+ |
 
-<br>
-* **Maven 방식**
-    ```
+
+**Maven 방식**
+```xml
     <dependencies>
         <dependency>
             <groupid>com.amazonaws</groupid>
@@ -175,8 +176,8 @@ https://github.com/aws/aws-sdk-android
             <version>[2.2.0, 2.3)</version>
         </dependency>
     </dependencies>
-    ```
-Release버전은 여기서 확인 <br>
+```
+Release버전은 여기서 확인
 https://aws.amazon.com/releasenotes/Android
 
 | Service/Feature | artifactID |
@@ -198,10 +199,10 @@ https://aws.amazon.com/releasenotes/Android
 | Amazon SNS | aws-android-sdk-sns |
 | Amazon SQS | aws-android-sdk-sqs |
 
-<br>
-* **jar파일 직접넣기** 
+
+**jar파일 직접넣기** 
 	
-http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/Welcome.html<br>
+http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/Welcome.html
 
 여기서 **Download the AWS Mobile SDK for Android**부분에서 
 
@@ -214,7 +215,7 @@ http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/Welcome.html<br>
 
 ### Add Import Statements 
 내 메인 액티비티에 해당 클래스들을 import한다 
-```
+```java
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.*;
@@ -223,7 +224,7 @@ import com.amazonaws.services.dynamodbv2.model.*;
 ```
 
 ### Set Permissions in Your Android Manifest
-```
+```xml
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
@@ -246,7 +247,7 @@ import com.amazonaws.services.dynamodbv2.model.*;
 
 
 ###Create DynamoDB Table
-이 튜토리얼을 위해 우리가 서점 앱을 만든다고 가정하자. Books table을 만들기 위해 </br>
+이 튜토리얼을 위해 우리가 서점 앱을 만든다고 가정하자. Books table을 만들기 위해 
 1. https://console.aws.amazon.com/dynamodb/home 접속한다. (서버 지역 확인) 
 ![](dbtable.PNG)
 2. Create Table을 클릭한다.
@@ -316,7 +317,7 @@ credentialsProvider 변수는 Cognito Sample code에 선언되어 있다 복사�
 DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
 ```
 
-이제 DB에 클래스를 매핑할 준비가 됐다  .
+이제 DB에 클래스를 매핑할 준비가 됐다.
 
 ###Define a Mapping Class 
 
@@ -337,7 +338,7 @@ bookstore 앱에서, 테이블안의 각각의 아이템은 book을 대표 할 �
 DynamoDB annotation 전체 리스트 http://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/JavaDeclarativeTagsList.html
 
 이제 Book 맵핑 클래스를 만들자
-```
+```java
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
 
 @DynamoDBTable(tableName = "Books")
@@ -400,9 +401,9 @@ hardCover가 nullable 타입인것을 주목해라. DynamoDB Object Mapper에서
 
 현재, database가 있고, mapping class가 있고, Object Mapper Client가 있다. 이제 클라우드에서 객체들을 interacting할 수 있다. 
 
-**Save an Item**<br>
+**Save an Item**
 객체를 저장하기 위해서, 먼저 생성하고, 적절한 필드값을 세팅시킨다.
-```
+```java
 Book book = new Book();
 book.setTitle("Great Expectations");
 book.setAuthor("Charles Dickens");
@@ -410,9 +411,9 @@ book.setPrice(1299);
 book.setIsbn("1234567890");
 book.setHardCover(false);
 ```
-그리고 테이블에서 클래스 객체와 상응하는 item에 write하기 위해 Object Mapper client를 사용한다. <br>
+그리고 테이블에서 클래스 객체와 상응하는 item에 write하기 위해 Object Mapper client를 사용한다.
 클라이언트에서 save() 메소드를 콜함으로써 book객체를 보낸다.
-```
+```java
 mapper.save(book);
 ```
 기본 키(여기서 "ISBN")를 제외하고 테이블에서 item들의 스키마가 미리 정의되어 있는건 없다. 매핑 클래스를 업데이트하고 추가하거나 뜻에 속성을 제거할 수 있다. item이 가질 수 있는 속성 수는 400KB size 이하로 가질 수 있다. 
@@ -420,21 +421,20 @@ mapper.save(book);
 **Retrieve an Item(검색)**
 
 object의 기본 키(여기서 해쉬 속성인 "ISBN")를 이용해서 DB로부터 상응하는 item을 로드할수 있다. 다음의 코드는 "1234567890"의 ISBN으로 도서 항목을 반환한다.
-```
+```java
 Book selectedBook = mapper.load(Book.class, "1234567890");
 ```
 
 **Update an Item**
-
 DB의 item을 업데이트 하기 위해서 새로운 속성을 세팅하고 object를 저장하기만 하면 된다. 예를 들어 다음과 같이 price를 업데이트 할 수 있다.
-```
+```java
 Book selectedBook = mapper.load(Book.class, "1234567890");
 selectedBook.setPrice(1199);
 mapper.save(selectedBook);
 ```
 
 새로운 해쉬 키는 DB에새로운 item을 생성한다는 것을 주목해라 비록 클라이언트쪽에서 새로운 object를 생성하지 않음에도 불구하고. 다음의 예를 보자.
-```
+```java
 Book selectedBook = mapper.load(Book.class, "1234567890");
 selectedBook.setIsbn("0987654321");
 mapper.save(selectedBook);
@@ -442,15 +442,15 @@ mapper.save(selectedBook);
 결과는 DB에 loaded된 item과 동일하지만, 새로운 ISBN을 갖는 새로운 item이다. 
 이제 selectBook은 새로운 DB의 새로운 item을 맵핑하지만 이전의 item도 남아있다. 
 
-**Delete an Item**<br>
+**Delete an Item**
 DB의 item을 지우기 위해 delete()메소드를 사용한다. 
-```
+```java
 mapper.delete(selectedBook);
 ```
 
 ###Perform a Scan
 스캔 작업으로, 주어진 테이블에서 모든 item들을 검색할 수 있다. 스캔은 table의 모든 item을 검사하고 비순차적으로 결과를 리턴한다. 
-```
+```java
 DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
 PaginatedScanList<Book> result = mapper.scan(Book.class, scanExpression);
 // Do something with result.
@@ -463,20 +463,20 @@ Object Mapper에 의해 리턴된 리스트는 수정될수 없고 그렇게 시
 스캔은 비용이 많이 드는 작업이며 테이블에 우선 순위가 높은 트래픽을 방해하지 않도록주의해서 사용해야 한다. The Amazon DynamoDB Developer Guide는 http://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/Introduction.html dp scan 작업의 최고 실행을 설명한다. 
 
 ###Perform a Query
-쿼리 작업은 hash와 range key 속성을 이용해 테이블의 아이템을 찾는다. Books테이블의 기본키는 range key를 갖지 않는다. 그러나 테이블을 만들때 global secondary index를 명시하고 그건 range key 속성을 갖는다.<br> 우리는 hash키와 secondary index의 범위 키에 대해 쿼리를 수행할것이다.
+쿼리 작업은 hash와 range key 속성을 이용해 테이블의 아이템을 찾는다. Books테이블의 기본키는 range key를 갖지 않는다. 그러나 테이블을 만들때 global secondary index를 명시하고 그건 range key 속성을 갖는다.
+우리는 hash키와 secondary index의 범위 키에 대해 쿼리를 수행할것이다.
 
-**Secondary Indexes**<br>
+**Secondary Indexes**
 secondary index는 query 작업을 서포트 해줄 대체키와 함께 테이블로부터 속성들의 subset을 포함하는 데이터 구조이다. secondary index로 쿼리들은 더이상 기본키에 제한받지 않는다. 대체 키를 이용해서 똑같이 검색할 수 있다. 
 
 secondary index안의 데이터는 테이블에서 인덱스로 project되거나 복사된 속성들로 구성되어 있다. 모든 secondary index는 DynamoDB에 의해 자동으로 유지된다. 테이블의 아이템을 추가하거나 수정, 삭제할 때 테이블의 모든 인덱스들도 이러한 변경사항을 반영하기위해 업데이트 된다. 
 
-secondary indexes를 더 배우기 위한 URL <br>
+secondary indexes를 더 배우기 위한 URL
 http://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/SecondaryIndexes.html
 
 **Query Example**
-
 다음의 예는 title이 "Great"로 시작하고 author "Charles Dickens"에 의해 books에 대한 쿼리를 수행한다. 
-```
+```java
 Book bookToFind = new Book();
 bookToFind.setAuthor("Charles Dickens");
 
@@ -501,13 +501,13 @@ book object를 생성하고 쿼리를 날릴 hash key 속성을 셋팅한다. Bo
 
 DynamoDBQueryExpression을 만들 때 쿼리에 hash key 값과 range key condition을 셋팅한다.  withRangeKeyCondition의 첫번째 파라미터가 range key 속성 이름인것을 주목해라.
 
-마지막으로 쿼리의 결과를 나타내기 위해 PaginatedQueryList<T>를 만든다. scan 결과 리스트와 같이 쿼리 결과 리스트도 수정할 수 없다.
+마지막으로 쿼리의 결과를 나타내기 위해 `PaginatedQueryList<T>`를 만든다. scan 결과 리스트와 같이 쿼리 결과 리스트도 수정할 수 없다.
 
 ###Conditional Writes 
 멀티 유저 환경에서 multiple clients는 같은 item에 접근할 수 있고 동시에 그 속성 값의 수정을 시도할 수 있다. client들이 data item 쓰기작업하는것을 돕기 위해 DynamoDB low-level client는 PutItem, DeleteItem, UpdateItem operation(연산)에 conditional writes를 지원한다. conditional write로 operation(연산)은 item 속성들이 기대되는 조건들중 하나 이상 만족해야만 성공한다. 그렇지 않으면 error를 리턴한다.
 
 다음의 예에서 만약 "Price" item의 값이 "1299"면 Books 테이블의 price item을 업데이트 한다.
-```
+```java
 try {
     HashMap<String, AttributeValue> primaryKey = new HashMap<>();
     AttributeValue isbn = new AttributeValue()
@@ -532,13 +532,14 @@ try {
     // The conditional check failed.
 }
 ```
-이 예에서 DynamoDB client에 updateItem()을 보내기 위해 UpdateItemRequest를 작성했다. UpdateItemRequest objcet는 update할 속성 이름을 명시한 addAttributeUpdatesEntry(속성에 대한 새로운 값, 속성에서 수행하기 위한 액션)를 호출한다. 또한 condition을 추가하기 위해  operation의 conditional block인 addExpectedEntry를 호출한다. <br>여기서 ComparisonOprator는 price의 item이 "1299"와 일치하는지 검사한다. 일치하지 않는다면 update는 실패한다.
+이 예에서 DynamoDB client에 updateItem()을 보내기 위해 UpdateItemRequest를 작성했다. UpdateItemRequest objcet는 update할 속성 이름을 명시한 addAttributeUpdatesEntry(속성에 대한 새로운 값, 속성에서 수행하기 위한 액션)를 호출한다. 또한 condition을 추가하기 위해  operation의 conditional block인 addExpectedEntry를 호출한다.
+여기서 ComparisonOprator는 price의 item이 "1299"와 일치하는지 검사한다. 일치하지 않는다면 update는 실패한다.
 
 conditional writes는 idempotent한 걸(반복 수행해도 값이 바뀌지 않음) 주목해라. 
 
 ###Batch Operations 
 DynamoDB Object Mapper는 database에 item 쓰기작업이나 item 삭제작업을 위해 batch를 제공한다. 다음의 예는 batchSave 메소드를 통해 bactch put operation을 설명한다. 
-```
+```java
 Book book1 = new Book();
 book1.setTitle("Moby-Dick; or, The Whale");
 book1.setAuthor("Herman Melville");
