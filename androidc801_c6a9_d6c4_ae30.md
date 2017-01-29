@@ -4,7 +4,7 @@
 
 **MemberVo를 생성해준다. **
 
-```
+```java
 package com.example.multicall.vo;
 
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class Member {
 ```
 
 **내 AWS 계정과 연결할 credential 생성하고 그걸 통해 DynamoDBMapper 객체를 생성한다.**
-```
+```java
 //내 AWS 계정과 연결할 credential 생성 
 	    CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
 	    	    getApplicationContext(),
@@ -74,7 +74,7 @@ public class Member {
 
 
 **AsyncTask를 통해 네트워크 전송한다. **
-```
+```java
 //인터넷이 연결돼 있나 확인 
 if(connect.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED 
 					|| connect.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED	
@@ -87,7 +87,7 @@ if(connect.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == Network
 					}
 ```
 
-```
+```java
 //AsyncTask를 써서 네트워킹 작업 
   	private class Networking extends AsyncTask<URL, Integer, String>{
 
