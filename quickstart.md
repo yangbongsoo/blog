@@ -6,7 +6,7 @@ url 복사해서 ```curl url붙여넣기 -o jdk버전``` 써놓으면 된다.
 
 jdk1.7은 ```tar xvfz jdk1.7~~``` 로 압축푼다.
 
-jdk1.6은 bin을 다운받았기 때문에 ```chmod +x jdk1.6.bin``` 해서 ll 해서 보면 녹색으로 바뀐다.<br> 그리고 ``` ./jdk1.6.bin ```하면 실행이 되면서 압축이 풀린다.
+jdk1.6은 bin을 다운받았기 때문에 ```chmod +x jdk1.6.bin``` 해서 ll 해서 보면 녹색으로 바뀐다. 그리고 ``` ./jdk1.6.bin ```하면 실행이 되면서 압축이 풀린다.
 
 병수가 이전에 설치해놓은 jdk1.7 위치는 ```/usr/lib/jvm/jdk1.7.0 ```(openJDK라 환경변수설정을 따로 안했다고 함) 
 
@@ -14,9 +14,9 @@ jdk1.6은 bin을 다운받았기 때문에 ```chmod +x jdk1.6.bin``` 해서 ll �
 
 ``` /etc/bash.bashrc ```가보니 맨끝에 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/  이렇게 되어있다. 
 
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/ <br>
-export JAVA_7_HOME=/usr/lib/jvm/java-7-openjdk-amd64/<br>
-export JAVA_6_HOME=/files/sokit/pinpointInstallDirectory/jdk1.6.0_45<br>
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
+export JAVA_7_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
+export JAVA_6_HOME=/files/sokit/pinpointInstallDirectory/jdk1.6.0_45
 
 추가적으로 위와 같이 작성한다.
 
@@ -29,11 +29,11 @@ http://maven.apache.org/download.cgi 가서  apache-maven-3.3.3-bin.tar.gz 링�
 
 그리고 /files/sokit/pinpointInstallDirectory/maven 이 경로를 PATH에다가 추가해준다.(/etc/bash.bashrc)
 
-PATH=$PATH:$JAVA_HOME/bin<br>
-PATH=$PATH:/files/sokit/pinpointInstallDirectory/maven/bin<br>
-PATH=$PATH:$HOME/bin<br>
-<br>
-export PATH<br>
+PATH=$PATH:$JAVA_HOME/bin
+PATH=$PATH:/files/sokit/pinpointInstallDirectory/maven/bin
+PATH=$PATH:$HOME/bin
+
+export PATH
 
 그다음 git을 설치한다. ``` apt-get install git ```
 
@@ -49,9 +49,9 @@ export PATH<br>
 
 ``` du -h ```해보면 용량 알 수 있다. 
 
-``` quickstart/bin/start-hbase.sh  ```해서 hbase 다운받는다. <br>
-``` quickstart/bin/init-hbase.sh  ```DB 테이블을 만든다. <br>
-``` quickstart/bin/start-collector.sh ```Collector를 띄운다. <br>
+``` quickstart/bin/start-hbase.sh  ```해서 hbase 다운받는다. 
+``` quickstart/bin/init-hbase.sh  ```DB 테이블을 만든다. 
+``` quickstart/bin/start-collector.sh ```Collector를 띄운다. 
 
 Collector가 다 띄워지면 새로운 putty창 열어서 Web UI띄운다. 
 
@@ -62,7 +62,8 @@ Collector가 다 띄워지면 새로운 putty창 열어서 Web UI띄운다.
 
 **Agent 붙여서 실제로 돌리기** 
 
-내 웹 서버에서 ```/usr/share/tomcat7/bin``` 가서 catalina.sh에 자바옵션을 추가해준다.<br> cf) 윈도우에서는 catalina.bat 고쳐야한다.
+내 웹 서버에서 ```/usr/share/tomcat7/bin``` 가서 catalina.sh에 자바옵션을 추가해준다.
+cf) 윈도우에서는 catalina.bat 고쳐야한다.
 
 ```
 JAVA_OPTS="-javaagent:/local/pinpoint/pinpoint-agent/pinpoint-bootstrap-1.1.0.jar -Dpinpoint.agentId=sokit -Dpinpoint.applicationName=SOKIT" 
@@ -80,7 +81,7 @@ profiler.collector.ip를 pinpoint 서버로 바꿔주고 포트를 29996 29995 2
 
 그리고 중요한 부분이 29996 29995는 UDP이다 해당 서버 방화벽 허용을 Custom TCP가 아닌 UDP로 꼭 바꿔줘야한다. 
 
-pinpoint 적용 끝 <br>
+pinpoint 적용 끝
 
 ![](pinpoint1.PNG)
 
