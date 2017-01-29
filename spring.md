@@ -46,21 +46,21 @@ AccountController에서
 
 Account 클래스를 만드는데 
 
-```
+``` java
 @Id @GeneratedValue
 private Long id;
 ```
 @Id는 해당 프로퍼티가 테이블의 기본키 역할을 한다는 것을 나타낸다. @GeneratedValue는 기본키의 값을 위한 자동 생성 전략을 명시하는데 사용한다. 
 
 AccountRepository는 jpa사용해서 만듦 두번째 인자는 pk 데이터타입
-```
+``` java
 extends JpaRepository<Account, Long>
 ```
 
 AccountService 클래스는 @Service 등록해서 component scan으로 빈으로 등록되게끔만 하고 @Autowired로 AccountRepository를 가지고 있게끔만 한다. 그리고 @Transactional 붙여주면 이 클래스 안에 만드는 모든 public 메소드는 다 transactional 애노테이션이 적용된다. 
 
 AccountController에서 
-```
+``` java
 public ResponseEntity createAccount(@RequestBody @Valid AccountDto.Create create,
                                           BindingResult result) {
 ```
@@ -75,7 +75,7 @@ AccountDto 클래스 가보면 @NotBlank @Size가 적용되어 있는데 그걸 
 
 **질문** 
 - 테스트에 @Transactional에 붙으면 자동으로 롤백이 된다고 말씀하셨는데 제가 아는 롤백이란 개념은 
-'데이터베이스에서 업데이트에 오류가 발생할 때, 이전 상태로 되돌리는 것' 인데 테스트에서 롤백이 된다라는 부분이 잘 와닿지 않습니다.<br>
+'데이터베이스에서 업데이트에 오류가 발생할 때, 이전 상태로 되돌리는 것' 인데 테스트에서 롤백이 된다라는 부분이 잘 와닿지 않습니다.
 
 
 답변 : 테스트의 모든 transactional은 에러가 나든, 안나든 롤백이 되도록 설정이 되어 있다. 롤백은 데이터의 변경사항을 commit하지 않고 되돌리는것 ex) 비지니스 로직상, 트랜잭션의 타임아웃 
@@ -101,20 +101,20 @@ TransactionConfiguration는 desperated 될것.
 
 ErrorResponse 클래스에 @Data붙이면 lombok에 의해 getter, setter 만들어짐 
 
-**Maven에서 dependency 의 scope 설정**<br>
-compile(default) : 컴파일 시 라이브러리를 사용한다<br>
-runtime : 실행 시 라이브러리를 사용한다<br>
-provided : 외부에서 라이브러리가 제공된다. 컴파일 시 사용하지만 빌드에 포함하지 않는다. 보통 JSP, Servlet 라이브러리들에 사용한다.<br>
-test : 테스트 코드에만 사용한다. <br>
+**Maven에서 dependency 의 scope 설정**
+compile(default) : 컴파일 시 라이브러리를 사용한다
+runtime : 실행 시 라이브러리를 사용한다
+provided : 외부에서 라이브러리가 제공된다. 컴파일 시 사용하지만 빌드에 포함하지 않는다. 보통 JSP, Servlet 라이브러리들에 사용한다.
+test : 테스트 코드에만 사용한다.
 
-```
+```xml
 <mvc:annotation-driven/> 
 <context:component-scan base-package=""/>
 ```
 
 base-package포함, 하위의 클래스들 중 @Controller, @Repository, @Service, @Component가 붙어 있는 클래스들을 자동으로 스프링 빈으로 등록한다. 
 
-```
+```xml
 <tx:annotation-driven/>
 <context:component-scan base-package=""/>
 ```
@@ -132,9 +132,9 @@ bace-package포함, 하위의 클래스들 중 @Transcational이 붙은 곳에 �
     2. context:annotation-config 태그를 설정하면 @Required @Autowired @Resource @PostConstruct @PreDestroy @Configuration 기능을 각각 설정하는 수고를 덜게 해준다. 
 
 
-**mvc:resources**<br>
+**mvc:resources**
 
-```
+```xml
 <mvc:default-servlet-handler default-servlet-name="default"/>
 ```
 DispatcherServlet이 처리하지 못한 요청을 서블릿 컨테이너의 DefaultServlet에게 넘겨주는 역할을 하는 핸들러이다. 
@@ -142,35 +142,33 @@ DispatcherServlet이 처리하지 못한 요청을 서블릿 컨테이너의 Def
 /js/jquery.js 처럼 컨트롤러에 매핑안되는 URL같은 경우는 DefaultServletHttpRequestHandler가 담당한다. 이 핸들러는 매핑 우선순위가 가장 낮아서 애노테이션 매핑 등등을 거쳐서 다 실패한 URL만 넘어온다. 그리고 요청을 자신이 직접 읽어서 처리하는 것이 아니라, 원래 서버가 제공하는 디폴트 서블릿으로 넘겨버린다. 그러면 서버의 기본 디폴트 서블릿이 동작해서 스태틱리소스를 처리하는 것이다. 다시말해 일단 스프링이 다 받고 스프링이 처리 못하는 건 다시 서버의 디폴트 서블릿으로 넘긴다는 아이디어이다. 
 
 `*.ico`파일 처리 못하는 현상은 `web.xml`에 ico의 MIME타입을 지정해주면 된다. 
-```
+```xml
 <mime-mapping>
     <extension>ico</extension>
     <mime-type>image/vnd.microsoft.icon</mime-type>
 </mime-mapping>
 ```
 
-**정적자원 설정하기**<br>
-
+**정적자원 설정하기**
 CSS,JS,이미지 등의 자원은 거의 변하지 않기 때문에, 웹 브러우저에 캐시를 하면 네트워크 사용량, 서버 사용량, 웹 브라우저의 반응 속도 등을 개선할 수 있다. 스프링 MVC를 이용하는 웹 애플리케이션에 정적 자원 파일이 함께 포함되어 있다면 웹 서버 설정을 사용하지 않고 캐시를 사용하도록 지정할 수 있다. 
 
-```
+```xml
 <mvc:resources mapping="/resources/**" location="/resources/" cache-period="60"/>
 ```
 
-mapping : 요청 경로 패턴을 설정한다. (컨텍스트 경로를 제외한 나머지 부분의 경로)<br>
-location : 웹 애플리케이션 내에서 요청 경로 패턴에 해당하는 자원의 위치를 지정한다. 위치가 여러곳일 경우 각 위치를 콤마로 구분한다.<br>
-cache-period: 웹 브라우저에 캐시 시간 관련 응답 헤더를 전송한다. 초 단위로 캐시 시간을 지정하며 이 값이 0이면 웹 브라우저가 캐시하지 않도록 한다. <br>
+mapping : 요청 경로 패턴을 설정한다. (컨텍스트 경로를 제외한 나머지 부분의 경로)
+location : 웹 애플리케이션 내에서 요청 경로 패턴에 해당하는 자원의 위치를 지정한다. 위치가 여러곳일 경우 각 위치를 콤마로 구분한다.
+cache-period: 웹 브라우저에 캐시 시간 관련 응답 헤더를 전송한다. 초 단위로 캐시 시간을 지정하며 이 값이 0이면 웹 브라우저가 캐시하지 않도록 한다. 
 
 위 설정의 경우 요청 경로가 /resources/로 시작하면, 그에 해당하는 자원을 /resources/나 /WEB-INF/resources/ 디렉토리에서 검색한다. 
 
-
-**빈 설정방식의 변화**<br>
+**빈 설정방식의 변화**
 ![](bean설정방식의변화.PNG)
 
-1.x : 모든걸 `<bean> </bean>`으로 <br>
-2.0.x : `<tx:annotation-driven`<br>
-2.5x : @Service, @Repository 같이 설정 `<context:component-scan base-package="~"`<br>
-3.0.x : @Configuration, @Bean <br>
+1.x : 모든걸 `<bean> </bean>`으로
+2.0.x : `<tx:annotation-driven`
+2.5x : @Service, @Repository 같이 설정 `<context:component-scan base-package="~"`
+3.0.x : @Configuration, @Bean
 3.1.x : @Enable~ ex) @EnableTransactionManagement
 
 ![](bean설정방식의변화2.PNG)
