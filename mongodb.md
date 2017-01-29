@@ -27,9 +27,10 @@ MongoDatabase database = mongoClient.getDatabase("mydb");
 ```
 이 시점에서 database 객체는 MongoDB 서버에 연결이 된다.
 
-**MongoClient**<br>
+**MongoClient**
 MongoClient 인스턴스는 사실 데이터베이스 연결의 풀을 대표한다. 그리고 다수의 스레드 환경에서도 MongoClient 인스턴스는 하나만 있으면 된다.
-<br>(중요)<br>
+
+(중요)
 전형적으로 주어진 데이터베이스 클러스터를 위해 하나의 MongoClient 인스턴스를 생성하고 너의 애플리케이션에 사용한다. 다수의 인스턴스를 생성할때:<br>
 - 모든 리소스 사용 한계(최대 연결수, 등등)는 MongoClient 인스턴스 당 적용한다. 
 - 인스턴스를 처분할때, 너는 자원을 클린업하기 위해서 MongoClient.close()를 콜해야 한다.  
@@ -64,7 +65,7 @@ collection에 document를 삽입하기 위해서는 `insertOne()` 메서드를 �
 다수의  document들을 추가하기 위해서 `insertMany()` 메서드를 사용한다. 
 
 다음 예제는 다수의 document들을 추가한다. 
-`{ "i" : value }`<br>
+`{ "i" : value }`
 루프에서 document들을 생성한다. 
 ```
 List<Document> documents = new ArrayList<Document>();
@@ -80,8 +81,8 @@ collection.insertMany(documents);
 `System.out.println(collection.count());`
 
 ###Query the Collection
-`find()` 메서드로 collection을 쿼리한다.<br>
-**Find the First Document in a Collection**<br>
+`find()` 메서드로 collection을 쿼리한다.
+**Find the First Document in a Collection**
 collection에 첫 번째 document를 가져오기 위해서 `find()`명령의 `first()`메서드를 콜해라. `collection.find().first()`는 첫 번째 document나 null(커서보다)을 리턴한다. 이것은 단일 document 매치여부 쿼리나 첫 번째 document를 가져올때 유용하다. 
 
 다음은 collection의 첫 번째 document를 찾아 출력하는 예제다. 
@@ -97,7 +98,7 @@ System.out.println(myDoc.toJson());
 ```
 NOTE : `_id` 요소는 MongoDB가 자동으로 추가해왔고 값은 보여지는 것과 다를 것이다. MongoDB는 내부적인 사용을 위해 "_"와 "$"로 시작하는 필드명을 남겨둔다. 
 
-**Find All Documents in a Collection**<br>
+**Find All Documents in a Collection**
 collection의 모든 document들을 검색하기 위해서 `find()`메서드를 사용한다. `find()`메서드는 검색 작업의 체이닝이나 컨트롤링 인터페이스를 제공하는 FindIterable 인스턴스를 리턴한다. `iterator()` 메서드를 사용해서 document들의 iterator를 가져온다. 다음 코드는 collection의 모든 document들을 검색하고 출력한다. 
 ```
 MongoCursor<Document> cursor = collection.find().iterator();
