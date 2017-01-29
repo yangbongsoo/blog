@@ -1,4 +1,4 @@
-**1. TraceId 작동 사례**<br> 
+**1. TraceId 작동 사례**
 하나의 Trace는 Span들의 집합이고 각각의 Span은 RPC가 도착할 때 처리할 작업을 나타내며 추적에 필요한 데이터를 가지고 있다. 그 데이터는 TraceId인데 TraceId는 TransactionId와 SpanId, ParentId로 이루어진 키의 집합이다. 
 
 이 TraceId를 HTTP 헤더에 넣어서 전송함으로써 각각의 노드 간의 관계를 정의 할 수 있다. 결국 Trace는 사용자의 한 요청에 따라 동작되는 모든 로직을 의미한다. 그래서 한 Trace에 TransactionId가 같게 하는 것이다. 
@@ -7,10 +7,9 @@ PRC 호출을 위한 기반조건은, RPC 호출시 TraceId를 넣을 공간이 
 
 TransactionId는 전체 메시지의 유니크 ID이고, 이는 요청 데이터를 조회하는 검색 key이도 하다.
 
-
 ![](pinpoint정리1.PNG)
 
-**2-1. 사례 질문**<br>
+**2-1. 사례 질문**
 Pinpoint는 모든 요청을 추적하지 않고 샘플링한 데이터를 수집할 수 있다. 적은 양의 데이터만 수집해도 전체 애플리케이션의 상태를 확인하는데 무리가 없기 때문에 깊이의 제한을 둬도 문제가 없다. 또한 모든 요청을 다 캐치하면 속도가 느려지고 성능저하가 크게 발생하게 된다.
 
 검색 속도는 알고리즘의 종류보다는, IO량에 더 큰 가중치가 있다. CPU vs IO가 되었을때, 보통은 IO가 병목 구간이다. 
@@ -22,7 +21,7 @@ Pinpoint는 모든 요청을 추적하지 않고 샘플링한 데이터를 수�
 
 ![](pinpoint정리2.PNG)
 
-**2-2. 사례 질문**<br>
+**2-2. 사례 질문**
 저는 TraceId 작동 사례만 보고 항상 트리구조인줄 알았다. 그래프 구조인게 맞는데 TraceId 작동 사례를 예로 들면 A->B->C->A 와 같은  순환관계가 발생할 수 있다.노드3번 or 노드4의 ParentSpanId가 10(노드1의 SPAN인 10이기 때문에) 이라면 순환관계
 
 ParentSpanId=-1 은 추적의 시작 지점이다. 일종의 ROOT
@@ -31,7 +30,7 @@ ParentSpanId=-1 은 추적의 시작 지점이다. 일종의 ROOT
 
 ![](pinpoint정리3.PNG)
 
-**3-1. Bytecode Instrument 질문** <br>
+**3-1. Bytecode Instrument 질문** 
 
 톰캣의 catalina.sh에 자바 옵션으로 javaagent를 설정함으로써 JVM이 구동될 때 이 JVM 안에서 특정 작업을 수행할 에이전트(Agent), 즉 요원을 지정할 수 있는 방식을 제공한다. 
 
@@ -65,11 +64,11 @@ https://github.com/naver/pinpoint/tree/master/plugins/gson
 
 ![](pinpoint정리8.PNG)
 
-**4-1. 추가적인 질문**<br>
+**4-1. 추가적인 질문**
 Pinpoint의 발전방향에서 Java가 아닌 구간의 프로파일링으로써 WebServer 구간의 성능 수집에 대해서 내가 알고 있는 개념은 아래 그림과 같다. 요즘 톰캣이 많이 발전되서 일부 WebServer기능까지 담고 있어서 아래와 같이 표현을 했다. 
 
-보통 WebServer는 정적인 데이터를 처리하는 서버이고 WebApplicationServer가 동적인 데이터를 처리하는 서버인데 WebServer 구간의 성능 수집이라 하시면 정적 데이터가 로딩되고 렌더링되는 성능 수집을 말씀하시는건가요?<br>
-답) No <br>
+보통 WebServer는 정적인 데이터를 처리하는 서버이고 WebApplicationServer가 동적인 데이터를 처리하는 서버인데 WebServer 구간의 성능 수집이라 하시면 정적 데이터가 로딩되고 렌더링되는 성능 수집을 말씀하시는건가요?
+답) No 
 정적데이터 보다는 WAS까지 오는 동적 데이터에 문제가 생기는 경우가 많다.
 Apache를 사용하였을 경우, Tomcat에 동적요청도 Apache를 통과해서 오게 됩니다.
 그런데 해당 구간(Webserver)이 문제를 자주 발생시키는 경향이 있어서, 이 구간에 대한 성능수집이 요구가 자주 발생하고 있다.
