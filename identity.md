@@ -31,7 +31,6 @@ HTTP GET, POST 또는 SOAP 웹서비스 등 여러가지 방법으로 구현될 
 
 
 **SAML 기반의 SSO 솔루션**
-
 simplePHPSAML - 가장 널리 쓰이고, 사용이 쉽다.
 Shibboleth - java stack으로 구현이 되어 있으며, terracotta를 이용하여 session을 저장하기 때문에 상대적으로 확장성이 높다.
 WSO2 identity server - 앞에서도 언급하였듯이, 확장성에 문제가 있는 것으로 보이며, 자체 OSGi 컨테이너인 carbon 엔진 위에서 동작한다. SAML 뿐만 아니라 OAuth,STS 서비스를 추가 지원하며, Provisioning protocol인 SCIM도 함께 지원한다. 오픈 소스이지만, 제품 완성도가 매우 높고, 사용이 매우 쉽다. (모니터링,관리 기능등이 강점)
@@ -41,8 +40,6 @@ CAS - TBD
 **[원문]**
 위키 : https://ko.wikipedia.org/wiki/%ED%86%B5%ED%95%A9_%EC%9D%B8%EC%A6%9D 
 조대협 블로그 : http://bcho.tistory.com/755
-
-###PingFederate(SSO)
 
 ###Facebook OAuth
 추가적인 보안 강화를 위해 사용자 인증(ID, Password)뿐만 아니라, 클라이언트 인증 방식을 추가할 수 있다. 페이스북은 API 토큰을 발급받도록 사용자 ID, 비밀번호 뿐만 아니라 Client ID와 Client Secret이라는 것을 같이 입력받도록 하는데, Client ID는 특정 앱에 대한 등록 ID이고 Client Secret은 특정 앱에 대한 비밀번호로, 페이스북 개발자 포털에서 앱을 등록하면 앱 별로 발급되는 일종의 비밀번호다.
@@ -87,6 +84,8 @@ API 토큰을 발급받을 때, Client ID와 Client Secret을 이용하여 클�
 ![](/fblogin.PNG)
 
 ![](/fbscope.PNG)
+
+###PingFederate(SSO)
 
 
 
