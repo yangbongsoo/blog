@@ -40,9 +40,7 @@ Open AM - Sun IDM을 모태로 하여, 현재 오픈소스화 되었다. 아무�
 CAS - TBD
 
 **[원문]**
-
 위키 : https://ko.wikipedia.org/wiki/%ED%86%B5%ED%95%A9_%EC%9D%B8%EC%A6%9D 
-
 조대협 블로그 : http://bcho.tistory.com/755
 
 ###PingFederate(SSO)
