@@ -114,3 +114,24 @@ cf) 사용자 로그인 인증방식은 웹 사이트 로그인이 더 쉽도록
 
 **사이트마다 각기 다른 쿠키들**
 보통 브라우저는 쿠키를 생성한 서버에게만 쿠키에 담긴 정보를 전달한다. joes-hardware.com에서 생성된 쿠키는 joes-hardware.com에만 보내고 bobs-books.com이나 mary-movie.com에는 보내지 않는다.
+
+서버는 쿠키를 생성할 때 Set-Cookie 응답 헤더에 Domain 속성을 기술해서 어떤 사이트가 그 쿠키를 읽을 수 있는지 제어할 수 있다.
+```
+Set-cookie: user="mary17"; domain="airtravelbargains.com"
+```
+예를 들어 위의 HTTP 응답 헤더는 브라우저가 user="mary17"이라는 쿠키를 .airtravelbargains.com 도메인을 가지고 있는 모든 사이트에 전달한다는 의미다.
+
+웹 사이트 일부에만 쿠키를 적용할 수도 있다. URL 경로의 앞부분을 가리키는 Path 속성을 기술해서 해당 경로에 속하는 페이지에만 쿠키를 전달한다.
+```
+Set-cookie: pref=compact; domain="airtravelbargains.com"; path=/autos/
+```
+만약 사용자가 `http://www.airtravelbargains.com/specials.html`에 접근하면 
+```
+Cookie: user="mary17"
+```
+위와 같은 쿠키만 얻게 된다. 하지만 `http://www.airtravelbargains.com/autos/cheapo/index.html`로 접근하면 
+```
+Cookie: user="mary17"
+Cookie: pref=compact
+```
+다음과 같은 두 가지 쿠키를 받게 된다.
