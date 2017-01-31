@@ -47,7 +47,7 @@ WSO2 Identity server의 경우에는 각 instance의 memory에 이 session 정�
 
 두번째는 **로그 아웃에 대한 문제**이다. Sp A나 Sp B에 SAML을 이용한 초기 인증이 성공한 경우, 제 로그인(인증)을 막기 위해서 자체적으로 HttpSession등을 사용하여, 별도의 login session을 유지해야 하는데, 이경우 Sp A,Sp B의 Session Time out 시간이 다를 수 있다. 한 사이트에서 logout을 해서 전체 사이트에 걸쳐서 logout이 안될 수 있는 incosistency 문제가 발생한다.
 
-그래서 WSO2 identity server의 경우에는 별도의 logout URL을 정의하여, IdP에서 log out을 한경우에 전체 사이트에서 log out을 시키는 global log out 기능을 제공한다.
+그래서 WSO2 identity server의 경우에는 별도의 logout URL을 정의하여, IdP에서 logout을 한경우에 전체 사이트에서 logout을 시키는 global logout 기능을 제공한다.
 
 **[원문]**
 위키 : https://ko.wikipedia.org/wiki/%ED%86%B5%ED%95%A9_%EC%9D%B8%EC%A6%9D 
@@ -61,8 +61,7 @@ WSO2 Identity server의 경우에는 각 instance의 memory에 이 session 정�
 API 토큰을 발급받을 때, Client ID와 Client Secret을 이용하여 클라이언트 앱을 인증하고 사용자 ID와 비밀번호를 추가로 받아서 사용자를 인증해 API 액세스 토큰을 발급한다. 
 
 **제 3자 인증 방식(OAuth 2.0 Autorization grant type)**
-
-제 3자 인증 방식은 페이스북이나 트위터와 같은 API 서비스 제공자들이 파트너 애플리케이션에 많이 적용하는 방법으로 자신의 서비스를 페이스북 계정을 이용하여 인증하는 경우다.
+페이스북이나 트위터와 같은 API 서비스 제공자들이 파트너 애플리케이션에 많이 적용하는 방법으로 자신의 서비스를 페이스북 계정을 이용하여 인증하는 경우다.
 
 중요한 점은 자신의 서비스에서 사용자 비밀번호를 받지 않고, 페이스북이 사용자를 인증하고 알려주는 방식이다. 즉, 파트너 서비스에는 페이스북 사용자의 비밀번호가 노출되지 않는 방식이다. 전체적인 흐름을 보면 다음과 같다.
 
