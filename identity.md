@@ -12,21 +12,21 @@ SAML은 어떤 구현체가 아니라 SSO등(꼭 SSO만은 아님)을 구현하�
 
 HTTP GET, POST 또는 SOAP 웹서비스 등 여러가지 방법으로 구현될 수 있으며, 여기서는 HTTP Post를 이용한 SSO 원리와 솔루션 설계시 유의 사항을 설명한다.
 
-**site SpA로 초기 로그인**
+**site Sp A로 초기 로그인**
 ![](/assets/SAML_sso1.png)
 
-1. Browser에서 사이트 SpA로 접속한다.
-2. 사이트 SpA에는 로그인이 되어 있지 않기 때문에 (세션이 없어서). SpA에서는 SAML request를 만들어서, Browser에게로 redirect URL을 보낸다.
-3. Browser는 redirect URL에 따라 IdP에 접속하고, Idp에서 login form을 넣고 log in을 한다. 이때, IdP와 Brower 사이에 HttpSession 또는 Cookie로 Login에 대한 정보를 기록한다. 그리고 다시 사이트 SpA로의 SAML response를 포함한 redirect URL을 browser로 전송한다.
-4. Browser는 SAML reponse를 가지고 SpA로 접속하면, SpA에는 인증된 정보를 가지고 로그인 처리를 한다. ※ 이 과정에서는 바로 사이트 SpA의 사용자 페이지(예를 들어 /home)등으로 가는 것이 아니라, SAML에 의해서 미리 정의한 SpA의 SAML response 처리 URL로 갔다가 SAML response를 처리가 끝나면 인증 처리를 한후, 사용자 페이지(/home)으로 다시 redirect한다.
+1. Browser에서 사이트 Sp A로 접속한다.
+2. 사이트 Sp A에는 로그인이 되어 있지 않기 때문에 (세션이 없어서). Sp A에서는 SAML request를 만들어서, Browser에게로 redirect URL을 보낸다.
+3. Browser는 redirect URL에 따라 IdP에 접속하고, Idp에서 login form을 넣고 log in을 한다. 이때, IdP와 Brower 사이에 HttpSession 또는 Cookie로 Login에 대한 정보를 기록한다. 그리고 다시 사이트 Sp A로의 SAML response를 포함한 redirect URL을 browser로 전송한다.
+4. Browser는 SAML reponse를 가지고 Sp A로 접속하면, Sp A에는 인증된 정보를 가지고 로그인 처리를 한다. ※ 이 과정에서는 바로 사이트 Sp A의 사용자 페이지(예를 들어 /home)등으로 가는 것이 아니라, SAML에 의해서 미리 정의한 Sp A의 SAML response 처리 URL로 갔다가 SAML response를 처리가 끝나면 인증 처리를 한후, 사용자 페이지(/home)으로 다시 redirect한다.
 
 
-**site SpA로 로그인된 상태에서 site SpA로 로그인**
+**site Sp A로 로그인된 상태에서 site Sp A로 로그인**
 ![](/assets/SAML_sso2.png)
 
-1. 사이트 SpA에서 로그인된 상태에서 SpB에 접속한다.
-2. 사이트 SpB는 로그인이 되어 있지 않기 때문에, SAML 메시지를 만들어서 IdP의 login from으로 redirect URL을 보낸다.
-3. 브라우져는 redirect URL을 따라서 IdP에 접속을 한다. IdP에 접속을 하면 앞의 과정에서 이미 Session 또는 Cookie가 만들어져 있기 때문에 별도의 로그인 폼을 띄위지 않고, SAML response message와 함께, SpB로의 redirect URL을 전송한다. 
+1. 사이트 Sp A에서 로그인된 상태에서 Sp B에 접속한다.
+2. 사이트 Sp B는 로그인이 되어 있지 않기 때문에, SAML 메시지를 만들어서 IdP의 login from으로 redirect URL을 보낸다.
+3. 브라우져는 redirect URL을 따라서 IdP에 접속을 한다. IdP에 접속을 하면 앞의 과정에서 이미 Session 또는 Cookie가 만들어져 있기 때문에 별도의 로그인 폼을 띄위지 않고, SAML response message와 함께, Sp B로의 redirect URL을 전송한다. 
 4. Browser는 Sp B에 인증된 정보를 가지고 로그인한다.
 
 
@@ -35,9 +35,19 @@ simplePHPSAML : 가장 널리 쓰이고, 사용이 쉽다.
 
 Shibboleth : java stack으로 구현이 되어 있으며, terracotta를 이용하여 session을 저장하기 때문에 상대적으로 확장성이 높다.
 
-WSO2 identity server : 앞에서도 언급하였듯이, 확장성에 문제가 있는 것으로 보이며, 자체 OSGi 컨테이너인 carbon 엔진 위에서 동작한다. SAML 뿐만 아니라 OAuth,STS 서비스를 추가 지원하며, Provisioning protocol인 SCIM도 함께 지원한다. 오픈 소스이지만, 제품 완성도가 매우 높고, 사용이 매우 쉽다. (모니터링,관리 기능등이 강점)
+WSO2 identity server : 자체 OSGi 컨테이너인 carbon 엔진 위에서 동작한다. SAML 뿐만 아니라 OAuth,STS 서비스를 추가 지원하며, Provisioning protocol인 SCIM도 함께 지원한다. 오픈 소스이지만, 제품 완성도가 매우 높고, 사용이 매우 쉽다. (모니터링,관리 기능등이 강점)
 
 Open AM : Sun IDM을 모태로 하여, 현재 오픈소스화 되었다. 아무래도 enterprise 제품을 기반으로 하다 보니 복잡도가 상대적으로 높다.
+
+**솔루션 설계 시 유의사항**
+두 가지 기술적인 이슈가 발생하는데 첫번째는 IdP에 대규모 사용자를 지원할 경우, Session 정보를 어떻게 분산 저장할것인가이다.
+WSO2 Identity server의 경우에는 각 instance의 memory에 이 session 정보를 저장하고, 자체 clustering feature를 이용하여 이 session을 상호 복제한다. Oracle WebLogic이나 Apache Tomcat cluster의 Http session clustering과 같은 원리이다.
+
+이 경우에 각 instance의 메모리 size에 따라 저장할 수 있는 session의 수의 한계를 가지게 되고, instance간 session 복제로 인하여, 장애 전파 등의 가능성을 가지게 된다. 그래서 Shibboleth의 경우에는 이 Session 정보를 별도의 terracotta와 같은 data grid에 저장하도록 하여, 확장성을 보장할 수 있다.
+
+두번째는 로그 아웃에 대한 문제인다. Sp A나 Sp B에 SAML을 이용한 초기 인증이 성공한 경우, 제 로그인(인증)을 막기 위해서 자체적으로 HttpSession등을 사용하여, 별도의 log in session을 유지해야 하는데, 이경우 Sp A,Sp B의 Session Time out 시간이 다를 수 있기 때문에, 한 사이트에서 log out이 된 경우 전체 사이트에 걸쳐서 log out이 안될 수 있는 incosistency 문제가 발생한다.
+그래서 WSO2 identity server의 경우에는 별도의 logout URL을 정의하여, IdP에서 log out을 한경우에 전체 사이트에서 log out을 시키는 global log out 기능을 제공한다.
+
 
 **[원문]**
 위키 : https://ko.wikipedia.org/wiki/%ED%86%B5%ED%95%A9_%EC%9D%B8%EC%A6%9D 
