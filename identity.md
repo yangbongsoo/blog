@@ -40,12 +40,12 @@ WSO2 identity server : 자체 OSGi 컨테이너인 carbon 엔진 위에서 동�
 Open AM : Sun IDM을 모태로 하여, 현재 오픈소스화 되었다. 아무래도 enterprise 제품을 기반으로 하다 보니 복잡도가 상대적으로 높다.
 
 **솔루션 설계 시 유의사항**
-두 가지 기술적인 이슈가 발생하는데 첫번째는 IdP에 대규모 사용자를 지원할 경우, Session 정보를 어떻게 분산 저장할것인가이다.
+두 가지 기술적인 이슈가 발생하는데 첫번째는 IdP에 대규모 사용자를 지원할 경우, **Session 정보를 어떻게 분산 저장할것인가**이다.
 WSO2 Identity server의 경우에는 각 instance의 memory에 이 session 정보를 저장하고, 자체 clustering feature를 이용하여 이 session을 상호 복제한다. Oracle WebLogic이나 Apache Tomcat cluster의 Http session clustering과 같은 원리이다.
 
 이 경우에 각 instance의 메모리 size에 따라 저장할 수 있는 session의 수의 한계를 가지게 되고, instance간 session 복제로 인하여, 장애 전파 등의 가능성을 가지게 된다. 그래서 Shibboleth의 경우에는 이 Session 정보를 별도의 terracotta와 같은 data grid에 저장하도록 하여, 확장성을 보장할 수 있다.
 
-두번째는 로그 아웃에 대한 문제인다. Sp A나 Sp B에 SAML을 이용한 초기 인증이 성공한 경우, 제 로그인(인증)을 막기 위해서 자체적으로 HttpSession등을 사용하여, 별도의 log in session을 유지해야 하는데, 이경우 Sp A,Sp B의 Session Time out 시간이 다를 수 있기 때문에, 한 사이트에서 log out이 된 경우 전체 사이트에 걸쳐서 log out이 안될 수 있는 incosistency 문제가 발생한다.
+두번째는 **로그 아웃에 대한 문제**이다. Sp A나 Sp B에 SAML을 이용한 초기 인증이 성공한 경우, 제 로그인(인증)을 막기 위해서 자체적으로 HttpSession등을 사용하여, 별도의 login session을 유지해야 하는데, 이경우 Sp A,Sp B의 Session Time out 시간이 다를 수 있기 때문에, 한 사이트에서 log out이 된 경우 전체 사이트에 걸쳐서 log out이 안될 수 있는 incosistency 문제가 발생한다.
 그래서 WSO2 identity server의 경우에는 별도의 logout URL을 정의하여, IdP에서 log out을 한경우에 전체 사이트에서 log out을 시키는 global log out 기능을 제공한다.
 
 
