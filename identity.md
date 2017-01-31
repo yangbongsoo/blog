@@ -49,7 +49,11 @@ WSO2 Identity server의 경우에는 각 instance의 memory에 이 session 정�
 
 그래서 WSO2 identity server의 경우에는 별도의 logout URL을 정의하여, IdP에서 logout을 한경우에 전체 사이트에서 logout을 시키는 global logout 기능을 제공한다.
 
-**[원문]**
+**cf) PingFederate(SSO)**
+The PingFederate® server는 고객, 직원, 협력사들에게 SSO, API security를 제공하는, 모든 기능을 갖춘 federation server다. SAML, WS-Federation, WS-Trust, OAuth and OpenID Connect을 비롯한 모든 최신 identity 표준을 지원한다. 
+홈페이지 : https://www.pingidentity.com/en/products/pingfederate.html
+
+**[본문]**
 위키 : https://ko.wikipedia.org/wiki/%ED%86%B5%ED%95%A9_%EC%9D%B8%EC%A6%9D 
 조대협 블로그 : http://bcho.tistory.com/755
 
@@ -95,8 +99,6 @@ API 토큰을 발급받을 때, Client ID와 Client Secret을 이용하여 클�
 ![](/fblogin.PNG)
 
 ![](/fbscope.PNG)
-
-###PingFederate(SSO)
 
 
 
