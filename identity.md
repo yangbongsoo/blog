@@ -99,8 +99,3 @@ API 토큰을 발급받을 때, Client ID와 Client Secret을 이용하여 클�
 ![](/fblogin.PNG)
 
 ![](/fbscope.PNG)
-
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-
