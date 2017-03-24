@@ -71,6 +71,7 @@ public class UserServiceImpl implements UserService {
 ...
 ```
 **cf) 프록시 패턴 vs 데코레이터 패턴**
+
 먼저 프록시란 자신이 클라이언트가 사용하려고 하는 실제 대상인 것처럼 위장해서 클라이언트의 요청을 받아주는 것을 말한다. 그리고 프록시를 통해 최종적으로 요청을 위임받아 처리하는 실제 오브젝트를 타깃이라고 부른다.
 
 프록시의 특징은 타깃과 같은 인터페이스를 구현했다는 것과 프록시가 타깃을 제어할 수 있는 위치에 있다는 것이다. 프록시는 사용 목적에 따라 두 가지로 구분할 수 있다. 첫째는 클라이언트가 타깃에 접근하는 방법을 제어(프록시 패턴)하기 위해서다. 두 번째는 타깃에 부가적인 기능을 부여(데코레이터 패턴)해주기 위해서다.
@@ -243,6 +244,7 @@ static class UppercaseAdvice implements MethodInterceptor {
 }
 ```
 **어드바이스 : 타깃이 필요 없는 순수한 부가기능을 담은 오브젝트**
+
 InvocationHandler를 구현했을 때와 달리 MethodInterceptor를 구현한 UppercaseAdvice에는 타깃 오브젝트가 등장하지 않는다. MethodInterceptor로는 메서드 정보와 함께 타깃 오브젝트가 담긴 MethodInvocation 오브젝트가 전달된다. MethodInvocation은 일종의 콜백 오브젝트로, proceed() 메서드를 실행하면 타깃 오브젝트의 메서드를 내부적으로 실행해주는 기능이 있다(MethodInvocation 구현 클래스는 일종의 공유 가능한 템플릿처럼 동작).
 
 바로 이 점이 JDK의 다이내믹 프록시를 직접 사용하는 코드와 스프링이 제공해주는 프록시 추상화 기능인 ProxyFactoryBean을 사용하는 코드의 가장 큰 차이점이자 ProxyFactoryBean의 장점이다. ProxyFactoryBean은 작은 단위의 템플릿/콜백 구조를 응용해서 적용했기 때문에 템플릿 역할을 하는 MethodInvocation을 싱글톤으로 두고 공유할 수 있다. 마치 SQL 파라미터 정보에 종속되지 않는 JdbcTemplate이기 때문에 수많은 DAO 메서드가 하나의 JdbcTemplate 오브젝트를 공유할 수 있는 것과 마찬가지다.
@@ -313,7 +315,7 @@ public class TransactionAdvice implements MethodInterceptor {
 ```
 이제 ProxyFactoryBean을 등록할 차례다. 아래와 같이 프로퍼티에 타깃 빈과 어드바이저 빈을 지정해주면 된다.
 ```xml
-<bean id="userService class="org.springframework.aop.framework.ProxyFactoryBean">
+<bean id="userService" class="org.springframework.aop.framework.ProxyFactoryBean">
   <property name="target" ref="userServiceImpl" />
   <property name="interceptorNames">
     <list>
