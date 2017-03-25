@@ -422,7 +422,11 @@ DefaultAdvisorAutoProxyCreator 등록은 다음 한 줄이면 충분하다.
   <aop:advisor advice-reg="transactionAdvice" pointcut-ref="transactionPointcut" />
 </aop:config>
 ```
-`<aop:config>` : AspectJAdvisorAutoProxyCreator를 빈으로 등록해준다. `<aop:pointcut>` : AspectJExpressionPointcut을 빈으로 등록해준다. `<aop:advisor>` : DefaultBeanFactoryPointcutAdvisor를 빈으로 등록해준다.
+`<aop:config>` : AspectJAdvisorAutoProxyCreator를 빈으로 등록해준다.
+
+`<aop:pointcut>` : AspectJExpressionPointcut을 빈으로 등록해준다. 
+
+`<aop:advisor>` : DefaultBeanFactoryPointcutAdvisor를 빈으로 등록해준다.
 ##5. 트랜잭션 속성
 PlatformTransactionManager로 대표되는 스프링의 트랜잭션 추상화를 설명하면서 그냥 넘어간 게 한 가지 있다. 트랜잭션 매니저에서 트랜잭션을 가져올 때 사용한 DefaultTransactionDefinition 오브젝트다.
 ```java
