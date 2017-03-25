@@ -347,6 +347,7 @@ public class TransactionAdvice implements MethodInterceptor {
 적용할 빈을 선정하는 로직이 추가된 포인트컷이 담긴 어드바이저를 등록하고 빈 후처리기를 사용하면 일일이 ProxyFactoryBean 빈을 등록하지 않아도 타깃 오브젝트에 자동으로 프록시가 적용되게 할 수 있다. 마지막 남은 번거로운 ProxyFactoryBean 설정 문제를 말끔하게 해결해주는 놀라운 방법이다.
 
 **확장된 포인트컷**
+
 지금까지 포인트컷이란 타깃 오브젝트의 메서드 중에서 어떤 메서드에 부가기능을 적용할지를 선정해주는 역할을 한다고 했다. 그러나 포인트컷은 등록된 빈 중에서 어떤 빈에 프록시를 적용할지를 선택하는 기능이 또 있다.
 ```java
 public interface Pointcut {
@@ -357,6 +358,7 @@ public interface Pointcut {
 ProxyFactoryBean에서는 굳이 클래스 레벨의 필터는 필요 없었지만, 모든 빈에 대해 프록시 자동 적용 대상을 선별해야 하는 빈 후처리기인 DefaultAdvisorAutoProxyCreator는 클래스와 메서드 선정 알고리즘을 모두 갖고 있는 포인트컷이 필요하다. 그런 포인트컷과 어드바이스가 결합되어 있는 어드바이저가 등록되어 있어야 한다.
 
 **클래스 필터를 적용한 포인트컷 작성**
+
 만들어야 할 클래스는 하나 뿐이다. 메서드 이름만 비교하던 포인트컷인 NameMethodPointcut을 상속해서 프로퍼티로 주어진 이름 패턴을 가지고 클래스 이름을 비교하는 ClassFilter를 추가하도록 만들 것이다.
 ```java
 public class NameMatchClassMethodPointcut extends NameMatchMethodPointcut {
