@@ -380,12 +380,14 @@ public class NameMatchClassMethodPointcut extends NameMatchMethodPointcut {
 }
 ```
 **어드바이저를 이용하는 자동 프록시 생성기 등록**
+
 적용할 자동 프록시 생성기인 DefaultAdvisorAutoProxyCreator는 등록된 빈 중에서 Advisor 인터페이스를 구현한 것을 모두 찾는다. 그리고 생성되는 모든 빈에 대해 어드바이저의 포인트컷을 적용해보면서 프록시 적용 대상을 선정한다. 빈 클래스가 프록시 선정 대상이라면 프록시를 만들어 원래 빈 오브젝트와 바꿔치기한다. 원래 빈 오브젝트는 프록시 뒤에 연결돼서 프록시를 통해서만 접근 가능하게 바뀌는 것이다. 따라서 타깃 빈에 의존한다고 정의한 다른 빈들은 프록시 오브젝트를 대신 DI 받게 될 것이다.
 DefaultAdvisorAutoProxyCreator 등록은 다음 한 줄이면 충분하다. 
 ```xml
 <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
 ```
 **포인트컷 등록**
+
 아래와 같이 기존의 포인트컷 설정을 삭제하고 새로 만든 클래스 필터 지원 포인트컷을 빈으로 등록한다. ServiceImpl로 이름이 끝나는 클래스와 upgrade로 시작하는 메서드를 선정해주는 포인트컷이다.
 ```xml
 <bean id="transactionPointcut" class="xx.xx.NameMatchClassMethodPointcut">
@@ -394,6 +396,7 @@ DefaultAdvisorAutoProxyCreator 등록은 다음 한 줄이면 충분하다.
 </bean>
 ```
 **ProxyFactoryBean 제거와 서비스 빈의 원상복구**
+
 프록시를 도입했던 때부터 아이디를 바꾸고 프록시에 DI 돼서 간접적으로 사용돼야 했던 userServiceImpl 빈의 아이디를 이제는 당당하게 userService로 되돌려놓을 수 있다. 더 이상 명시적인 프록시 팩토리 빈을 등록하지 않기 때문이다. 마지막으로 남았던 ProxyFactoryBean 타입의 빈은 삭제해버려도 좋다.
 ```xml
 <bean id="userService class="xx.xx.UserServiceImpl">
@@ -440,6 +443,7 @@ public Object invoke(MethodInvocation invocation) throws Throwable {
 DefaultTransactionDefinition이 구현하고 있는 TransactionDefinition 인터페이스는 트랜잭션의 동작방식에 영향을 줄 수 있는 네 가지 속성을 정의하고 있다.
 
 **트랜잭션 전파**
+
 트랜잭션의 경계에서 이미 진행 중인 트랜잭션이 있을 때 또는 없을 때, 어떻게 동작할 것인가를 결정하는 방식을 말한다.
 
 ![](스크린샷 2016-09-18 오후 10.33.33.jpg)
@@ -461,17 +465,21 @@ DefaultTransactionDefinition이 구현하고 있는 TransactionDefinition 인터
 이 외에도 다양한 트랜잭션 전파 속성을 사용할 수 있다. 트랜잭션 매니저를 통해 트랜잭션을 시작하려고 할 때 getTransaction()이라는 메서드를 사용하는 이유는 바로 이 트랜잭션 전파 속성이 있기 때문이다.
 
 **격리수준**
+
 모든 DB 트랜잭션은 격리수준(isolation level)을 갖고 있어야 한다. 서버환경에서는 여러 개의 트랜잭션이 동시에 진행될 수 있다. 따라서 적절하게 격리수준을 조정해서 가능한 한 많은 트랜잭션을 동시에 진행시키면서도 문제가 발생하지 않게 하는 제어가 필요하다.
 
 **제한시간**
+
 트랜잭션을 수행하는 제한시간(timeout)을 설정할 수 있다. DefaultTransactionDefinition의 기본 설정은 제한시간이 없다는 것이다. 제한시간은 트랜잭션을 직접 시작할 수 있는 PROPAGATION_REQUIRED나 PROPAGATION_REQUIRES_NEW와 함께 사용해야만 의미가 있다.
 
 **읽기전용**
+
 읽기전용으로 설정해두면 트랜잭션 내에서 데이터를 조작하는 시도를 막아줄 수 있다. 또한 데이터 액세스 기술에 따라서 성능이 향상될 수도 있다.
 
 트랜잭션 정의를 수정하려면 어떻게 해야 할까? TransactionDefinition 오브젝트를 생성하고 사용하는 코드는 트랜잭션 경계설정 기능을 가진 TransactionAdvice다. 트랜잭션 정의를 바꾸고 싶으면 디폴트 속성을 갖고 있는 DefaultTransactionDefinition을 사용하는 대신 외부에서 정의된 TransactionDefinition 오브젝트를 DI 받아서 사용하도록 만들면 된다. TransactionDefinition 타입의 빈을 정의해두면 프로퍼티를 통해 원하는 속성을 지정해줄 수 있다. 하지만 이 방법으로 트랜잭션 속성을 변경하면 TransactionAdvice를 사용하는 모든 트랜잭션의 속성이 한꺼번에 바뀐다는 문제가 있다. 원하는 메서드만 선택해서 독자적인 트랜잭션 정의를 적용할 수 있는 방법은 없을까?
 
 **트랜잭션 인터셉터와 트랜잭션 속성**
+
 스프링에는 편리하게 트랜잭션 경계설정 어드바이스로 사용할 수 있도록 만들어진 TransactionInterceptor가 존재한다. TransactionInterceptor 어드바이스의 동작방식은 기존에 만들었던 TransactionAdvice와 다르지 않다. 다만 트랜잭션 정의를 메서드 이름 패턴을 이용해서 다르게 지정할 수 있는 방법을 추가로 제공해줄 뿐이다.
 
 TransactionInterceptor는 PlatformTransactionManager와 Properties 타입의 두 가지 프로퍼티를 갖고 있다. 트랜잭션 매니저 프로퍼티는 잘 알고 있지만 Properties 타입의 프로퍼티는 처음 보는 것이다.
@@ -493,6 +501,7 @@ TransactionInterceptor는 이런 TransactionAttribute를 Properties라는 일종
 cf) readOnly나 timeout 등은 트랜잭션이 처음 시작될 때가 아니라면 적용되지 않는다.
 
 **tx 네임스페이스를 이용한 설정 방법**
+
 ![](스크린샷 2016-09-18 오후 11.51.20.jpg)
 
 ###프록시 방식 AOP는 같은 타깃 오브젝트 내의 메서드를 호출할 때는 적용되지 않는다.
