@@ -1,6 +1,9 @@
 # Summary
 
 * [Introduction](README.md)
+* [자바 성능 튜닝 이야기](c790-bc14-c131-b2a5-d29c-b2dd-c774-c57c-ae30.md)
+* [자바 병렬 프로그래밍\(작업중\)](자바-병렬-프로그래밍작업중.md)
+  * [1부 기본 원리](1부-기본-원리.md)
 * [Identity](identity.md)
 * [Spring 작업 이슈](spring_c791_c5c5_c774_c288.md)
 * [클린코더스 강의 정리](d074_b9b0_cf54_b354_c2a4_ac15_c758_c815_b9ac.md)
@@ -13,7 +16,6 @@
 * [소프트웨어 품질관리\(NHN은 이렇게한다\)](nhnc740_c774_b807_ac8c_d55c_b2e421_c18c_d504_d2b8_.md)
 * [서블릿 컨테이너의 이해\(웹프로그래머를 위한\) ](c11c-be14-b9bf-cee8-d14c-c774-b108-c758-c774-d57428-c6f9-d504-b85c-adf8-b798-ba38-b97c-c704-d55c29.md)
 * [웹을 지탱하는 기술](c6f9_c744_c9c0_d0f1_d558_b294_ae30_c220.md)
-* [객체지향의 사실과 오해](ac1d_ccb4_c9c0_d5a5_c758_c0ac_c2e4_acfc_c624_d574.md)
 * [자바 병렬 프로그래밍\(작업중\)](자바-병렬-프로그래밍작업중.md)
   * [1부 기본 원리](1부-기본-원리.md)
 * [Effective Java](effective_java.md)
