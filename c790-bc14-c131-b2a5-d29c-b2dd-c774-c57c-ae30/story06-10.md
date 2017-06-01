@@ -35,4 +35,25 @@ static 초기화 블록은 위와 같이 클래스 어느 곳에나 지정할 �
 static의 특징은 다른 JVM 에서는 static이라고 선언해도 다른 주소나 다른 값을 참조하지만, 하나의 JVM이나 WAS 인스턴스에서는 같은 주소에 존재하는 값을 참조한다는 것이다. 그리고 GC의 대상도 되지 않는다. 그러므로 static을 잘 사용하면 성능을 뛰어나게 향상시킬 수 있지만, 잘못 사용하면 예기치 못한 결과를 초래하게 된다.
 
 특히 웹 환경에서 static을 잘못 사용하다가는 여러 쓰레드에서 하나의 변수에 접근할 수도 있기 때문에 데이터가 꼬이는 큰 일이 발생할 수도 있다.
-###static 잘 활용하기
+###static 잘못 쓰면 이렇게 된다
+```java
+public class BadQueryManager {
+    private static String queryURL = null;
+
+    public BadQueryManager(String badUrl) {
+        queryURL = badUrl;
+    }
+    
+    public static String getSql(String idSql) {
+        try {
+            FileReader reader = new FileReader();
+            HashMap<String, String> document = reader.read(queryURL);
+            return document.get(idSql);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+}
+```
+만약 어떤 화면에서 BadQueryManager의 생성자를  통해서 queryURL을 설정하고, getSql을 호출하기 전에, 다른 queryURL을 사용하는 화면의 스레드에서 BadQueryManager의 생성자를 호출하면 어떤 일이 발생할까? 그때부터는 시스템이 오류를 발생시킨다.
