@@ -2,6 +2,7 @@
 
 * [Introduction](README.md)
 * [자바 성능 튜닝 이야기\(작업중\)](c790-bc14-c131-b2a5-d29c-b2dd-c774-c57c-ae30.md)
+  * [Story02-05](c790-bc14-c131-b2a5-d29c-b2dd-c774-c57c-ae30/story02-05.md)
 * [자바 병렬 프로그래밍\(작업중\)](자바-병렬-프로그래밍작업중.md)
   * [1부 기본 원리](1부-기본-원리.md)
 * [Identity](identity.md)
