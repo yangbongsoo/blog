@@ -59,6 +59,7 @@ public class BadQueryManager {
 만약 어떤 화면에서 BadQueryManager의 생성자를  통해서 queryURL을 설정하고, getSql을 호출하기 전에, 다른 queryURL을 사용하는 화면의 스레드에서 BadQueryManager의 생성자를 호출하면 어떤 일이 발생할까? 그때부터는 시스템이 오류를 발생시킨다.
 
 ## Story07 클래스 정보, 어떻게 알아낼 수 있나?
+reflection 관련 클래스를 어떻게 사용해야 하는지 간단한 예를 통해서 살펴보자.
 ```java
 public class DemoClass {
     private String privateField;
@@ -127,3 +128,4 @@ Class Simple Name : DemoClass
 Package Name : org.sample 
 toString : class org.sample.DemoClass 
 ```
+이 코드는 클래스 정보만을 가져오는 부분이다. 이제 필드 정보를 읽는 부분을 보자.
