@@ -209,3 +209,4 @@ public String publicRetMethod()
 public InnerClass getInnerClass() 
  void method() 
 ```
+메서드 가져오는 부분에서 중요한 것은 예외와 매개변수를 처리하는 부분이다. 이 두 가지 데이터는 일반적으로 하나가 아니기 때문에 위와 같이 반복하면서 해당 부분의 정보를 읽어 와야 한다.
