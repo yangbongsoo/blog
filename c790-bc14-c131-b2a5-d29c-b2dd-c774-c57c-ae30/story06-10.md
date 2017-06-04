@@ -131,7 +131,6 @@ toString : class org.sample.DemoClass
 이 코드는 클래스 정보만을 가져오는 부분이다. 이제 필드 정보를 읽는 부분을 보자.
 ```java
     public void getFieldInfo(Class demoClass) {
-        System.out.println("--------------------");
         Field[] field1 = demoClass.getDeclaredFields();
         Field[] field2 = demoClass.getFields();
         System.out.format("Declared Fields : %d, Fields: %d\n", field1.length, field2.length);
@@ -145,7 +144,15 @@ toString : class org.sample.DemoClass
         }
     }
 ```
+```
+Declared Fields : 4, Fields: 1
+private String privateField 
+ String field 
+protected String protectedField 
+public String publicField 
+```
 여기서 가장 어려운 부분은 식별자 데이터를 가져오는 부분이다. getModifiers() 메서드에서는 int 타입으로 리턴을 하기 때문에 간단하게 변환을 하기가 어렵다. 그에 대비해서 Modifier 클래스에 static으로 선언되어 있는 Modifier.toString() 메서드가 있다. 이 메서드에 int 타입의 값을 보내면 식별자 정보를 문자열로 리턴한다. 
 
+이제 메서드 정보를 가져오는 부분을 보자.
 
 
