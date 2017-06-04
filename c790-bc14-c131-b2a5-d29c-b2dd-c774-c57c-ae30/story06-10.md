@@ -154,5 +154,58 @@ public String publicField
 여기서 가장 어려운 부분은 식별자 데이터를 가져오는 부분이다. getModifiers() 메서드에서는 int 타입으로 리턴을 하기 때문에 간단하게 변환을 하기가 어렵다. 그에 대비해서 Modifier 클래스에 static으로 선언되어 있는 Modifier.toString() 메서드가 있다. 이 메서드에 int 타입의 값을 보내면 식별자 정보를 문자열로 리턴한다. 
 
 이제 메서드 정보를 가져오는 부분을 보자.
+```java
+    public void getMethodInfo(Class demoClass) {
+        Method[] method1 = demoClass.getDeclaredMethods();
+        Method[] method2 = demoClass.getMethods();
+        System.out.format("Declared methods : %d, Methods : %d\n", method1.length, method2.length);
 
+        for (Method met1 : method1) {
+            // method name info
+            String methodName = met1.getName();
+            // method modifier info
+            int modifier = met1.getModifiers();
+            String modifierStr = Modifier.toString(modifier);
+            // method return type info
+            String returnType = met1.getReturnType().getSimpleName();
+            // method parameter info
+            Class params[] = met1.getParameterTypes();
+            StringBuilder paramStr = new StringBuilder();
+            int paramLen = params.length;
+            if (paramLen != 0) {
+                paramStr.append(params[0].getSimpleName()).append(" arg");
+                for (int loop = 1; loop < paramLen; loop++) {
+                    paramStr.append(",")
+                            .append(params[loop].getName())
+                            .append(" arg")
+                            .append(loop);
+                }
+            }
 
+            // method exception info
+            Class exceptions[] = met1.getExceptionTypes();
+            StringBuilder exceptionStr = new StringBuilder();
+            int exceptionLen = exceptions.length;
+            if (exceptionLen != 0) {
+                exceptionStr.append("throws").append(exceptions[0].getSimpleName());
+                for (int loop = 1; loop < exceptionLen; loop++) {
+                    exceptionStr.append(",")
+                            .append(exceptions[loop].getSimpleName());
+                }
+            }
+
+            // print result
+            System.out.format("%s %s %s(%s) %s\n", modifierStr, returnType, methodName, paramStr, exceptionStr);
+        }
+    }
+```
+```
+Declared methods : 7, Methods : 13
+public String publicMethod(String arg,int arg1) 
+public void publicMethod() throwsIOException,Exception
+protected void protectedMethod() 
+private void privateMethod() 
+public String publicRetMethod() 
+public InnerClass getInnerClass() 
+ void method() 
+```
