@@ -210,3 +210,25 @@ public InnerClass getInnerClass()
  void method() 
 ```
 메서드 가져오는 부분에서 중요한 것은 예외와 매개변수를 처리하는 부분이다. 이 두 가지 데이터는 일반적으로 하나가 아니기 때문에 위와 같이 반복하면서 해당 부분의 정보를 읽어 와야 한다.
+
+###reflection 클래스를 잘못 사용한 사례
+```java
+public String checkClass(Object src) {
+	if (src.getClass().getName().equals(“java.math.BigDecimal”)) {
+		// 데이터 처리
+	}
+
+	// 이하 생략
+}
+```
+이렇게 사용할 경우 응답 속도에 그리 많은 영향을 주지는 않지만, 많이 사용하면 필요 없는 시간을 낭비하게 된다. getClass() 메서드를 호출할 때 Class 객체를 만들고, 그 객체의 이름을 가져오는 메서드를 수행하는 시간과 메모리를 사용한다.
+```java
+public String checkClass(Object src) {
+	if (src instance java.math.DigDecimal) {
+		// 데이터 처리
+	}
+
+	// 이하 생략
+}
+```
+이러한 부분에서 개선이 필요할 때는 자바의 기본으로 돌아가자.
