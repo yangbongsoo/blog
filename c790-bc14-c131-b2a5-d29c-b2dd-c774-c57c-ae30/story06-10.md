@@ -57,3 +57,73 @@ public class BadQueryManager {
 }
 ```
 만약 어떤 화면에서 BadQueryManager의 생성자를  통해서 queryURL을 설정하고, getSql을 호출하기 전에, 다른 queryURL을 사용하는 화면의 스레드에서 BadQueryManager의 생성자를 호출하면 어떤 일이 발생할까? 그때부터는 시스템이 오류를 발생시킨다.
+
+## Story07 클래스 정보, 어떻게 알아낼 수 있나?
+```java
+public class DemoClass {
+    private String privateField;
+    String field;
+    protected String protectedField;
+    public String publicField;
+
+    public DemoClass() {}
+    public DemoClass(String arg) {}
+
+    public void publicMethod() throws IOException, Exception {}
+
+    public String publicMethod(String s, int i) {
+        return "s="+s+ "i ="+i;
+    }
+
+    protected void protectedMethod() {}
+
+    private void privateMethod() {}
+
+    void method() {}
+
+    public String publicRetMethod() {
+        return null;
+    }
+
+    public InnerClass getInnerClass() {
+        return new InnerClass();
+    }
+
+    public class InnerClass {
+    }
+}
+```
+```java
+public class DemoTest {
+    public static void main(String[] args) {
+        DemoClass dc = new DemoClass(); // 점검 대상 클래스 객체
+        DemoTest dt = new DemoTest();
+        dt.getClassInfos(dc);
+    }
+
+    public void getClassInfos(Object clazz) {
+        Class demoClass = clazz.getClass();
+        getClassInfo(demoClass);
+    }
+
+    public void getClassInfo(Class demoClass) {
+        String className = demoClass.getName();
+        System.out.format("Class Name : %s \n", className);
+        String classCanonicalName = demoClass.getCanonicalName();
+        System.out.format("Class Canonical Name : %s \n", classCanonicalName);
+        String classSimpleName = demoClass.getSimpleName();
+        System.out.format("Class Simple Name : %s \n", classSimpleName);
+        String packageName = demoClass.getPackage().getName();
+        System.out.format("Package Name : %s \n", packageName);
+        String toString = demoClass.toString();
+        System.out.format("toString : %s \n", toString);
+    }
+}
+```
+```
+Class Name : org.sample.DemoClass 
+Class Canonical Name : org.sample.DemoClass 
+Class Simple Name : DemoClass 
+Package Name : org.sample 
+toString : class org.sample.DemoClass 
+```
