@@ -214,7 +214,7 @@ public InnerClass getInnerClass()
 ###reflection 클래스를 잘못 사용한 사례
 ```java
 public String checkClass(Object src) {
-	if (src.getClass().getName().equals(“java.math.BigDecimal”)) {
+	if (src.getClass().getName().equals("java.math.BigDecimal")) {
 		// 데이터 처리
 	}
 
@@ -232,3 +232,56 @@ public String checkClass(Object src) {
 }
 ```
 이러한 부분에서 개선이 필요할 때는 자바의 기본으로 돌아가자.
+
+JMH를 이용하여 얼마나 성능 차이가 있는지 비교해 보자.
+```java
+@State(Scope.Thread)
+@BenchmarkMode({Mode.AverageTime})
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
+public class Reflection {
+
+    int LOOP_COUNT = 100;
+    String result;
+
+    @Benchmark
+    public void withEquals() {
+        Object src = new BigDecimal("6");
+        for (int loop = 0; loop < LOOP_COUNT; loop++) {
+            if (src.getClass().getName().equals("java.math.BigDecimal")) {
+                result = "BigDecimal";
+            }
+        }
+    }
+
+    @Benchmark
+    public void withInstanceof() {
+        Object src = new BigDecimal("6");
+        for (int loop = 0; loop < LOOP_COUNT; loop++) {
+            if (src instanceof java.math.BigDecimal) {
+                result = "BigDecimal";
+            }
+        }
+    }
+
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(Reflection.class.getSimpleName())
+                .warmupIterations(3)
+                .measurementIterations(5)
+                .forks(1)
+                .build();
+
+        new Runner(opt).run();
+    }
+}
+```
+```
+# Run complete. Total time: 00:00:17
+
+Benchmark                  Mode  Cnt  Score   Error  Units
+Reflection.withEquals      avgt    5  0.276 ± 0.024  us/op
+Reflection.withInstanceof  avgt    5  0.028 ± 0.006  us/op
+```
+큰 차이는 발생하지 않지만, 이런 부분이 모여 큰 차이를 만들기 때문에 작은 것부터 생각하면서 코딩하는 습관을 가지는 것이 좋다. 추가로 클래스의 메타 데이터 정보는 
+JVM의 Perm 영역에 저장된다는 사실을 기억해 주기 바란다. 만약 Class 클래스를 사용하여 엄청나게 많은 클래스를 동적으로 생성하는 일이 벌어지면 Perm 영역이 더 이상 
+사용할 수 없게 되어 OutOfMemoryError가 발생할 수도 있으니, 조심해서 사용하자.
