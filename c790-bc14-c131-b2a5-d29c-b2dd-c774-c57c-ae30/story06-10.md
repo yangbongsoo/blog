@@ -285,3 +285,25 @@ Reflection.withInstanceof  avgt    5  0.028 ± 0.006  us/op
 큰 차이는 발생하지 않지만, 이런 부분이 모여 큰 차이를 만들기 때문에 작은 것부터 생각하면서 코딩하는 습관을 가지는 것이 좋다. 추가로 클래스의 메타 데이터 정보는 
 JVM의 Perm 영역에 저장된다는 사실을 기억해 주기 바란다. 만약 Class 클래스를 사용하여 엄청나게 많은 클래스를 동적으로 생성하는 일이 벌어지면 Perm 영역이 더 이상 
 사용할 수 없게 되어 OutOfMemoryError가 발생할 수도 있으니, 조심해서 사용하자.
+
+## Story08 synchronized는 제대로 알고 써야 한다.
+웹 기반 시스템을 개발할 때 스레드를 컨트롤할 일은 별로 없다. 만약 스레드를 직접 건드리면 서비스의 안전성이 떨어질 수도 있으니 자제하는 것이 좋다.
+
+우리가 개발하는 WAS는 여러 개의 스레드가 동작하도록 되어 있다. 그래서 synchronized를 자주 사용한다. 하지만 synchronized를 쓴다고 무조건 안정적인 것은
+아니며, 성능에 영향을 미치는 부분도 있다.
+
+스레드의 구현은 Thread 클래스를 상속받는 방법과 Runnable 인터페이스를 구현하는 방법 두 가지가 있다. 
+```java
+public class RunnableImpl implements Runnable { 
+	public void run() {
+
+	}
+}
+```
+```java
+public class ThreadExtends extends Thread {
+	public void run() {
+
+	}
+}
+```
