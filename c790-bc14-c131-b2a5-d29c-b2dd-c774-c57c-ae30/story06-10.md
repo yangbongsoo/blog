@@ -307,3 +307,14 @@ public class ThreadExtends extends Thread {
 	}
 }
 ```
+```java
+public class RunThreads {
+	public static void main(String[] args) {
+		RunnableImpl ri = new RunnableImpl();
+		new Thread(ri).start();
+
+		ThreadExtends te = new ThreadExtends();
+		te.start();
+	}
+}
+```
