@@ -16,6 +16,7 @@
   * [Part2-2 함수형 데이터 처리](part2-2_d568_c218_d615_b370_c774_d130_cc98_b9ac.md)
   * [Part3-1 효과적인 자바8 프로그래밍](part3-1_d6a8_acfc_c801_c778_c790_bc14_8_d504_b85c_.md)
 * [네이버를 만든 기술, 자바편](b124_c774_bc84_b97c_b9cc_b4e0_ae30_c2202c_c790_bc14_d3b8.md)
+* [객체지향의 사실과오해](ac1d-ccb4-c9c0-d5a5-c758-c0ac-c2e4-acfc-c624-d574.md)
 * [소프트웨어 품질관리\(NHN은 이렇게한다\)](nhnc740_c774_b807_ac8c_d55c_b2e421_c18c_d504_d2b8_.md)
 * [서블릿 컨테이너의 이해\(웹프로그래머를 위한\) ](c11c-be14-b9bf-cee8-d14c-c774-b108-c758-c774-d57428-c6f9-d504-b85c-adf8-b798-ba38-b97c-c704-d55c29.md)
 * [웹을 지탱하는 기술](c6f9_c744_c9c0_d0f1_d558_b294_ae30_c220.md)
@@ -57,5 +58,4 @@
 * [Amazon Cognito\(Android-DynamoDB\)](android-dynamodb.md)
   * [DynamoDB](dynamodb2.md)
   * [Android적용 후기](androidc801_c6a9_d6c4_ae30.md)
-* [객체지향의 사실과오해](ac1d-ccb4-c9c0-d5a5-c758-c0ac-c2e4-acfc-c624-d574.md)
 
