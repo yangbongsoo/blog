@@ -117,3 +117,52 @@ worker.tomcat.connection_pool_timeout=100
 worker.list=jkstatus
 worker.jkstatus.type=status
 ```
+
+#Tomcat
+##server.xml
+```xml
+<?xml version='1.0' encoding='utf-8'?>
+<Server port="8005" shutdown="SHUTDOWN">
+
+  <Listener className="org.apache.catalina.core.JasperListener" />
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" gcDaemonProtection="false" />
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+
+  <Service name="Catalina">
+
+    <Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+                URIEncoding="UTF-8"
+               redirectPort="8443" />
+
+    <!-- Define an AJP 1.3 Connector on port 8009 -->
+    <Connector port="8009" protocol="AJP/1.3"
+                enableLookups="false"
+                acceptCount="1000" debug="0"
+                connectionTimeout="180000"
+                useBodyEncodingForURI="true"
+                maxPostSize="4194304"
+                maxParameterCount="4000"
+                disableUploadTimeout="true"
+                redirectPort="8443" />
+
+
+    <Engine name="Catalina" defaultHost="localhost">
+
+
+      <!-- my Server Setting start -->
+
+      <Host name="localhost"  appBase="webapps"
+                  unpackWARs="true" autoDeploy="true"
+                  xmlValidation="false" xmlNamespaceAware="false">
+
+        <Context docBase="/xxx/xxx/xxx/xxx/xxxx" path="/myProject" />
+        <Context docBase="/xxx/xxx/xxx/xxx/xxx" path="/monitor" reloadable="false" />
+        <Context path="/managerAgent" debug="0" privileged="true" docBase="managerAgent.war" />
+
+      </Host>
+      <!-- my Server Setting end -->
+    </Engine>
+  </Service>
+</Server>
+```
