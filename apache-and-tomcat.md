@@ -1,4 +1,10 @@
 #Apache httpd.conf
+
+cf) Apache Syntax error check
+```
+$sudo apachectl -t
+```
+
 ```xml
 
 ServerRoot "/usr" (mac에 기본적으로 깔려있는 apache 기준)
