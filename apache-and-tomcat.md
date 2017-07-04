@@ -1,9 +1,11 @@
-#Apache httpd.conf
+#Apache
 
 cf) Apache Syntax error check
 ```
 $sudo apachectl -t
 ```
+
+##httpd.conf
 
 ```xml
 
@@ -100,7 +102,8 @@ DocumentRoot "/abc/def/ght"
 **ServerRoot :** 서버의 설정, 에러, 로그파일들이있는 디렉토리 트리의 맨 위
 **Listen :** 아파치를 디폴트가 아닌 특정 IP 주소 나 포트에 바인드 할 수도 있다(prevent Apache from glomming onto all bound IP addresses).
 **LoadModule jk_module :** 본인 pc에 디폴트로 mod_jk가 없어서 so 파일을 구해다 other 디렉토리에 넣었다.
-
+**VirtualHost :** 위와 같이 http.conf에서 직접 작업 하지 않고 Include /private/etc/apache2/extra/httpd-vhosts.conf 한 후 그곳에서 작업해도 된다.
+##workers.properties
 ```xml
 worker.list=tomcat
 
