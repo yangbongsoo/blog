@@ -119,6 +119,7 @@ worker.jkstatus.type=status
 ```
 
 #Tomcat
+참고문헌 : 자바 고양이 톰캣 이야기 (최진식 저)
 ##server.xml
 ```xml
 <?xml version='1.0' encoding='utf-8'?>
@@ -135,6 +136,12 @@ worker.jkstatus.type=status
                 URIEncoding="UTF-8"
                redirectPort="8443" />
 
+    <!--
+    <Connector port="8443" protocol="org.apache.coyote.http11.Http11Protocol"
+               maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
+               clientAuth="false" sslProtocol="TLS" />
+    -->
+    
     <!-- Define an AJP 1.3 Connector on port 8009 -->
     <Connector port="8009" protocol="AJP/1.3"
                 enableLookups="false"
@@ -166,3 +173,16 @@ worker.jkstatus.type=status
   </Service>
 </Server>
 ```
+**Server**
+최상위 Element인 `<Server>`는 `<Service>` 모음으로, Shutdown 요청 처리를 위한 address와 port 속성을 가지고 있다. 각각 Shutdown 요청을 받기 위해 listen하는 IP address와 포트를 설정하며 기본값을 localhost와 8005이다. 만약 port 속성을 -1로 설정하면 Shutdown 포트 기능을 사용하지 않는다. 한 shuStdown 속성은 Shutdown 명령어(패스워드)를 설정한다. 기본 설정 값 'SHUTDOWN'인데 보안상 변경하는 것이 좋다.
+
+**Service**
+Server 하위에 있으며 Connector 모음이다. Service 속성은 className과 name 단 2개다.
+
+**Engine**
+defaultHost 속성은 Engine 하위에 속한 Host 가운데 하나이며 어떤 Host도 처리하지 않는 요청을 처리한다.
+
+**Host**
+Host Container는 가상 호스트 기능을 제공한다. Host 이름은 name 속성을 통해 설정한다. 만약 할당된 URL이 있다면 URL로 설정한다. 상위 Engine 내에 2개 이상의 Host가 구성되어 있다면 그중 1개가 defaultHost값이 되어야한다.
+
+
