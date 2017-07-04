@@ -1,5 +1,5 @@
 #Apache httpd.conf
-```
+```xml
 
 ServerRoot "/usr" (mac에 기본적으로 깔려있는 apache 기준)
 
@@ -21,17 +21,90 @@ LoadModule jk_module /private/etc/apache2/other/mod_jk.so
 ServerAdmin you@example.com
 ServerName www.example.com:80
 
-#문서를 제공할 디렉토리다. 기본적으로 모든 요청은 디렉토리에서 취해 지지만
+#문서를 제공할 디렉토리다. 기본적으로 모든 요청은 디렉토리에서 처리되지만
 #심볼릭 링크와 별칭을 사용하여 다른 위치를 가리킬 수도 있다.
 DocumentRoot "/abc/def/ght"
 
+#default는 매우 제한적인 기능으로 구성한다.
+#서버의 파일 시스템 전체에 대한 액세스를 거부한다. 
+#아래의 다른 <Directory> 블록에서 웹 콘텐츠 디렉토리에 대한 액세스를 명시적으로 허용해야 한다.
 <Directory />
     Options FollowSymLinks
     AllowOverride none
     Order deny,allow
     Deny from all
 </Directory>
+
+############################
+# JKConnector Configuation #
+############################
+<IfModule mod_jk.c>
+   JkMount /*.ybs tomcat
+   JkMount /*.jsp tomcat
+   JkMount /jkmanager/* jkstatus
+   JkMountCopy All
+   JkLogFile "/var/log/apache2/mod_jk.log"
+   JkShmFile "/var/log/apache2/mod_jk.shm"
+   JkWorkersFile /private/etc/apache2/workers.properties
+
+   <Location /jkmanager/>
+        JkMount jkstatus
+        Order deny,allow
+        Deny from all
+        Allow from 127.0.0.1
+   </Location>
+</IfModule>
+
+###############################
+# Virtual Hosts Configuration #
+###############################
+<VirtualHost *:80>
+    ServerAdmin goodbs1000@gmail.com
+    DocumentRoot /Users/yangbongsoo/Documents/myProject/target/deploy
+    ServerName xxx.xxx.com
+    <Directory "/Users/yangbongsoo/Documents/myProject/target/deploy">
+            Options FollowSymLinks
+            AllowOverride None
+            Order allow,deny
+            Allow from all
+    </Directory>
+
+    <Directory ~ "/\.svn/*">
+    Order deny,allow
+    Deny from all
+   </Directory>
+   
+   <Directory ~ "/META-INF">
+    Order deny,allow
+    Deny from all
+   </Directory>
+   
+   <Directory ~ "/WEB-INF">
+    Order deny,allow
+    Deny from all
+   </Directory>
+
+    RewriteEngine on
+    RewriteRule  ^/(projectName)*(/)*$ /projectName/Main.jsp [R]
+    JkMountCopy On
+    JkMount /*.ybs tomcat
+    JkMount /*.jsp tomcat
+</VirtualHost>
 ```
 **ServerRoot :** 서버의 설정, 에러, 로그파일들이있는 디렉토리 트리의 맨 위
 **Listen :** 아파치를 디폴트가 아닌 특정 IP 주소 나 포트에 바인드 할 수도 있다(prevent Apache from glomming onto all bound IP addresses).
 **LoadModule jk_module :** 본인 pc에 디폴트로 mod_jk가 없어서 so 파일을 구해다 other 디렉토리에 넣었다.
+
+```xml
+worker.list=tomcat
+
+worker.tomcat.type=ajp13
+worker.tomcat.port=8009
+worker.tomcat.host=localhost
+worker.tomcat.socket_timeout=100
+worker.tomcat.connection_pool_timeout=100
+#worker.tomcat.lbfactor=1
+
+worker.list=jkstatus
+worker.jkstatus.type=status
+```
