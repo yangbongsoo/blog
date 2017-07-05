@@ -49,8 +49,9 @@ DocumentRoot "/abc/def/ght"
 #MinSpareServers, MaxSpareServers :
 #부하가 적어서 MinSpareServers 개수 보다 적었을 경우 최소한 이 개수 만큼 유지하려고 아파치가 노력하고 
 #부하가 증가하여 프로세스 개수가 많아질 경우에 MaxSpareServers 개수 이하로 줄이려고 아파치는 노력한다.
-#MaxRequestsPerChild : 프로세스가 요청 받을 수 있는 맥시멈 수 (0일 경우엔 무한)
+#ServerLimit :아파치 동시 접속자 수 설정 (apache 2.2.x 버전의 "ServerLimit" 는 DEFAULT = 256 , MAX = 20000 으로 지정)
 #MaxClients : 실행 가능한 최대 프로세스 갯수
+#MaxRequestsPerChild : 프로세스가 요청 받을 수 있는 맥시멈 수 (0일 경우엔 무한)
 <IfModule mpm_prefork_module>
     StartServers          5
     MinSpareServers       5
@@ -125,6 +126,8 @@ DocumentRoot "/abc/def/ght"
 **LoadModule jk_module :** 본인 pc에 디폴트로 mod_jk가 없어서 so 파일을 구해다 other 디렉토리에 넣었다.
 
 **VirtualHost :** 위와 같이 http.conf에서 직접 작업 하지 않고 Include /private/etc/apache2/extra/httpd-vhosts.conf 한 후 그곳에서 작업해도 된다.
+
+
 
 ##workers.properties
 ```xml
@@ -217,6 +220,8 @@ appBase는 Host의 애플리케이션 디렉토리다. 기본은 webapps다. aut
 
 Host 내에 배포된 애플리케이션이다. reloadable 속성은 WEB-INF/classes 및 WEB-INF/lib 디렉토리에 변경이 발생할 때 자동 반영 여부를 결정하는 속성으로 기본 false다. true로 설정하면 빈번한 Tomcat 재기동을 피할 수 있어 개발 시에는 유용하지만 운영 시에는 적지 않은 오버 헤드를 동반하므로 적용에 신중해야 한다.
 
+#Apache MaxClients와 Tomcat의 Full GC
+참고문헌 : http://d2.naver.com/helloworld/132178
 
 
 
