@@ -223,9 +223,18 @@ Host 내에 배포된 애플리케이션이다. reloadable 속성은 WEB-INF/cla
 #Apache MaxClients와 Tomcat MaxThreads 설정값 
 참고문헌 : http://d2.naver.com/helloworld/132178
 
-먼저 apache, tomcat이 구동되지 않은 상태에서 서버의 메모리 정보를 확인한다.
+1. apache, tomcat이 구동되지 않은 상태에서 서버의 메모리 정보를 확인한다. (total : 1998MB, used : 142MB, free : 1855MB)
+2. tomcat 설정에 따른 메모리 점유(Perm Gen + Native Heap Area) : 1152MB
+```
+CATALINA_OPTS="-server -Xms1024m -Xmx1024m -XX:MaxPermSize=128m
+```
 
-total : 1998MB, used : 142MB, free : 1855MB
+3. swap으로 인한 성능 저하를 막으려면 어떠한 상황에서도 전체 메모리의 최대 80%인 1598.4MB 이상 사용되지 않도록 해야함
+cf) 80%는 swappiness가 기본값인 60일 경우에 해당하는 수치이며 본인 서버에서는 swappiness값이 0이었다. 하지만 동일하게 80% 적용.
+4. apache 없이 사용되는 메모리는 1152+ 142 = 1294MB이기 때문에 apache가 사용 가능한 최대 메모리는 304.4MB (1598.4 - 1294)
+5. top으로 확인 시 apache 프로세스 1개당 약 2.9MB 사용
+6. apache process 최대 갯수(MaxClients)는 약 105개 (304.4 / 2.9)
+7. tomcat Max Threads는 통상적으로 MaxClients의 * 1.1이므로 약 116개
 
 
 ```xml
