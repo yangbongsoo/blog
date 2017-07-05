@@ -57,7 +57,7 @@ DocumentRoot "/abc/def/ght"
     MinSpareServers       5
     MaxSpareServers      10
     #ServerLimit         2048
-    MaxClients          484
+    MaxClients          105
     MaxRequestsPerChild   0
 </IfModule>
 
@@ -243,7 +243,7 @@ cf) 80%는 swappiness가 기본값인 60일 경우에 해당하는 수치이며 
     MinSpareServers       5
     MaxSpareServers      10
     #ServerLimit         2048
-    MaxClients          484
+    MaxClients          105
     MaxRequestsPerChild   0
 </IfModule>
 
