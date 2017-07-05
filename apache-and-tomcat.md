@@ -43,6 +43,25 @@ DocumentRoot "/abc/def/ght"
     Deny from all
 </Directory>
 
+...
+
+#StartServers : 아파치 구동 시 띄울 프로세스 갯수
+#MinSpareServers, MaxSpareServers :
+#부하가 적어서 MinSpareServers 개수 보다 적었을 경우 최소한 이 개수 만큼 유지하려고 아파치가 노력하고 
+#부하가 증가하여 프로세스 개수가 많아질 경우에 MaxSpareServers 개수 이하로 줄이려고 아파치는 노력한다.
+#MaxRequestsPerChild : 프로세스가 요청 받을 수 있는 맥시멈 수 (0일 경우엔 무한)
+#MaxClients : 실행 가능한 최대 프로세스 갯수
+<IfModule mpm_prefork_module>
+    StartServers          5
+    MinSpareServers       5
+    MaxSpareServers      10
+    #ServerLimit         2048
+    MaxClients          484
+    MaxRequestsPerChild   0
+</IfModule>
+
+...
+
 ############################
 # JKConnector Configuation #
 ############################
