@@ -220,9 +220,37 @@ appBase는 Host의 애플리케이션 디렉토리다. 기본은 webapps다. aut
 
 Host 내에 배포된 애플리케이션이다. reloadable 속성은 WEB-INF/classes 및 WEB-INF/lib 디렉토리에 변경이 발생할 때 자동 반영 여부를 결정하는 속성으로 기본 false다. true로 설정하면 빈번한 Tomcat 재기동을 피할 수 있어 개발 시에는 유용하지만 운영 시에는 적지 않은 오버 헤드를 동반하므로 적용에 신중해야 한다.
 
-#Apache MaxClients와 Tomcat의 Full GC
+#Apache MaxClients와 Tomcat MaxThreads 설정값 
 참고문헌 : http://d2.naver.com/helloworld/132178
 
+먼저 apache, tomcat이 구동되지 않은 상태에서 서버의 메모리 정보를 확인한다.
+
+total : 1998MB, used : 142MB, free : 1855MB
+
+
+```xml
+<IfModule mpm_prefork_module>
+    StartServers          5
+    MinSpareServers       5
+    MaxSpareServers      10
+    #ServerLimit         2048
+    MaxClients          484
+    MaxRequestsPerChild   0
+</IfModule>
+
+```
+
+```xml
+<Connector port="8009" protocol="AJP/1.3"
+                enableLookups="false"
+                acceptCount="1000" debug="0"
+                connectionTimeout="180000"
+                useBodyEncodingForURI="true"
+                maxPostSize="4194304"
+                maxParameterCount="4000"
+                disableUploadTimeout="true"
+                redirectPort="8443" />
 
 
 
+```
