@@ -8,7 +8,8 @@
 * [자바 병렬 프로그래밍\(작업중\)](자바-병렬-프로그래밍작업중.md)
   * [1부 기본 원리](1부-기본-원리.md)
 * [Identity](identity.md)
-* [Spring 작업 이슈](spring_c791_c5c5_c774_c288.md)
+* [Spring 작업 이슈\(1 - 21\)](spring_c791_c5c5_c774_c288.md)
+* [Spring 작업 이슈\(22 - \)](spring-c791-c5c5-c774-c28828-22-.md)
 * [클린코더스 강의 정리](d074_b9b0_cf54_b354_c2a4_ac15_c758_c815_b9ac.md)
 * [Java8 in Action](java8_in_action.md)
   * [Part1 기초](part1.md)
@@ -55,7 +56,5 @@
   * [도커의정의](b3c4_cee4_c758_c815_c758_md.md)
   * [도커를 사용해야하는 이유](b3c4_cee4_b97c_c0ac_c6a9_d574_c57c_d558_b294_c774_c720_md.md)
   * [도커로 Pinpoint실행\(ubuntu\)](b3c4_cee4_b85c_pinpoint_c2e4_d58928_ubuntu.md)
-* [Amazon Cognito\(Android-DynamoDB\)](android-dynamodb.md)
-  * [DynamoDB](dynamodb2.md)
-  * [Android적용 후기](androidc801_c6a9_d6c4_ae30.md)
+* Spring 작업 이슈\(22 - \)
 
