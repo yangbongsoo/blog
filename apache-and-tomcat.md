@@ -256,6 +256,7 @@ cf) 80%는 swappiness가 기본값인 60일 경우에 해당하는 수치이며 
                 connectionTimeout="180000"
                 useBodyEncodingForURI="true"
                 maxPostSize="4194304"
+                maxThreads="106"
                 maxParameterCount="4000"
                 disableUploadTimeout="true"
                 redirectPort="8443" />
