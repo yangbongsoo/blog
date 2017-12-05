@@ -248,4 +248,49 @@ static ngx_int_t ngx_http_mymodule_handler(ngx_http_request_t *r)
     ...
 }
 ```
-그다음으로 핸들러는 파라미터로 ngx_http_request_t 구조체 타입의 HTTP 요청을 받는다.
+그다음, 핸들러는 파라미터로 ngx_http_request_t 구조체 타입의 HTTP 요청을 받는다.
+```c
+typedef struct ngx_http_request_s {  
+    ...
+    ngx_str_t uri;
+    ngx_str_t args;
+    ngx_http_headers_in_t headers_in;
+    ...
+} ngx_http_request_t;
+```
+uri: 요청한 페이지의 경로(예: /query.cgi)
+args: 요청할 때 "?" 뒤에 오는 파라미터
+headers_in: 요청 기타 인수(accept-range, cookie 등)가 저장된 구조체
+
+다음은 응답 헤더 전송이다.
+```c
+ngx_str_set(&r->headers_out.content_type, "text/plain");
+r->headers_out.status = NGX_HTTP_OK;
+r->headers_out.content_length_n = body.len;
+
+rc = ngx_http_send_header(r);
+if (rc == NGX_ERROR || rc > NGX_OK || r->header_only) {
+return rc;
+}
+```
+
+다음은 응답 본체 전송이다. HTTP 응답 본체를 전송하려면 Nginx에서 정의한 ngx_buf_t와 ngx_chain_t 구조체를 사용한다. HTTP 응답 본체를 ngx_buf_t 구조체 타입의 버퍼에 저장하고, 버퍼를 다시 ngx_chain_t 구에 연결하고 체인 구조를 만들어 필터로 전송한다.
+```c
+... 
+
+ngx_chain_t out;
+ngx_buf_t *b;
+
+...
+
+b = ngx_pcalloc(r->pool, sizeof(ngx_buf_t));
+
+b->pos      = body.data;
+b->last     = b->pos + body.len;
+b->memory   = 1;
+b->last_buf = 1;
+out.buf     = b;
+out.next    = NULL;
+
+return ngx_http_output_filter(r, &out);
+```
