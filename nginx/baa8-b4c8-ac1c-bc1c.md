@@ -3,7 +3,13 @@
 NGINX 모듈 제작하기 : http://d2.naver.com/helloworld/192785
 github 주소 : https://github.com/yangbongsoo/ngx\_http\_hello\_world
 
-cf) nginx 1.9.11버전부터 apache처럼 동적 링크가 가능하다.
+cf) nginx 1.9.11버전부터 apache처럼 동적 링크가 가능하다. 
+https://www.nginx.com/resources/wiki/extending/converting/#compiling-dynamic
+그건 나중에 살펴보자. 
+
+nginx 바이너리에 모듈을 추가해 빌드하려면 두개의 파일이 필요하다.
+
+**config**
 ```
 ngx_addon_name=ngx_http_hello_world_module
 
@@ -20,6 +26,8 @@ else
     NGX_ADDON_SRCS="$NGX_ADDON_SRCS $ngx_addon_dir/ngx_http_hello_world_module.c"
 fi
 ```
+
+`ngx_http_(your module)_module.c`
 
 ```c
 /*
