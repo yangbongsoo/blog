@@ -192,5 +192,60 @@ static char *ngx_http_hello_world(ngx_conf_t *cf, ngx_command_t *cmd, void *conf
     return NGX_CONF_OK;
 }
 ```
+코어(core) 모듈의 핸들러 콜백 함수 포인터에 핸들러 함수를 등록한다.
 
+```c
+static ngx_int_t ngx_http_hello_world_handler(ngx_http_request_t *r)
+{
+    ngx_int_t                    rc;
+    ngx_chain_t                  out;
+    ngx_buf_t                   *b;
+    ngx_str_t                    body = ngx_string(NGX_HTTP_HELLO_WORLD);
 
+    if (r->method != NGX_HTTP_GET && r->method != NGX_HTTP_HEAD) {
+        return NGX_HTTP_NOT_ALLOWED;
+    }
+
+    if (r->headers_in.if_modified_since) {
+        return NGX_HTTP_NOT_MODIFIED;
+    }
+
+    b = ngx_pcalloc(r->pool, sizeof(ngx_buf_t));
+    if (b == NULL) {
+        return NGX_HTTP_INTERNAL_SERVER_ERROR;
+    }
+    b->pos      = body.data;
+    b->last     = b->pos + body.len;
+    b->memory   = 1;
+    b->last_buf = 1;
+    out.buf     = b;
+    out.next    = NULL;
+
+    ngx_str_set(&r->headers_out.content_type, "text/plain");
+    r->headers_out.status            = NGX_HTTP_OK;
+    r->headers_out.content_length_n  = body.len;
+
+    rc = ngx_http_send_header(r);
+    if (rc == NGX_ERROR || rc > NGX_OK || r->header_only) {
+        return rc;
+    }
+
+    return ngx_http_output_filter(r, &out);
+}
+```
+핸들러 모듈 구현은 다음의 네 가지 단계로 나눌 수 있다.
+1. 로케이션(location)설정 가져오기
+2. HTTP 요청에 대한 HTTP 응답 생성
+3. HTTP 응답 헤더 전송
+4. HTTP 응답 본체 전송
+
+cf) 위의 코드에서는 로케이션 설정 가져오기는 없다. 예를 들면 아래와 같다.
+```c
+static ngx_int_t ngx_http_mymodule_handler(ngx_http_request_t *r)  
+{
+    ngx_http_mymodule_loc_conf_t *my_config = NULL;
+    myconfig = ngx_http_get_module_loc_conf(r, ngx_http_mymodule_module);
+    ...
+}
+```
+그다음으로 핸들러는 파라미터로 ngx_http_request_t 구조체 타입의 HTTP 요청을 받는다.
