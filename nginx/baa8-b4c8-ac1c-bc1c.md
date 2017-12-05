@@ -282,15 +282,17 @@ ngx_chain_t out;
 ngx_buf_t *b;
 
 ...
-
+/* 버퍼 할당과 HTTP 응답을 버퍼에 저장 */
 b = ngx_pcalloc(r->pool, sizeof(ngx_buf_t));
 
 b->pos      = body.data;
 b->last     = b->pos + body.len;
 b->memory   = 1;
 b->last_buf = 1;
+/* 버퍼를 체인 구조에 연결*/
 out.buf     = b;
 out.next    = NULL;
 
 return ngx_http_output_filter(r, &out);
 ```
+중요한 점은 C 표준 라이브러리의 malloc 함수 대신 ngx_palloc 함수를 사용하여 설정 구조체 메모리를 할당한 것이다. ngx_palloc 함수는 NGINX 모듈을 개발할 때 항상 사용해야 하는 함수로서 메모리 풀(pool) 포인터와 메모리 크기를 파라미터로 받는다. ngx_palloc 함수를 사용하면 C 표준 라이브러리의 free 함수를 명시적으로 호출하여 메모리를 해제할 필요가 없다. 어떤 메모리 풀에서 메모리를 할당받는지에 따라 ngx_palloc 함수로 할당받은 메모리는 메모리 풀을 소유한 객체의 수명(life time)이 다할 때까지 유효하다. 위 예에서 할당한 메모리는 ngx_conf_t 객체의 수명 동안 유효하다.
