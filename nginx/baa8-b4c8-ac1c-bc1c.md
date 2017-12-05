@@ -296,3 +296,76 @@ out.next    = NULL;
 return ngx_http_output_filter(r, &out);
 ```
 중요한 점은 C 표준 라이브러리의 malloc 함수 대신 ngx_palloc 함수를 사용하여 설정 구조체 메모리를 할당한 것이다. ngx_palloc 함수는 NGINX 모듈을 개발할 때 항상 사용해야 하는 함수로서 메모리 풀(pool) 포인터와 메모리 크기를 파라미터로 받는다. ngx_palloc 함수를 사용하면 C 표준 라이브러리의 free 함수를 명시적으로 호출하여 메모리를 해제할 필요가 없다. 어떤 메모리 풀에서 메모리를 할당받는지에 따라 ngx_palloc 함수로 할당받은 메모리는 메모리 풀을 소유한 객체의 수명(life time)이 다할 때까지 유효하다. 위 예에서 할당한 메모리는 ngx_conf_t 객체의 수명 동안 유효하다.
+
+이제 두개 남았다.
+
+### 모듈 구조체(Module Context)
+```c
+static ngx_http_module_t ngx_http_hello_world_module_ctx = {
+    NULL,                              /* preconfiguration */
+    NULL,                              /* postconfiguration */
+    
+    NULL,                              /* create main configuration */
+    NULL,                              /* init main configuration */
+
+    NULL,                              /* create server configuration */
+    NULL,                              /* merge server configuration */
+
+    NULL,                              /* create location configuration */
+    NULL                               /* merge location configuration */
+};
+```
+
+
+위에서 모듈 지시어로 ngx_command_t 구조체를 이용해서 설정 파일의 값과 설정 구조체 변수를 연결했다. 
+
+이제는 Nginx에 내장된 ngx_http_module_t 구조체로 모듈 구조체를 정의한다. 그런데 Hello World 예제에서는 모두 NULL로 설정되어 있기 때문에 자세한 설명은 다른 예제에서 하록 하겠다.
+```c
+typedef struct {  
+    ngx_int_t (*preconfiguration)(ngx_conf_t *cf);
+    ngx_int_t (*postconfiguration)(ngx_conf_t *cf);
+    void *(*create_main_conf)(ngx_conf_t *cf);
+    char *(*init_main_conf)(ngx_conf_t *cf,
+    void *conf);
+    void *(*create_srv_conf)(ngx_conf_t *cf);
+    char *(*merge_srv_conf)(ngx_conf_t *cf,
+    void *prev, void *conf);
+    void *(*create_loc_conf)(ngx_conf_t *cf);
+    char *(*merge_loc_conf)(ngx_conf_t *cf,
+    void *prev, void *conf);
+} ngx_http_module_t;
+```
+ngx_http_module_t 구조체는 다음과 같이 콜백 함수 포인터 변수로 구성된다. 필요에 따라 콜백 함수를 구현한 다음 모듈 구조체에 콜백 함수의 포인터를 등록한다.
+```
+preconfiguration 설정 시작 전 호출 함수의 포인터를 저장
+postconfiguration 설정 완료 후 호출 함수의 포인터를 저장
+create_main_conf main 설정 생성 함수의 포인터를 저장
+init_main_conf main 설정 초기화 함수의 포인터를 저장
+create_srv_conf server 설정 생성 함수의 포인터를 저장
+merge_srv_conf server 설정 조합 함수의 포인터를 저장
+create_loc_conf location 설정 생성 함수의 포인터를 저장
+merge_loc_conf location 설정 조합 함수의 포인터를 저장
+```
+
+이제 마지막이다. 
+### 모듈 정의(Module Definition)
+```
+ngx_module_t ngx_http_hello_world_module = {
+    NGX_MODULE_V1,
+    &ngx_http_hello_world_module_ctx, /* module context */
+    ngx_http_hello_world_commands,    /* module directives */
+    NGX_HTTP_MODULE,                  /* module type */
+    NULL,                             /* init master */
+    NULL,                             /* init module */
+    NULL,                             /* init process */
+    NULL,                             /* init thread */
+    NULL,                             /* exit thread */
+    NULL,                             /* exit process */
+    NULL,                             /* exit master */
+    NGX_MODULE_V1_PADDING
+};
+```
+설정 파일에서 설정 구조체 변수로 값을 연결하는 ngx_command_t 구조체 배열을 정의하고, 설정 구조체를 생성/조합하는 함수를 구현하여 모듈 구조체인 ngx_http_module_t 구조체를 정의하면 Nginx 모듈의 필수 구성 요소가 모두 갖춰진다.
+
+필수 구성 요소를 모두 완성하면 이를 이용하여 Nginx 모듈 자체를 정의한다. Nginx 모듈을 정의할 때는 Nginx에 내장된 ngx_module_t 구조체를 이용한다.
+
