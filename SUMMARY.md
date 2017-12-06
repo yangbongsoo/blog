@@ -51,6 +51,7 @@
 * [대용량 아키텍처와 성능 튜닝]
   * [레퍼런스 아키텍처](soa.md)
   * [마이크로 서비스 아키텍처](msa.md)
+  * [REST의 이해와 설계](rest.md)
 * [Living Documentation](what__why__how_living_documentation.md)
 * [JUnit+Mockito vs Groovy+Spock](junit+mockito_vs_groovy+spock.md)
 * [Understanding The Tomcat Classpath](understanding_the_tomcat_classpath.md)
