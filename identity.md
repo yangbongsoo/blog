@@ -60,7 +60,7 @@ The PingFederate® server는 고객, 직원, 협력사들에게 SSO, API securit
 ###Facebook OAuth
 추가적인 보안 강화를 위해 사용자 인증(ID, Password)뿐만 아니라, 클라이언트 인증 방식을 추가할 수 있다. 페이스북은 API 토큰을 발급받도록 사용자 ID, 비밀번호 뿐만 아니라 Client ID와 Client Secret이라는 것을 같이 입력받도록 하는데, Client ID는 특정 앱에 대한 등록 ID이고 Client Secret은 특정 앱에 대한 비밀번호로, 페이스북 개발자 포털에서 앱을 등록하면 앱 별로 발급되는 일종의 비밀번호다.
 
-![](/developerfacebook.PNG)
+![](/assets/developerfacebook.PNG)
 
 API 토큰을 발급받을 때, Client ID와 Client Secret을 이용하여 클라이언트 앱을 인증하고 사용자 ID와 비밀번호를 추가로 받아서 사용자를 인증해 API 액세스 토큰을 발급한다. 
 
@@ -69,21 +69,21 @@ API 토큰을 발급받을 때, Client ID와 Client Secret을 이용하여 클�
 
 중요한 점은 자신의 서비스에서 사용자 비밀번호를 받지 않고, 페이스북이 사용자를 인증하고 알려주는 방식이다. 즉, 파트너 서비스에는 페이스북 사용자의 비밀번호가 노출되지 않는 방식이다. 전체적인 흐름을 보면 다음과 같다.
 
-![](apitokenflow.PNG)
+![](assets/apitokenflow.PNG)
 
 1.먼저 페이스북의 개발자 포털에 접속하여, 페이스북 인증을 사용하고자 하는 애플리케이션 정보를 등록한다(서비스명, 서비스 URL, 그리고 인증이 성공했을 때 인증 성공 정보를 받을 콜백 URL).
 
-![](/oauthsetting.PNG)
+![](/assets/oauthsetting.PNG)
 
 2.페이스북 개발자 포털은 등록된 정보를 기준으로 해당 애플리케이션에 대한 Client ID와 Client Secret을 발급한다. 이 값은 앞에서 설명한 클라이언트 인증에 사용된다.
 
 3.다음으로 개발하고자 하는 애플리케이션에 이 Client ID와 Client Secret을 넣고, 페이스북 인증 페이지 정보를 넣어서 애플리케이션을 개발한다(Javascript SDK 적용).
 
-![](/fbsdk.PNG)
+![](/assets/fbsdk.PNG)
 
 애플리케이션이 개발되서 실행되면 다음과 같은 절차로 사용자 인증을 수행하게 된다.
 
-![](/스크린샷 2016-11-08 오후 6.47.36.jpg)
+![](/assets/facebookoauthworkflow.jpg)
 
 1. 웹 브라우저에서 사용자가 Sokit 서비스에 접근하려고 요청한다.
 2. Sokit 서비스는 사용자 인증이 되지 않았기 때문에 페이스북 로그인 페이지 URL을 HTTP  리다이렉션으로 브라우저에 보낸다. 이때 이 URL로 페이스북에 이 로그인 요청이 Sokit에 대한 사용자 인증 요청임을 알려주고자, Client ID 등의 추가 정보와 함께 페이스북 정보 접근 권한(사용자 정보, 그룹 정보 등)을 scope라는 필드를 통해서 요청한다.
@@ -96,9 +96,9 @@ API 토큰을 발급받을 때, Client ID와 Client Secret을 이용하여 클�
 9. 페이스북은 해당 정보를 보고 제대로 인증된 사용자임을 확인해주고 Access Token을 발급한다.
 10. Sokit은 9에서 받은 Access Token으로 페이스북 API 서비스에 접근한다.
 
-![](/fblogin.PNG)
+![](/assets/fblogin.PNG)
 
-![](/fbscope.PNG)
+![](/assets/fbscope.PNG)
 
 ###HTTP 완벽가이드 11장 - 클라이언트 식별과 쿠키
 HTTP는 stateless 하기 때문에 사용자를 식별하기 위해서는 추가적인 기술이 필요하다. HTTP 헤더, IP주소, 로그인 인증, URL에 식별자를 포함하는 방식(Fat URL), 쿠키 이렇게 5가지 방식이 있다.
