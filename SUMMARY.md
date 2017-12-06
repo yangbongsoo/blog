@@ -4,6 +4,7 @@
 * [Nginx](nginx.md)
   * [모듈개발](nginx/baa8-b4c8-ac1c-bc1c.md)
   * [한글 테스트](nginx/d55c-ae00-d14c-c2a4-d2b8.md)
+  * [한글 테스트2](nginx/한글_테스트.md)
 * [Apache and Tomcat](apache-and-tomcat.md)
 * [자바 성능 튜닝 이야기\(작업중\)](c790-bc14-c131-b2a5-d29c-b2dd-c774-c57c-ae30.md)
   * [Story02-05](c790-bc14-c131-b2a5-d29c-b2dd-c774-c57c-ae30/story02-05.md)
