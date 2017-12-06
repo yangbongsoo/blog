@@ -13,7 +13,7 @@
 * [Spring 개발 이슈모음]
   * [issue1 ~ issue21](Spring_개발_이슈모음/Spring_개발_이슈1.md)
   * [issue22 ~ ](Spring_개발_이슈모음/Spring_개발_이슈2.md)
-* [클린코더스 강의 정리](d074_b9b0_cf54_b354_c2a4_ac15_c758_c815_b9ac.md)
+* [클린코더스 강의 정리](클린코더스_강의_정리.md)
 * [Java8 in Action](java8_in_action.md)
   * [Part1 기초](part1.md)
   * [Part2-1 함수형 데이터 처리](part2_d568_c218_d615_b370_c774_d130_cc98_b9ac.md)
