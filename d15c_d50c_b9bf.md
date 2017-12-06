@@ -38,7 +38,7 @@ public void deleteAll() throws SQLException{
 close()는 만들어진 순서의 반대로 하는 것이 원칙이다. 
 
 이제 이 deleteAll() 메서드에 담겨 있던 변하지 않는 부분, 자주 변하는 부분을 전략 패턴을 사용해 깔끔하게 분리해보자.
-![](strategypattern.PNG)
+![](/assets/strategypattern.PNG)
 
 클라이언트 책임을 담당할 deleteAll() 메서드
 ```java
@@ -140,7 +140,7 @@ public void add(final User user) throws SQLException{
 클래스 선언과 오브젝트 생성이 결합된 형태로 만들어지며, 클래스를 재사용할 필요가 없고 구현한 인터페이스 타입으로만 사용할 경우에 유용하다. 
 
 익명 내부 클래스는 선언과 동시에 오브젝트를 생성한다. 이름이 없기 때문에 클래스 자신의 타입을 가질 수 없고, 구현한 인터페이스 타입의 변수에만 저장할 수 있다. 
-![](template-callback2.PNG)
+![](/assets/template-callback2.PNG)
 
 ```java
 public void add(final User user) throws SQLExecption{
@@ -232,7 +232,7 @@ public class UserDao {
 전략 패턴의 기본 구조에 익명 내부 클래스를 활용한 방식을 스프링에서는 템플릿/콜백 패턴이라고 부른다. 전략 패턴의 컨텍스트를 템플릿이라 부르고, 익명 내부 클래스로 만들어지는 오브젝트를 콜백이라고 부른다.
 
 cf) 콜백 : 실행되는 것을 목적으로 다른 오브젝트의 메서드에 전달되는 오브젝트를 말한다. 파라미터로 전달되지만 값을 참조하기 위한 것이 아니라 특정 로직을 담은 메서드를 실행시키기 위해 사용한다.
-![](스크린샷 2016-09-16 오후 11.09.22.jpg)
+![](/assets/tobytemplatecallback.jpg)
 
 그런데 템플릿/콜백 방식에서 한 가지 아쉬운 점이 있다. DAO 메서드에서 매번 익명 내부 클래스를 사용하기 때문에 상대적으로 코드를 작성하고 읽기가 조금 불편하다는 점이다. 그래서 이번에는 복잡한 익명 내부 클래스의 사용을 최소화할 수 있는 방법을 찾아보자.
 

@@ -29,8 +29,8 @@ cf) 마지막 부분에 Spring Boot 1.4 Test방식 소개
 ```
 
 첫 예제
-![](스크린샷 2016-06-06 오후 3.21.46.jpg)
-![](스크린샷 2016-06-06 오후 3.21.56.jpg)
+![](/assets/mockitovsgroovy1.jpg)
+![](/assets/mockitovsgroovy2.jpg)
 
 3개의 섹션으로 나눠진다(BDD에 기반해서 given when then).
 
@@ -237,7 +237,7 @@ def "다양한 제곱 테스트"() {
 
 올랑(Hollandaise) 소스를 만들기 위해서는 cooking temperature를 매우 정밀하게 조절해야 한다. 
 
-![](올랑.jpg)
+![](/assets/올랑.jpg)
 
 그래서 올랑(Hollandaise) 소스를 위해 애플리케이션에서 temperature monitoring 하는 system을 만든다고 해보자.
 HollandaiseTemperatureMonitor 클래스(production code)는 다음과 같다.
@@ -337,9 +337,9 @@ class SpringBootSpockTestingApplicationSpecIT extends Specification {
 참고 : https://www.youtube.com/watch?v=czjWpmy3rkM
 
 spock으로 진행해봤는데 에러가 났을 때 좀 더 친절한 메세지 외에는 장점을 못느꼈습니다(중요한건 리팩토링이지 명세가 아닌거 같습니다).
-![](스크린샷 2016-06-06 오후 7.35.06.jpg)
+![](/assets/mockitovsgroovy3.jpg)
 
-![](스크린샷 2016-06-06 오후 7.35.41.jpg)
+![](/assets/mockitovsgroovy4.jpg)
 
 ###미담 프로젝트 단위 테스트
 **java+mockito**

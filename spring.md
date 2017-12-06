@@ -32,9 +32,9 @@ public class Account {
 lombok을 사용하기 위해서는 
 
 1. lombok plugin 설치 
-![](lombok1.PNG)
+![](/assets/lombok1.PNG)
 2. lombok 설정 
-![](lombok2.PNG)
+![](/assets/lombok2.PNG)
 
 AccountController에서 
 
@@ -96,7 +96,7 @@ rollback은 method 레벨
 근데 4.2 버전부터는 Rollback이 다 한다. 
 TransactionConfiguration는 desperated 될것. 
 
-![](sdfsdf2.PNG)
+![](/assets/sdfsdf2.PNG)
 
 
 ErrorResponse 클래스에 @Data붙이면 lombok에 의해 getter, setter 만들어짐 
@@ -163,7 +163,7 @@ cache-period: 웹 브라우저에 캐시 시간 관련 응답 헤더를 전송�
 위 설정의 경우 요청 경로가 /resources/로 시작하면, 그에 해당하는 자원을 /resources/나 /WEB-INF/resources/ 디렉토리에서 검색한다. 
 
 **빈 설정방식의 변화**
-![](bean설정방식의변화.PNG)
+![](/assets/bean설정방식의변화.PNG)
 
 1.x : 모든걸 `<bean> </bean>`으로
 2.0.x : `<tx:annotation-driven`
@@ -171,15 +171,15 @@ cache-period: 웹 브라우저에 캐시 시간 관련 응답 헤더를 전송�
 3.0.x : @Configuration, @Bean
 3.1.x : @Enable~ ex) @EnableTransactionManagement
 
-![](bean설정방식의변화2.PNG)
+![](/assets/bean설정방식의변화2.PNG)
 
-![](ooo.PNG)
+![](assets/ooo.PNG)
 
 @EnableWebMvc는 `<mvc:annotation-driven>`과 똑같다. 따라서 애노테이션 드리븐을 설정하면 위의 주석에 해당하는 것들이 자동으로 등록이 된다. 기본적으로 Http메세지 컨버터도 등록이 되지만, JSON을 위한 MappingJackson2HttpMessageConverter는 직접 등록해줘야 사용할 수 있다. 
 
 ---
 **웹 환경에서 스프링 애플리케이션이 기동하는 방식**
-![](webapplicationcontext.PNG)
+![](/assets/webapplicationcontext.PNG)
 서블릿 컨테이너는 브라우저와 같은 클라이언트로부터 들어오는 요청을 받아서 서블릿을 동작시켜주는 일을 맡는다. 서블릿은 웹 애플리케이션이 시작될 때 미리 만들어둔 웹 애플리케이션 컨텍스트에게 빈 오브젝트로 구성된 애플리케이션의 기동 역할을 해줄 빈을 요청해서 받아둔다. 그리고 미리 지정된 메서드를 호출함으로써 스프링 컨테이너가 DI 방식으로 구성해둔 애플리케이션의 기능이 시작되는 것이다. 
 
 스프링은 이런 웹 환경에서 애플리케이션 컨텍스트를 생성하고 설정 메타정보로 초기화해주고, 클라이언트로부터 들어오는 요청마다 적절한 빈을 찾아서 이를 실행해주는 기능을 가진 DispatcherServlet이라는 이름의 서블릿을 제공한다. DispatcherServlet은 서블릿이 초기화 될때 자신만의 컨텍스트를 생성하고 초기화한다.

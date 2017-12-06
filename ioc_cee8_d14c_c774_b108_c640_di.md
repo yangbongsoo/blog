@@ -59,7 +59,7 @@ public void addNewServiceRequest(ServiceRequest serviceRequest) {
 }
 ```
 이런 코드가 자연스럽게 느껴질지도 모르겠다. ServiceRequest를 단지 폼의 정보를 전달해주는 DTO와 같은 데이터 저장용 오브젝트로 취급하고, 그 정보를 이용해 실제 비지니스 로직을 처리할 때 필요한 정보는 다시 서비스 계층의 오브젝트가 직접 찾아오게 만드는 것이다.
-![](오브젝트사용방식.jpg)
+![](/assets/오브젝트사용방식.jpg)
 위 그림은 ServiceRequest가 폼의 정보를 담고 사용되는 구조를 나타낸다. 코드에서 new로 생성하는 ServiceRequest를 제외한 나머지 오브젝트는 스프링이 관리하는 싱글톤 빈이다. 이 방식의 장점은 처음 설계하고 만들기는 편하다는 것이다. 웹 페이지의 등록 폼에서 어떤 식으로 사용자 정보가 입력될지를 미리 정해두고, 그 입력 방식에 따라서 컨트롤러와 서비스 오브젝트까지 만들면 된다. 서비스 오브젝트는 폼에서 문자열로 입력된 고객번호가 ServiceRequest 오브젝트에 담겨 전달된다는 사실을 미리 알고 있다.
 
 문제는 폼의 고객정보 입력 방법이 모든 계층의 코드와 강하게 결합되어 있다는 점이다. 만약 고객정보를 텍스트로 입력받는 대신 AJAX를 써서 이름을 이용한 자동완성 기능을 이용한 후에 Customer 테이블의 id를 폼에서 전달하는 식으로 바뀌면 어떻게 될까? ServiceRequest의 필드와 이를 처리하는 컨트롤러는 물론이고, A/S 서비스 신청을 처리하는 서비스 오브젝트인 ServiceRequestService의 코드도 다음과 같이 id 값을 이용해 Customer 오브젝트를 가져오는 방법으로 수정돼야 할 것이다.
@@ -163,7 +163,7 @@ public void addNewServiceRequest(ServiceRequest serviceRequest) {
   serviceRequest.notifyServiceRequestRegistration(); // 구체적인 통보 작업은 ServiceRequest에서 알아서 담당하게 한다.
 }
 ```
-![](스크린샷 2016-08-24 오후 4.54.54.jpg)
+![](/assets/ioc_contatiner.jpg)
 ServiceRequest를 프로토타입 빈으로 변경하면서 새롭게 바뀐 의존관계다. 이렇게 매번 새롭게 오브젝트를 만들면서 DI도 함께 적용하려고 할 때 사용할 수 있는게 바로 프로토타입 빈이다. 한번 컨테이너로부터 생성해서 가져온 이후에는 new로 직접 생성한 오브젝트처럼 평범하게 사용하면 된다. 빈으로 만들어진 오브젝트이기 때문에 DI를 통해 주입된 다른 빈을 자유롭게 이용할 수 있다.
 
 ###프로토타입 빈의 DL 전략

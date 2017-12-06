@@ -92,7 +92,7 @@ cf\) 읽기 전용이라면 인스턴스 변수로 생성해도 상관없다. �
 **DI**  
 스프링 IoC 기능의 대표적인 동작원리는 주로 의존관계 주입이라고 불린다.
 
-![](dependency.PNG)
+![](/assets/dependency.PNG)
 
 A는 B에 의존한다.\(B가 변하면 A에 영향을 끼친다\)
 
@@ -105,7 +105,7 @@ DI란 다음 3가지 조건을 충족해야 한다.
 2. 런타임 시점의 의존관계는 컨테이너나 팩토리 \(ApplicationContext\)같은 제 3의 존재가 결정한다.  
 3. 의존관계는 사용할 오브젝트에 대한 레퍼런스를 외부에서 제공해줌으로써 만들어진다.
 
-![](di2.PNG)
+![](/assets/di2.PNG)
 
 UserDao와 ConnectionMaker 사이에 DI가 적용되려면 UserDao도 반드시 컨테이너가 만드는 빈 오브젝트여야한다.
 
@@ -118,7 +118,7 @@ UserDao와 ConnectionMaker 사이에 DI가 적용되려면 UserDao도 반드시 
 스프링은 InitializingBean 인터페이스를 제공하고 있으며, 빈 객체의 클래스가 InitializingBean 인터페이스를 구현하고 있으면 InitializingBean 인터페이스에 정의된 메서드를 호출해서 빈 객체가 초기화를 진행할 수 있도록 한다. 또한, 스프링 설정에서 초기화 메서드를 지정하면, 스프링은 그 메서드를 호출해서 빈이 초기화를 수행할 수 있게 한다.
 
 **빈 라이프사이클 개요**  
-![](beanlifecycle.PNG)
+![](/assets/beanlifecycle.PNG)
 
 **InitializingBean 인터페이스와 DisposableBean 인터페이스**  
 스프링은 객체의 초기화 및 소멸 과정을 위해 다음의 두 인터페이스를 제공하고 있다.
