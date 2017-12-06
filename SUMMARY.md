@@ -24,7 +24,7 @@
 * [소프트웨어 품질관리(NHN은 이렇게한다)](소프트웨어_품질관리_NHN은_이렇게한다.md)
 * [웹프로그래머를 위한 서블릿 컨테이너의 이해](웹_프로그래머를_위한_서블릿_컨테이너의_이해.md)
 * [웹을 지탱하는 기술](웹을_지탱하는_기술.md)
-* [Git Flow](git.md)
+* [Git Flow](gitflow.md)
 * [Effective Java]
   * [객체의 생성과 삭제](객체의_생성과_삭제.md)
   * [모든 객체의 공통 메서드](모든_객체의_공통_메서드.md)
@@ -56,3 +56,4 @@
 * [Living Documentation](what__why__how_living_documentation.md)
 * [JUnit+Mockito vs Groovy+Spock](junit+mockito_vs_groovy+spock.md)
 * [Understanding The Tomcat Classpath](understanding_the_tomcat_classpath.md)
+* [specification by example](specification_by_example.md)
