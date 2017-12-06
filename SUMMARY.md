@@ -50,13 +50,3 @@
 * [Living Documentation](what__why__how_living_documentation.md)
 * [JUnit+Mockito vs Groovy+Spock](junit+mockito_vs_groovy+spock.md)
 * [Understanding The Tomcat Classpath](understanding_the_tomcat_classpath.md)
-* [Pinpoint](pinpoint.md)
-  * [Q&A](q&a.md)
-  * [quickstart](quickstart.md)
-  * [MongoDB](mongodb.md)
-* [LucyXssServletFilter](lucyxssservletfilter.md)
-* [Docker](b3c4_cee4_md.md)
-  * [도커의정의](b3c4_cee4_c758_c815_c758_md.md)
-  * [도커를 사용해야하는 이유](b3c4_cee4_b97c_c0ac_c6a9_d574_c57c_d558_b294_c774_c720_md.md)
-  * [도커로 Pinpoint실행\(ubuntu\)](b3c4_cee4_b85c_pinpoint_c2e4_d58928_ubuntu.md)
-
