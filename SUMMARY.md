@@ -1,15 +1,15 @@
 # Summary
 
 * [Introduction](README.md)
-* [Nginx](nginx.md)
+* [Nginx]
   * [모듈개발](nginx/모듈개발.md)
   * [한글 테스트2](nginx/한글 테스트.md)
 * [Apache and Tomcat](apache-and-tomcat.md)
-* [자바 성능 튜닝 이야기(작업중)](자바 성능 튜닝 이야기.md)
+* [자바 성능 튜닝 이야기(작업중)]
   * [Story02-05](자바 성능 튜닝 이야기/story02-05.md)
   * [Story06-10](자바 성능 튜닝 이야기/story06-10.md)
-* [자바 병렬 프로그래밍\(작업중\)](자바-병렬-프로그래밍작업중.md)
-  * [1부 기본 원리](1부-기본-원리.md)
+* [자바 병렬 프로그래밍\(작업중\)]
+  * [1부 기본 원리](자바 병렬 프로그래밍/1부 기본 원리.md)
 * [Identity](identity.md)
 * [Spring 작업 이슈1](spring_c791_c5c5_c774_c288.md)
 * [Spring 작업 이슈2](spring-c791-c5c5-c774-c28828-22-.md)
