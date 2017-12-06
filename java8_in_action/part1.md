@@ -179,7 +179,7 @@ public static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p){
 
 `List<Apple> result = filterApples(inventory, (Apple apple) -> “red”.equals(apple.getColor()));`
 
-![](parameterization.jpg)
+![](/assets/parameterization.jpg)
 
 **리스트 형식으로 추상화**
 
@@ -387,7 +387,7 @@ Function<BufferedReader, String> f =
 ```
 ###형식 검사, 형식 추론, 제약
 람다 표현식 자체에는 람다가 어떤 함수형 인터페이스를 구현하는지의 정보가 포함되어 있지 않다. 람다가 사용되는 context를 이용해서 람다의 형식(type)을 추론할 수 있다. 
-![](type_inspection_process.jpg)
+![](/assets/type_inspection_process.jpg)
 
 **특별한 void 호환 규칙**
 
@@ -454,7 +454,7 @@ inventory.sort((comparing(Apple::getWeight());
 
 **메서드 레퍼런스를 만드는 방법**
 
-![](change_methodreference.jpg)
+![](/assets/change_methodreference.jpg)
 
 메서드 레퍼런스는 세 가지 유형으로 구분할 수 있다. ‘정적 메서드 레페런스’, ‘다양한 형식의 인스턴스 메서드 레퍼런스’, ‘기존 객체의 인스턴스 메서드 레퍼런스'
 

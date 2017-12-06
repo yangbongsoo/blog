@@ -99,7 +99,7 @@ System.out.println(threeHighCaloricDishNames);
 ```
 우선 menu에 stream 메서드를 호출해서 요리 리스트(menu)로부터 스트림을 얻었다. 여기서 **데이터 소스**는 요리 리스트(menu)다. 데이터 소스는 **연속된 요소**를 스트림에 제공한다. 다음으로 스트림에 filter, map, limit, collect로 이어지는 일련의 **데이터 처리 연산**을 적용한다. collect를 제외한 모든 연산은 서로 **파이프라인**을 형성할 수 있도록 스트림을 반환한다. 마지막으로 collect 연산으로 파이프라인을 처리해서 결과를 반환한다(collect는 스트림이 아니라 List를 반환한다). 마지막에 collect를 호출하기 전까지는 menu에서 아무것도 선택되지 않으며 출력 결과도 없다. 즉, collect가 호출되기 전까지 메서드 호출이 저장되는 효과가 있다. 
 
-![](streamprocess.jpg)
+![](/assets/streamprocess.jpg)
 
 ###스트림과 컬렉션
 
