@@ -12,7 +12,7 @@
 @ContextConfiguration("/app-config.xml")
 ```
 
-`@ContextConfiguration`은 통합 테스트에서 클래스 레벨 메타데이터\(xml 파일 or javaConfig 파일\)를 정의한다. 다시 말해, context를 로드하는데 사용되는 annotated class\(@Configuration 클래스\)나 application context resource locations\(classpath에 위치한 XML 설정 파일\)들을 선언한다.
+`@ContextConfiguration`은 통합 테스트에서 클래스 레벨 메타데이터(xml 파일 or javaConfig 파일)를 정의한다. 다시 말해, context를 로드하는데 사용되는 annotated class(@Configuration 클래스)나 application context resource locations(classpath에 위치한 XML 설정 파일)들을 선언한다.
 
 또한 `@ContextConfiguration`은 ContextLoader 전략을 사용할 수 있다. 하지만 일반적으로 로더를 직접 명시할 필요는 없다. default loader가 initializers 뿐만 아니라 resource locations 또는 annotated classes를 지원하기 때문이다.
 
@@ -60,9 +60,9 @@ initializers = ConfigFileApplicationContextInitializer.class)
 
 ConfigFileApplicationContextInitializer는 Spring Boot application.properties파일을 로드해 테스트 코드에 적용한다. `@SpringApplicationConfiguration`가 제공하는 full feature들이 필요 없을 때 사용된다.
 
-cf\) spring boot 1.4
+cf) spring boot 1.4
 
-직접적인 Configuration 설정 없이도 `@*Test` 애노테이션이 자동으로 primary configuration을 찾는다\(테스트가 포함된 패키지로부터 `@SpringBootApplication`또는 `@SpringBootConfiguration` 애노테이션 클래스를 찾는다\).
+직접적인 Configuration 설정 없이도 `@*Test` 애노테이션이 자동으로 primary configuration을 찾는다(테스트가 포함된 패키지로부터 `@SpringBootApplication`또는 `@SpringBootConfiguration` 애노테이션 클래스를 찾는다).
 
 ### Spring Boot
 
@@ -85,7 +85,7 @@ initializers = ConfigFileApplicationContextInitializer.class)
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
 ```
 
-cf\) 방법4에서 `@SpringBootTest`에서 classes 속성을 생략하면 inner-classes에서 `@Configuration`을 제일 먼저 로드하려 시도하고, 없으면 `@SpringBootApplication` class를 찾는다.
+cf) 방법4에서 `@SpringBootTest`에서 classes 속성을 생략하면 inner-classes에서 `@Configuration`을 제일 먼저 로드하려 시도하고, 없으면 `@SpringBootApplication` class를 찾는다.
 
 **@WebApplicationContext**
 
@@ -113,7 +113,7 @@ public class AccountControllerTest {
 ## 2. dataSource
 
 메이븐 pom.xml에서 에서 spring-boot-starter-data-jpa 를 추가하면 그안에 spring-boot-starter-jdbc가 있고 그 안에 tomcat-jdbc가 있다.  
-Spring Boot에서는 DataSource 관리를 위한 구현체로써 tomcat-jdbc\(The Tomcat JDBC Pool\) 을 default로 제공한다.
+Spring Boot에서는 DataSource 관리를 위한 구현체로써 tomcat-jdbc(The Tomcat JDBC Pool) 을 default로 제공한다.
 
 ![](스크린샷 2016-05-21 오후 3.32.23.jpg)  
 근데 실서버에 배포 했을 때 위와 같은 에러가 반복해서 발생했고 그 주기도 일정치 않아서 재연이 쉽지 않았다. `validationQuery: select 1`을 설정했음에도 connection이 자꾸 닫히는 문제가 발생했다.
@@ -218,7 +218,7 @@ Spring Boot 1.4부터는 db 프로파일에 `spring.datasource.hikari`를 명시
 @RequestMapping(value = "/messages/receiverUsername/{receiverUsername:.+}", method = RequestMethod.GET)
 ```
 
-위와 같이 정규식으로 모든 문자열을 \(. 포함\) 받겠다고 명시했음에도 .t는 인식이 안되는 문제가 발생했다.
+위와 같이 정규식으로 모든 문자열을 (. 포함) 받겠다고 명시했음에도 .t는 인식이 안되는 문제가 발생했다.
 
 이유는 .t라는 확장자가 있기 때문에 아래와 같이 설정에서 mediaType을 json으로 직접 명시해주면 해결이 가능하다.
 
@@ -342,7 +342,7 @@ assertNull(argumentCaptor.getValue().getXXX());
 <context:property-placeholder properties-ref="yamlProperties" />
 ```
 
-cf\) spring boot에서는 classpath 에 application.yml 을 추가 하면 자동으로 boot가 스캔하기 때문에 따로 설정이 필요없다.
+cf) spring boot에서는 classpath 에 application.yml 을 추가 하면 자동으로 boot가 스캔하기 때문에 따로 설정이 필요없다.
 
 ```
     <build>
@@ -604,7 +604,7 @@ mybatis:
 </settings>
 ```
 
-cf\) 다른 설정정보 참고 : [http://www.mybatis.org/mybatis-3/ko/configuration.html](http://www.mybatis.org/mybatis-3/ko/configuration.html)
+cf) 다른 설정정보 참고 : [http://www.mybatis.org/mybatis-3/ko/configuration.html](http://www.mybatis.org/mybatis-3/ko/configuration.html)
 
 ## 10. @RequestParam값이 Optional일때 DefaultValue 적용
 
@@ -632,11 +632,11 @@ public class Work {
 }
 ```
 
-@Scope 애노테이션으로 스코프를 지정했다면 proxyMode 엘리먼트를 이용해서 프록시를 이용한 DI가 되도록 지정할 수 있다. 클라이언트\(여기선 컨트롤러 클래스\)는 스코프 프록시 오브젝트를 실제 스코프 빈처럼 사용하면 프록시에서 현재 스코프에 맞는 실제 빈 오브젝트로 작업을 위임해준다.
+@Scope 애노테이션으로 스코프를 지정했다면 proxyMode 엘리먼트를 이용해서 프록시를 이용한 DI가 되도록 지정할 수 있다. 클라이언트(여기선 컨트롤러 클래스)는 스코프 프록시 오브젝트를 실제 스코프 빈처럼 사용하면 프록시에서 현재 스코프에 맞는 실제 빈 오브젝트로 작업을 위임해준다.
 
 스코프 프록시는 각 요청에 연결된 HTTP 세션정보를 참고해서 사용자마다 다른 Work 오브젝트를 사용하게 해준다. 클라이언트인 컨트롤러 입장에서는 모두 같은 오브젝트를 사용하는 것처럼 보이지만, 실제로는 그 뒤에 사용자별로 만들어진 여러 개의 Work가 존재하고, 스코프 프록시는 실제 Work 오브젝트로 클라이언트의 호출을 위임해주는 역할을 해줄 뿐이다.
 
-프록시 빈이 인터페이스를 구현하고 있고, 클라이언트에서 인터페이스로 DI 받는다면 proxyMode를 ScopedProxyMode.INTERFACES로 지정해주고, 프록시 빈 클래스를 직접 DI 한다면 ScopedProxyMode.TARGET\_CLASS로 지정하면 된다\(여기서는 Work 클래스로 직접 DI 할 것이므로 ScopedProxyMode.TARGET\_CLASS\).
+프록시 빈이 인터페이스를 구현하고 있고, 클라이언트에서 인터페이스로 DI 받는다면 proxyMode를 ScopedProxyMode.INTERFACES로 지정해주고, 프록시 빈 클래스를 직접 DI 한다면 ScopedProxyMode.TARGET_CLASS로 지정하면 된다(여기서는 Work 클래스로 직접 DI 할 것이므로 ScopedProxyMode.TARGET_CLASS).
 
 ```java
 스코프 프록시의 DI 사용
@@ -649,7 +649,7 @@ public void MainController {
 }
 ```
 
-cf \) XML 설정방식
+cf) XML 설정방식
 
 ```xml
 <bean id="work" class="...Work" scope="session">
@@ -694,9 +694,9 @@ DI 받을 때 클래스를 이용한다면 proxy-target-class를 true로 설정�
 
 대부분의 웹 브라우저는 보안상의 이유로 다른 도메인의 URL을 호출해서 데이터를 가져오는 것을 금지하고 있다. 우리 웹 서비스에서만 사용하기 위해 다른 서브 도메인을 가진 API 서버를 구축했는데, 다른 웹 서비스에서 마음대로 접근해서 사용하면 문제가 되기 때문이다.
 
-그런데 하나의 도메인을 가진 웹 서버에서 모든 처리를 하기에는 효율성이나 성능 등 여러 문제로 각 기능별로 여러 서버를 두는 경우가 많다\(API 서버, WAS 서버, 파일 서버 등등\). 물리적으로 분리된 서버이고, 다른 용도로 구축된 서버이니 당연히 각각 다른 도메인을 가진 서버들일 텐데, 서로간에 Ajax 통신을 할 수 없는 것일까? 즉 서로 다른 도메인 간의 호출을 의미하는 크로스 도메인 문제를 해결할 수는 없는 것일까?
+그런데 하나의 도메인을 가진 웹 서버에서 모든 처리를 하기에는 효율성이나 성능 등 여러 문제로 각 기능별로 여러 서버를 두는 경우가 많다(API 서버, WAS 서버, 파일 서버 등등). 물리적으로 분리된 서버이고, 다른 용도로 구축된 서버이니 당연히 각각 다른 도메인을 가진 서버들일 텐데, 서로간에 Ajax 통신을 할 수 없는 것일까? 즉 서로 다른 도메인 간의 호출을 의미하는 크로스 도메인 문제를 해결할 수는 없는 것일까?
 
-CORS\(Cross Origin Resource Sharing\)은 외부 도메인에서의 요청\(접근\)을 허용해주는 메커니즘이다.
+CORS(Cross Origin Resource Sharing)은 외부 도메인에서의 요청(접근)을 허용해주는 메커니즘이다.
 
 원문 : [http://ooz.co.kr/232](http://ooz.co.kr/232)
 

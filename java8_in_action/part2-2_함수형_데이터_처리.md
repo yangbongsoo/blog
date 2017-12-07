@@ -30,13 +30,13 @@ Map<Currency, List<Transaction>> transactionByCurrencies =
 
 ### 컬렉터란 무엇인가?
 
-Collector 인터페이스 구현은 스트림의 요소를 어떤 식으로 도출할지 지정한다. 5장에서는 '각 요소를 리스트로 만들어라'를 의미하는 toList를 Collector 인터페이스의 구현으로 사용했다. 여기서는 groupingBy를 이용해서 '각 키\(통화\) 버킷 그리고 각 키 버킷에 대응하는 요소 리스트를 값으로 포함하는 맵을 만들라'는 동작을 수행한다.
+Collector 인터페이스 구현은 스트림의 요소를 어떤 식으로 도출할지 지정한다. 5장에서는 '각 요소를 리스트로 만들어라'를 의미하는 toList를 Collector 인터페이스의 구현으로 사용했다. 여기서는 groupingBy를 이용해서 '각 키(통화) 버킷 그리고 각 키 버킷에 대응하는 요소 리스트를 값으로 포함하는 맵을 만들라'는 동작을 수행한다.
 
-collect 메서드로 Collector 인터페이스 구현을 전달한다. 스트림에 collect를 호출하면 스트림의 요소에 내부적으로 리듀싱 연산이 수행된다. 통화 예제에서 보여주는 것처럼 Collector 인터페이스의 메서드를 어떻게 구현하느냐에 따라 스트림에 어떤 리듀싱 연산을 수행할지 결정된다. Collectors 유틸리티 클래스는 자주 사용하는 컬렉터 인스턴스를 손쉽게 생성할 수 있는 정적 팩토리 메서드를 제공한다. ex\) toList\(\), counting\(\)
+collect 메서드로 Collector 인터페이스 구현을 전달한다. 스트림에 collect를 호출하면 스트림의 요소에 내부적으로 리듀싱 연산이 수행된다. 통화 예제에서 보여주는 것처럼 Collector 인터페이스의 메서드를 어떻게 구현하느냐에 따라 스트림에 어떤 리듀싱 연산을 수행할지 결정된다. Collectors 유틸리티 클래스는 자주 사용하는 컬렉터 인스턴스를 손쉽게 생성할 수 있는 정적 팩토리 메서드를 제공한다. ex) toList(), counting()
 
 **리듀싱과 요약**
 
-첫 번째 예제로 counting\(\)이라는 팩토리 메서드가 반환하는 컬렉터로 메뉴에서 요리 수를 계산한다.
+첫 번째 예제로 counting()이라는 팩토리 메서드가 반환하는 컬렉터로 메뉴에서 요리 수를 계산한다.
 
 `long howMayDishes = menu.stream().collect(counting());`
 
@@ -103,7 +103,7 @@ Optional<Dish> mostCalorieDish = menu.stream().collect(reducing(
   (d1, d2) -> d1.getCaloriees() > d2.getCalories() ? d1 : d2));
 ```
 
-한 개의 인수를 갖는 reducing 컬렉터는 시작값이 없으므로 빈 스트림이 넘겨졌을 때 시작값이 설정되지 않는 상황이 벌어진다. 그래서 Optional로 받고, 반환함수가 자기 자신이기 때문에\(항등 함수\) 최종적으로 `Optional<Dish>` 객체를 반환한다.
+한 개의 인수를 갖는 reducing 컬렉터는 시작값이 없으므로 빈 스트림이 넘겨졌을 때 시작값이 설정되지 않는 상황이 벌어진다. 그래서 Optional로 받고, 반환함수가 자기 자신이기 때문에(항등 함수) 최종적으로 `Optional<Dish>` 객체를 반환한다.
 
 **컬렉션 프레임워크 유연성: 같은 연산도 다양한 방식으로 수행할 수 있다.**
 
@@ -122,7 +122,7 @@ int totalCalories = menu.stream().collect(reducing(
 int totalCalories = menu.stream().map(Dish::getCalories).reduce(Integer::sum).get();
 ```
 
-reduce\(Integer::sum\)도 빈 스트림과 관련한 널 문제를 피할 수 있도록 int가 아닌 `Optional<Integer>`를 반환한다. 그리고 get으로 Optional 객체 내부의 값을 추출했다. 요리 스트림은 비어있지 않다는 사실을 알고 있으므로 get을 자유롭게 사용할 수 있다. 마지막으로 스트림을 IntStream으로 매핑한 다음에 sum 메서드를 호출하는 방법으로도 결과를 얻을 수 있다.
+reduce(Integer::sum)도 빈 스트림과 관련한 널 문제를 피할 수 있도록 int가 아닌 `Optional<Integer>`를 반환한다. 그리고 get으로 Optional 객체 내부의 값을 추출했다. 요리 스트림은 비어있지 않다는 사실을 알고 있으므로 get을 자유롭게 사용할 수 있다. 마지막으로 스트림을 IntStream으로 매핑한 다음에 sum 메서드를 호출하는 방법으로도 결과를 얻을 수 있다.
 
 ```java
 int totalCalories = menu.stream().mapToInt(Dish::getCalories).sum();
@@ -192,7 +192,7 @@ Map<Dish.Type, Map<CaloricLevel, List<Dish>>> dishesByTypeCaloricLevel =
 
 ### 분할
 
-분할은 분할 함수라 불리는 프레디케이트를 분류 함수로 사용하는 특수한 그룹화 기능이다. 분할 함수는 불린을 반환하므로 맵의 키 형식은 Boolean이다. 결과적으로 그룹화 맵은 최대 두 개\(T/F\)의 그룹으로 분류된다. 예를 들어 채식주의자 친구를 저녁에 초대했다고 가정하자. 그러면 이제 모든 요리를 채식 요리와 채식이 아닌 요리로 분류 해야 한다.
+분할은 분할 함수라 불리는 프레디케이트를 분류 함수로 사용하는 특수한 그룹화 기능이다. 분할 함수는 불린을 반환하므로 맵의 키 형식은 Boolean이다. 결과적으로 그룹화 맵은 최대 두 개(T/F)의 그룹으로 분류된다. 예를 들어 채식주의자 친구를 저녁에 초대했다고 가정하자. 그러면 이제 모든 요리를 채식 요리와 채식이 아닌 요리로 분류 해야 한다.
 
 ```java
 Map<Boolean, List<Dish>> partitionedMenu = 
