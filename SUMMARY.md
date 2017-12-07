@@ -2,7 +2,8 @@
 
 * [Introduction](README.md)
 * [Nginx]
-  * [모듈개발](nginx/모듈개발.md)
+  * [모듈개발기초](nginx/모듈개발기초.md)
+  * [CORS모듈](nginx/CORS모듈.md)
 * [Spring 개발 이슈모음]
   * [issue1 ~ issue21](Spring_개발_이슈모음/Spring_개발_이슈1.md)
   * [issue22 ~ ](Spring_개발_이슈모음/Spring_개발_이슈2.md)
