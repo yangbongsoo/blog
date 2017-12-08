@@ -1,4 +1,5 @@
-#공부한것들을 정리하는 블로그 입니다.
+# Develop Blog
 
-###E-mail : goodbs1000@gmail.com
-###Github : https://github.com/yangbongsoo
+## E-mail : goodbs1000@gmail.com
+## Github : https://github.com/yangbongsoo
+## Gitbook : https://yangbongsoo.gitbooks.io/study/content/
