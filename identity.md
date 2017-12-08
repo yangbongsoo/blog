@@ -1,6 +1,6 @@
 #Identity
 
-###SAML 기반의 web sso 원리 정리
+##SAML 기반의 web sso 원리 정리
 통합인증(SSO, Single Sign On)은 한 번의 인증 과정으로 여러 컴퓨터 상의 자원을 이용 가능하게 하는 인증 기능이다. 싱글 사인온, 단일 계정 로그인, 단일 인증이라고 한다.
 
 보안이 필요한 환경에서 통합인증을 도입하는 경우, 여러 응용 프로그램의 로그인 처리가 간소화되어 편리성을 도모할 수 있는 반면, 통합인증의 시작점이 되는, 즉 최초의 로그인 대상이 되는 응용 프로그램 혹은, 운영체제에 대한 접근 보안이 중요하게 된다. 보안위험이 적은 환경에서는 편리성만을 추구하면 되지만, 보안이 요구되는 환경에서는 1회용 비밀번호를 이용하는 등, 이중 인증 등으로 보안을 강화할 필요가 있다.
@@ -21,7 +21,7 @@ HTTP GET, POST 또는 SOAP 웹서비스 등 여러가지 방법으로 구현될 
 4. Browser는 SAML reponse를 가지고 Sp A로 접속하면, Sp A에는 인증된 정보를 가지고 로그인 처리를 한다. ※ 이 과정에서는 바로 사이트 Sp A의 사용자 페이지(예를 들어 /home)등으로 가는 것이 아니라, SAML에 의해서 미리 정의한 Sp A의 SAML response 처리 URL로 갔다가 SAML response를 처리가 끝나면 인증 처리를 한후, 사용자 페이지(/home)으로 다시 redirect한다.
 
 
-**site Sp A로 로그인된 상태에서 site Sp A로 로그인**
+**site Sp A로 로그인된 상태에서 site Sp B로 로그인**
 ![](/assets/SAML_sso2.png)
 
 1. 사이트 Sp A에서 로그인된 상태에서 Sp B에 접속한다.
@@ -31,6 +31,7 @@ HTTP GET, POST 또는 SOAP 웹서비스 등 여러가지 방법으로 구현될 
 
 
 **SAML 기반의 SSO 솔루션**
+
 simplePHPSAML : 가장 널리 쓰이고, 사용이 쉽다.
 
 Shibboleth : java stack으로 구현이 되어 있으며, terracotta를 이용하여 session을 저장하기 때문에 상대적으로 확장성이 높다.
@@ -40,6 +41,7 @@ WSO2 identity server : 자체 OSGi 컨테이너인 carbon 엔진 위에서 동�
 Open AM : Sun IDM을 모태로 하여, 현재 오픈소스화 되었다. 아무래도 enterprise 제품을 기반으로 하다 보니 복잡도가 상대적으로 높다.
 
 **솔루션 설계 시 유의사항**
+
 두 가지 기술적인 이슈가 발생하는데 첫번째는 IdP에 대규모 사용자를 지원할 경우, **Session 정보를 어떻게 분산 저장할것인가**이다.
 WSO2 Identity server의 경우에는 각 instance의 memory에 이 session 정보를 저장하고, 자체 clustering feature를 이용하여 이 session을 상호 복제한다. Oracle WebLogic이나 Apache Tomcat cluster의 Http session clustering과 같은 원리이다.
 
@@ -50,14 +52,16 @@ WSO2 Identity server의 경우에는 각 instance의 memory에 이 session 정�
 그래서 WSO2 identity server의 경우에는 별도의 logout URL을 정의하여, IdP에서 logout을 한경우에 전체 사이트에서 logout을 시키는 global logout 기능을 제공한다.
 
 **cf) PingFederate(SSO)**
+
 The PingFederate® server는 고객, 직원, 협력사들에게 SSO, API security를 제공하는, 모든 기능을 갖춘 federation server다. SAML, WS-Federation, WS-Trust, OAuth and OpenID Connect을 비롯한 모든 최신 identity 표준을 지원한다. 
 홈페이지 : https://www.pingidentity.com/en/products/pingfederate.html
 
 **[본문]**
+
 위키 : https://ko.wikipedia.org/wiki/%ED%86%B5%ED%95%A9_%EC%9D%B8%EC%A6%9D 
 조대협 블로그 : http://bcho.tistory.com/755
 
-###Facebook OAuth
+##Facebook OAuth
 추가적인 보안 강화를 위해 사용자 인증(ID, Password)뿐만 아니라, 클라이언트 인증 방식을 추가할 수 있다. 페이스북은 API 토큰을 발급받도록 사용자 ID, 비밀번호 뿐만 아니라 Client ID와 Client Secret이라는 것을 같이 입력받도록 하는데, Client ID는 특정 앱에 대한 등록 ID이고 Client Secret은 특정 앱에 대한 비밀번호로, 페이스북 개발자 포털에서 앱을 등록하면 앱 별로 발급되는 일종의 비밀번호다.
 
 ![](/assets/developerfacebook.PNG)
@@ -65,6 +69,7 @@ The PingFederate® server는 고객, 직원, 협력사들에게 SSO, API securit
 API 토큰을 발급받을 때, Client ID와 Client Secret을 이용하여 클라이언트 앱을 인증하고 사용자 ID와 비밀번호를 추가로 받아서 사용자를 인증해 API 액세스 토큰을 발급한다. 
 
 **제 3자 인증 방식(OAuth 2.0 Autorization grant type)**
+
 페이스북이나 트위터와 같은 API 서비스 제공자들이 파트너 애플리케이션에 많이 적용하는 방법으로 자신의 서비스를 페이스북 계정을 이용하여 인증하는 경우다.
 
 중요한 점은 자신의 서비스에서 사용자 비밀번호를 받지 않고, 페이스북이 사용자를 인증하고 알려주는 방식이다. 즉, 파트너 서비스에는 페이스북 사용자의 비밀번호가 노출되지 않는 방식이다. 전체적인 흐름을 보면 다음과 같다.
@@ -100,7 +105,7 @@ API 토큰을 발급받을 때, Client ID와 Client Secret을 이용하여 클�
 
 ![](/assets/fbscope.PNG)
 
-###HTTP 완벽가이드 11장 - 클라이언트 식별과 쿠키
+##HTTP 완벽가이드 11장 - 클라이언트 식별과 쿠키
 HTTP는 stateless 하기 때문에 사용자를 식별하기 위해서는 추가적인 기술이 필요하다. HTTP 헤더, IP주소, 로그인 인증, URL에 식별자를 포함하는 방식(Fat URL), 쿠키 이렇게 5가지 방식이 있다.
 
 cf) 사용자 로그인 인증방식은 웹 사이트 로그인이 더 쉽도록 WWW-Authenticate와 Authorization 헤더를 사용한다. 서버에서, 사용자가 사이트에 접근하기 전에 로그인을 시키고자 한다면 HTTP 401 unauthorized 응답코드와 WWW-Authenticate 헤더를 브라우저에 보낸다. 브라우저는 로그인 대화상자를 보여주고, 다음 요청부터 Authorization 헤더에 그 정보를 기술하여 보낸다.
@@ -108,11 +113,13 @@ cf) 사용자 로그인 인증방식은 웹 사이트 로그인이 더 쉽도록
 그중에서 쿠키는 사용자를 식별하고 세션을 유지하는 방식 중에서 현재까지 장 널리 사용하는 방식이다. 쿠키는 캐시와 충돌할 수 있어서, 대부분의 캐시나 브라우저는 쿠키에 있는 내용물을 캐싱하지 않는다.
 
 **쿠키의 타입**
+
 쿠키는 크게 세션 쿠키(seesion cookie)와 지속 쿠키(persistent cookie) 두 가지 타입으로 나눌 수 있다. 세션 쿠키는 사용자가 부라우저를 닫으면 삭제된다. 지속 쿠키는 디스크에 저장되어, 브라우저를 닫거나 컴퓨를 재시작하더라도 남아있다. 지속쿠키는 사용자가 주기적으로 방문하는 사이트에 대한 설정 정보나 로그인 이름을 유지하려고 사용한다. 
 
-세션 쿠키와 지속 쿠키의 다른 점은 파기되는 시점 뿐이다. 쿠키는 Discard 파라미터가 설정되어 있거나, 파기되기가지 남은 시간을 가리키는 Expires 혹은 Max-Age 파라미터가 없으면 세션 쿠키가 된다.
+세션 쿠키와 지속 쿠키의 다른 점은 파기되는 시점 뿐이다. 쿠키는 Discard 파라미터가 설정되어 있거나, 파기 되기까지 남은 시간을 가리키는 Expires 혹은 Max-Age 파라미터가 없으면 세션 쿠키가 된다.
 
 **사이트마다 각기 다른 쿠키들**
+
 보통 브라우저는 쿠키를 생성한 서버에게만 쿠키에 담긴 정보를 전달한다. joes-hardware.com에서 생성된 쿠키는 joes-hardware.com에만 보내고 bobs-books.com이나 mary-movie.com에는 보내지 않는다.
 
 서버는 쿠키를 생성할 때 Set-Cookie 응답 헤더에 Domain 속성을 기술해서 어떤 사이트가 그 쿠키를 읽을 수 있는지 제어할 수 있다.
