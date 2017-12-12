@@ -1,6 +1,6 @@
-#Identity
+# Identity
 
-##SAML 기반의 web sso 원리 정리
+## SAML 기반의 web sso 원리 정리
 통합인증(SSO, Single Sign On)은 한 번의 인증 과정으로 여러 컴퓨터 상의 자원을 이용 가능하게 하는 인증 기능이다. 싱글 사인온, 단일 계정 로그인, 단일 인증이라고 한다.
 
 보안이 필요한 환경에서 통합인증을 도입하는 경우, 여러 응용 프로그램의 로그인 처리가 간소화되어 편리성을 도모할 수 있는 반면, 통합인증의 시작점이 되는, 즉 최초의 로그인 대상이 되는 응용 프로그램 혹은, 운영체제에 대한 접근 보안이 중요하게 된다. 보안위험이 적은 환경에서는 편리성만을 추구하면 되지만, 보안이 요구되는 환경에서는 1회용 비밀번호를 이용하는 등, 이중 인증 등으로 보안을 강화할 필요가 있다.
@@ -61,7 +61,7 @@ The PingFederate® server는 고객, 직원, 협력사들에게 SSO, API securit
 위키 : https://ko.wikipedia.org/wiki/%ED%86%B5%ED%95%A9_%EC%9D%B8%EC%A6%9D 
 조대협 블로그 : http://bcho.tistory.com/755
 
-##Facebook OAuth
+## Facebook OAuth
 추가적인 보안 강화를 위해 사용자 인증(ID, Password)뿐만 아니라, 클라이언트 인증 방식을 추가할 수 있다. 페이스북은 API 토큰을 발급받도록 사용자 ID, 비밀번호 뿐만 아니라 Client ID와 Client Secret이라는 것을 같이 입력받도록 하는데, Client ID는 특정 앱에 대한 등록 ID이고 Client Secret은 특정 앱에 대한 비밀번호로, 페이스북 개발자 포털에서 앱을 등록하면 앱 별로 발급되는 일종의 비밀번호다.
 
 ![](/assets/developerfacebook.PNG)
@@ -105,7 +105,7 @@ API 토큰을 발급받을 때, Client ID와 Client Secret을 이용하여 클�
 
 ![](/assets/fbscope.PNG)
 
-##HTTP 완벽가이드 11장 - 클라이언트 식별과 쿠키
+## HTTP 완벽가이드 11장 - 클라이언트 식별과 쿠키
 HTTP는 stateless 하기 때문에 사용자를 식별하기 위해서는 추가적인 기술이 필요하다. HTTP 헤더, IP주소, 로그인 인증, URL에 식별자를 포함하는 방식(Fat URL), 쿠키 이렇게 5가지 방식이 있다.
 
 cf) 사용자 로그인 인증방식은 웹 사이트 로그인이 더 쉽도록 WWW-Authenticate와 Authorization 헤더를 사용한다. 서버에서, 사용자가 사이트에 접근하기 전에 로그인을 시키고자 한다면 HTTP 401 unauthorized 응답코드와 WWW-Authenticate 헤더를 브라우저에 보낸다. 브라우저는 로그인 대화상자를 보여주고, 다음 요청부터 Authorization 헤더에 그 정보를 기술하여 보낸다.

@@ -125,7 +125,7 @@ static long nanoTime()
 nanoTime() 메서드는 JDK 5.0부터 추가된 메서드다. 되도록이면 nanoTime() 메서드의 결과로 판단하도록 하자.
 
 ## Story03 왜 자꾸 String을 쓰지 말라는거야
-###StringBuffer 클래스와 StringBuilder 클래스
+### StringBuffer 클래스와 StringBuilder 클래스
 StringBuilder 클래스는 JDK 5.0에서 새로 추가되었다. StringBuffer 클래스가 제공하는 메서드와 동일하다. StringBuffer 클래스는 스레드에 안전하게(ThreadSafe) 설계되어 있으므로, 여러 개의 스레드에서 하나의 StringBuffer 객체를 처리해도 전혀 문제가 되지 않는다. 하지만 StringBuilder는 단일 스레드에서의 안전성만 보장한다. 그렇기 때문에 여러 개의 스레드에서 하나의 StringBuilder 객체를 처리하면 문제가 발생한다.
 
 StringBuffer를 기준으로 생성자와 메서드를 확인하고 정리해 보자.
@@ -309,7 +309,7 @@ MyBenchmark.makeObjectWithSize  avgt    5  0.560 ± 0.025  ms/op
 
 Process finished with exit code 0
 ```
-###Set 클래스 중 무엇이 가장 빠를까?
+### Set 클래스 중 무엇이 가장 빠를까?
 먼저 HashSet, TreeSet, LinkedHashSet add를 비교해보면 다음과 같다.
 ```java
 @State(Scope.Thread)
@@ -553,7 +553,7 @@ public class TreeSet<E> extends AbstractSet<E>
 ```
 TreeSet은 데이터를 저장하면서 정렬한다. 구현한 인터페이스 중에 NavigableSet이 있다. 이 인터페이스는 특정 값보다 큰 값이나 작은 값, 가장 큰 값, 가장 작은 값 등을 추출하는 메서드를 선언해 놓았으며 JDK 1.6부터 추가된 것이다. 즉, 데이터를 순서에 따라 탐색하는 작업이 필요할때는 TreeSet을 사용하는 것이 좋다는 의미다. 하지만 그럴 필요가 없을 때는 HashSet이나 LinkedHashSet을 사용하는 것을 권장한다.
 
-###List 관련 클래스 중 무엇이 빠를까?
+### List 관련 클래스 중 무엇이 빠를까?
 데이터를 넣는 속도부터 비교해보자. 
 ```java
 @State(Scope.Thread)
@@ -793,7 +793,7 @@ ListRemove.removeVectorFromLast       avgt    5  0.038 ± 0.007  us/op
 ```
 결과를 보면 첫 번째 값을 삭제하는 메서드와 마지막 값을 삭제하는 메서드의 속도 차이는 크다. 그리고 LinkedList는 별 차이가 없다. 그 이유가뭘까? ArrayList와 Vector는 실제로 그 안에 배열을 사용하기 때문에 0번째 인덱스 값을 삭제하면 나머지를 다 옮겨야 하기 때문이다.
 
-###Map 관련 클래스 중에서 무엇이 빠를까?
+### Map 관련 클래스 중에서 무엇이 빠를까?
 ```java
 @State(Scope.Thread)
 @BenchmarkMode({Mode.AverageTime})
@@ -913,7 +913,7 @@ MapGet.getSeqTreeMap           avgt    5  55.169 ±  8.445  us/op
 ## Story05 지금까지 사용하던 for루프를 더 빠르게 할 수 있다고?
 switch문은 JDK 6까지는 byte, short, char, int 이렇게 네 가지 타입을 사용한 조건 분기만 가능했지만, JDK 7부터는 String도 사용 가능하다. 일반적으로 if문에서 분기를 많이 하면 시간이 많이 소요된다고 생각한다. if문 조건 안에 들어가는 비교 구문에서 속도를 잡아먹지 않는한, if문장 자체에서는 그리 많은 시간이 소요되지 않는다. 
 
-###반복 구문에서의 속도는?
+### 반복 구문에서의 속도는?
 JDK 5.0 이전에는 for 구문을 다음과 같이 사용하였다. 여기서 list는 값이 들어있는 ArrayList이다.
 ```java
 for (int loop = 0; loop < list.size(); loop++) 
@@ -1004,7 +1004,7 @@ ForLoop.traditionalSizeForLoop  avgt    5  131.080 ± 46.861  us/op
 
 cf) 중괄호 안에서 아무런 작업을 하지 않거나, resultProcess() 메서드를 호출하지 않을 경우, 자바의 JIT(Just In Time) 컴파일러는최적화를 통해 해당 코드를 무시해 버릴 수도 있다. 그래서 메서드 호출을 하도록 했다.
 
-###반복 구문에서의 필요 없는 반복
+### 반복 구문에서의 필요 없는 반복
 가장 많은 실수 중 하나는 반복 구문에서 계속 필요 없는 메서드 호출을 하는 것이다. 다음 소스를 보자.
 ```java
 public void sample(DataVo data, String key) {
