@@ -7,7 +7,7 @@
 
 cf) 마지막 부분에 Spring Boot 1.4 Test방식 소개
 
-##Spock
+## Spock
 참고 : http://thejavatar.com/testing-with-spock/ 
 참고 : http://farenda.com/spock-framework-tutorial/
 
@@ -49,7 +49,7 @@ class SpockNameInverterTest extends Specification{
 }
 ```
 
-###Stub
+### Stub
 ```groovy
 def "creating example stubs"() {
    given:
@@ -138,7 +138,7 @@ def "만약 리스트에 Integer 추가하면 예외처리"() {
 ```
 cf) JDK7에서 새롭게 소개된 Invokedynamic. 자바는 static type 언어라고 불리며, 이는 컴파일 타임에서 이미 멤버 변수들이나 함수 변수들의 타입이 반드시 명시적으로 지정돼야 함을 의미한다. 그에 반해 루비나 자바스크립트는 이른바 ‘duck-typing’이라고 하는 타입 시스템을 사용함으로써 컴파일 타임에서의 타입을 강제하지 않는다. Invokedynamic은 이러한 duck-typing을 JVM레벨에서 기본적으로 지원하면서 자바 외에 다른 언어들이 JVM이라는 플랫폼 위에서 최적화된 방식으로 실행될 수 있는 토대를 제공한다.
 
-###Mock
+### Mock
 ```groovy
 def "creating example mocks"() {
    given:
@@ -160,7 +160,7 @@ cf) 토비의 스프링에서 Stub과 Mock 비교
 Stub은 테스트 대상 Object의 의존객체로 존재하면서 테스트 동안에 코드가 정상적으로 수행할 수 있도록 돕는다.
 때론 테스트 대상 Object가 의존 Object에게 출력한 값에 관심이 있거나, 의존 Object를 얼마나 사용했는가 하는 커뮤니케이션 행위 자체에 관심이 있을 수 있다. 문제는 이 정보를 테스트에서는 직접 알 수가 없기 때문에 목 객체를 만들어서 사용해야 한다.
 
-###Spy
+### Spy
 Stub이나 Mock과는 다르게 Spy는 Dummy 객체가 아니다. Spy는 실제 일반 객체를 감싼것이다. Spy를 만들 때는 interface로 만들지 않고 class로 만들어야 한다. 
 ```groovy
 def "interface로 Spy 만들면 안된다."() {
@@ -219,7 +219,7 @@ Mocking of non-interface types requires the CGLIB library. Please put cglib-node
 </dependency>
 ```
 
-###where:
+### where:
 ```groovy
 def "다양한 제곱 테스트"() {
         expect:
@@ -232,7 +232,7 @@ def "다양한 제곱 테스트"() {
         10   || 100
     }
 ```
-##블로그에서 groovy를 이용한 통합테스트 방식 소개
+## 블로그에서 groovy를 이용한 통합테스트 방식 소개
 참고 : http://groovy-coder.com/?p=111
 
 올랑(Hollandaise) 소스를 만들기 위해서는 cooking temperature를 매우 정밀하게 조절해야 한다. 
@@ -332,8 +332,8 @@ class SpringBootSpockTestingApplicationSpecIT extends Specification {
 }
 ```
 
-##간단한 Spock 적용 후기
-###Name Inverter
+## 간단한 Spock 적용 후기
+### Name Inverter
 참고 : https://www.youtube.com/watch?v=czjWpmy3rkM
 
 spock으로 진행해봤는데 에러가 났을 때 좀 더 친절한 메세지 외에는 장점을 못느꼈습니다(중요한건 리팩토링이지 명세가 아닌거 같습니다).
@@ -341,7 +341,7 @@ spock으로 진행해봤는데 에러가 났을 때 좀 더 친절한 메세지 
 
 ![](/assets/mockitovsgroovy4.jpg)
 
-###미담 프로젝트 단위 테스트
+### 미담 프로젝트 단위 테스트
 **java+mockito**
 ```java
 @Mock
@@ -404,7 +404,7 @@ def "시작안했는데 랜덤메세지를 호출하면 예외가 잘 발생하�
 
 ---
 
-##Spring Boot 1.4 Test방식 변경부분 소개
+## Spring Boot 1.4 Test방식 변경부분 소개
 참고 : https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4
 
 Spring Framework 4.3부터 생성자를 통한 주입에서 더이상 @Autowired가 필요 없어졌다. 생성자가 하나만 있다는 전제하에 Spring이 autowire target으로 본다.
@@ -575,7 +575,7 @@ public class UserRepositoryTests {
 4. Turn on SQL logging
 
 TestEntityManager는 Spring Boot에서 제공한다. standard JPA EntityManager를 대신한다. 
-###[용어정리]
+### [용어정리]
 **Mock Object**
 Mock Object 는 검사하고자 하는 코드와 맞물려 동작하는 객체들을 대신하여 동작하기 위해 만들어진 객체이다. 검사하고자 하는 코드는 Mock Object 의 메서드를 부를 수 있고, 이 때 Mock Object는 미리 정의된 결과 값을 전달한다. MockObject는 자신에게 전달된 인자를 검사할 수 있으며, 이를 테스트 코드로 전달할 수도 있다.
 
