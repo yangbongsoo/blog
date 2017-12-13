@@ -262,7 +262,7 @@ public String getCarInsuranceName(Person person) {
 
 그래서 자바8은 `java.util.Optional<T>`를 제공한다. Optional은 선택형값을 캡슐화하는 클래스다. **값이 있으면 Optional 클래스는 값을 감싼다. 반면 값이 없으면 Optional.empty 메서드로 Optional을 반환한다.** 즉, Optional 타입은 값이 없을 수 있음을 명시적으로 보여준다. 
 
-**빈 Optional **
+**빈 Optional**
 
 ```java
 Optional<Car> optCar = Optional.empty();
