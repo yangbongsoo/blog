@@ -23,8 +23,8 @@ LoadModule jk_module /private/etc/apache2/other/mod_jk.so
 #'Main' server configuration 
 #이 섹션의 지시문은 <main> 서버가 사용하는 값을 설정하며, 
 #<VirtualHost> 정의에 의해 처리되지 않는 요청에 응답한다.
-#또한 이 값은 나중에 파일에 정의 할 수있는 <VirtualHost> 컨테이너의 기본#값을 제공한다.
-#이러한 지시어는 모두 <VirtualHost> 컨테이너 안에 나타날 수 있는데, 가상 #호스트가 정의 될 때 기본 설정은 무시된다.
+#또한 이 값은 나중에 파일에 정의 할 수있는 <VirtualHost> 컨테이너의 기본값을 제공한다.
+#이러한 지시어는 모두 <VirtualHost> 컨테이너 안에 나타날 수 있는데, 가상 호스트가 정의 될 때 기본 설정은 무시된다.
 
 ServerAdmin you@example.com
 ServerName www.example.com:80

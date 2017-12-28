@@ -56,7 +56,7 @@
 * [Living Documentation](what__why__how_living_documentation.md)
 * [specification by example](specification_by_example.md)
 * [자바 성능 튜닝 이야기(작업중)]
-  * [Story02-05](자바_성능_튜닝_이야기/story02-05.md)
-  * [Story06-10](자바_성능_튜닝_이야기/story06-10.md)
+  * [요약 정리1](자바_성능_튜닝_이야기/story02-05.md)
+  * [요약 정리2](자바_성능_튜닝_이야기/story06-10.md)
 * [자바 병렬 프로그래밍(작업중)]
   * [1부 기본 원리](자바_병렬_프로그래밍/1부_기본_원리.md)
