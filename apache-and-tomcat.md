@@ -2,7 +2,14 @@
 
 cf) Apache Syntax error check
 ```
-$sudo apachectl -t
+$ apachectl -t
+```
+
+start / stop / restart
+```
+$ apachectl start
+$ apachectl stop
+$ apachectl restart 
 ```
 
 ## httpd.conf
