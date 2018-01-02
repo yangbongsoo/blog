@@ -116,7 +116,15 @@ gzip_proxied     expired no-cache no-store private auth;
 gzip_types       text/plain application/x-javascript text/xml text/css application/xml application/javascript;
 ```
 
+```
+gzip_comp_level 5;
+```
+5는 크기와 CPU 사용량간에 완벽한 절충안으로, 대부분의 ASCII 파일 (레벨 9와 거의 동일)에 대해 약 75 %의 감소를 제공한다(기본값 : 1).
+
+https://github.com/h5bp/server-configs-nginx/blob/master/nginx.conf
+
 추가적으로 ie 6이하는 gzip 옵션이 제공 되지 않으므로 disable 시킬 수도 있다. 
+gzip_disable 옵션에서 정규표현식으로 비활성화 시킬 수 있는데 "User-Agent"헤더에서 일치하는 것에 국한된다.
 ```
 gzip_disable "MSIE [1-6]\.";
 ```
