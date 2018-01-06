@@ -294,3 +294,31 @@ public void serviceRequestFormSubmit(HttpServletRequest request) {
   ...
 }
 ```
+
+### 빈 등록정보 조회 유틸리티 클래스
+```java
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.context.support.GenericApplicationContext;
+
+public class BeanDefinitionUtils {
+	public static void printBeanDefinitions(GenericApplicationContext gac) {
+		List<List<String>> roleBeanInfos = new ArrayList<>();
+		roleBeanInfos.add(new ArrayList<>());
+		roleBeanInfos.add(new ArrayList<>());
+		roleBeanInfos.add(new ArrayList<>());
+		
+		for (String name : gac.getBeanDefinitionNames()) {
+			int role = gac.getBeanDefinition(name).getRole();
+			List<String> beanInfos = roleBeanInfos.get(role);
+			beanInfos.add(role + "\t" + name + "\t" + gac.getBean(name).getClass().getName());
+		}
+		
+		for (List<String> beanInfos : roleBeanInfos) {
+			for (String beanInfo : beanInfos) {
+				System.out.println(beanInfo);
+			}
+		}
+	}
+}
+```  
