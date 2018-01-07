@@ -322,3 +322,15 @@ public class BeanDefinitionUtils {
 	}
 }
 ```  
+컨테이너의 빈 등록 정보 확인 (vol.1 p692)
+```java
+	@Autowired
+	DefaultListableBeanFactory bf;
+
+	@Test
+	public void beanTest() throws Exception {
+		for (String s : bf.getBeanDefinitionNames()) {
+			System.out.println(bf.getBean(s).getClass().getName());
+		}
+	}
+```
