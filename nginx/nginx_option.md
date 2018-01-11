@@ -31,6 +31,14 @@ gzip_proxied no-cache no-store private expired auth;
 ```
 대부분의 다른 지시어와 마찬가지로 압축을 구성하는 지시어는 http context or server or location configuration block에 포함될 수 있다.
 
+```
+gzip_http_version 1.1
+```
+압축이 필요한 HTTP Request의 최소 버전이다. 디폴트는 1.1이다.
+
+Nginx1 -> Nginx2 -> Upstream Server의 구조일 때, Nginx `proxy_http_version` 디폴트는 1.0이기 때문에
+`proxy_http_version` 을 1.1로 명시하거나, `gzip_http_version` 을 1.0으로 명시해야 한다.
+
 gzip_vary 옵션을 키면 response headers에 `Vary: Accept-Encoding`이 추가적으로 나온다.
 ```
 gzip_vary on;
