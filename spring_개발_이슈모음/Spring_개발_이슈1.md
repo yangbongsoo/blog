@@ -115,8 +115,7 @@ public class AccountControllerTest {
 메이븐 pom.xml에서 에서 spring-boot-starter-data-jpa 를 추가하면 그안에 spring-boot-starter-jdbc가 있고 그 안에 tomcat-jdbc가 있다.  
 Spring Boot에서는 DataSource 관리를 위한 구현체로써 tomcat-jdbc(The Tomcat JDBC Pool) 을 default로 제공한다.
 
-![](스크린샷 2016-05-21 오후 3.32.23.jpg)  
-근데 실서버에 배포 했을 때 위와 같은 에러가 반복해서 발생했고 그 주기도 일정치 않아서 재연이 쉽지 않았다. `validationQuery: select 1`을 설정했음에도 connection이 자꾸 닫히는 문제가 발생했다.
+근데 실서버에 배포 했을 때 에러가 반복해서 발생했고 그 주기도 일정치 않아서 재연이 쉽지 않았다. `validationQuery: select 1`을 설정했음에도 connection이 자꾸 닫히는 문제가 발생했다.
 
 ```java
 [2016-05-19 17:37:40.187] boot - 11886 ERROR [http-nio-8080-exec-3] --- SqlExceptionHelper: No operations allowed after connection closed.
@@ -1077,7 +1076,7 @@ public class Application extends WebMvcConfigurerAdapter {
         argumentResolvers.add(authenticationResolver(xxxService));
     }
 
-        @Bean
+    @Bean
     public CookieHandlerMethodArgumentResolver authenticationResolver(xxxService xxxService) {
         CookieHandlerMethodArgumentResolver cookieHandlerMethodArgumentResolver = new CookieHandlerMethodArgumentResolver(xxxService);
         return cookieHandlerMethodArgumentResolver;
@@ -1102,11 +1101,8 @@ public class Application extends WebMvcConfigurerAdapter {
 //Controller class 
 
 public ResponseEntity<ResultResponse> logout(@Authentication User user, HttpServletResponse response) {
-    if (user != null) {
-
-    } else {
-
-    }
+    if (user != null) {}
+    else {}
 }
 ```
 
@@ -1198,13 +1194,13 @@ public class Address {
 ```
 
 **결과 /app/publicprofile**  
-![](/assets/스크린샷 2017-03-24 오후 4.08.10.png)
+![](/assets/publicprofile.png)
 
 **결과 app/friendprofile**  
-![](/assets/스크린샷 2017-03-24 오후 4.08.26.png)
+![](/assets/friendprofile.png)
 
 **결과 app/familyprofile**  
-![](/assets/스크린샷 2017-03-24 오후 4.08.35.png)
+![](/assets/familyprofile.png)
 
 ### 21. Spring Boot Embedded Tomcat AJP 연동
 
