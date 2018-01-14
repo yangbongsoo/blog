@@ -176,7 +176,7 @@ http.set_cookie
 http.last_modified
 http.x_forwarded_for
 ```
-
+cf) http2 필드는 1.12.0버전부터 가능하다.
 
 전체 IP 통신의 목록 구하기
 ```
