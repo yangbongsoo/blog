@@ -15,7 +15,7 @@ cf) Strict-Transport-Security는 HTTPS 요청일때만 추가된다.
 ```
 X-Frame-Options: DENY
 ```
-response header에 X-Frame-Options를 갖고 있는 모든 사이트는  iframe 안에서 렌더링 되지 못하도록 브라우저가 막는다.
+response header에 X-Frame-Options를 갖고 있는 모든 사이트는 iframe 안에서 렌더링 되지 못하도록 브라우저가 막는다.
 
 **customize**
 ```

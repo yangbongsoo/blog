@@ -130,6 +130,54 @@ Hypertext Transfer Protocol
 --
 ```
 
+tshark의 리드필터(-R 옵션)로 지정할 수 있는 HTTP 프로토콜의 필드 목록을 확인하는 방법은 아래와 같다.
+```
+$ ./tshark -G | cut -f3 | grep "^http\."
+http.notification
+http.response
+http.request
+http.authbasic
+http.request.method
+http.request.uri
+http.request.version
+http.request.full_uri
+http.response.code
+http.response.phrase
+http.authorization
+http.proxy_authenticate
+http.proxy_authorization
+http.proxy_connect_host
+http.proxy_connect_port
+http.www_authenticate
+http.content_type
+http.content_length_header
+http.content_length
+http.content_encoding
+http.transfer_encoding
+http.upgrade
+http.user_agent
+http.host
+http.connection
+http.cookie
+http.accept
+http.referer
+http.accept_language
+http.accept_encoding
+http.date
+http.cache_control
+http.server
+http.location
+http.sec_websocket_accept
+http.sec_websocket_extensions
+http.sec_websocket_key
+http.sec_websocket_protocol
+http.sec_websocket_version
+http.set_cookie
+http.last_modified
+http.x_forwarded_for
+```
+
+
 전체 IP 통신의 목록 구하기
 ```
 $ ./tshark -r ~/tshark-log/temp.pcap -q -z "conv,ip,ip.addr==10.xxx.xxx.xxx" -w ~/tshark-log/write.pcap
