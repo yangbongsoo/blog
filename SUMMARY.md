@@ -55,6 +55,7 @@
 * [애자일적용후기](애자일적용후기.md)
 * [객체지향과 디자인패턴](객체지향과_디자인패턴.md)
 * [자바의 정석](자바의_정석.md)
+* [마이바티스를 사용한 자바 퍼시스턴스 개발](마이바티스를_사용한_자바_퍼시스턴스_개발.md)
 * [Living Documentation](what__why__how_living_documentation.md)
 * [specification by example](specification_by_example.md)
 * [자바 성능 튜닝 이야기(작업중)]
