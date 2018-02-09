@@ -108,3 +108,22 @@ protected void configure(HttpSecurity http) throws Exception {
 }
 
 ```
+
+### 24. List에 있는 value를 Mybatis foreach로 insert 하기
+```java
+public class TestDto {
+    private List<String> list;
+
+    // getter & setter
+}
+```
+```xml
+    <insert id="insertTest" parameterType="com.test.dto.TestDto">
+        INSERT
+        INTO test_table (id, order)
+        VALUES
+        <foreach collection="list" item="value" index="order" open="" separator="," close="">
+            (#{value}, #{order})
+        </foreach>
+    </insert>
+```
