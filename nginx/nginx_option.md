@@ -21,6 +21,17 @@ gzip_min_length 10240;
 ```
 NGINX는 기본적으로 프록시 서버에서 오는 요청에 대한 응답은 압축하지 않는다(요청의 Via 헤더 필드가 있는지 여부에 따라 프록시 서버에서 오는 요청인지 결정된다).
 
+Nginx1 -> Nginx2 -> Upstream Server의 구조일 때, Via 헤더가 자동으로 추가되지 않는다. 따라서 Nginx1에서 아래와 같이 셋팅해주면 Nginx2에서는 gzip설정이 on 되어 있어도 패스한다.
+Via 헤더의 유무가 중요하다. 헤더 value는 어떤 값이라도 상관없다.
+```
+proxy_set_header Via '10.xx.xx.xx';
+```
+
+주의 : 아래와 같이 add_header를 사용하면 response 헤더에 추가되기 때문에 의도한대로 동작하지 않는다.
+```
+add_header Via '10.xx.xx.xx';
+```
+
 이러한 응답의 압축을 설정하기 위해서는 gzip_proxied 지시어를 사용한다. gzip_proxied 지시어는 NGINX가 압축해야 하는 프록시된 요청의 종류를 지정하는 여러가지 파라미터가 있다. 
 예를 들어 프록시 서버에 캐시되지 않는 요청에만 응답을 압축하는 것이 합리적이다.
 
