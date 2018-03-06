@@ -45,6 +45,7 @@
 * [소프트웨어 품질관리(NHN은 이렇게한다)](소프트웨어_품질관리_NHN은_이렇게한다.md)
 * [웹프로그래머를 위한 서블릿 컨테이너의 이해](웹_프로그래머를_위한_서블릿_컨테이너의_이해.md)
 * [웹을 지탱하는 기술](웹을_지탱하는_기술.md)
+* [Finalizer attack](finalizer-attack.md)
 * [Git Flow](gitflow.md)
 * [Identity](identity.md)
 * [Singleton](singleton.md)
