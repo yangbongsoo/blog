@@ -127,3 +127,51 @@ public class TestDto {
         </foreach>
     </insert>
 ```
+
+### 25. 컨트롤러에서 List 객체 받는 방법 정리
+**방법1**
+```js
+$.ajax({
+    url: "/test1",
+    type: "post",
+    contentType: 'application/json;charset=UTF-8',
+    data: JSON.stringify(list)
+    }).done(function (data, status, xhr) {
+    ...
+```
+```java
+@RequestMapping(value = "/test1", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.POST)
+public void test1(@RequestBody List<String> list) {
+    ...
+}
+```
+**방법2**
+```js
+$.ajax({
+    url: "/test2",
+    type: "post",
+    contentType: 'application/json;charset=UTF-8',
+    data: JSON.stringify({
+        name: yangbongsoo,
+        age: 29,
+        list: list
+        })
+    }).done(function (data, status, xhr) {
+    ...
+
+```
+```java
+@RequestMapping(value = "/test2", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.POST)
+public void test2(@RequestBody TestDto testDto) {
+    ...
+}
+```
+```java
+public class TestDto {
+    private String name;
+    private int age;
+    private List<String> list;
+
+    //getter and setter
+}
+```
