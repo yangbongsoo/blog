@@ -55,10 +55,10 @@ gzip_vary 옵션을 키면 response headers에 `Vary: Accept-Encoding`이 추가
 gzip_vary on;
 ```
 
-Vary 헤더를 이해하기 위해서는 먼저 내용 협상(Content-nogotiation)에 대한 이해가 필요하다.
+Vary 헤더를 이해하기 위해서는 먼저 내용 협상(Content-negotiation)에 대한 이해가 필요하다.
 
 종종 하나의 URL이 여러 리소스에 대응해야 할 경우가 있다. 콘텐츠를 여러 언어로 제공하려고 하는 웹 사이트의 예를 들어보자. 
-사용자에 맞게 서버가 알아서 영어나 프랑스어로 제공할 수 있도록 HTTP는 내용 협상(Content-nogotiation) 방법을 제공한다.
+사용자에 맞게 서버가 알아서 영어나 프랑스어로 제공할 수 있도록 HTTP는 내용 협상(Content-negotiation) 방법을 제공한다.
 여기서는 서로 다른 버전(영어인지 프랑스어인지)을 배리언트(variant)라고 부른다
 
 내용 협상 기법은 3가지가 있다(클라이언트 주도 협상, 서버 주도 협상, 투명 협상).
