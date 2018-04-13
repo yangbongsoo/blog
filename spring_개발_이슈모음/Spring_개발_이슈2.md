@@ -175,3 +175,11 @@ public class TestDto {
     //getter and setter
 }
 ```
+
+### 26. Mac에서 Spring Boot의 시작이 느릴 때
+Mac에서 Spring Boot의 시작이 느리다면 아래와 같이 hostname을 지정해 본다.
+```
+sudo scutil --set HostName MyMacBook
+```
+Spring Boot의 StartupInfoLogger 에서는 InetAddress.getLocalHost().getHostName();를 호출한다.
+Mac에서는 Hostname이 지정되어 있지 않을 경우 해당 메서드 호출에 몇초가 걸리는 것으로 파악된다.
