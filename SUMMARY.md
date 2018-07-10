@@ -18,7 +18,7 @@
   * [모든 객체의 공통 메서드](effective_java/모든_객체의_공통_메서드.md)
   * [클래스와 인터페이스](effective_java/클래스와_인터페이스.md)
   * [제네릭](effective_java/제네릭.md)
-  * [열거형(enum)과 어노테이션](effective_java/열거형(enum)과_어노테이션.md)
+  * [열거형(enum)과 어노테이션](effective_java/enum과_어노테이션.md)
   * [메서드](effective_java/메서드.md)
   * [일반적인 프로그래밍 원칙들](effective_java/일반적인_프로그래밍_원칙들.md)
   * [예외](effective_java/예외.md)
