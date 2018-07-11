@@ -1,18 +1,43 @@
 # 열거형(enum)과 어노테이션
 ### 규칙34 : int 상수 대신 enum을 사용하라
-enum자료형에 메서드나 필드를 추가하는 이유는 상수에 데이터를 연계시키면 좋기 때문이다. 
+```java
+// int를 사용한 enum 패턴
+public static final int APPLE_FUJI = 0;
+public static final int APPLE_PIPPIN = 1;
+public static final int APPLE_GRANNY_SMITH = 2;
+
+public static final int ORANGE_NAVEL  = 0;
+public static final int ORANGE_TEMPLE = 1;
+public static final int ORANGE_BLOOD = 2;
+```
+위의 코드는 형안전성 측면에서도 그렇고, 편의성 관점에서도 단점이 많다. String enum 패턴이라 불리는 것은 더 나쁜 패턴이다.
+상수 비교를 할 때 문자열 비교를 해야 하므로 성능이 떨어질 수 있고, 사용자가 필드 이름 대신 하드코딩된 문자열 상수를 클라이언트 코드 안에 박어버릴 수 있다는 점이다. 하드코딩된 문자열 상수에 오타가 있는 경우, 컴파일 할 때는 오류를 발견할 수 없기 때문에 실행 도중에 문제가 생기게 될 것이다.
+
+자바 1.5부터 enum 자료형이 생겼다.
+```java
+public enum Apple { FUJI, PIPPIN, GRANNY_SMITH }
+public enum Orange { NAVEL, TEMPLE, BLOOD }
+```
+다른 언어들(C, C++, C#)의 enum은 int 값이지만 자바의 enum 자료형은 완전한 기능을 갖춘 클래스다.
+
+enum자료형에 메서드나 필드를 추가하는 이유는 상수에 데이터를 연계시키면 좋기 때문이다. 풍부한 기능을 갖춘 enum 자료형 예제로, 태양계의
+여덟 행성을 모델링하는 사례를 살펴보자.
 ```java
 public enum Planet {
     MERCURY(3.33, 2.22),
     VENUS(2.22, 3.33),
     MARS(6.66, 7.77),
     URANUS(8.88,9.99);
+	...
 
-    private final double mass;
-    private final double radius;
-    private final double G = 6.67;
+    private final double mass; // 킬로그램 단위
+    private final double radius; // 미터단위
     private final double surfaceGravity;
 
+	// 중력 상수
+    private final double G = 6.67;
+
+    // 생성자
     Planet(double mass, double radius) {
         this.mass = mass;
         this.radius = radius;
@@ -24,11 +49,71 @@ public enum Planet {
     public double surfaceGravity() {return surfaceGravity;}
 
     public double surfaceWeigt(double mass){
-        return mass * surfaceGravity;
+        return mass * surfaceGravity; // F = ma
     }
 ```
-enum은 원래 변경 불가능하므로 모든 필드는 final로 선언되어야 한다.
-enum생성자 안에서는 enum의 static 필드를 접근할 수 없다(컴파일 시점에 상수인 static 필드는 제외).
+enum은 원래 변경 불가능하므로 모든 필드는 final로 선언되어야 한다. 필드는 public으로 선언할 수도 있지만, private로 선언하고 public 접근자를 두는 편이 더 낫다.
+
+enum 자료형에는 자동 생성된 valueOf(String) 메서드가 있는데, 이 메서드는 상수의 이름을 상수 그 자체로 변환하는 역할을 한다. enum 자료형의 toString 메서드를 재정의 할 경우에는 fromString 메서드를 작성해서 toString이 뱉어내는 문자열을 다시 enum 상수로 변환할 수단을 제공해야 할지 생각해 봐야 한다.
+```java
+// enum 자료형에 대한 fromString 메서드 구현
+private static final Map<String, Operation> stringToEnum = new HashMap<>();
+
+static { // 상수 이름을 실제 상수로 대응시키는 맵 초기화
+	for (Operation op : values())
+		stringToEnum.put(op.toString(), op);
+}
+
+// 문자열이 주어지면 그에 대한 Operation 상수 반환. 잘못된 문자열이면 null 반환
+public static Operation fromString(String symbol) {
+	return stringToEnum.get(symbol);
+}
+```
+Operation 상수를 stringToEnum 맵에 넣는 것은 상수가 만들어진 다음에 실행되는 static 블록 안에서 한다는 것에 주의하자. 각각의 상수가 생성자 안에서 맵에 자기 자신을 넣도록 하면 컴파일 할 때 오류가 발생한다. enum 생성자 안에서는 enum의 static 필드를 접근할 수 없다(컴파일 시점에 상수인 static 필드는 제외).
+생성자가 실행될 때 static 필드는 초기화된 상태가 아니기 때문에 필요한 제약이다.
+
+3rd Edition에서 추가된 부분
+```java
+private static final Map<String, Operation> stringToEnum = Stream.of(values()).collect(toMap(Object::toString, e -> e));
+
+public static Optional<Operation> fromString(String symbol) {
+	return Optional.ofNullable(stringToEnum.get(symbol));
+}
+```
+
+상수별 메서드 구현의 단점은 enum 상수끼리 공유하는 코드를 만들기가 어렵다는 것이다. 예를 들어, 급여 명세서에 찍히는 요일을 표현하는 enum 자료형이 있다고 하자.
+이 enum 자료형 상수, 그러니까 요일을 나타내는 상수에는 직원의 시급과 해당 요일에 일한 시간을 인자로 주면 해당 요일의 급여를 계산하는 메서드가 있다.
+그런데 주중에는 초과근무 시간에 대해서만 초과근무 수당을 주어야 하고, 주말에는 몇 시간을 일했건 전부 초과근무 수당으로 처리해야 한다.
+switch 문을 만들 때 case 레이블을 경우에 따라 잘 붙이기만 하면 쉽게 원하는 계산을 할 수 있을 것이다.
+```java
+public enum PayrollDay {
+	MONDAY,	TUESDAY, WEDNESDAY,	THURSDAY, FRIDAY, SATURDAY,	SUNDAY;
+	private static final int HOURS_PER_SHIFT = 8;
+
+	double pay(double hourWorked, double payRate) {
+		double basePay = hourWorked * payRate;
+
+		double overtimePay; // 초과근무수당 계산
+		switch (this) {
+			case SATURDAY: case SUNDAY:
+				overtimePay = hourWorked * payRate /2;
+				break;
+			default:
+				overtimePay = hourWorked <= HOURS_PER_SHIFT ? 0 : (hourWorked - HOURS_PER_SHIFT) * payRate / 2;
+		}
+
+		return basePay + overtimePay;
+	}
+}
+```
+분명 간결한 코드다. 하지만 유지보수 관점에서는 위험한 코드다. enum에 새로운 상수를 추가한다고 하자. 아마도 휴가 등을 나타내는 특별한 값일 것이다.
+그런데 switch 문에 해당 상수에 대한 case를 추가하는 것을 잊었다면? 컴파일은 되겠지만 휴가 때 일한 시간에 대해서는 같은 급여를 지급하는
+프로그램이 되어버릴 것이다.
+
+정말 좋은 방법은 새로운 enum 상수를 추가할 때 초과근무 수당 계산 정책을 반드시 선택하도록 하는 것이다. 기본적인 아이디어는 초과근무 수당을
+계산하는 부분을 private로 선언된 중첩 enum 자료형에 넣고, PayrollDay enum 생성자가 이 전략 enum 상수를 인자로 받게 하는 것이다.
+PayrollDay enum 상수가 초과근무 수당 계산을 이 정책 enum 상수에 위임하도록 하면 switch문이나 상수별 메서드 구현은 없앨 수 있다.
+이 패턴을 적용한 코드가 switch 문을 써서 만든 코드보다는 복잡하지만 안전할 뿐더러 유연성도 높다.
 ```java
 public enum PayrollDay {
 
@@ -43,24 +128,24 @@ public enum PayrollDay {
     private final PayType payType;
 
     //Constructor
-    PayrollDay(PayType payType){
+    PayrollDay(PayType payType) {
         this.payType = payType;
     }
 
-    double pay(double hoursWorked, double payRate){
+    double pay(double hoursWorked, double payRate) {
         return payType.pay(hoursWorked, payRate);
     }
 
     // 정책 enum 자료형
-    private enum PayType{
-        WEEKDAY{
-          double overtimePay(double hours, double payRate){
+    private enum PayType {
+        WEEKDAY {
+          double overtimePay(double hours, double payRate) {
               return hours <= HOURS_PER_SHIFT ? 0 : (hours - HOURS_PER_SHIFT) * payRate / 2;
           }
         },
-        WEEKEND{
-            double overtimePay(double hours, double payRate){
-                return hours * payRate /2;
+        WEEKEND {
+            double overtimePay(double hours, double payRate) {
+                return hours * payRate / 2;
             }
         };
 
@@ -68,9 +153,9 @@ public enum PayrollDay {
 
         abstract double overtimePay(double hrs, double payRate);
 
-        double pay(double hoursWorked, double payRate){
+        double pay(double hoursWorked, double payRate) {
             double basePay = hoursWorked * payRate;
-            return basePay + overtimePay(hoursWorked,payRate);
+            return basePay + overtimePay(hoursWorked, payRate);
         }
     }
 }
