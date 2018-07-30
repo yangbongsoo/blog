@@ -568,6 +568,72 @@ public class RunTests {
 	}
 }
 ```
+자바8부터 multivalued annotations 하는 또다른 방법이 있다.
+
+```java
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@Repeatable(BongTestContainer.class)
+public @interface BongTest {
+	Class<? extends Exception> value() default BongTest.None.class;
+
+	public static class None extends Exception {
+		private None() {
+		}
+	}
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface BongTestContainer {
+	BongTest[] value();
+}
+
+@BongTest(NullPointerException.class)
+@BongTest(IndexOutOfBoundsException.class)
+public static void doublyBad() {
+	List<String> list = new ArrayList<>();
+	list.addAll(5, null);
+}
+```
+```java
+public class RunTests {
+	public static void main(String[] args) throws Exception {
+		int tests = 0;
+		int passed = 0;
+		Class testClass = Sample.class;
+		for (Method m : testClass.getDeclaredMethods()) {
+			if (m.isAnnotationPresent(BongTest.class) || m.isAnnotationPresent(BongTestContainer.class)) {
+				tests++;
+				try {
+					m.invoke(null);
+					passed++;
+				} catch (InvocationTargetException wrappedExc) {
+					Throwable exc = wrappedExc.getCause();
+					BongTest[] excTests = m.getAnnotationsByType(BongTest.class);
+					for (BongTest excTest : excTests) {
+						if (excTest.value().isInstance(exc)) {
+							passed++;
+							break;
+						}
+					}
+
+					System.out.println(m + " failed:" + exc);
+
+				} catch (Exception exc) {
+					System.out.println("INVALID @BongTest" + m);
+					System.out.println(exc);
+				}
+			}
+		}
+
+		System.out.println("Passed :" + passed);
+		System.out.println("Failed :" + (tests - passed));
+	}
+}
+```
+
+
 
 ### 규칙 40 : Override 애노테이션은 일관되게 사용하라
 상위 클래스에 선언된 메서드를 재정의할 때는 반드시 선언부에 Override 애노테이션을 붙여라. 그래야 실수 했을 때 컴파일러에서 검출될 수 있다.
