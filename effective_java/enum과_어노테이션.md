@@ -161,7 +161,7 @@ public enum PayrollDay {
 }
 ```
 
-### 규칙31 : ordinal 대신 객체 필드를 사용하라 
+### 규칙35 : ordinal 대신 객체 필드를 사용하라
 ```java
 //ordinal을 남용한 사례 
 public enum Ensemble{
@@ -188,7 +188,7 @@ public enum Ensemble{
     }
 }
 ```
-### 규칙32 : 비트 필드 대신 EnumSet을 사용하라 
+### 규칙36 : 비트 필드 대신 EnumSet을 사용하라
 ```java
 //비트 필드 열거형 상수 - 이제는 피해야 할 구현법
 public class Text{
@@ -216,7 +216,7 @@ public class Text{
 `text.applyStyles(EnumSet.of(Style.BOLD, Style.ITALIC));`
 EnumSet의 단점이 하나 있는데 변경 불가능 EnumSet객체를 만들 수 없다. 그래서 EnumSet 객체를 Collections.unmodifiableSet으로 포장하면 되는데, 성능이나 코드 가독성 측면에서 좀 손해를 보게 된다. 
 
-### 규칙33 : ordinal을 배열 첨자로 사용하는 대신 EnumMap을 이용하라 
+### 규칙37 : ordinal을 배열 첨자로 사용하는 대신 EnumMap을 이용하라
 ```java
 class Herb{
 	enum Type { ANNUAL, PERENNIAL, BIENNIAL }
@@ -292,7 +292,7 @@ public enum Phase{
 
 LIQUID쪽을 보면 액체 LIQUID에서 고체 SOLID로 변하는 것은 언다FREEZE라고 한다. 이 맵의 자료형은 `Map<Phase, Map<Phase, Transition>>`인데, “상전이 이전 상태를, 상전이 이후 상태와 상전이 명칭 사이의 관계를 나타내는 맵에 대응시키는 맵”이라는 뜻이다. 
 
-### 규칙34 : 확장 가능한 enum을 만들어야 한다면 인터페이스를 이용하라
+### 규칙38 : 확장 가능한 enum을 만들어야 한다면 인터페이스를 이용하라
 일반적으로 enum 자료형을 계승한다는 것은 바람직하지 않다. 확장된 자료형의 상수들이 기본 자료형의 상수가 될 수 있지만 그 반대가 될 수 없다는 것은 혼란스럽기 때문이다. 또한 기본 자료형과 그 모든 하위 자료형의 enum 상수들을 순차적으로 살펴볼 좋은 방법도 없고 설계와 구현에 관계된 많은 부분이 까다로워진다. 
 
 **하지만 열거 자료형의 확장이 가능하면 좋은 경우가 적어도 하나 있다. 연산 코드(opcode)를 만들어야 할 때다.** 연산 코드는 어떤 기계에서 사용되는 연산을 표현하기 위해 쓰이는 열거 자료형이다. 기본 아이디어는 enum 자료형이 임의의 인터페이스를 구현할 수 있다는 사실을 이용하는 것이다.
@@ -364,71 +364,212 @@ test 메서드의 인자 형태는 메서드를 호출할 때, 여러 enum 자�
 
 인터페이스를 사용해 확장 가능한 enum 자료형을 만드는 방법에는 한 가지 사소한 문제가 있다. enum 구현 자체는 계승할 수 없다는 것이다. 
 
-### 규칙35 : 작명 패턴 대신 애노테이션을 사용하라 
-작명 패턴의 예로 JUnit에서는 테스트 메서드 이름을 test로 시작해야 했다. 이러한 작명 패턴에는 몇 가지 문제점이 있는데 첫째, 오타났을 때 프로그램 상 문제가 없기 때문에 알아차리기 어렵다. 둘째, 특정한 프로그램 요소에만 적용되도록 만들 수 없다. 예를 들어 testSafetyMechanisms라는 이름의 클래스를 만들었다 해도 클래스 이름 까지는 확인하지 않기 때문에 의미가 없다. 셋째, 프로그램 요소에 인자를 전달할 마땅한 방법이 없다. 예를 들어 특정 예외가 발생해야 성공으로 판정하는 테스트에서 메서드 이름에 포함된 문자열로 예외를 알려주는 방법이 있다. 그러나 보기 흉할 뿐 아니라 컴파일러가 문자열이 예외 이름인지 알 도리가 없다.
+### 규칙39 : (Prefer annotations to naming patterns)작명 패턴 대신 애노테이션을 사용하라
+이번 예제는 Junit의 @Test 애노테이션 기능을 간단하게 직접 구현해보면서, 작명 패턴(naming pattern) 보다 애노테이션이 어떻게 더 좋은지를 설명한다.
 
-애노테이션을 사용하자 
+작명 패턴의 예로 과거 JUnit은 테스트 메서드 이름을 test로 시작해야 했다.
+이러한 작명 패턴에는 몇 가지 문제점이 있는데 첫째, 오타났을 때 프로그램 상 문제가 없기 때문에 알아차리기 어렵다.
+둘째, 특정한 프로그램 요소에만 적용되도록 만들 수 없다. 예를 들어 testSafetyMechanisms라는 이름의 클래스를 만들었다 해도 그 클래스의 모든 메서드를 테스트 실행시키지 않는다(클래스 이름 까지는 확인하지 않기 때문에 의미가 없다).
+셋째, 프로그램 요소에 인자를 전달할 마땅한 방법이 없다. 메서드 이름에 포함된 문자열로 예외를 알려주는 방법이 있지만 보기 흉할 뿐 아니라 컴파일러가 문자열이 예외 이름인지 알 도리가 없다.
+
+그러므로 애노테이션을 사용하자.
 ```java
 // 표식 애노테이션 자료형(markder annotation type) 선언
 import java.lang.annotation.*;
 
 /**
-*애노테이션이 붙은 메서드가 테스트 메서드임을 표시.
-*무인자 정적 메서드에만 사용 가능.
+* 애노테이션이 붙은 메서드가 테스트 메서드임을 표시.
+* 무인자 정적 메서드(parameterless)에만 사용 가능.
 */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Test { 
+public @interface BongTest {
 }
 ```
-애노테이션 자료형 Test 선언부에도 Retention과 Target이라는 애노테이션이 붙어 있다. 애노테이션 자료형 선언부에 붙는 애노테이션은 메타-애노테이션이라 부른다. @Retention(RetentionPolicy.RUNTIME)은 Test가 실행시간(runtime)에도 유지되어야 하는 애노테이션이라는 뜻이다. 그렇지 않으면 Test는 테스트 도구에게는 보이지 않는다. @Target(ElementType.METHOD)은 Test가 메서드 선언부에만 적용할 수 있는 애노테이션이라는 뜻이다.
+애노테이션 자료형 BongTest 선언부에도 Retention과 Target이라는 애노테이션이 붙어 있다. 애노테이션 자료형 선언부에 붙는 애노테이션은 메타-애노테이션이라 부른다.
+@Retention(RetentionPolicy.RUNTIME)은 BongTest가 실행시간(runtime)에도 유지되어야 하는 애노테이션이라는 뜻이다. 그렇지 않으면 BongTest는 테스트 도구에게는 보이지 않는다.
+@Target(ElementType.METHOD)은 BongTest가 메서드 선언부에만 적용할 수 있는 애노테이션이라는 뜻이다.
 
-이 책에서는 Test 애노테이션을 '무인자 정적 메서드’에만 사용 가능하다고 설명한다. static 메서드가 아니면 잘못됐다고 한다. P229
-
-특정한 예외가 발생했을 경우만 성공하는 테스트도 지원 가능하도록 고쳐보자. 새로운 애노테이션이 자료형이 필요하다. 
 ```java
-// 인자를 취하는 애노테이션 자료형 
-import java.lang.annotation.*;
+public class Sample {
 
-/**
-*이 애노테이션이 붙은 메서드는 테스트 메서드이며,
-*테스트에 성공하려면 지정된 예외를 발생시켜야 한다. 
-*/
+	@BongTest
+	public static void noParamStaticMethod() { // 성공해야함
+	}
+
+	@BongTest
+	public static void oneParamMethod() { // 실패해야함
+		throw new RuntimeException("Boom");
+	}
+
+	@BongTest
+	public void noParamMethod() { // 실패해야함
+	}
+
+	@BongTest
+    private void privateNoParamMethod() { // 실패해야함
+    }
+
+	@BongTest
+	public static void oneParamStaticMethod(String ii) { // 실패해야함
+	}
+}
+```
+위와 같이 @BongTest 애노테이션을 적용한 메서드를 Sample 클래스에 선언해 놓고 테스트 실행기를 돌려보자.
+@BongTest 애노테이션은 Sample 클래스가 동작하는 데 직접적 영향을 미치지 않는다. 해당 애노테이션에 관심 있는 프로그램에게 유용한 정보를 제공할 뿐이다.
+```java
+public class RunTests {
+	public static void main(String[] args) throws Exception {
+		int tests = 0;
+		int passed = 0;
+		Class testClass = Sample.class;
+		for (Method m : testClass.getDeclaredMethods()) {
+			if (m.isAnnotationPresent(BongTest.class)) {
+				tests++;
+				try {
+					m.invoke(null);
+					passed++;
+				} catch (InvocationTargetException wrappedExc) {
+					Throwable exc = wrappedExc.getCause();
+					System.out.println(m + " failed:" + exc);
+				} catch (Exception exc) {
+					System.out.println("INVALID @BongTest" + m);
+					System.out.println(exc);
+				}
+			}
+		}
+
+		System.out.println("Passed :" + passed);
+		System.out.println("Failed :" + (tests - passed));
+	}
+}
+```
+이 테스트 실행기는 Sample 클래스의 메서드들 가운데 @BongTest 애노테이션이 붙은 메서드를 전부 찾아내서 리플렉션 기능을 활용해 실행한다(Method.invoke 호출).
+isAnnotationPresent 메서드는 실행해야 하는 테스트 메서드를 찾는 용도로 사용되었다. 리플렉션을 통해 호출된 메서드가 예외를 발생시키면 해당 예외는
+InvocationTargetException으로 wrapping된다. 이 예외가 아닌 다른 예외가 발생되었다면 그것은 컴파일 시에 발견하지 못한, 잘못 사용된 애노테이션이 있다는 뜻이다.
+인스턴스 메서드나 private 메서드, 인자가 있는 메서드에 애노테이션을 붙이면 그런일이 생긴다.
+
+이제 특정한 예외가 발생했을 경우만 성공하는 테스트도 지원 가능하도록 고쳐보자. 새로운 애노테이션 자료형이 필요하다.
+```java
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface ExceptionTest { 
-	Class<? extends Exception> value();
+public @interface BongTest {
+	Class<? extends Exception> value() default BongTest.None.class;
+
+	public static class None extends Exception {
+		private None() {
+		}
+	}
 }
 ```
-이 애노테이션에 사용할 수 있는 인자의 자료형은 `Class<? extends Exception>`이다. “Exception을 계승한 클래스에 대한 Class 객체”라고 풀이할 수 있겠다. Class 객체를 이렇게 사용하는 용법을 한정적 자료형 토큰이라고 한다. 
+추가로 None 클래스를 만들어 default로 놓음으로써 애노테이션의 인자가 없을 때 컴파일 에러가 발생하는것을 막았다.
+
 ```java
-// 인자를 받는 애노테이션의 사용 예제
-@ExceptionTest(ArithmeticException.class)
-public static void m1() { // 이 테스트는 성공 해야 함
-	int i = 0;
-	i = i / i; 
+	@BongTest(ArithmeticException.class)
+	public static void arithmeticExceptionTest() {
+		int i = 0;
+		i = i / i;
+	}
+
+	@BongTest(ArrayIndexOutOfBoundsException.class)
+	public static void arrayIndexOutOfBoundsExceptionTest() {
+		int[] a = new int[0];
+		int i = a[1];
+	}
+```
+위와 같이 발생할 예외를 인자로 보내주면 아래의 테스트 실행기에서 통과 됨을 확인할 수 있다.
+```java
+public class RunTests {
+	public static void main(String[] args) throws Exception {
+		int tests = 0;
+		int passed = 0;
+		Class testClass = Sample.class;
+		for (Method m : testClass.getDeclaredMethods()) {
+			if (m.isAnnotationPresent(BongTest.class)) {
+				tests++;
+				try {
+					m.invoke(null);
+					passed++;
+				} catch (InvocationTargetException wrappedExc) {
+					Throwable exc = wrappedExc.getCause();
+					Class<? extends Exception> excType = m.getAnnotation(BongTest.class).value();
+
+					if (excType.isInstance(exc))
+						passed++;
+					else
+						System.out.println(m + " failed:" + exc);
+				} catch (Exception exc) {
+					System.out.println("INVALID @BongTest" + m);
+					System.out.println(exc);
+				}
+			}
+		}
+
+		System.out.println("Passed :" + passed);
+		System.out.println("Failed :" + (tests - passed));
+	}
 }
 ```
-좀 더 발전 시키면, 지정된 예외들 가운데 하나라도 테스트 메서드 안에서 발생하면 테스트가 통과하도록 할 수도 있다. 
+
+좀 더 발전 시켜서 지정된 예외들 가운데 하나라도 테스트 메서드 안에서 발생하면 테스트가 통과하도록 할 수도 있다.
 ```java
-// 배열을 인자로 받는 애노테이션 자료형
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface ExceptionTest { 
-	Class<? extends Exception>[] value();
+public @interface BongTest {
+	Class<? extends Exception>[] value() default BongTest.None.class;
+
+	public static class None extends Exception {
+		private None() {
+		}
+	}
 }
 
-//배열을 인자로 받는 애노테이션 사용 예
-@ExceptionTest({ IndexOutofBoundsException.class, NullPointerException.class})
-public static void doublyBad(){
-	List<String> list = new ArrayList<String>();
-
-	// 자바 명세에는 아래와 같이 addAll을 호출하면 IndexOutofBoundsException이나NullPointerException이 발생한다고 명시되어 있다.
+@BongTest({IndexOutOfBoundsException.class, NullPointerException.class})
+public static void doublyBad() {
+	List<String> list = new ArrayList<>();
+	// 자바 명세에는 아래와 같이 addAll을 호출하면 IndexOutOfBoundsException이나 NullPointerException이 발생한다고 명시되어 있다.
 	list.addAll(5, null);
 }
 ```
+```java
+public class RunTests {
+	public static void main(String[] args) throws Exception {
+		int tests = 0;
+		int passed = 0;
+		Class testClass = Sample.class;
+		for (Method m : testClass.getDeclaredMethods()) {
+			if (m.isAnnotationPresent(BongTest.class)) {
+				tests++;
+				try {
+					m.invoke(null);
+					passed++;
+				} catch (InvocationTargetException wrappedExc) {
+					Throwable exc = wrappedExc.getCause();
+					Class<? extends Exception>[] excTypes = m.getAnnotation(BongTest.class).value();
 
-### 규칙36 : Override 애노테이션은 일관되게 사용하라 
+					for (Class<? extends Exception> excType : excTypes) {
+						if (excType.isInstance(exc)) {
+							passed++;
+							break;
+						}
+					}
+
+					System.out.println(m + " failed:" + exc);
+
+				} catch (Exception exc) {
+					System.out.println("INVALID @BongTest" + m);
+					System.out.println(exc);
+				}
+			}
+		}
+
+		System.out.println("Passed :" + passed);
+		System.out.println("Failed :" + (tests - passed));
+	}
+}
+```
+
+### 규칙 40 : Override 애노테이션은 일관되게 사용하라
 상위 클래스에 선언된 메서드를 재정의할 때는 반드시 선언부에 Override 애노테이션을 붙여라. 그래야 실수 했을 때 컴파일러에서 검출될 수 있다.
 
 그런데 비-abstract 클래스에서 abstract 메서드를 재정의할 때는 Override 애노테이션을 붙이지 않아도 된다(상위 클래스 메서드를 재정의한다는 사실을 명시적으로 표현하고 싶다면 붙여도 상관 없다).
@@ -436,7 +577,7 @@ public static void doublyBad(){
 버전 1.6 이상의 자바를 사용한다면 Override 애노테이션을 통해 찾을 수 있는 버그는 더 많다. 클래스 뿐 아니라 
 인터페이스에 선언된 메서드를 구현할 때도 Override를 사용할 수 있게 되었기 때문이다. 하지만 인터페이스를 구현할 때 모든 메서드에 반드시 Override를 붙여야 하는 것은 아니다. 인터페이스에 선언된 메서드를 재정의 하지 않으면 어차피 컴파일러가 오류를 내기 때문이다. (마찬가지로 특정 인터페이스 메서드를 재정의하는 메서드라는 사실을 명시적으로 알리고 싶다면 애노테이션을 붙여도 되나, 반드시 필요한 것은 아니다).
 
-### 규칙 37 : 자료형을 정의할 때 표식 인터페이스를 사용하라 
+### 규칙 41 : 자료형을 정의할 때 표식 인터페이스를 사용하라
 표식 인터페이스(marker interface)는 아무 메서드도 선언하지 않는 인터페이스다. Serializable 인터페이스가 그 예다. 
 ```java
 public interface Serializable {
