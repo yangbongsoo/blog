@@ -596,6 +596,12 @@ public static void doublyBad() {
 	list.addAll(5, null);
 }
 ```
+@Repeatable 메타 애노테이션으로 단일 요소에 반복적으로 적용할 수 있다. containing annotation type 인자를 받고 그 containing annotation type은
+annotation 배열 타입을 갖는다. 주의할 점은 containing annotation type도 반드시 retention 정책과 target에 대한 메타 애노테이션이 있어야 한다. 그렇지 않으면 컴파일이 안된다.
+
+repeatable annotation을 처리하려면 주의가 필요하다. getAnnotationsByType 메서드는 repeated와 non-repeated 애노테이션에 접근하는데 모두 사용될 수 있다.
+그러나 isAnnotationPresent 메서드는 BongTest 타입을 검사할 때 BongTestContainer 타입은 자동으로 무시한다. 마찬가지로 BongTestContainer 타입을 검사할 때도 BongTest
+타입은 무시한다. 그래서 아래와 같이 두개의 타입 모두를 검사해줘야 한다.
 ```java
 public class RunTests {
 	public static void main(String[] args) throws Exception {
@@ -632,8 +638,7 @@ public class RunTests {
 	}
 }
 ```
-
-
+Repeatable 애노테이션은 가독성을 향상시키지만, 애노테이션을 처리하는데 더 많은 상용구(boilerplate)가 있으며 처리하는데 오류를 발생시키기 쉽다.
 
 ### 규칙 40 : Override 애노테이션은 일관되게 사용하라
 상위 클래스에 선언된 메서드를 재정의할 때는 반드시 선언부에 Override 애노테이션을 붙여라. 그래야 실수 했을 때 컴파일러에서 검출될 수 있다.
