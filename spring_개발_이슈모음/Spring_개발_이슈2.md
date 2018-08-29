@@ -69,7 +69,9 @@ HSTS를 사용하는 대신 서버에서 HTTP 접속을 HTTPS로 redirect 시키
 Strict-Transport-Security: max-age=31536000 ; includeSubDomains; preload
 ```
 max-age : 지정 시간(단위 초)만큼 HTTPS를 사용
+
 includeSubdomains : HSTS를 서브 도메인에도 적용
+
 preload : 브라우저가 해당 사이트를 HSTS 적용 preload list에 추가하도록 함
 
 **preload list**
@@ -81,6 +83,8 @@ HTTPS로 웹 사이트에 접속하기 위해 적어도 한번 웹 서버와 통
 만약 내장되는 preload list에 추가되면 삭제되기까지(목록 삭제 및 사용자 브라우저 업데이트) 시간이 오래 걸리므로 추가는 신중하게 해야한다. preload list는 크롬이 관리하고 있고 대부분의 브라우저들(파이어폭스, 오페라, 사파리, IE11, Edge)이 이 목록을 같이 사용한다.
 
 만약 수동으로 해제하고자 한다면 크롬은 `chrome://net-internals/#hsts`에 들어가서 Delete Domain에서 삭제할 도메인을 입력하고 삭제하면 된다.
+
+HSTS 설정 코드
 ```xml
 <http>
 <!-- ... -->
@@ -107,6 +111,30 @@ protected void configure(HttpSecurity http) throws Exception {
 	}
 }
 
+```
+HSTS disable 코드
+```xml
+<http>
+	<!-- ... -->
+
+	<headers>
+		<hsts disable="true"/>
+	</headers>
+</http>
+```
+```java
+@EnableWebSecurity
+public class WebSecurityConfig extends
+		WebSecurityConfigurerAdapter {
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+			// ...
+			.headers()
+				.httpStrictTransportSecurity().disable();
+	}
+}
 ```
 
 ### 24. List에 있는 value를 Mybatis foreach로 insert 하기
