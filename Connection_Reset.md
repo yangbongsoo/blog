@@ -1,9 +1,9 @@
 # Connection reset 
 
-nelo에서 exception 나오는 부분의 코드를 보면 결국 socketRead 하다가 Exception이 발생한거다.
-그래서 resetState를 CONNECTION_RESET_PENDING이 되고 CONNECTION_RESET이 됨
-그래서 최종적으로 `throw new SocketException("Connection reset");` 수행
- 
+에러로그에서 exception 나오는 부분의 코드를 보면 아래의 코드에서 socketRead 하다가 
+ConnectionResetException이 발생했다. socketRead 메서드 안의 socketRead0 메서드는
+native라서 자바코드로는 더이상 추적할 수 없다. 일단 예외가 발생했고 resetState가 CONNECTION_RESET_PENDING이 되고
+곧 CONNECTION_RESET이 된다. 최종적으로는 `throw new SocketException("Connection reset");` 수행된다.
 ```java
 class SocketInputStream extends FileInputStream
 {
@@ -121,9 +121,11 @@ TCP A가 crash났을 때 TCP A의 이벤트를 인식하지 못한 TCP B는 데�
 TCP B는 다시 LISTEN 상태로 돌아간다.
 
 
-출처 : TCP/IP The Ultimate Protocol Guide<br>
-출처 : effective tcp/ip programming
-출처 : http://tech.kakao.com/2016/04/21/closewait-timewait/
+
+cf) Connection reset은 read 시 상대방 socket이 close 된 경우이고 
+Connection reset by peer: socket write error는 write 시 상대방 socket이 close된 경우다.
+
+
 
 ## tcpdump   
 ```
@@ -137,14 +139,17 @@ option
 # tcpdump -i eth0 src 192.168.0.1 and tcp port 80	=> source ip 가 이것이면서 tcp port 80 인 패킷
 ```
 
-tcp 덤프 해석할 줄 알아야돼 1.1.1.1은 client ip 3001은 port
+client ip : 1.1.1.1 <br>
+port : 3001 <br> 
 ```
-23:34:31.893798 IP (tos 0x0, ttl 64, id 60919, offset 0, flags [DF], proto TCP (6), length 60)
+// three way handshaking
+23:34:31.893798 IP (tos 0x0, ttl 64, id 60919, offset 0, flags [DF], proto TCP (6), length 60) 
     bong.server.52986 > 1.1.1.1.3001: Flags [S], cksum 0xcaaa (correct), seq 1479370850, win 14600, options [mss 1460,sackOK,TS val 3970205077 ecr 0,nop,wscale 7], length 0
 23:34:31.896765 IP (tos 0x0, ttl 54, id 0, offset 0, flags [DF], proto TCP (6), length 60)
     1.1.1.1.3001 > bong.server.52986: Flags [S.], cksum 0x766b (correct), seq 3196372313, ack 1479370851, win 14480, options [mss 1460,sackOK,TS val 3970163747 ecr 3970205077,nop,wscale 7], length 0
 23:34:31.896776 IP (tos 0x0, ttl 64, id 60920, offset 0, flags [DF], proto TCP (6), length 52)
     bong.server.52986 > 1.1.1.1.3001: Flags [.], cksum 0xdd51 (correct), seq 1, ack 1, win 115, options [nop,nop,TS val 3970205080 ecr 3970163747], length 0
+    
 23:34:31.896802 IP (tos 0x0, ttl 64, id 60921, offset 0, flags [DF], proto TCP (6), length 4396)
     bong.server.52986 > 1.1.1.1.3001: Flags [.], cksum 0x47ee (incorrect -> 0x1689), seq 1:4345, ack 1, win 115, options [nop,nop,TS val 3970205080 ecr 3970163747], length 4344
 23:34:31.896810 IP (tos 0x0, ttl 64, id 60924, offset 0, flags [DF], proto TCP (6), length 1500)
@@ -185,7 +190,10 @@ tcp 덤프 해석할 줄 알아야돼 1.1.1.1은 client ip 3001은 port
 
 ## gc
 
-gc 동작원리 정리해서 gc 로그 분석 (ngrinder로 부하테스트 주면서 gc 변화 분석)
-자바 네트워크 프로그래밍 보면서 client - server 소켓 통신 직접 해봐 
 
-https://github.com/tylertreat/comcast 가 도움이 될수 있을지는 모르겠다.
+
+
+출처 : TCP/IP The Ultimate Protocol Guide<br>
+출처 : effective tcp/ip programming <br>
+출처 : http://tech.kakao.com/2016/04/21/closewait-timewait/ <br>
+출처 : http://multifrontgarden.tistory.com/46 <br>
