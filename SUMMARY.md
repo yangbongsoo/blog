@@ -3,9 +3,6 @@
 * [Introduction](README.md)
 * [자주쓰는 쉘스크립트 모음](자주쓰는_쉘스크립트.md)
 * [Tshark](tshark.md)
-* [Nginx]
-  * [모듈개발기초](nginx/모듈개발기초.md)
-  * [nginx 옵션](nginx/nginx_option.md)
 * [Spring 개발 이슈모음]
   * [issue1 ~ issue21](spring_개발_이슈모음/Spring_개발_이슈1.md)
   * [issue22 ~ ](spring_개발_이슈모음/Spring_개발_이슈2.md)
@@ -56,6 +53,7 @@
 * [웹을 지탱하는 기술](웹을_지탱하는_기술.md)
 * [Finalizer attack](finalizer-attack.md)
 * [Git Flow](gitflow.md)
+* [nginx gzip 옵션](nginx/nginx_gzip_option.md)
 * [Identity](identity.md)
 * [Singleton](singleton.md)
 * [JUnit+Mockito vs Groovy+Spock](junit+mockito_vs_groovy+spock.md)
@@ -74,3 +72,5 @@
   <!-- * [6장 실행계획](real_mysql/실행계획.md) -->
 <!-- * [자바 병렬 프로그래밍(작업중)] -->
   <!-- * [1부 기본 원리](자바_병렬_프로그래밍/1부_기본_원리.md) -->
+<!-- * [Nginx] -->
+  <!-- * [모듈개발기초](nginx/모듈개발기초.md) -->
