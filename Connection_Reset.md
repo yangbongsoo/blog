@@ -77,7 +77,7 @@ Reset flag는 connection이 reset되야 함을 나타내며, segment가 보기�
 
 일반적인 3 way handshake를 통해 커넥션을 맺고 4 way handshake를 통해 커넥션을 끊는다.
 
-### RST flag 예시
+### RST 재설정 세그먼트 사용 예제
  
 ![](/assets/rstflagex1.jpg)
 
@@ -97,13 +97,13 @@ Connection Establishment를 논의할 때, 두개의 프로세스간 정상적�
 
 ![](/assets/rstflagex2.jpg)
 
-한쪽이 crash나고 다시 가동될 때, 에러 복구 메커니즘을 살펴보자. 한가지 가능한 시나리오는 다음과 같다. <br>
-TCP A 와 TCP B가 정상적으로 동작하다가 TCP B가 segment를 보냈는데 TCP A에서 crash가 발생했다. 
+**한쪽이 crash나고 다시 가동될 때, 에러 복구 메커니즘** <br>
+TCP A 와 TCP B가 정상적으로 동작하다가 TCP B가 segment를 보냈는데 TCP A에서 crash가 발생했다. <br>
 TCP A는 close하고 다시 three way handshake를 위한 SYN을 보낸다. <br> 
 TCP B는 자신이 synchronized 되어있다고 생각한다(잘 연결되어 있다고 생각). <br>
 따라서 SYN 세그먼트를 수신하면 시퀀스 번호를 확인하고 문제가 생겼다는걸 알 수 있다.(line3) <br>
 TCP B는 시퀀스 번호 150을 기대한다는 ACK를 다시 전송한다(line4). <br>
-TCP A는 수신 된 세그먼트가 자신이 보낸거에 맞지 않다고 생각하고(자신은 three way handshake 첫 과정인 SYN을 보냈음)
+TCP A는 수신 된 세그먼트가 자신이 보낸거에 맞지 않다고 생각하고(자신은 three way handshake 첫 과정인 SYN을 보냈음) <br>
 Reset 세그먼트를 보낸다(line5). <br> 
 TCP B는 중단되고 close된다. <br>
 TCP A는 이제 다시 three way handshake(line 7)로 연결을 시도 할 수 있다. <br>
@@ -117,8 +117,15 @@ TCP A가 crash났을 때 TCP A의 이벤트를 인식하지 못한 TCP B는 데�
 
 ![](/assets/rstflagex4.jpg)
 
-위 케이스는 둘 다 LISTEN 상태에서 시작한다. 이 때 위에서 봤던 중복 SYN 문제가 발생하고, TCP A는 Reset을 보낸다.
-TCP B는 다시 LISTEN 상태로 돌아간다.
+위 케이스는 둘 다 LISTEN 상태에서 시작한다. 이 때 위에서 봤던 중복 SYN 문제가 발생하고, TCP A는 Reset을 보낸다. <br>
+TCP B는 다시 LISTEN 상태로 돌아간다. <br>
+
+**존재하지 않는 포트에 대한 연결 요구** <br>
+재설정 세그먼트가 생성되는 일반적 경우는, 연결 요구가 도착할 때 목적지 포트상에 프로세스가 대기하고 있지 않을 때다.
+이것을 이전에 connection refuse 오류 메세지를 살펴볼 때 봤다. 이것은 TCP에서 종종 발생한다. UDP의 경우,
+사용되지 않고 있는 목적지 포트에 데이터그램이 도착하면 ICMP 목적지 접근 불가(포트 접근불가)가 생성된다.
+TCP는 대신에 재설정 세그먼트(reset segment)를 사용한다.
+
 
 
 
@@ -188,12 +195,8 @@ port : 3001 <br>
 [.]은 ACK를 뜻하며 [F.] 은 FIN+ACK 을 가리키는 싱글 패킷
 ```
 
-## gc
-
-
-
-
 출처 : TCP/IP The Ultimate Protocol Guide<br>
 출처 : effective tcp/ip programming <br>
+출처 : TCP/IP ILLustrated, Volume1 Second Edition
 출처 : http://tech.kakao.com/2016/04/21/closewait-timewait/ <br>
 출처 : http://multifrontgarden.tistory.com/46 <br>
