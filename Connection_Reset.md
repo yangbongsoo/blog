@@ -1,12 +1,11 @@
 # Connection reset 
 
-에러로그에서 exception 나오는 부분의 코드를 보면 아래의 코드에서 socketRead 하다가 
+에러로그에서 exception 나오는 부분의 코드를 보면, socketRead 하다가
 ConnectionResetException이 발생했다. socketRead 메서드 안의 socketRead0 메서드는
-native라서 자바코드로는 더이상 추적할 수 없다. 일단 예외가 발생했고 resetState가 CONNECTION_RESET_PENDING이 되고
-곧 CONNECTION_RESET이 된다. 최종적으로는 `throw new SocketException("Connection reset");` 수행된다.
+native라서 자바코드로는 더이상 디버깅할 수 없다. 정리해보면 예외가 발생했고 resetState가 CONNECTION_RESET_PENDING이 되고
+곧 CONNECTION_RESET이 된다. 그리고 최종적으로 `throw new SocketException("Connection reset");`이 수행된다.
 ```java
-class SocketInputStream extends FileInputStream
-{
+class SocketInputStream extends FileInputStream {
     ...
     
     int read(byte b[], int off, int length, int timeout) throws IOException {
@@ -63,6 +62,7 @@ class SocketInputStream extends FileInputStream
     ...
 }
 ```
+
 ## RST flag
 RST : The Reset flag indicates that the connection should be rest, and must be sent if a segment is
 received which is apparently not for the current connection. On receipt of a segment with the
@@ -120,13 +120,36 @@ TCP A가 crash났을 때 TCP A의 이벤트를 인식하지 못한 TCP B는 데�
 위 케이스는 둘 다 LISTEN 상태에서 시작한다. 이 때 위에서 봤던 중복 SYN 문제가 발생하고, TCP A는 Reset을 보낸다. <br>
 TCP B는 다시 LISTEN 상태로 돌아간다. <br>
 
+### TCP/IP ILLustrated 재설정 세그먼트(reset segment)
+일반적으로 재설정은 참조 연결에 대해서 정확하지 않은 세그먼트가 도착할 때 TCP에 의해 보내진다.
+참조 연결(reference connection)이라는 용어는 목적지 IP 주소와 포트 번호, 송신측 IP 주소와 포트 번호가 정의된 연결을 의미한다.
+RFC 793은 이것을 소켓(socket)이라고 부른다. 재설정은 정상적으로 TCP 연결의 빠른 해제의 결과다. 재설정 세그먼트 사용의 예를
+보기 위해 시나리오를 구성해보자.
+
 **존재하지 않는 포트에 대한 연결 요구** <br>
 재설정 세그먼트가 생성되는 일반적 경우는, 연결 요구가 도착할 때 목적지 포트상에 프로세스가 대기하고 있지 않을 때다.
-이것을 이전에 connection refuse 오류 메세지를 살펴볼 때 봤다. 이것은 TCP에서 종종 발생한다. UDP의 경우,
-사용되지 않고 있는 목적지 포트에 데이터그램이 도착하면 ICMP 목적지 접근 불가(포트 접근불가)가 생성된다.
+이것은 TCP에서 종종 발생한다. UDP의 경우, 사용되지 않고 있는 목적지 포트에 데이터그램이 도착하면 ICMP 목적지 접근 불가(포트 접근불가)가 생성된다.
 TCP는 대신에 재설정 세그먼트(reset segment)를 사용한다.
 
+이런 예를 발생시키는 것은 간단하다. 여기서는 텔넷 클라이언트를 사용해 목적지에서 사용되지 않고 있는 포트 번호를 지정한다.
 
+```
+$ telnet localhost 9999
+Trying 127.0.0.1...
+telnet: connect to address 127.0.0.1: Connection refused
+telnet: Unable to connect to remote host: Connection refused
+```
+이 오류 메세지는 텔넷 클라이언트에 의해 즉시 출력된다. 아래는 이 명령에 대한 패킷 교환을 나타내고 있다.
+```
+1 22:15:16.348064 127.0.0.1.32803 > 127.0.0.1.9999:
+    S [tcp sum ok] 3357881819:3357881819(0) win 32767
+
+2 22:15:16.348105 127.0.0.1.9999 > 127.0.0.1.32803:
+    R [tcp sum ok] 0:0(0) ack 3357881820 win 0
+```
+도착한 세그먼트의 ACK 비트는 설정돼 있지 않기 때문에 재설정의 순서 번호는 0으로 설정되고, 확인 응답 번호는 수신 ISN에
+세그먼트의 데이터 바이트 수를 더한 값으로 설정돼 있다. TCP에 의해 받아들여진 재설정 세그먼트를 위해 ACK 비트 필드는 반드시
+설정돼야 하고 ACK 번호 필드는 유효한 윈도우 내에 있어야 한다.
 
 
 cf) Connection reset은 read 시 상대방 socket이 close 된 경우이고 
@@ -134,7 +157,7 @@ Connection reset by peer: socket write error는 write 시 상대방 socket이 cl
 
 
 
-## tcpdump   
+## TCP Dump
 ```
 # cd /usr/sbin
 # sudo ./tcpdump -i eth0 -vv -w ./dump.log  tcp port 80
