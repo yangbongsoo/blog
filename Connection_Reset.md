@@ -1,5 +1,4 @@
 # Connection reset 
-
 에러로그에서 exception 나오는 부분의 코드를 보면, socketRead 하다가
 ConnectionResetException이 발생했다. socketRead 메서드 안의 socketRead0 메서드는
 native라서 자바코드로는 더이상 디버깅할 수 없다. 정리해보면 예외가 발생했고 resetState가 CONNECTION_RESET_PENDING이 되고
@@ -61,6 +60,32 @@ class SocketInputStream extends FileInputStream {
     }
     ...
 }
+```
+
+## 대처
+정확한 원인 파악이 쉽지 않아 retryHandler를 등록해서 Connection Reset이 발생되면 최대 두번까지 재전송하도록 했다.
+```java
+    httpClient = HttpClients.custom()
+		.setRetryHandler(retryHandler())
+        .setConnectionManager(connectionManager)
+        .setDefaultConnectionConfig(connectionConfig)
+        .setDefaultRequestConfig(requestConfig)
+        .build();
+```
+```java
+private static HttpRequestRetryHandler retryHandler() {
+		return (exception, executionCount, context) -> {
+			if (executionCount > 2) {
+				return false;
+			}
+
+			if (exception instanceof SocketException && exception.getMessage().equals("Connection reset")) {
+				return true;
+			}
+
+			return false;
+		};
+	}
 ```
 
 ## RST flag
@@ -206,6 +231,41 @@ $ tcpdump -vvv -s 1500 tcp
 순서 번호와 확인 응답 번호를 포함하고 있다. 여기서 주의할 점은 재설정 세그먼트가 다른 종단으로부터 어떠한 응답도 얻지 못한다는 점이다.
 이것은 전혀 확인 응답이 아니다. 재설정의 수신기는 연결을 중단하고 애플리케이션에게 연결이 재설정됐다는 것을 통보한다. 이것은 종종
 Connection reset by peer 오류 표시나 유사한 메세지를 유발한다.
+
+**절반 개방(half-open) 연결**<br>
+TCP 연결에서 한쪽 종단이 상대방의 확인 없이 자신의 연결만을 폐쇄 또는 중단할 때 절반 개방(half-open)이라고 한다.
+이것은 두 호스트 중 하나가 붕괴됐을 때 발생한다. 절반 개방 연결은 데이터 전송이 행해지지 않는 동안에는 가동되고 있는 한쪽 종단이
+다른 쪽 종단의 붕괴 상태를 감지할 수 없다.
+
+또 다른 일반적인 절반 개방이 발생하는 경우에서는 클라이언트 호스트가 애플리케이션을 종료하고 나서 클라이언트 호스트를 종료하지 않고
+전력 공급을 중단한 경우다. 예를 들면 PC가 텔넷 클라이언트 상태로 동작 중일 때 사용자가 종료 시간이 돼서 PC의 전원을 꺼버린
+경우를 생각 할 수 있다. 이 경우에 데이터의 전송이 없다면 서버는 클라이언트가 없어진 사실을 전혀 모르게 될 것이다.
+새로운 텔넷 클라이언트를 실행하면 서버 호스트에는 새로운 서버가 동작된다. 이렇게 해서 서버 호스트상에 많은 절반 개방 TCP 연결이
+생기게 된다.
+
+쉽게 절반 개방 연결을 만들 수 있다. 이 경우에는 서버보다 클라이언트상에서 수행한다. 10.0.0.1 상에서 텔넷 클라이언트를 실행하고,
+그것을 10.0.0.7 상의 sun rpc 서버에 접속한다. 그러고 나서 한 줄의 문자열을 입력한 후 그것을 tcpdump를 통해 살펴보고,
+그런 다음 서버의 호스트에 있는 이더넷 케이블을 끊고, 서버 호스트를 재가동한다. 이에 따라 서버 호스트는 충돌하게 된다(서버를 재가동
+하기 전에 이더넷 케이블을 끊는 것은 TCP가 보통 시스템을 종료할 때 행하는 개방 연결에 FIN을 전송하는 것을 막기 위해서다).
+
+서버가 재가동된 후 케이블을 다시 접속하고, 클라이언트에서 서버로 또 다른 문자열을 전송해본다. 이때 서버의 TCP도 재실행되고,
+재실행되기 전의 연결 정보는 모두 메모리에서 손실된 상태이기 때문에 데이터 세그먼트가 참조하는 연결에 대해 어떠한 정보도 알 수가 없게 된다.
+TCP의 규칙은 수신자가 재설정으로 응답하는 것이다.
+```
+$ telnet 10.0.0.7 sunrpc
+Trying 10.0.0.7...
+Connected to 10.0.0.7.
+Escape character is '^]'.
+foo
+(이더넷 케이블이 절단되고 서버가 재부트된다)
+bar
+Connection closed by remote host
+```
+아래는 이 예의 tcpdump 출력을 보여준다.
+```
+
+```
+
 
 ## TCP Dump
 ```

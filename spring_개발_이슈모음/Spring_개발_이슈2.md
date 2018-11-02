@@ -211,3 +211,8 @@ sudo scutil --set HostName MyMacBook
 ```
 Spring Boot의 StartupInfoLogger 에서는 InetAddress.getLocalHost().getHostName();를 호출한다.
 Mac에서는 Hostname이 지정되어 있지 않을 경우 해당 메서드 호출에 몇초가 걸리는 것으로 파악된다.
+
+### 27. ParameterizedTypeReference 사용
+TypeToken
+
+https://www.youtube.com/watch?v=01sdXvZSjcI
