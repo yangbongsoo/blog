@@ -88,6 +88,49 @@ private static HttpRequestRetryHandler retryHandler() {
 	}
 ```
 
+## 다른쪽들 정리
+spring restTemplate 디폴트는 SimpleClientHttpRequest 사용
+
+```java
+public abstract class HttpAccessor {
+
+	/** Logger available to subclasses */
+	protected final Log logger = LogFactory.getLog(getClass());
+
+	private ClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+
+
+	/**
+	 * Set the request factory that this accessor uses for obtaining client request handles.
+	 * <p>The default is a {@link SimpleClientHttpRequestFactory} based on the JDK's own
+	 * HTTP libraries ({@link java.net.HttpURLConnection}).
+	 * <p><b>Note that the standard JDK HTTP library does not support the HTTP PATCH method.
+	 * Configure the Apache HttpComponents or OkHttp request factory to enable PATCH.</b>
+	 * @see #createRequest(URI, HttpMethod)
+	 * @see org.springframework.http.client.HttpComponentsAsyncClientHttpRequestFactory
+	 * @see org.springframework.http.client.OkHttp3ClientHttpRequestFactory
+	 */
+	public void setRequestFactory(ClientHttpRequestFactory requestFactory) {
+		Assert.notNull(requestFactory, "ClientHttpRequestFactory must not be null");
+		this.requestFactory = requestFactory;
+	}
+```
+기본적으로 java.net.HttpURLConnection을 사용
+
+restTemplate에 생성자로 requestFactory를 인자로 받아서 사용할 수 있는데, apache HttpClients를 사용하게 된다면
+```java
+    // Add request retry executor, if not disabled
+    if (!automaticRetriesDisabled) {
+        HttpRequestRetryHandler retryHandlerCopy = this.retryHandler;
+        if (retryHandlerCopy == null) {
+            retryHandlerCopy = DefaultHttpRequestRetryHandler.INSTANCE;
+        }
+        execChain = new RetryExec(execChain, retryHandlerCopy);
+    }
+```
+retry 설정을 disable하지 않으면 DefaultHttpRequestRetryHandler가 등록됨(디폴트 retryCount는 3)
+
+
 ## RST flag
 RST : The Reset flag indicates that the connection should be rest, and must be sent if a segment is
 received which is apparently not for the current connection. On receipt of a segment with the
