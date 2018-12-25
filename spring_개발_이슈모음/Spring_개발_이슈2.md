@@ -212,7 +212,47 @@ sudo scutil --set HostName MyMacBook
 Spring Boot의 StartupInfoLogger 에서는 InetAddress.getLocalHost().getHostName();를 호출한다.
 Mac에서는 Hostname이 지정되어 있지 않을 경우 해당 메서드 호출에 몇초가 걸리는 것으로 파악된다.
 
-### 27. ParameterizedTypeReference 사용
-TypeToken
+### 27. Tomcat8 UMASK 이슈
+스프링 이슈는 아니지만 따로 적을 곳이 없어서 여기에 적음
 
-https://www.youtube.com/watch?v=01sdXvZSjcI
+파일 업로드를 할 때 업로드된 파일 권한이 위에서 아래로 바뀌는 현상 발견
+```
+-rw-r--r--
+-rw-r-----
+```
+
+원인을 찾아보니 tomcat 7.0.68 catalina.sh에서는 UMASK가 주석처리 되어있었는데
+```
+#JAVA_OPTS="$JAVA_OPTS -Dorg.apache.catalina.security.SecurityListener.UMASK=`umask`"
+```
+
+tomcat 8.5.32 catalina.sh에서 UMASK에 대한 부분이 바꼈다.
+```
+# Set UMASK unless it has been overridden
+if [ -z "$UMASK" ]; then
+    UMASK="0027"
+fi
+umask $UMASK
+
+...
+
+# Make the umask available when using the org.apache.catalina.security.SecurityListener
+JAVA_OPTS="$JAVA_OPTS -Dorg.apache.catalina.security.SecurityListener.UMASK=`umask`"
+```
+
+문제가 되는 이유는, 아파치 httpd.conf에서 User nobody를 할 경우에 640이면 파일 read를 못하게 된다.
+기존 tomcat7에서는 read에 문제가 되지 않았던 부분이다.
+```
+file 666 - 022 = 644(-rw-r--r--)
+file 666 - 027 = 640(-rw-r-----)
+```
+
+cf) 027은 `000 010 111`이고 보수로 전환하면 `111 101 000`이 된다.
+UMASK 보수 값과 파일 기본 허가권을 AND 연산하면
+```
+110 110 110
+111 101 000
+-----------
+110 100 000
+```
+640이 된다.
