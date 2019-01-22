@@ -66,6 +66,7 @@
 * [마이바티스를 사용한 자바 퍼시스턴스 개발](마이바티스를_사용한_자바_퍼시스턴스_개발.md)
 * [Living Documentation](what__why__how_living_documentation.md)
 * [specification by example](specification_by_example.md)
+* [Mathematical Statistics](MathematicalStatistics.md)
 
 <!-- * [Real MySQL(작업중)] -->
   <!-- * [5장 인덱스](real_mysql/인덱스.md) -->
