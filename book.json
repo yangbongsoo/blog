@@ -3,5 +3,9 @@
         "-code_tomorrow_scheme",
         "mathjax"
     ],
-    "pluginsConfig": {}
+    "pluginsConfig": {
+        "mathjax":{
+            "forceSVG": true
+        }
+    }
 }
