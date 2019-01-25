@@ -1,69 +1,17 @@
 # Connection reset 
-에러로그에서 exception 나오는 부분의 코드를 보면, socketRead 하다가
-ConnectionResetException이 발생했다. socketRead 메서드 안의 socketRead0 메서드는
-native라서 자바코드로는 더이상 디버깅할 수 없다. 정리해보면 예외가 발생했고 resetState가 CONNECTION_RESET_PENDING이 되고
-곧 CONNECTION_RESET이 된다. 그리고 최종적으로 `throw new SocketException("Connection reset");`이 수행된다.
-```java
-class SocketInputStream extends FileInputStream {
-    ...
-    
-    int read(byte b[], int off, int length, int timeout) throws IOException {
-        
-        ...
-        
-        boolean gotReset = false;
-        
-        // acquire file descriptor and do the read
-        FileDescriptor fd = impl.acquireFD();
-        try {
-            n = socketRead(fd, b, off, length, timeout);
-            if (n > 0) {
-                return n;
-            }
-        } catch (ConnectionResetException rstExc) {
-            gotReset = true;
-        } finally {
-            impl.releaseFD();
-        }
-        
-        /*
-         * We receive a "connection reset" but there may be bytes still
-         * buffered on the socket
-         */
-        if (gotReset) {
-            impl.setConnectionResetPending();
-            impl.acquireFD();
-            try {
-                n = socketRead(fd, b, off, length, timeout);
-                if (n > 0) {
-                    return n;
-                }
-            } catch (ConnectionResetException rstExc) {
-            } finally {
-                impl.releaseFD();
-            }
-        }      
-        
-        /*
-         * If we get here we are at EOF, the socket has been closed,
-         * or the connection has been reset.
-         */
-        if (impl.isClosedOrPending()) {
-            throw new SocketException("Socket closed");
-        }
-        if (impl.isConnectionResetPending()) {
-            impl.setConnectionReset();
-        }
-        if (impl.isConnectionReset()) {
-            throw new SocketException("Connection reset");
-        }
-    }
-    ...
-}
-```
 
-## 대처
-정확한 원인 파악이 쉽지 않아 retryHandler를 등록해서 Connection Reset이 발생되면 최대 두번까지 재전송하도록 했다.
+## RST flag
+RST : The Reset flag indicates that the connection should be rest, and must be sent if a segment is
+received which is apparently not for the current connection. On receipt of a segment with the
+RST bit set, the receiving station will immediately aobrt the connection. Where a connection is aborted,
+all data in transit is considered lost, and all buffers allocated to that connection are released.
+
+Reset flag는 connection이 reset되야 함을 나타내며, segment가 보기에 현재 connection을 위한게 아닌걸 받았을 때
+보내져야 한다. RST 비트가 설정된 segment를 수신하면 즉시 연결을 중단한다. 연결이 중단된 경우, 전송 중인 모든 데이터는 손실된 것으로 간주되며
+해당 연결에 할당된 모든 버퍼가 해제된다.
+
+## Connection reset일 때 retry 로직 구현
+apache HttpClients 인자로 retryHandler를 직접 등록하는 방법도 있고
 ```java
     httpClient = HttpClients.custom()
 		.setRetryHandler(retryHandler())
@@ -88,36 +36,7 @@ private static HttpRequestRetryHandler retryHandler() {
 	}
 ```
 
-## 다른쪽들 정리
-spring restTemplate 디폴트는 SimpleClientHttpRequest 사용
-
-```java
-public abstract class HttpAccessor {
-
-	/** Logger available to subclasses */
-	protected final Log logger = LogFactory.getLog(getClass());
-
-	private ClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-
-
-	/**
-	 * Set the request factory that this accessor uses for obtaining client request handles.
-	 * <p>The default is a {@link SimpleClientHttpRequestFactory} based on the JDK's own
-	 * HTTP libraries ({@link java.net.HttpURLConnection}).
-	 * <p><b>Note that the standard JDK HTTP library does not support the HTTP PATCH method.
-	 * Configure the Apache HttpComponents or OkHttp request factory to enable PATCH.</b>
-	 * @see #createRequest(URI, HttpMethod)
-	 * @see org.springframework.http.client.HttpComponentsAsyncClientHttpRequestFactory
-	 * @see org.springframework.http.client.OkHttp3ClientHttpRequestFactory
-	 */
-	public void setRequestFactory(ClientHttpRequestFactory requestFactory) {
-		Assert.notNull(requestFactory, "ClientHttpRequestFactory must not be null");
-		this.requestFactory = requestFactory;
-	}
-```
-기본적으로 java.net.HttpURLConnection을 사용
-
-restTemplate에 생성자로 requestFactory를 인자로 받아서 사용할 수 있는데, apache HttpClients를 사용하게 된다면
+retry 설정을 disable하지 않으면 기본적으로 DefaultHttpRequestRetryHandler가 등록된다(디폴트 retryCount는 3).
 ```java
     // Add request retry executor, if not disabled
     if (!automaticRetriesDisabled) {
@@ -128,20 +47,8 @@ restTemplate에 생성자로 requestFactory를 인자로 받아서 사용할 수
         execChain = new RetryExec(execChain, retryHandlerCopy);
     }
 ```
-retry 설정을 disable하지 않으면 DefaultHttpRequestRetryHandler가 등록됨(디폴트 retryCount는 3)
 
-
-## RST flag
-RST : The Reset flag indicates that the connection should be rest, and must be sent if a segment is
-received which is apparently not for the current connection. On receipt of a segment with the
-RST bit set, the receiving station will immediately aobrt the connection. Where a connection is aborted,
-all data in transit is considered lost, and all buffers allocated to that connection are released. 
-
-Reset flag는 connection이 reset되야 함을 나타내며, segment가 보기에 현재 connection을 위한게 아닌걸 받았을 때
-보내져야 한다. RST 비트가 설정된 segment를 수신하면 즉시 연결을 중단한다. 연결이 중단된 경우, 전송 중인 모든 데이터는 손실된 것으로 간주되며 
-해당 연결에 할당된 모든 버퍼가 해제된다.
-
-### RST 재설정 세그먼트 사용 예제
+## RST 재설정 세그먼트 발생 시나리오
  
 ![](/assets/rstflagex1.jpg)
 
@@ -184,13 +91,13 @@ TCP A가 crash났을 때 TCP A의 이벤트를 인식하지 못한 TCP B는 데�
 위 케이스는 둘 다 LISTEN 상태에서 시작한다. 이 때 위에서 봤던 중복 SYN 문제가 발생하고, TCP A는 Reset을 보낸다. <br>
 TCP B는 다시 LISTEN 상태로 돌아간다. <br>
 
-### TCP/IP ILLustrated 재설정 세그먼트(reset segment)
+## TCP/IP Illustrated Vol 1 Second Edition 재설정 세그먼트(reset segment)
 일반적으로 재설정은 참조 연결에 대해서 정확하지 않은 세그먼트가 도착할 때 TCP에 의해 보내진다.
 참조 연결(reference connection)이라는 용어는 목적지 IP 주소와 포트 번호, 송신측 IP 주소와 포트 번호가 정의된 연결을 의미한다.
 RFC 793은 이것을 소켓(socket)이라고 부른다. 재설정은 정상적으로 TCP 연결의 빠른 해제의 결과다. 재설정 세그먼트 사용의 예를
 보기 위해 시나리오를 구성해보자.
 
-**존재하지 않는 포트에 대한 연결 요구** <br>
+### 존재하지 않는 포트에 대한 연결 요구
 재설정 세그먼트가 생성되는 일반적 경우는, 연결 요구가 도착할 때 목적지 포트상에 프로세스가 대기하고 있지 않을 때다.
 이것은 TCP에서 종종 발생한다. UDP의 경우, 사용되지 않고 있는 목적지 포트에 데이터그램이 도착하면 ICMP 목적지 접근 불가(포트 접근불가)가 생성된다.
 TCP는 대신에 재설정 세그먼트(reset segment)를 사용한다.
@@ -215,7 +122,7 @@ telnet: Unable to connect to remote host: Connection refused
 세그먼트의 데이터 바이트 수를 더한 값으로 설정돼 있다. TCP에 의해 받아들여진 재설정 세그먼트를 위해 ACK 비트 필드는 반드시
 설정돼야 하고 ACK 번호 필드는 유효한 윈도우 내에 있어야 한다.
 
-**연결 중단** <br>
+### 연결 중단
 
 ![](/assets/tcphandshake.png)
 
@@ -275,7 +182,7 @@ $ tcpdump -vvv -s 1500 tcp
 이것은 전혀 확인 응답이 아니다. 재설정의 수신기는 연결을 중단하고 애플리케이션에게 연결이 재설정됐다는 것을 통보한다. 이것은 종종
 Connection reset by peer 오류 표시나 유사한 메세지를 유발한다.
 
-**절반 개방(half-open) 연결**<br>
+### 절반 개방(half-open) 연결
 TCP 연결에서 한쪽 종단이 상대방의 확인 없이 자신의 연결만을 폐쇄 또는 중단할 때 절반 개방(half-open)이라고 한다.
 이것은 두 호스트 중 하나가 붕괴됐을 때 발생한다. 절반 개방 연결은 데이터 전송이 행해지지 않는 동안에는 가동되고 있는 한쪽 종단이
 다른 쪽 종단의 붕괴 상태를 감지할 수 없다.
@@ -304,11 +211,21 @@ foo
 bar
 Connection closed by remote host
 ```
-아래는 이 예의 tcpdump 출력을 보여준다.
-```
 
-```
+### 시간_대기 감소(TWA)
+TIME_WAIT 상태는 폐기된 폐쇄 연결로부터 남겨진 어떤 데이터그램을 허용하기 위한 것이다. 이 기간 동안 대기 TCP는 통상적으로 별로 할 일이 없다.
+이것은 단지 2MSL 타이머가 종료될 때까지 상태를 유지한다. 따라서 이 기간 동안 연결로부터 확실한 세그먼트나 좀 더 특별한 RST 세그먼트를 수신하면 비동기화 될 수 있다.
+이것을 TIME_WAIT 감소 TWA이라 부른다.
 
+![](/assets/connection_reset_twa_image.png)
+
+위 그림에서 보여준 예에서 서버는 연결에서 자신의 역할을 완료했고 어떤 상태를 클리어했다. 클라이언트는 TIME_WAIT 상태에 남아 있다. FIN 교환이 완료되면 클라이언트의 다음 순서 번호는 K이고
+서버의 순서 번호는 L이다. 늦게 도착한 세그먼트는 서버로부터 클라이언트로 순서 번호 L-100을 사용하고 ACK 번호 K-200을 포함한다. 클라이언트가 이 세그먼트를 수신하면 이것은 순서 번호와
+ACK 값 모두가 오래된 것이라고 결정한다. 이런 오래된 세그먼트를 수신하면 TCP는 가장 현재 순서 번호와 ACK 값(K와 L)을 가진 ACK를 전송함으로써 응답한다. 그러나 서버가 이 세그먼트를 수신하면
+이것은 연결과 관련된 어떠한 정보도 갖고 있지 않기 때문에 RST 세그먼트로 응답한다.
+
+이것은 서버를 위해서는 문제가 없지만, 클라이언트를 TIME_WAIT에서 CLOSED로 미리 천이(Transit)하게 만든다. 대부분의 시스템에서는 단순하게 TIME_WAIT 상태에서는 재설정 세그먼트에
+동작하지 않음으로써 이 문제를 회피한다.
 
 ## TCP Dump
 ```
