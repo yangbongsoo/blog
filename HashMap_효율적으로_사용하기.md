@@ -1,5 +1,5 @@
 # HashMap 효율적으로 사용하기
-### HashMap의 Key, Value 출력
+## HashMap의 Key, Value 출력
 ```java
 //create a map in java 11
 var productPrice = new HashMap<String, Double>();
@@ -16,7 +16,7 @@ productPrice.put("Egg", 1.9);
 Double egg = productPrice.get("Egg");
 ```
 
-1. 모든 Key값 출력 <br>
+### 모든 Key값 출력
 ```java
 Set<String> keys = productPrice.keySet();
 //print all the keys
@@ -38,7 +38,7 @@ while (iterator.hasNext()) {
 }
 ```
 
-2. 모든 Value값 출력 <br>
+### 모든 Value값 출력
 ```java
 Collection<Double> values = productPrice.values();
 for (Double value : values) {
@@ -59,7 +59,7 @@ while (iterator.hasNext()) {
 }
 ```
 
-3. Key, Value 함께 출력 <br>
+### Key, Value 함께 출력
 ```java
 Set<Map.Entry<String, Double>> entries = productPrice.entrySet();
 for (Map.Entry<String, Double> entry : entries) {
@@ -89,7 +89,7 @@ Map은 Iterator가 없기 때문에 entrySet() 메서드를 통해 Set에 key와
 entrySet()을 이용해서 key와 value를 함께 읽어 올수도 있고 keySet()이나 values()를 이용해서 키와 값을 따로 읽어 올 수 있다. <br>
 key는 중복을 허용하지 않으니까 Set타입으로 반환하고 value는 중복을 허용하니까 Collection 타입으로 반환한다. <br>
 
-### Key 중복 확인
+## Key 중복 확인
 ```
 if (productPrice.containsKey("Rice") ) {
     ...
@@ -99,7 +99,7 @@ if (productPrice.containsKey("Rice") ) {
 ```
 cf) Map에서 키가 중복되면 기존의 값을 덮어쓴다.
 
-### computeIfAbsent() VS puIfAbsent()
+## computeIfAbsent() VS puIfAbsent()
 ```java
 var theKey = "Fish";
 // key값이 이미 존재하면 callExpensiveMethodToFindValue 메서드는 호출되지 않는다.
@@ -109,7 +109,7 @@ productPriceMap.computeIfAbsent(theKey, key -> callExpensiveMethodToFindValue(ke
 productPriceMap.putIfAbsent(theKey, callExpensiveMethodToFindValue(theKey));
 ```
 
-### computeIfPresent() VS compute()
+## computeIfPresent() VS compute()
 오라클이 Java EE를 Eclipse Foundation에 기부 한 사실은 모두 알고 있으며, 결과적으로 Jakarta EE로 이름이 바뀌었다. <br>
 이 주제에 관한 기사를 제공하는 프로그램을 작성하고 단어 선택 빈도를 계산하여 사람들이이 단어를 얼마나 자주 언급하고 있는지 알아보자. <br>
 
@@ -148,7 +148,7 @@ public void read(String text) {
 computeIfPresent 메서드는 key와 remapping function 두개의 인자를 갖는다. 그래서 key가 있을 때만 value를 compute한다. <br>
 Map에는 compute 메서드도 존재하는데 key값이 있든 없든간에 무조건 remapping function을 compute한다. <br>
 
-### getOrDefault()
+## getOrDefault()
 key값이 없을 때도 value를 얻길 원할 때 사용된다.
 ```java
 productPriceMap.getOrDefault("Fish", 29.4);
