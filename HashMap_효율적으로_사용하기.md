@@ -1,5 +1,5 @@
 # HashMap 효율적으로 사용하기
-
+### HashMap의 Key, Value 출력
 ```java
 //create a map in java 11
 var productPrice = new HashMap<String, Double>();
@@ -16,7 +16,6 @@ productPrice.put("Egg", 1.9);
 Double egg = productPrice.get("Egg");
 ```
 
-### HashMap의 Key, Value 출력
 1. 모든 Key값 출력 <br>
 ```java
 Set<String> keys = productPrice.keySet();
@@ -25,10 +24,12 @@ for (String key : keys) {
     System.out.println(key);
 }
 ```
+
 ```java
 Set<String> keys = productPrice.keySet();
 keys.forEach(key -> System.out.println(key));
 ```
+
 ```java
 Set set = productPrice.keySet();
 Iterator iterator = set.iterator();
@@ -44,10 +45,12 @@ for (Double value : values) {
 	System.out.println(value);
 }
 ```
+
 ```java
 Collection<Double> values = productPrice.values();
 values.forEach(value -> System.out.println(value));
 ```
+
 ```java
 Collection values = productPrice.values();
 Iterator iterator = values.iterator();
@@ -64,12 +67,14 @@ for (Map.Entry<String, Double> entry : entries) {
     System.out.println(", Value: "+ entry.getValue());
 }
 ```
+
 ```java
 productPrice.forEach((key, value) -> {
     System.out.print("key: "+ key);
     System.out.println(", Value: "+ value);
 });
 ```
+
 ```java
 Set set = productPrice.entrySet();
 Iterator it = set.iterator();
@@ -79,6 +84,7 @@ while (it.hasNext()) {
     System.out.println(e.getKey() + e.getValue());
 }
 ```
+
 Map은 Iterator가 없기 때문에 entrySet() 메서드를 통해 Set에 key와 value 결합한 형태로 저장시킨다. 그리고 Map 내부 인터페이스인 Map.Entry를 통해 key와 value를 얻어온다. <br>
 entrySet()을 이용해서 key와 value를 함께 읽어 올수도 있고 keySet()이나 values()를 이용해서 키와 값을 따로 읽어 올 수 있다. <br>
 key는 중복을 허용하지 않으니까 Set타입으로 반환하고 value는 중복을 허용하니까 Collection 타입으로 반환한다. <br>
@@ -148,5 +154,5 @@ key값이 없을 때도 value를 얻길 원할 때 사용된다.
 productPriceMap.getOrDefault("Fish", 29.4);
 ```
 
-원문 : https://dzone.com/articles/how-to-use-java-hashmap-effectively?fbclid=IwAR1ZMb6aImx-7Ry-GD6S-YfxdDkrRvlSo-SlSVL08gRDxWP_zilcVnuXXtM
-참고 : 자바의 정석
+원문 : https://dzone.com/articles/how-to-use-java-hashmap-effectively?fbclid=IwAR1ZMb6aImx-7Ry-GD6S-YfxdDkrRvlSo-SlSVL08gRDxWP_zilcVnuXXtM <br>
+참고 : 자바의 정석 <br>
