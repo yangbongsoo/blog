@@ -31,6 +31,7 @@ cf) 마지막 부분에 Spring Boot 1.4 Test방식 소개
 첫 예제
 
 ![](/assets/mockitovsgroovy1.jpg)
+
 ![](/assets/mockitovsgroovy2.jpg)
 
 3개의 섹션으로 나눠진다(BDD에 기반해서 given when then).
