@@ -239,7 +239,7 @@ def "다양한 제곱 테스트"() {
 
 올랑(Hollandaise) 소스를 만들기 위해서는 cooking temperature를 매우 정밀하게 조절해야 한다. 
 
-![](/assets/올랑.jpg)
+![](/assets/올랑.jpg)
 
 그래서 올랑(Hollandaise) 소스를 위해 애플리케이션에서 temperature monitoring 하는 system을 만든다고 해보자.
 HollandaiseTemperatureMonitor 클래스(production code)는 다음과 같다.
