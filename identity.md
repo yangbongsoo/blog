@@ -13,6 +13,7 @@ SAML은 어떤 구현체가 아니라 SSO등(꼭 SSO만은 아님)을 구현하�
 HTTP GET, POST 또는 SOAP 웹서비스 등 여러가지 방법으로 구현될 수 있으며, 여기서는 HTTP Post를 이용한 SSO 원리와 솔루션 설계시 유의 사항을 설명한다.
 
 **site Sp A로 초기 로그인**
+
 ![](/assets/SAML_sso1.png)
 
 1. Browser에서 사이트 Sp A로 접속한다.
@@ -22,6 +23,7 @@ HTTP GET, POST 또는 SOAP 웹서비스 등 여러가지 방법으로 구현될 
 
 
 **site Sp A로 로그인된 상태에서 site Sp B로 로그인**
+
 ![](/assets/SAML_sso2.png)
 
 1. 사이트 Sp A에서 로그인된 상태에서 Sp B에 접속한다.
