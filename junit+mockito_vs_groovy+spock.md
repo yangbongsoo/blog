@@ -29,6 +29,7 @@ cf) 마지막 부분에 Spring Boot 1.4 Test방식 소개
 ```
 
 첫 예제
+
 ![](/assets/mockitovsgroovy1.jpg)
 ![](/assets/mockitovsgroovy2.jpg)
 
@@ -337,6 +338,7 @@ class SpringBootSpockTestingApplicationSpecIT extends Specification {
 참고 : https://www.youtube.com/watch?v=czjWpmy3rkM
 
 spock으로 진행해봤는데 에러가 났을 때 좀 더 친절한 메세지 외에는 장점을 못느꼈습니다(중요한건 리팩토링이지 명세가 아닌거 같습니다).
+
 ![](/assets/mockitovsgroovy3.jpg)
 
 ![](/assets/mockitovsgroovy4.jpg)
