@@ -1193,13 +1193,16 @@ public class Address {
 }
 ```
 
-**결과 /app/publicprofile**  
+**결과 /app/publicprofile**
+
 ![](/assets/publicprofile.png)
 
-**결과 app/friendprofile**  
+**결과 app/friendprofile**
+
 ![](/assets/friendprofile.png)
 
-**결과 app/familyprofile**  
+**결과 app/familyprofile**
+
 ![](/assets/familyprofile.png)
 
 ### 21. Spring Boot Embedded Tomcat AJP 연동
