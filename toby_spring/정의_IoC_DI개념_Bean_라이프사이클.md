@@ -117,7 +117,8 @@ UserDao와 ConnectionMaker 사이에 DI가 적용되려면 UserDao도 반드시 
 
 스프링은 InitializingBean 인터페이스를 제공하고 있으며, 빈 객체의 클래스가 InitializingBean 인터페이스를 구현하고 있으면 InitializingBean 인터페이스에 정의된 메서드를 호출해서 빈 객체가 초기화를 진행할 수 있도록 한다. 또한, 스프링 설정에서 초기화 메서드를 지정하면, 스프링은 그 메서드를 호출해서 빈이 초기화를 수행할 수 있게 한다.
 
-**빈 라이프사이클 개요**  
+**빈 라이프사이클 개요**
+
 ![](/assets/beanlifecycle.PNG)
 
 **InitializingBean 인터페이스와 DisposableBean 인터페이스**  

@@ -1,5 +1,6 @@
 스프링에 적용된 가장 인기 있는 AOP 적용 대상은 바로 선언적 트랜잭션 기능이다. 
 ## 1. 데코레이터 패턴을 이용한 트랜잭션 코드 분리
+
 ![](/assets/tobyaop1.jpg)
 
 UserService 인터페이스를 도입해서 순수 비지니스로직을 담당하는 UserServiceImpl과 트랜잭션 처리를 담당하는 UserServiceTx로 나눈다.
@@ -80,6 +81,7 @@ public class UserServiceImpl implements UserService {
 
 ## 2. 다이내믹 프록시를 이용한 트랜잭션 부가기능
 프록시를 이용하는 방법은 유용하지만 매번 새로운 클래스를 정의해야 하고, 만약 인터페이스의 구현해야 할 메서드가 많으면 모든 메서드를 일일히 구현해서 위임하는 코드를 넣어야하는 번거로움이 있다. 하지만 자바의 리플렉션 기능을 이용하면 손쉽게 구현할 수 있다.
+
 ![](/assets/tobyaop2.jpg)
 
 다이내믹 프록시는 프록시 팩토리에 의해 런타임 시 다이내믹하게 만들어지는 오브젝트다. 다이내믹 프록시 오브젝트는 타깃의 인터페이스와 같은 타입으로 만들어진다. 클라이언트는 다이내믹 프록시 오브젝트를 타깃 인터페이스를 통해 사용할 수 있다. 이 덕분에 프록시를 만들 때 인터페이스를 모두 구현해가면서 클래스를 정의하는 수고를 덜 수 있다. 프록시 팩토리에게 인터페이스 정보만 제공해주면 해당 인터페이스를 구현한 클래스의 오브젝트를 자동으로 만들어주기 때문이다.
@@ -89,6 +91,7 @@ public class UserServiceImpl implements UserService {
 public Object invoke(Object proxy, Method method, Object[] args)
 ```
 invoke() 메서드는 리플렉션의 Method 인터페이스를 파라미터로 받는다. 메서드를 호출할 때 전달되는 파라미터도 args로 받는다. 다이내믹 프록시 오브젝트는 클라이언트의 모든 요청을 리플렉션 정보로 변환해서 InvocationHandler 구현 오브젝트의 invoke() 메서드로 넘기는 것이다. 타깃 인터페이스의 모든 메서드 요청이 하나의 메서드로 집중되기 때문에 중복되는 기능을 효과적으로 제공할 수 있다.
+
 ![](/assets/tobyaop3.jpg)
 
 간단한 예를 통해 다시 살펴보자. 
@@ -250,6 +253,7 @@ InvocationHandler를 구현했을 때와 달리 MethodInterceptor를 구현한 U
 바로 이 점이 JDK의 다이내믹 프록시를 직접 사용하는 코드와 스프링이 제공해주는 프록시 추상화 기능인 ProxyFactoryBean을 사용하는 코드의 가장 큰 차이점이자 ProxyFactoryBean의 장점이다. ProxyFactoryBean은 작은 단위의 템플릿/콜백 구조를 응용해서 적용했기 때문에 템플릿 역할을 하는 MethodInvocation을 싱글톤으로 두고 공유할 수 있다. 마치 SQL 파라미터 정보에 종속되지 않는 JdbcTemplate이기 때문에 수많은 DAO 메서드가 하나의 JdbcTemplate 오브젝트를 공유할 수 있는 것과 마찬가지다.
 
 **포인트컷 : 부가기능 적용 대상 메서드 선정 방법**
+
 ![](/assets/tobyaop4.jpg)
 
 스프링은 부가기능을 제공하는 오브젝트를 어드바이스라고 부르고, 메서드 선정 알고리즘을 담은 오브젝트를 포인트컷이라고 부른다. 어드바이스와 포인트컷은 모두 프록시에 DI로 주입돼서 사용된다. 두 가지 모두 여러 프록시에서 공유가 가능하도록 만들어지기 때문에 스프링의 싱글톤 빈으로 등록이 가능하다.
@@ -327,6 +331,7 @@ public class TransactionAdvice implements MethodInterceptor {
 어드바이저는 interceptorNames라는 프로퍼티를 통해 넣는다. 프로퍼티 이름이 advisor가 아닌 이유는 어드바이스와 어드바이저를 혼합해서 설정할 수 있도록 하기 위해서다. 그래서 property 태그의 ref 애트리뷰트를 통한 설정 대신 list와 value 태크를 통해 여러 개의 값을 넣을 수 있도록 하고 있다. value 태그에는 어드바이스 또는 어드바이저로 설정한 빈의 아이디를 넣으면 된다. 한 개 이상을 넣을 수 있다.
 
 **어드바이스와 포인트컷의 재사용**
+
 ![](/assets/tobyaop5.jpg)
 
 위의 그림은 ProxyFactoryBean을 이용해서 많은 수의 서비스 빈에게 트랜잭션 부가기능을 적용했을 때의 구조다. 트랜잭션 부가기능을 담은 TransactionAdvice는 하나만 만들어서 싱글톤 빈으로 등록해주면, DI 설정을 통해 모든 서비스에 적용이 가능하다. 메서드 선정 방식이 달라지는 경우만 포인트컷의 설정을 따로 등록하고 어드바이저로 조합해서 적용해주면 된다.
@@ -489,6 +494,7 @@ DefaultTransactionDefinition이 구현하고 있는 TransactionDefinition 인터
 TransactionInterceptor는 PlatformTransactionManager와 Properties 타입의 두 가지 프로퍼티를 갖고 있다. 트랜잭션 매니저 프로퍼티는 잘 알고 있지만 Properties 타입의 프로퍼티는 처음 보는 것이다.
 
 Properties 타입인 두 번째 프로퍼티 이름은 transactionAttributes로, 트랜잭션 속성을 정의한 프로퍼티다. 트랜잭션 속성은 TransactionDefinition의 네 가지 기본 항목에 rollbackOn()이라는 메서드를 하나 더 갖고 있는 TransactionAttribute 인터페이스로 정의된다. rollbackOn() 메서드는 어떤 예외가 발생하면 롤백을 할 것인가를 결정하는 메서드다. 이 TransactionAttribute를 이용하면 트랜잭션 부가기능의 동작 방식을 모두 제어할 수 있다.
+
 ![](/assets/tobyaop9.jpg)
 
 위 트랜잭션 경계설정 코드를 다시 살펴보면 트랜잭션 부가기능의 동작방식을 변경할 수 있는 곳이 두 군데 있다는 사실을 알 수 있다. TransactionAdvice는 RuntimeException이 발생하는 경우에만 트랜잭션을 롤백시킨다. 하지만 런타임 예외가 아닌 경우에는 트랜잭션이 제대로 처리되지 않고 메서드를 빠져나가게 되어 있다. UserService는 런타임 예외만 던진다는 사실을 알기 때문에 일단 이렇게 정의해도 상관없지만, 체크 예외를 던지는 타깃에 사용한다면 문제가 될 수 있다. 그렇다면 런타임 예외만이 아니라 모든 종류의 예외에 대해 트랜잭션을 롤백 시키도록 해야 할까? 그래서는 안 된다. 비지니스 로직상의 예외 경우를 나타내기 위해 타깃 오브젝트가 체크 예외를 던지는 경우에는 DB 트랜잭션은 커밋시켜야 하기 때문이다. 2장에서 설명했듯이 일부 체크 예외는 정상적인 작업 흐름 안에서 사용될 수도 있다.
@@ -498,6 +504,7 @@ Properties 타입인 두 번째 프로퍼티 이름은 transactionAttributes로,
 그런데 TransactionInterceptor의 이러한 예외처리 기본 원칙을 따르지 않는 경우가 있을 수 있다. 그래서 TransactionAttribute는 rollbackOn()이라는 속성을 둬서 기본 원칙과 다른 예외처리가 가능하게 해준다. 이를 활용하면 특정 체크 예외의 경우는 트랜잭션을 롤백시키고, 특정 런타임 예외에 대해서는 트랜잭션을 커밋시킬 수도 있다.
 
 TransactionInterceptor는 이런 TransactionAttribute를 Properties라는 일종의 맵 타입 오브젝트로 전달받는다. 아래 설정은 메서드 이름 패턴과 문자열로 된 트랜잭션 속성을 이용해서 정의한 TransactionInterceptor 타입 빈의 예다.
+
 ![](/assets/tobyaop10.jpg)
 
 세 가지 메서드 이름 패턴에 대한 트랜잭션 속성이 정의되어 있다. get으로 시작하는 모든 메서드에는 PROPAGATION_REQUIRED이면서 읽기전용이고 시간제한은 30초다.
@@ -509,7 +516,8 @@ cf) readOnly나 timeout 등은 트랜잭션이 처음 시작될 때가 아니라
 ![](/assets/tobyaop11.jpg)
 
 ### 프록시 방식 AOP는 같은 타깃 오브젝트 내의 메서드를 호출할 때는 적용되지 않는다.
-이건 전략이라기보다는 주의사항이다. 프록시 방식의 AOP에서는 프록시를 통한 부가기능의 적용은 클라이언트로부터 호출이 일어날 때만 가능하다. 여기서 클라이언트는 인터페이스를 통해 타깃 오브젝트를 사용하는 다른 모든 오브젝트를 말한다. 반대로 **타깃 오브젝트가 자기 자신의 메서드를 호출할 때는 프록시를 통한 부가기능의 적용이 일어나지 않는다.** 
+이건 전략이라기보다는 주의사항이다. 프록시 방식의 AOP에서는 프록시를 통한 부가기능의 적용은 클라이언트로부터 호출이 일어날 때만 가능하다. 여기서 클라이언트는 인터페이스를 통해 타깃 오브젝트를 사용하는 다른 모든 오브젝트를 말한다. 반대로 **타깃 오브젝트가 자기 자신의 메서드를 호출할 때는 프록시를 통한 부가기능의 적용이 일어나지 않는다.**
+
 ![](/assets/tobyaop12.jpg)
 
 위 그림은 트랜잭션 프록시가 타깃에 적용되어 있는 경우의 메서드 호출 과정을 보여준다. delete()와 update()는 모두 트랜잭션 적용 대상인 메서드다. 따라서 [1]과 [3]처럼 클라이언트로부터 메서드가 호출되면 트랜잭션 프록시를 통해 타깃 메서드로 호출이 전달되므로 트랜잭션 경계설정 부가기능이 부여될 것이다.
@@ -544,6 +552,7 @@ public @interface Transactional {
 }
 ```
 @Transactional 애노테이션을 트랜잭션 속성정보로 사용하도록 지정하면 스프링은 @Transactional이 부여된 모든 오브젝트를 자동으로 타깃 오브젝트로 인식한다. 이때 사용되는 포인트컷은 TransactionAttributeSourcePointcut이다. TransactionAttributeSourcePointcut은 스스로 표현식과 같은 선정기준을 갖고 있진 않다. 대신 @Transactional이 타입 레벨이든 메서드 레벨이든 상관없이 부여된 빈 오브젝트를 모두 찾아서 포인트컷의 선정 결과로 돌려준다. @Transactional은 기본적으로 트랜잭션 속성을 정의하는 것이지만, 동시에 포인트컷의 자동등록에도 사용된다.
+
 ![](/assets/tobyaop13.jpg)
 
 위의 그림은 @Transactional 애노테이션을 사용했을 때 어드바이저의 동작방식을 보여준다. TransactionInterceptor는 메서드 이름 패턴을 통해 부여되는 일괄적인 트랜잭션 속성정보 대신 @Transactional 애노테이션의 엘리먼트에서 트랜잭션 속성을 가져오는 AnnotationTransactionAttributeSource를 사용한다. @Transactional은 메서드마다 다르게 설정할 수도 있으므로 매우 유연한 트랜잭션 속성 설정이 가능해진다. 
@@ -551,6 +560,7 @@ public @interface Transactional {
 동시에 포인트컷도 @Transactional을 통한 트랜잭션 속성정보를 참조하도록 만든다. @Transactional로 트랜잭션 속성이 부여된 오브젝트라면 포인트컷의 선정 대상이기도 하기 때문이다. 이 방식을 이용하면 포인트컷과 트랜잭션 속성을 애노테이션 하나로 지정할 수 있다. 트랜잭션 속성은 타입 레벨에 일괄적으로 부여할 수도 있지만, 메서드 단위로 세분화해서 트랜잭션 속성을 다르게 지정할 수도 있기 때문에 매우 세밀한 트랜잭션 속성 제어가 가능해진다.
 ### 대체 정책
 스프링은 @Transactional을 적용할 때 4단계의 대체(fallback)정책을 이용하게 해준다. 메서드의 속성을 확인할 때 타깃 메서드, 타깃 클래스, 선언 메서드, 선언 타입의 순서에 따라서 @Transactional이 적용됐는지 차례로 확인하고, 가장 먼저 발견되는 속성정보를 사용하게 하는 방법이다. 이런 식으로 끝까지 발견되지 않으면 트랜잭션 적용 대상이 아니라고 판단한다.
+
 ![](/assets/tobyaop14.jpg)
 
 위와 같이 정의된 인터페이스와 구현 클래스가 있다고 하자. @Transactional을 부여할 수 있는 위치는 총 6개다. 스프링은 트랜잭션 기능이 부여될 위치인 타깃 오브젝트의 메서드부터 시작해서 @Transactional 애노테이션이 존재하는지 확인한다. 따라서 [5]와 [6]이 @Transactional이 위치할 수 있는 첫 번째 후보다. 여기서 애노테이션이 발견되면 바로 애노테이션의 속성을 가져다 해당 메서드의 트랜잭션 속성으로 사용한다.
