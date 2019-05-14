@@ -57,6 +57,7 @@
 * [마이바티스를 사용한 자바 퍼시스턴스 개발](마이바티스를_사용한_자바_퍼시스턴스_개발.md)
 * [HashMap 효율적으로 사용하기](HashMap_효율적으로_사용하기.md)
 * [자바의 정석](자바의_정석.md)
+* [슈퍼타입토큰(Super Type Token)](super_type_token.md)
 * [Singleton](singleton.md)
 * [Identity](identity.md)
 * [Finalizer attack](finalizer-attack.md)
