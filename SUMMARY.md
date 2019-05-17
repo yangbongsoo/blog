@@ -2,16 +2,16 @@
 
 * [Introduction](README.md)
 * [Connection Reset](Connection_Reset.md)
-* [자주쓰는 쉘스크립트 모음](자주쓰는_쉘스크립트.md)
+* [자주쓰는 쉘스크립트 모음](shell_script.md)
 * [Tshark](tshark.md)
 * [Spring 개발 이슈모음]
-  * [issue1 ~ issue21](spring_개발_이슈모음/Spring_개발_이슈1.md)
-  * [issue22 ~ ](spring_개발_이슈모음/Spring_개발_이슈2.md)
+  * [issue1 ~ issue21](spring_develop_issue/spring_develop_issue1.md)
+  * [issue22 ~ ](spring_develop_issue/spring_develop_issue2.md)
 * [Java8 in Action]
   * [Part1 기초](java8_in_action/part1.md)
-  * [Part2-1 함수형 데이터 처리](java8_in_action/part2_함수형_데이터_처리.md)
-  * [Part2-2 함수형 데이터 처리](java8_in_action/part2-2_함수형_데이터_처리.md)
-  * [Part3-1 효과적인 자바8 프로그래밍](java8_in_action/part3-1_효과적인_자바8_프로그래밍.md)
+  * [Part2-1 함수형 데이터 처리](java8_in_action/part2_functional_data_processing.md)
+  * [Part2-2 함수형 데이터 처리](java8_in_action/part2-2_functional_data_processing.md)
+  * [Part3-1 효과적인 자바8 프로그래밍](java8_in_action/part3-1_effective_java8_programming.md)
 * [Effective Java (3rd Edition 추가 작업중)]
   * [객체의 생성과 삭제](effective_java/객체의_생성과_삭제.md)
   * [모든 객체의 공통 메서드](effective_java/모든_객체의_공통_메서드.md)
