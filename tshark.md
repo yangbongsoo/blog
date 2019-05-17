@@ -238,3 +238,8 @@ $ ./tshark -o column.format:'" Source","%s","Destination","%d", "dstport", "%uD"
 ```
 -o 옵션을 통해서 티샤크의 옵션을 변경할 수 있다. 
 `-o " <name>:<value> ...    override preference setting`
+
+---
+disqus:
+  identifier: "ybs-1"
+---
