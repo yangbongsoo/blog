@@ -27,7 +27,8 @@ Via 헤더의 유무가 중요하다. 헤더 value는 어떤 값이라도 상관
 proxy_set_header Via '10.xx.xx.xx';
 ```
 
-주의 : 아래와 같이 add_header를 사용하면 response 헤더에 추가되기 때문에 의도한대로 동작하지 않는다.
+{% hint style="warning" %} 아래와 같이 add_header를 사용하면 response 헤더에 추가되기 때문에 의도한대로 동작하지 않는다. {% endhint %}
+
 ```
 add_header Via '10.xx.xx.xx';
 ```
