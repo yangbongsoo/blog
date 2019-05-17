@@ -240,6 +240,5 @@ $ ./tshark -o column.format:'" Source","%s","Destination","%d", "dstport", "%uD"
 `-o " <name>:<value> ...    override preference setting`
 
 ---
-disqus:
-  identifier: "ybs-1"
+disqus
 ---
