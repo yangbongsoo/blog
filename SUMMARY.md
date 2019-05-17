@@ -48,6 +48,7 @@
   * [마이크로 서비스 아키텍처](high_capacity_architecture_performance_tuning/msa.md)
   * [REST의 이해와 설계](high_capacity_architecture_performance_tuning/rest.md)
 * [켄트백 구현패턴](implementation_patterns.md)
+* [클린코드](clean_code.md)
 * [클린코더스 강의 정리](clean_coders.md)
 * [네이버를 만든 기술, 자바편](naver_tech_java.md)
 * [객체지향의 사실과 오해](oo_fact_and_misunderstanding.md)
