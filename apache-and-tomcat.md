@@ -1,21 +1,24 @@
-# Apache
+# Apache and Tomcat
 
-cf) Apache Syntax error check
-```
+## Apache
+
+cf\) Apache Syntax error check
+
+```text
 $ apachectl -t
 ```
 
 start / stop / restart
-```
+
+```text
 $ apachectl start
 $ apachectl stop
-$ apachectl restart 
+$ apachectl restart
 ```
 
-## httpd.conf
+### httpd.conf
 
-```xml
-
+```markup
 ServerRoot "/usr" (mac에 기본적으로 깔려있는 apache 기준)
 
 ...
@@ -108,12 +111,12 @@ DocumentRoot "/abc/def/ght"
     Order deny,allow
     Deny from all
    </Directory>
-   
+
    <Directory ~ "/META-INF">
     Order deny,allow
     Deny from all
    </Directory>
-   
+
    <Directory ~ "/WEB-INF">
     Order deny,allow
     Deny from all
@@ -126,18 +129,18 @@ DocumentRoot "/abc/def/ght"
     JkMount /*.jsp tomcat
 </VirtualHost>
 ```
+
 **ServerRoot :** 서버의 설정, 에러, 로그파일들이있는 디렉토리 트리의 맨 위
 
-**Listen :** 아파치를 디폴트가 아닌 특정 IP 주소 나 포트에 바인드 할 수도 있다(prevent Apache from glomming onto all bound IP addresses).
+**Listen :** 아파치를 디폴트가 아닌 특정 IP 주소 나 포트에 바인드 할 수도 있다\(prevent Apache from glomming onto all bound IP addresses\).
 
-**LoadModule jk_module :** 본인 pc에 디폴트로 mod_jk가 없어서 so 파일을 구해다 other 디렉토리에 넣었다.
+**LoadModule jk\_module :** 본인 pc에 디폴트로 mod\_jk가 없어서 so 파일을 구해다 other 디렉토리에 넣었다.
 
 **VirtualHost :** 위와 같이 http.conf에서 직접 작업 하지 않고 Include /private/etc/apache2/extra/httpd-vhosts.conf 한 후 그곳에서 작업해도 된다.
 
+### workers.properties
 
-
-## workers.properties
-```xml
+```markup
 worker.list=tomcat
 
 worker.tomcat.type=ajp13
@@ -151,10 +154,13 @@ worker.list=jkstatus
 worker.jkstatus.type=status
 ```
 
-# Tomcat
-참고문헌 : 자바 고양이 톰캣 이야기 (최진식 저)
-## server.xml
-```xml
+## Tomcat
+
+참고문헌 : 자바 고양이 톰캣 이야기 \(최진식 저\)
+
+### server.xml
+
+```markup
 <?xml version='1.0' encoding='utf-8'?>
 <Server port="8005" shutdown="SHUTDOWN">
 
@@ -174,7 +180,7 @@ worker.jkstatus.type=status
                maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
                clientAuth="false" sslProtocol="TLS" />
     -->
-    
+
     <!-- Define an AJP 1.3 Connector on port 8009 -->
     <Connector port="8009" protocol="AJP/1.3"
                 enableLookups="false"
@@ -206,40 +212,40 @@ worker.jkstatus.type=status
   </Service>
 </Server>
 ```
-**Server**<br>
-최상위 Element인 `<Server>`는 `<Service>` 모음으로, Shutdown 요청 처리를 위한 address와 port 속성을 가지고 있다. 각각 Shutdown 요청을 받기 위해 listen하는 IP address와 포트를 설정하며 기본값을 localhost와 8005이다. 만약 port 속성을 -1로 설정하면 Shutdown 포트 기능을 사용하지 않는다. 한 shuStdown 속성은 Shutdown 명령어(패스워드)를 설정한다. 기본 설정 값 'SHUTDOWN'인데 보안상 변경하는 것이 좋다.
 
-**Service**<br>
-Server 하위에 있으며 Connector 모음이다. Service 속성은 className과 name 단 2개다.
+**Server**  
+ 최상위 Element인 `<Server>`는 `<Service>` 모음으로, Shutdown 요청 처리를 위한 address와 port 속성을 가지고 있다. 각각 Shutdown 요청을 받기 위해 listen하는 IP address와 포트를 설정하며 기본값을 localhost와 8005이다. 만약 port 속성을 -1로 설정하면 Shutdown 포트 기능을 사용하지 않는다. 한 shuStdown 속성은 Shutdown 명령어\(패스워드\)를 설정한다. 기본 설정 값 'SHUTDOWN'인데 보안상 변경하는 것이 좋다.
 
-**Engine**<br>
-defaultHost 속성은 Engine 하위에 속한 Host 가운데 하나이며 어떤 Host도 처리하지 않는 요청을 처리한다.
+**Service**  
+ Server 하위에 있으며 Connector 모음이다. Service 속성은 className과 name 단 2개다.
 
-**Host**<br>
-Host Container는 가상 호스트 기능을 제공한다. Host 이름은 name 속성을 통해 설정한다. 만약 할당된 URL이 있다면 URL로 설정한다. 상위 Engine 내에 2개 이상의 Host가 구성되어 있다면 그중 1개가 defaultHost값이 되어야한다.
-appBase는 Host의 애플리케이션 디렉토리다. 기본은 webapps다. autoDeploy 속성을 통해 appBase 내 변경 사항을 주기적으로 확인할 수 있다(기본 true). 하지만 운영 환경이라면 가급적 false로 설정하는 것이 좋다. unpackWARs는 WAR 파일을 풀어서 사용할지 여부를 설정하는 속성으로 기본 true이다.
+**Engine**  
+ defaultHost 속성은 Engine 하위에 속한 Host 가운데 하나이며 어떤 Host도 처리하지 않는 요청을 처리한다.
 
-**Context**<br>
-Host 내에 배포된 애플리케이션이다. reloadable 속성은 WEB-INF/classes 및 WEB-INF/lib 디렉토리에 변경이 발생할 때 자동 반영 여부를 결정하는 속성으로 기본 false다. true로 설정하면 빈번한 Tomcat 재기동을 피할 수 있어 개발 시에는 유용하지만 운영 시에는 적지 않은 오버 헤드를 동반하므로 적용에 신중해야 한다.
+**Host**  
+ Host Container는 가상 호스트 기능을 제공한다. Host 이름은 name 속성을 통해 설정한다. 만약 할당된 URL이 있다면 URL로 설정한다. 상위 Engine 내에 2개 이상의 Host가 구성되어 있다면 그중 1개가 defaultHost값이 되어야한다. appBase는 Host의 애플리케이션 디렉토리다. 기본은 webapps다. autoDeploy 속성을 통해 appBase 내 변경 사항을 주기적으로 확인할 수 있다\(기본 true\). 하지만 운영 환경이라면 가급적 false로 설정하는 것이 좋다. unpackWARs는 WAR 파일을 풀어서 사용할지 여부를 설정하는 속성으로 기본 true이다.
 
-# Apache MaxClients와 Tomcat MaxThreads 설정값 
-참고문헌 : http://d2.naver.com/helloworld/132178
+**Context**  
+ Host 내에 배포된 애플리케이션이다. reloadable 속성은 WEB-INF/classes 및 WEB-INF/lib 디렉토리에 변경이 발생할 때 자동 반영 여부를 결정하는 속성으로 기본 false다. true로 설정하면 빈번한 Tomcat 재기동을 피할 수 있어 개발 시에는 유용하지만 운영 시에는 적지 않은 오버 헤드를 동반하므로 적용에 신중해야 한다.
 
-1. apache, tomcat이 구동되지 않은 상태에서 서버의 메모리 정보를 확인한다. (total : 1998MB, used : 142MB, free : 1855MB)
-2. tomcat 설정에 따른 메모리 점유(Perm Gen + Native Heap Area) : 1152MB
-```
-CATALINA_OPTS="-server -Xms1024m -Xmx1024m -XX:MaxPermSize=128m
-```
+## Apache MaxClients와 Tomcat MaxThreads 설정값
 
-3. swap으로 인한 성능 저하를 막으려면 어떠한 상황에서도 전체 메모리의 최대 80%인 1598.4MB 이상 사용되지 않도록 해야함
-cf) 80%는 swappiness가 기본값인 60일 경우에 해당하는 수치이며 본인 서버에서는 swappiness값이 0이었다. 하지만 동일하게 80% 적용.
-4. apache 없이 사용되는 메모리는 1152+ 142 = 1294MB이기 때문에 apache가 사용 가능한 최대 메모리는 304.4MB (1598.4 - 1294)
+참고문헌 : [http://d2.naver.com/helloworld/132178](http://d2.naver.com/helloworld/132178)
+
+1. apache, tomcat이 구동되지 않은 상태에서 서버의 메모리 정보를 확인한다. \(total : 1998MB, used : 142MB, free : 1855MB\)
+2. tomcat 설정에 따른 메모리 점유\(Perm Gen + Native Heap Area\) : 1152MB
+
+   ```text
+   CATALINA_OPTS="-server -Xms1024m -Xmx1024m -XX:MaxPermSize=128m
+   ```
+
+3. swap으로 인한 성능 저하를 막으려면 어떠한 상황에서도 전체 메모리의 최대 80%인 1598.4MB 이상 사용되지 않도록 해야함 cf\) 80%는 swappiness가 기본값인 60일 경우에 해당하는 수치이며 본인 서버에서는 swappiness값이 0이었다. 하지만 동일하게 80% 적용.
+4. apache 없이 사용되는 메모리는 1152+ 142 = 1294MB이기 때문에 apache가 사용 가능한 최대 메모리는 304.4MB \(1598.4 - 1294\)
 5. top으로 확인 시 apache 프로세스 1개당 약 2.9MB 사용
-6. apache process 최대 갯수(MaxClients)는 약 105개 (304.4 / 2.9)
-7. tomcat Max Threads는 통상적으로 MaxClients의 * 1.1이므로 약 116개
+6. apache process 최대 갯수\(MaxClients\)는 약 105개 \(304.4 / 2.9\)
+7. tomcat Max Threads는 통상적으로 MaxClients의 \* 1.1이므로 약 116개
 
-
-```xml
+```markup
 <IfModule mpm_prefork_module>
     StartServers          5
     MinSpareServers       5
@@ -248,10 +254,9 @@ cf) 80%는 swappiness가 기본값인 60일 경우에 해당하는 수치이며 
     MaxClients          105
     MaxRequestsPerChild   0
 </IfModule>
-
 ```
 
-```xml
+```markup
 <Connector port="8009" protocol="AJP/1.3"
                 enableLookups="false"
                 acceptCount="1000" debug="0"
@@ -262,5 +267,5 @@ cf) 80%는 swappiness가 기본값인 60일 경우에 해당하는 수치이며 
                 maxParameterCount="4000"
                 disableUploadTimeout="true"
                 redirectPort="8443" />
-
 ```
+

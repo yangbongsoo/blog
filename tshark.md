@@ -1,13 +1,16 @@
-# 티샤크를 활용한 네트워크 트래픽 분석
+# Tshark
 
-참고 : 티샤크를 활용한 네트워크 트래픽 분석(와이어샤크의 커맨드라인 버전 TShark)
+참고 : 티샤크를 활용한 네트워크 트래픽 분석\(와이어샤크의 커맨드라인 버전 TShark\)
 
 와이어샤크 패키지 설치
-```
+
+```text
 # yum install wireshark
 ```
+
 root권한으로 실행시키지 않고 setcap으로 필요한 기능만을 부여
-```
+
+```text
 # cd /usr/sbin
 # sudo ./groupadd tshark
 # sudo ./usermod -a -G tshark yangbongsoo
@@ -17,14 +20,18 @@ root권한으로 실행시키지 않고 setcap으로 필요한 기능만을 부�
 # sudo ./getcap /usr/sbin/dumpcap
 /usr/sbin/dumpcap = cap_net_admin,cap_net_raw+eip
 ```
+
 yangbongsoo 계정으로 다시 들어와서 트래픽을 캡쳐할 권한이 있는지 확인
-```
+
+```text
 $ ./tshark -i eth0 -c 1 -q
 Capturing on eth0
 1 packet captured
 ```
-와이어샤크와 마찬가지로 티샤크는 덤프캡을 이용해서 데이터를 수집한다. 덤프캡에는 기본적인 패킷 캡처 기능만 구현돼있으므로, 매우 복잡해서 취약점이 존재할 확률이 높은 와이어샤크나 티샤크 대신 덤프캡에 루트 권한을 주는게 훨씬 더 안전하다. 
-```
+
+와이어샤크와 마찬가지로 티샤크는 덤프캡을 이용해서 데이터를 수집한다. 덤프캡에는 기본적인 패킷 캡처 기능만 구현돼있으므로, 매우 복잡해서 취약점이 존재할 확률이 높은 와이어샤크나 티샤크 대신 덤프캡에 루트 권한을 주는게 훨씬 더 안전하다.
+
+```text
 $ ./tshark -V tcp port 80 -R "http.request || http.response" &
 $ pstree -pa 'yangbongsoo'
 nginx,155263
@@ -38,9 +45,10 @@ bash,109967
   └─tshark,110535 -V tcp port 80 -R http.request\040||\040http.response
       └─dumpcap,110538 -n -i eth0 -f tcp\040port\04080 -Z none
 ```
+
 위의 pstree 결과로 티샤크가 데이터를 캡처하기 위해 덤프캡을 자식 프로세스로 생성하는 것을 볼 수 있다.
 
-```
+```text
 $ ./tshark -D
 1. eth0
 2. nflog (Linux netfilter log (NFLOG) interface)
@@ -48,9 +56,10 @@ $ ./tshark -D
 4. any (Pseudo-device that captures on all interfaces)
 5. lo
 ```
-옵션 -D를 이용하면 시스템에서 이용 가능한 네트워크 인터페이스를 나열할 수 있고 -i를 이용하면 트래픽을 캡처할 리스닝 인터페이스를 지정할 수 있다.
-티샤크는 수신된 패킷마다 기본 요약 정보를 출력한다.
-```
+
+옵션 -D를 이용하면 시스템에서 이용 가능한 네트워크 인터페이스를 나열할 수 있고 -i를 이용하면 트래픽을 캡처할 리스닝 인터페이스를 지정할 수 있다. 티샤크는 수신된 패킷마다 기본 요약 정보를 출력한다.
+
+```text
 $ ./tshark -i eth0 -c 2
 Capturing on eth0
 0.000000000 10.xxx.xxx.xxx -> 10.xxx.xxx.xxx TCP 1012 45850 > biimenu [PSH, ACK] Seq=1 Ack=1 Win=501 Len=946 TSval=1734909355 TSecr=856327483
@@ -58,29 +67,33 @@ Capturing on eth0
 2 packets captured
 ```
 
-네크워크 카드에 패킷이 도달하고, 수신 데이터는 커널에 정의된 메모리 블록으로 복사된다. 패킷 필터는 사용자가 지정한 패킷만 필터링해서 버퍼에 저장한다.
-저장된 패킷은 사용자 공간에서 실행 중인 덤프캡으로 전송되며 덤프캡은 이 패킷을 libpcap 파일 형식으로 기록한다. 끝으로 티샤크는 덤프캡이 작성한 캡처 파일을 읽고 처리한다.
+네크워크 카드에 패킷이 도달하고, 수신 데이터는 커널에 정의된 메모리 블록으로 복사된다. 패킷 필터는 사용자가 지정한 패킷만 필터링해서 버퍼에 저장한다. 저장된 패킷은 사용자 공간에서 실행 중인 덤프캡으로 전송되며 덤프캡은 이 패킷을 libpcap 파일 형식으로 기록한다. 끝으로 티샤크는 덤프캡이 작성한 캡처 파일을 읽고 처리한다.
 
 커널은 수신된 패킷을 반드시 커널 공간에서 사용자 공간으로 복사해야 한다는 사실을 알아두자. 이와 같은 컨텍스트 스위칭은 CPU 시간을 소모하므로 네트워크 카드를 통과하는 모든 데이터 흐름을 캡처하면 시스템 전체의 성능이 저하될 수 있다. 바로 이때문에 캡처 필터가 필요하다. 캡처 필터를 사용하면 커널 공간에서 불필요한 패킷은 제외시키고 사용자가 관심 있는 패킷만 허용함으로써 성능 저하를 최소화할 수 있다.
 
 필터는 -f 옵션을 사용해서 지정할 수 있다.
-```
+
+```text
 $ ./tshark -f "tcp port 80" -i eth0
 ```
 
-캡처 필터를 티샤크의 핵심인 디스플레이(또는 리드) 필터와 혼동하면 안된다. 디스플레이 필터는 이미 캡처된 패킷을 필터링하는 데 사용된다. 이 필터를 사용하면 프로토콜의 각 필드를 디코딩 및 해석하는 디섹터의 활용도를 극대화할 수 있다.
+캡처 필터를 티샤크의 핵심인 디스플레이\(또는 리드\) 필터와 혼동하면 안된다. 디스플레이 필터는 이미 캡처된 패킷을 필터링하는 데 사용된다. 이 필터를 사용하면 프로토콜의 각 필드를 디코딩 및 해석하는 디섹터의 활용도를 극대화할 수 있다.
 
 디스플레이 필터는 -R 옵션으로 지정할 수 있다.
-```
-$ ./tshark  -f "tcp port 80" -i eth0 -R "http.request || http.response" -V
-``` 
--V 옵션은 add output of packet tree(Packet Details)
 
+```text
+$ ./tshark  -f "tcp port 80" -i eth0 -R "http.request || http.response" -V
 ```
+
+-V 옵션은 add output of packet tree\(Packet Details\)
+
+```text
 $ ./tshark  -f "tcp port 80" -i eth0 -R "http.request || http.response" -V | grep "Hypertext Transfer Protocol" -A 21
 ```
+
 grep 해서 필요한부분만 추출할수도 있다.
-```
+
+```text
 --
 Hypertext Transfer Protocol
     GET /api/static/real.js HTTP/1.1\r\n
@@ -130,8 +143,9 @@ Hypertext Transfer Protocol
 --
 ```
 
-tshark의 리드필터(-R 옵션)로 지정할 수 있는 HTTP 프로토콜의 필드 목록을 확인하는 방법은 아래와 같다.
-```
+tshark의 리드필터\(-R 옵션\)로 지정할 수 있는 HTTP 프로토콜의 필드 목록을 확인하는 방법은 아래와 같다.
+
+```text
 $ ./tshark -G | cut -f3 | grep "^http\."
 http.notification
 http.response
@@ -176,10 +190,12 @@ http.set_cookie
 http.last_modified
 http.x_forwarded_for
 ```
-cf) http2 필드는 1.12.0버전부터 가능하다.
+
+cf\) http2 필드는 1.12.0버전부터 가능하다.
 
 전체 IP 통신의 목록 구하기
-```
+
+```text
 $ ./tshark -r ~/tshark-log/temp.pcap -q -z "conv,ip,ip.addr==10.xxx.xxx.xxx" -w ~/tshark-log/write.pcap
 ================================================================================
 IPv4 Conversations
@@ -195,8 +211,10 @@ Filter:ip.addr==10.xxx.xxx.xxx
 10.xxx.xxx.xxx        <-> 10.10.10.10                1       106       0         0       1       106    15.104299993         0.0000
 ================================================================================
 ```
+
 위에서 사용된 옵션들
-```
+
+```text
 -q : be more quiet on stdout (e.g. when using statistics)
 -z <statistics>          various statistics, see the man page for details
 -r <infile>              set the filename to read from (no stdin!)
@@ -205,7 +223,8 @@ Filter:ip.addr==10.xxx.xxx.xxx
 ```
 
 저장된 write.pcap 파일 읽기
-```
+
+```text
 $ ./capinfos ~/tshark-log/write.pcap
 File name:           /home/yangbongsoo/tshark-log/temp.pcap
 File type:           Wireshark - pcapng
@@ -227,8 +246,9 @@ MD5:                 1q908e9a36cn382l768s95w4k6c8w6kb
 Strict time order:   True
 ```
 
-허용된 포트(HTTP, HTTPS)를 제외한 포트로의 외부 연결 파악하기
-```
+허용된 포트\(HTTP, HTTPS\)를 제외한 포트로의 외부 연결 파악하기
+
+```text
 $ ./tshark -o column.format:'" Source","%s","Destination","%d", "dstport", "%uD", "Protocol", "%p"' -r ~/tshark-log/temp.pcap -R "ip.src == 10.xxx.xxx.xxx && ! dns && tcp.dstport != 80 && tcp.dstport != 443" | sort -u
 
 10.xxx.xxx.xxx -> 10.10.10.10 9973 TCP
@@ -236,6 +256,6 @@ $ ./tshark -o column.format:'" Source","%s","Destination","%d", "dstport", "%uD"
 10.xxx.xxx.xxx -> 10.10.10.10 59048 HTTP
 10.xxx.xxx.xxx -> 10.10.10.10 59048 TCP
 ```
--o 옵션을 통해서 티샤크의 옵션을 변경할 수 있다. 
-`-o " <name>:<value> ...    override preference setting`
+
+-o 옵션을 통해서 티샤크의 옵션을 변경할 수 있다. `-o " <name>:<value> ... override preference setting`
 

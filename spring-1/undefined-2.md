@@ -1,0 +1,180 @@
+# 예외
+
+**초난감 예외처리 코드**
+
+```java
+// 1번
+try {
+    ...
+} 
+catch(SQLException e) { //예외를 잡고 아무것도 하지 않는다. 
+}
+
+// 2번
+catch(SQLException e) {
+    System.out.println(e); // 다른 로그나 메세지에 금방 묻혀버려 놓치지 쉽상
+}
+
+// 3번
+catch(SQLException e) {
+    e.printStackTract(); // 다른 로그나 메세지에 금방 묻혀버려 놓치지 쉽상
+}
+```
+
+catch 블록을 이용해 화면에 메세지를 출력한 것은 예외를 처리한 게 아니다. 예외를 처리할 때 반드시 지켜야 할 핵심 원칙은 한 가지다. 모든 예외는 적절하게 복구되든지 아니면 작업을 중단시키고 운영자 또는 개발자에게 분명하게 통보돼야 한다.
+
+```java
+// 그나마 나은 예외
+catch(SQLException e) {
+    e.printStackTract();
+    System.exit(1);
+}
+```
+
+**무의미하고 무책임한 throws**  
+ catch 블록으로 예외를 잡아봐야 해결할 방법도 없고 처리하기 귀찮아서 throws Excpetion을 기계적으로 붙이는 경우도 있다. 이런 무책임한 throws 선언도 심각한 문제점이 있다. 자신이 사용하려고 하는 메서드 선언에서는 의미 있는 정보를 얻을 수 없다. 정말 무엇인가 실행 중에 예외적인 상황이 발생할 수 있다는 것인지, 아니면 그냥 습관적으로 복사해서 붙여 놓은 것인지 알 수 가 없다.
+
+일반적으로 예외라고 하면 Exception 클래스의 서브 클래스 중에서 RuntimeException을 상속하지 않은 것만을 말하는 체크 예외라고 생각해도 된다.
+
+## 예외처리 방법
+
+**예외복구** : 예외처리 코드를 강제하는 체크 예외들은 예외를 어떤 식으로든 복구할 가능성이 있는 경우에 사용한다.
+
+예를 들어 사용자가 요청한 파일을 읽으려고 시도했는데 해당 파일이 없다거나 다른 문제가 있어서 읽히지가 않아서 IOException 발생했다고 해보자. 이때는 사용자에게 상황을 알려주고 다른 파일을 이용하도록 안내해서 예외상황을 해결할 수 있다. 단, IOException 에러 메세지가 사용자에게 그냥 던져지는 것은 예외 복구라고 볼 수 없다.
+
+```java
+int maxretry = MAX_RETRY;
+while(maxretry-- > 0) {
+    try { 
+        …
+        return;
+    }
+    catch(SomeException e) {
+        // 로그 출력. 정해진 시간만큼 대기
+    }
+    finally {
+        // 리소스 반납. 정리 작업
+    }
+}
+throw new RetryFailedException(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+```
+
+**예외처리 회피** : 예외처리를 자신이 담당하지 않고 자신을 호출한 쪽으로 던져버리는 것 \(throws\)
+
+**예외 전환** : 예외 회피와 비슷하게 메소드 밖으로 던지지만 발생한 예외를 그대로 넘기는게 아니라 **적절한 예외로 전환해서 던진다는 특징**이 있다. 예외 전환은 두가지 목적으로 사용된다. 첫째는 내부에서 발생한 예외를 그대로 던지는 것이 그 예외상황에 대한 적절한 의미를 부여해주지 못하는 경우에, 의미를 분명하게 해줄수 있는 예외로 바꿔주기 위해서다.
+
+```java
+catch(SQLException e){
+    ...
+    throw DuplicateUserIdException(e);
+}
+```
+
+보통 전환하는 예외에 원래 발생한 예외를 담아서 **중첩 예외**로 만드는 것이 좋다. 중첩 예외는 새로운 예외를 만들면서 생성자나 initCause\(\) 메서드로 근본 원인이 되는 예외를 넣어주면 된다.
+
+```java
+catch(SQLException e){
+  ...
+    throw DuplicateUserIdException().initCause(e);
+}
+```
+
+두 번째 방법은 예외를 처리하기 쉽고 단순하게 만들기 위해 포장하는 것이다. 주로 예외처리를 강제하는 체크 예외를 언체크 예외인 런타임 예외로 바꾸는 경우에 사용한다.
+
+**일반적으로 체크 예외를 계속 throws를 사용해 넘기는 건 무의미하다. 어차피 복구가 불가능한 예외라면 가능한 한 빨리 런타임 예외로 포장해 던지게 해서 다른 계층의 메서드를 작성할 때 불필요한 throws 선언이 들어가지 않도록 해줘야 한다.**
+
+## 예외처리 전략
+
+체크 예외는 복구할 가능성이 조금이라도 있는, 말 그대로 예외적인 상황이기 때문에 자바는 이를 처리하는 catch 블록이나 throws 선언을 강제하고 있다는게 문제다.
+
+자바가 처음 만들어질 때 많이 사용되던 애플릿이나 AWT, 스윙을 사용한 독립형 애플리케이션에서는 통제 불가능한 시스템 예외라고 할지라도 애플리케이션의 작업이 중단되지 않게 해주고 상황을 복구해야 했다. 예를 들어 워드의 파일 열기 기능에서 사용자가 입력한 이름에 해당하는 파일을 찾을 수 없다고 애플리케이션이 종료돼버리게 할 수는 없다.
+
+하지만 자바 엔터프라이즈 서버환경은 다르다. 수많은 사용자가 동시에 요청을 보내고 각 요청이 독립적인 작업으로 취급된다. 하나의 요청을 처리하는 중에 예외가 발생하면 해당 작업만 중단시키면 그만이다. 자바 엔터프라이즈 서버환경에서는 독립형 애플리케이션과 달리 서버의 특정 계층에서 예외가 발생했을 때 작업을 일시 중지하고 사용자와 바로 커뮤니케이션하면서 예외상황을 복구할 수 있는 방법이 없다. 차라리 프로그램의 오류나 외부 환경으로 인해 예외가 발생하는 경우라면 빨리 해당 요청의 작업을 취소하고 서버 관리자나 개발자에게 통보해주는 편이 낫다. 즉, **자바의 환경이 서버로 이동하면서 체크 예외의 활용도와 가치는 점점 떨어지고 있다. 그래서 대응이 불가능한 체크 예외라면 빨리 런타임 예외로 전환해서 던지는 게 낫다.**
+
+**add\(\) 메서드 예외처리**
+
+```java
+    public void add(User user) throws DuplicateUserIdException, SQLException{
+        try{
+            // JDBC를 이용해 user 정보를 DB에 추가하는 코드 또는
+            // 그런 기능을 가진 다른 SQLException을 던지는 메서드를 호출하는 코드
+        }
+        catch(SQLException e){
+            //ErrorCode가 MySQL의 "Duplicate Entry(1062)"이면 예외 전환
+            if(e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
+                throw DuplicateUserIdException();
+            else
+                throw e; // 그 외의 경우는 SQLException 그대로
+        }
+    }
+```
+
+위 코드를 보면 DuplicateUserIdException과 SQLException 두 가지의 체크 예외를 던지게 되어 있다. DuplicateUserIdException은 충분히 복구 가능한 예외이므로 add\(\) 메서드를 사용하는 쪽에서 잡아서 대응할 수 있다. 하지만 SQLException은 대부분 복구 불가능한 예외이므로 잡아봤자 처리할 것도 없고, 결국 throws를 타고 계속 앞으로 전달되다가 애플리케이션 밖으로 던져질 것이다. 그럴 바에는 그냥 런타임 예외로 포장해 던져버려서 그 밖의 메서드들이 신경 쓰지 않게 해주는 편이 낫다.
+
+DuplicateUserIdException도 굳이 체크 예외로 둬야 하는 것은 아니다. DuplicateUserIdException처럼 의미 있는 예외는 add\(\) 메서드를 바로 호출한 오브젝트 대신 더 앞단의 오브젝트에서 다룰 수 도 있다. 어디에서든 DuplicateUserIdException을 잡아서 처리할 수 있다면 굳이 체크 예외로 만들지 않고 런타임 예외로 만드는 게 낫다. 대신 add\(\) 메서드는 명시적으로 DuplicateUserIdException을 던진다고 선언해야 한다. 그래야 add\(\) 메서드를 사용하는 코드를 만드는 개발자에게 의미 있는 정보를 전달해줄 수 있다. 런타임 예외도 throws로 선언할 수 있으니 문제 될 것은 없다.
+
+```java
+    public DuplicateUserIdException extends RuntimeException{
+        public DuplicateUserIdException(Throwable cause){
+            super(cause);
+        }
+    }
+```
+
+먼저 사용자 아이디가 중복됐을 때 사용하는 DuplicateUserIdException을 만든다. 중첩 예외를 만들 수 있도록 생성자를 추가해주는 것을 잊지 말자.
+
+```java
+    public void add(User user) throws DuplicateUserIdException{
+            try{
+                // JDBC를 이용해 user 정보를 DB에 추가하는 코드 또는
+                // 그런 기능을 가진 다른 SQLException을 던지는 메서드를 호출하는 코드
+            }
+            catch(SQLException e){
+                if(e.getErrorCode() == MysqlErrorNumbers.ER_DUP_ENTRY)
+                    throw new DuplicateUserIdException(e); //예외전환
+                else
+                    throw new RuntimeException(e); //예외 포장
+            }
+        }
+```
+
+이제 이 add\(\) 메서드를 사용하는 오브젝트는 SQLException을 처리하기 위해 불필요한 throws 선언을 할 필요는 없으면서, 필요한 경우 아이디 중복 상황을 처리하기 위해 DuplicateUserIdException을 이용할 수 있다.
+
+## 애플리케이션 예외
+
+시스템 또는 외부의 예외상황이 원인이 아니라 애플리케이션 자체의 로직에 의해 의도적으로 발생시키고, 반드시 catch 해서 무엇인가 조치를 취하도록 요구하는 예외를 애플리케이션 예외라고 한다.
+
+은행계좌에서 출금하는 기능을 가진 메서드가 있다고 해보자. 이런 기능을 담은 메서드를 설계하는 방법이 두 가지 있다. 첫 번째 방법은 정상적인 출금처리를 했을 경우와 잔고 부족이 발생했을 경우에 각각 다른 종류의 리턴 값을 돌려주는 것이다. 하지만 이 방법은 정상적인 처리가 안됐을 때 전달하는 리턴값의 표준 같은게 없어서 개발자 사이의 의사소통 문제로 제대로 동작하지 않을 위험이 있다. 또 한 가지 문제는 결과 값을 확인하는 조건문이 자주 등장해서 if 블록이 범벅된 코드가 이어질지 모른다.
+
+두 번째 방법은 정상적인 흐름을 따르는 코드는 그대로 두고, 잔고 부족과 같은 예외 상황에서는 비지니스적인 의미를 띤 예외를 던지도록 만드는 것이다. 이때 사용하는 예외는 의도적으로 체크 예외로 만든다. 그래서 개발자가 잊지 않고 잔고 부족처럼 자주 발생 가능한 예외상황에 대한 로직을 구현하도록 강제해주는 게 좋다.
+
+```java
+try {
+    BigDecimal balance = account.withdraw(amount);
+    …
+    // 정상적인 처리 결과를 출력하도록 진행
+}
+catch( InsufficientBalanceException e) {
+    // InsufficientBalanceException에 담긴 인출 가능한 잔고금액 정보를 가져옴 
+    BigDecimal availFunds = e.getAvailFunds();
+    …
+    // 잔고 부족 안내 메세지를 준비하고 이를 출력하도록 진행 
+}
+```
+
+## 예외 전환
+
+자바 데이터 액세스 기술은 JDBC 외에도 JDO, JPA 등이 있다. 또한 JDBC를 기반으로 하고, 성격도 비슷하지만 사용 방법과 API, 발생하는 예외가 다른 iBatis도 있다.
+
+DAO 인터페이스를 통해 구현을 분리시켰지만 메서드 선언에 나타나는 예외정보때문에 클라이언트가 DAO 기술에 의존적이 될 수 밖에 없다.
+
+```java
+pulbic interface UserDao {
+  public void add(User user) throws PersistentException; 
+  public void add(User user) throws HibernateException;
+  public void add(User user) throws JdoException; 
+}
+```
+
+DAO 인터페이스를 기술에 완전히 독립적으로 만들려면 예외가 일치하지 않는 문제도 해결해야 한다. 그래서 스프링은 자바의 다양한 데이터 액세스 기술을 사용할 때 발생하는 예외들을 추상화해서 DataAccessException 계층구조 안에 정리해놓았다.
+
