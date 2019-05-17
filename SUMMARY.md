@@ -55,7 +55,7 @@
 * [소프트웨어 품질관리(NHN은 이렇게한다)](nhn_sw_quailty_management.md)
 * [웹프로그래머를 위한 서블릿 컨테이너의 이해](servlet_container.md)
 * [웹을 지탱하는 기술](web_tech.md)
-* [마이바티스를 사용한 자바 퍼시스턴스 개발](mabatis.md)
+* [마이바티스를 사용한 자바 퍼시스턴스 개발](mybatis.md)
 * [HashMap 효율적으로 사용하기](hashmap.md)
 * [자바의 정석](java_basic.md)
 * [슈퍼타입토큰(Super Type Token)](super_type_token.md)
@@ -71,7 +71,7 @@
 * [애자일적용후기](agile.md)
 * [Living Documentation](what__why__how_living_documentation.md)
 * [specification by example](specification_by_example.md)
-* [Mathematical Statistics](MathematicalStatistics.md)
+* [Mathematical Statistics](mathematicalstatistics.md)
 
 <!-- * [Real MySQL(작업중)] -->
   <!-- * [5장 인덱스](real_mysql/인덱스.md) -->
