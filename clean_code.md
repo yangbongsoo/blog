@@ -297,3 +297,17 @@ private void logError(Exception e) {
     logger.log(e.getMessage());
 }
 ```
+
+## 주석
+코드로 의도를 표현하지 못해 주석을 사용한다. 표현력을 강화해서 애초에 주석이 필요 없는 방향으로 개발해야 한다.
+
+```java
+// 직원에게 복지 혜택을 받을 자격이 있는지 검사한다
+if ((employee.flags & HOURLY_FLAG) && (employee.age > 65))
+```
+
+위 코드보다는 아래의 코드가 더 낫다.
+
+```java
+if (employee.isEligibleForFullBenefits())
+```
