@@ -1,11 +1,11 @@
 # 클린코드
 
-## 의미 있는 이름
+## 2장 의미 있는 이름
 ### 검색 하기 쉬운 이름을 사용하라
 MAX_CLASSES_PER_STUDENT는 grep으로 찾기가 쉽지만, 숫자 7은 은근히 까다롭다. 7이 들어가는 파일 이름이나 수식이 모두 검색되기 때문이다.
 개인 사례) unAccess 라는 변수가 있을 때 관련 api url을 `/un/access` 로 짓는거보다는 `/unaccess` 로 짓는게 검색하기 쉽다. 검색이 쉬우니 네이밍 변경하기도 쉽다.
 
-## 함수
+## 3장 함수
 ### 한 가지만 해라!
 ```java
 // 목록 3-2 HtmlUtil (리팩토링한 버전)
@@ -298,7 +298,7 @@ private void logError(Exception e) {
 }
 ```
 
-## 주석
+## 4장 주석
 코드로 의도를 표현하지 못해 주석을 사용한다. 표현력을 강화해서 애초에 주석이 필요 없는 방향으로 개발해야 한다.
 
 ```java
@@ -311,3 +311,209 @@ if ((employee.flags & HOURLY_FLAG) && (employee.age > 65))
 ```java
 if (employee.isEligibleForFullBenefits())
 ```
+
+## 5장 형식 맞추기
+코드 형식(컨벤션)은 중요하다. 너무나도 중요하므로 융통성 없이 맹목적으로 따르면 안 된다. 코드 형식은 의사소통의 일환이다. 의사소통은 전문 개발자의 일차적인 의무다.
+어쩌면 '돌아가는 코드'가 전문 개발자의 일차적인 의무라 여길지도 모르겠다. 하지만 이 책을 읽으면서 생각이 바뀌었기 바란다. 오늘 구현한 기능이 다음 버전에서 바뀔 확률은 아주 높다.
+그런데 오늘 구현한 코드의 가독성은 앞으로 바뀔 코드의 품질에 지대한 영향을 미친다. 오랜 시간이 지나 원래 코드의 흔적을 더 이상 찾아보기 어려울 정도로 코드가 바뀌어도 맨 처음 잡아놓은 구현 스타일과
+가독성 수준은 유지보수 용이성과 확장성에 계속 영향을 미친다. 원래 코드는 사라질지라도 개발자의 스타일과 규율은 사라지지 않는다.
+
+## 6장 객체와 자료 구조
+변수를 private으로 정의하는 이유가 있다. 남들이 변수에 의존하지 않게 만들고 싶어서다. 그렇다면 어째서 수많은 프로그래머가 getter/setter 함수를 당연하게 public해 private 변수를 외부에 노출할까?
+
+### 자료 추상화
+변수를 private으로 선언하더라도 각 값마다 getter/setter 함수를 제공한다면 구현을 외부로 노출하는 셈이다. 자료를 세세하게 공개하기보다는 추상적인 개념으로 표현하는 편이 좋다.
+그러나 인터페이스나 getter/setter 함수만으로는 추상화가 이뤄지지 않는다. 개발자는 객체가 포함하는 자료를 표현할 가장 좋은 방법을 심각하게 고민해야 한다.
+
+```java
+// 목록 6-3 구체적인 Vehicle 클래스
+public interface Vehicle {
+    double getFuelTankCapacityInGallons();
+    double getGallonsOfGasoline();
+}
+```
+
+```java
+// 목록 6-4 추상적인 Vehicle 클래스
+public interface Vehicle {
+    double getPercentFuelRemaining();
+}
+```
+
+목록 6-3은 자동차 연료 상태를 구체적인 숫자 값으로 알려준다. 목록 6-4는 자동차 연료 상태를 백분율이라는 추상적인 개념으로 알려준다.
+목록 6-3은 두 함수가 변수값을 읽어 반환할 뿐이라는 사실이 거의 확실하다. 목록 6-4는 정보가 어디서 오는지 전혀 드러나지 않는다.
+
+### 자료/객체 비대칭
+객체는 추상화 뒤로 자료를 숨긴 채 자료를 다루는 함수만 공개한다. 자료 구조는 자료를 그대로 공개하며 별다른 함수를 제공하지 않는다. 두 정의는 본질적으로 상반되고 두 개념은 사실상 정반대다.
+
+```java
+// 목록 6-5 절차적인 도형
+public class Square {
+	public Point topLeft;
+	public double side;
+}
+
+public class Rectangle {
+	public Point topLeft;
+	public double height;
+	public double width;
+}
+
+public class Circle {
+	public Point center;
+	public double radius;
+}
+
+public class Geometry {
+	public final double PI = 3.141592;
+
+	public double area(Object shape) throws Exception {
+		if (shape instanceof Square) {
+			Square s = (Square)shape;
+			return s.side * s.side;
+		} else if (shape instanceof Rectangle) {
+			Rectangle r = (Rectangle)shape;
+			return r.height * r.width;
+		} else if (shape instanceof Circle) {
+			Circle c = (Circle)shape;
+			return PI * c.radius * c.radius;
+		}
+		throw new Exception();
+	}
+}
+```
+
+목록 6-5는 절차적인 도형 클래스다. Geometry 클래스는 세 가지 도형 클래스를 다룬다. 각 도형 클래스는 간단한 자료 구조다. 아무 메서드도 제공하지 않는다. 도형이 동작하는 방식은
+Geometry 클래스에서 구현한다.
+
+만약 Geometry 클래스에 둘레 길이를 구하는 perimeter() 함수를 추가하고 싶다면? 도형 클래스들은 아무 영향도 받지 않는다. 도형 클래스에 의존하는 다른 클래스도 마찬가지다. 반대로 새 도형을 추가하고 싶다면?
+Geometry 클래스에 속한 함수를 모두 고쳐야 한다.
+
+```java
+/// 목록 6-6 다형적인 도형
+public interface Shape {
+	double area();
+}
+
+public class Square implements Shape {
+	private Point topLeft;
+	private double side;
+
+	@Override
+	public double area() {
+		return side * side;
+	}
+}
+
+public class Rectangle implements Shape {
+	private Point topLeft;
+	private double height;
+	private double width;
+
+	@Override
+	public double area() {
+		return height * width;
+	}
+}
+
+public class Circle implements Shape {
+	private Point center;
+	private double radius;
+	public final double PI = 3.141592;
+
+	@Override
+	public double area() {
+		return PI * radius * radius;
+	}
+}
+
+public class Geometry {
+	public double area(Shape shape) {
+		return shape.area();
+	}
+}
+```
+
+목록 6-6은 객체 지향적인 도형 클래스다. 여기서 area()는 다형 메서드다. 그러므로 새로운 도형을 추가해도 기존 함수에 영향을 미치지 않는다. 반면 새로운 함수를 추가하고 싶다면 도형 클래스 전부를 고쳐야 한다.
+둘은 상호 보완적인 특질이 있다. 분별 있는 프로그래머는 모든 것이 객체라는 생각이 미신임을 잘 안다. 때로는 단순한 자료 구조와 절차적인 코드가 가장 적합한 상황도 있다.
+
+### 디미터 법칙
+디미터 법칙은 잘 알려진 휴리스틱으로, 모듈은 자신이 조작하는 객체의 속사정을 몰라야 한다는 법칙이다. 좀 더 정확히 표현하자면, "클래스 C의 메서드 f는 다음과 같은 객체의 메서드만 호출해야 한다"고 주장한다.
+1. 클래스 C
+2. f가 생성한 객체
+3. f 인수로 넘어온 객체
+4. C 인스턴스 변수에 저장된 객체
+
+하지만 위 객체에서 허용된 메서드가 반환하는 객체의 메서드는 호출하면 안된다.
+
+```java
+final String outputDir = ctxt.getOptions().getScratchDir().getAbsolutePath();
+```
+
+흔히 위와 같은 코드를 기차 충돌(train wreck)이라 부른다. 일반적으로 조잡하다 여겨지는 방식이므로 피하는 편이 좋다. 위 코드는 다음과 같이 나누는 편이 좋다.
+
+```java
+Options opts = ctxt.getOptions();
+File scratchDir = opts.getScratchDir();
+final String outputDir = scratchDir.getAbsolutePath();
+```
+
+위 예제가 디미터 법칙을 위반하는지 여부는 ctxt, Options, ScratchDir이 객체인지 아니면 자료 구조인지에 달렸다. 객체라면 내부 구조를 숨겨야 하므로 확실히 디미터 법칙을 위반한다. 반면, 자료 구조라면
+당연히 내부 구조를 노출하므로 디미터 법칙이 적용되지 않는다.
+
+```java
+final String outputDir = ctxt.options.scratchDir.absolutePath;
+```
+
+위와 같이 구현했다면 디미터 법칙을 거론할 필요가 없어진다. 자료 구조는 무조건 함수 없이 공개 변수만 포함하고 객체는 비공개 변수와 공개 함수를 포함한다면 문제는 훨씬 간단해진다.
+
+하지만 단순한 자료 구조에도 조회 함수와 설정 함수를 정의하라 요구하는 프레임워크와 표준(ex 빈)이 존재한다. 이런 혼란으로 말미암아 때때로 절반은 객체, 절반은 자료 구조인 잡종 구조가 나온다.
+잡종 구조는 중요한 기능을 수행하는 함수도 있고, 공개 변수나 getter/setter 함수도 있다. getter/setter 함수는 비공개 변수를 그대로 노출한다. 덕택에 다른 함수가 절차적인 프로그래밍의 자료 구조 접근 방식처럼
+비공개 변수를 사용하픈 유혹에 빠지기 십상이다.
+
+이런 잡종 구조는 되도록 피하는 편이 좋다. 프로그래머가 함수나 타입을 보호할지 공개할 지 확신하지 못해(더 나쁘게는 무지해) 어중간하게 내놓은 설계에 불과하다.
+
+### 자료 전달 객체(DTO)
+자료 구조체의 전형적인 형태는 공개 변수만 있고 함수가 없는 클래스다. DTO라고 하는데 굉장히 유용한 구조체다. 특히 데이터베이스와 통신하거나 소켓에서 받은 메시지의 구문을 분석할 때 유용하다.
+좀 더 일반적인 형태는 빈(bean) 구조다.
+
+```java
+public class Address {
+    private String street;
+    private String city;
+
+    // getter setter
+}
+```
+
+일종의 사이비 캡슐화로 일부 OO 순수주의자나 만족시킬 뿐 별다른 이익을 제공하지 않는다.
+
+DTO 클래스에 save나 find 같은 탐색 함수도 제공하는 활성 레코드가 있는데 그러면 자료 구조도 아니고 객체도 아닌 잡종 구조가 나온다.
+
+## 7장 오류 처리
+### null을 반환하지 마라
+우리가 흔히 저지르는 바람에 오류를 유발하는 행위가 있다. 그 중 첫째가 null을 반환하는 습관이다.
+
+```java
+public void registerItem(Item item) {
+    if (item != null) {
+        ItemRegistry registry = peristentStore.getItemRegistry();
+        if (registry != null) {
+            Item existing = registry.getItem(item.getID());
+            if (existing.getBillingPeriod().hasRetailOwner()) {
+                existing.register(item);
+            }
+        }
+    }
+}
+```
+
+위 코드는 나쁜 코드다. null을 반환하는 코드는 일거리를 늘릴 뿐만 아니라 호출자에게 문제를 떠넘긴다. 누구 하나라도 null 확인을 빼먹는다면 애플리케이션이 통제 불능에 빠질지도 모른다.
+peristentStore가 null이라면 NPE가 발생한다.
+
+메서드에서 null을 반환하고픈 유혹이 든다면 그 대신 예외를 던지거나 특수 사례 객체를 반환한다. 사용하려는 외부 API가 null을 반환한다면 감싸기 메서드를 구현해 예외를 던지거나 특수 사례 객체를 반환하는 방식을 고려한다.
+
+### null을 전달하지 마라
+메서드로 null을 전달하는 방식은 더 나쁘다. 정상적인 인수로 null을 기대하는 API가 아니라면 메서드로 null을 전달하는 코드는 최대한 피한다.
+메서드는 전달받은 파라미터를 null 체크 해서 다른 예외로 처리하는 방법(throw new InvalidArgumentException)이 있고, assert 문을 이용하는 방법이 있다. 하지만 호출자가 실수로 넘기는 null 자체를
+막을 방법은 없기 때문에 애초에 null을 넘기지 못하도록 금지하는 정책이 합리적이다.
