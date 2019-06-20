@@ -256,3 +256,99 @@ UMASK 보수 값과 파일 기본 허가권을 AND 연산하면
 110 100 000
 ```
 640이 된다.
+
+### 28. Spring, Ajax File upload(FormData)
+commons-fileupload 의존성을 추가한다.
+
+```xml
+<dependency>
+	<groupId>commons-fileupload</groupId>
+	<artifactId>commons-fileupload</artifactId>
+	<version>1.3.1</version>
+</dependency>
+```
+
+servlet-context.xml에서 CommonsMultipartResolver를 빈으로 등록한다.
+
+```xml
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760"/> <!--10MB -->
+	</bean>
+```
+
+컨트롤러에서 MultipartFile 객체로 받는다.
+
+```java
+	@RequestMapping(value = "/file/insert", method = RequestMethod.POST)
+	public AjaxResponse insertBoardWorksEditorArticleFile(@RequestParam("files") List<MultipartFile> files) throws Exception {
+	    ...
+	}
+```
+
+FormData를 이용하는 방법은 두가지다.
+
+1.form 태그 있을 경우
+```html
+<form id="fileUploadForm" method="post" enctype="multipart/form-data">
+    <input type="file" name="files" id="filesToUpload" multiple="multiple" onchange="makeFileList();" style="display: none">
+</form>
+```
+
+```js
+function makeFileList() {
+    var form = $('#fileUploadForm')[0];
+    var formData = new FormData(form);
+
+    $.ajax({
+        url: "/file/insert,
+        type: 'POST',
+        enctype: 'multipart/form-data', // 추가 안해도 정상 동작함
+        processData: false, // false를 안해 주면 jquery Uncaught TypeError: Illegal invocation 발생(false를 해줌으로써 jQuery가 자동으로 데이터를 쿼리 문자열로 변환하지 않도록 방지)
+        cache: false,
+        contentType: false, // 만약 contentType을 아예 안보내면 "application/x-www-form-urlencoded; charset=UTF-8" 로 지정되서 500 에러 발생(MultipartException: Current request is not a multipart request)
+        // contentType: 'multipart/form-data', // contentType을 multipart/form-data로 직접 명시하면 405 에러 발생
+        data: formData
+    }).done(function (data, status, xhr) {
+
+    }).fail(function (xhr, status, error) {
+
+    });
+}
+```
+
+2.form 태그 없을 경우
+```html
+<input type="file" name="files" id="filesToUpload" multiple="multiple" onchange="makeFileList();" style="display: none">
+```
+
+```js
+function makeFileList() {
+    var input = document.getElementById('filesToUpload');
+    var formData = new FormData();
+    for (var i=0; i<input.files.length; i++) {
+        formData.append('files', input.files[i]);
+    }
+
+    $.ajax({
+        url: "/file/insert,
+        type: 'POST',
+        enctype: 'multipart/form-data', // 추가 안해도 정상 동작함
+        processData: false, // false를 안해 주면 jquery Uncaught TypeError: Illegal invocation 발생(false를 해줌으로써 jQuery가 자동으로 데이터를 쿼리 문자열로 변환하지 않도록 방지)
+        cache: false,
+        contentType: false, // 만약 contentType을 아예 안보내면 "application/x-www-form-urlencoded; charset=UTF-8" 로 지정되서 500 에러 발생(MultipartException: Current request is not a multipart request)
+        // contentType: 'multipart/form-data', // contentType을 multipart/form-data로 직접 명시하면 405 에러 발생
+        data: formData
+    }).done(function (data, status, xhr) {
+
+    }).fail(function (xhr, status, error) {
+
+    });
+}
+```
+
+cf) HTTP Method POST 방식으로 전송할 때는 body의 데이터를 설명하는 content-type를 꼭 추가해줘야 한다.
+application/x-www-form-urlencoded은 default content-type이다(key=value&key=value 와 같은 데이터를 전달한다).
+서블릿 컨테이너는 request의 body를 읽어 Map 형태로 변환한다.
+그리고 반드시 content-type에 body의 인코딩을 추가해줘야 한다(ex charset=UTF-8).
+
+
