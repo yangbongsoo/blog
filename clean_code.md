@@ -513,10 +513,30 @@ peristentStore가 null이라면 NPE가 발생한다.
 
 메서드에서 null을 반환하고픈 유혹이 든다면 그 대신 예외를 던지거나 특수 사례 객체를 반환한다. 사용하려는 외부 API가 null을 반환한다면 감싸기 메서드를 구현해 예외를 던지거나 특수 사례 객체를 반환하는 방식을 고려한다.
 
+cf) https://dzone.com/refcardz/java-api-best-practices?chapter=13
+
+non-null value 리턴을 보장함으로써 api 사용자들은 그들의 코드에 null check를 없앨 수 있다. 하지만 전체 api에 일관되게 적용하는게 중요하다. 하나라도 일관성이 깨지게
+될 경우, NPE를 야기시키므로 api 신뢰를 잃기가 쉽다.
+
 ### null을 전달하지 마라
 메서드로 null을 전달하는 방식은 더 나쁘다. 정상적인 인수로 null을 기대하는 API가 아니라면 메서드로 null을 전달하는 코드는 최대한 피한다.
 메서드는 전달받은 파라미터를 null 체크 해서 다른 예외로 처리하는 방법(throw new InvalidArgumentException)이 있고, assert 문을 이용하는 방법이 있다. 하지만 호출자가 실수로 넘기는 null 자체를
 막을 방법은 없기 때문에 애초에 null을 넘기지 못하도록 금지하는 정책이 합리적이다.
+
+cf) https://dzone.com/refcardz/java-api-best-practices?chapter=14
+
+자바 8부터 추가되는 `Optional<T>`를 이용하는 방법에 있어서 아래 코드 방식은 별로다(null을 리턴해서 null 체크 하는것에 비해 크게 좋은점이 없다). 
+```java
+Optional<ItemRegistry> itemRegistry = peristentStore.getItemRegistry();
+if (itemRegistry.isPresent()) {
+  ...
+```
+
+메서드 리턴 타입으로 `Optional<Collection<T>>`를 사용하지 말고 좀 더 간결하게 `Collection<T>`를 리턴하는게 좋다.
+
+```java
+Car fastestCar = getFastest(cars).orElse(Car.INVALID);
+```
 
 ## 8장 경계
 ### 외부 코드 사용하기
