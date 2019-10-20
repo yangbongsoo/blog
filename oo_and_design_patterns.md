@@ -453,6 +453,98 @@ public void setOnClickListener(OnClickListener o) { … }
 ```
 
 ## 단일 책임 원칙
+클래스는 단 한 개의 책임을 가져야 한다. 즉, 클래스를 변경하는 이유는 단 한 개여야 한다.
+그런데 단일 책임 원칙은 가장 어려운 원칙이기도 하다. 한개의 책임에 대한 정의가 명확하지 않고, 책임을 도출하기 위해서는 다양한 경허이 필요하기 때문이다.
+
+```java
+public class DataViewer {
+    public void display() {
+        String data = loadHtml();
+        updateGui(data);
+    }
+
+    public String loadHtml() {
+        HttpClient client = new HttpClient();
+        client.connect(url);
+        return client.getResponse();
+    }
+
+    private void updateGui(String data) {
+        GuiData guiModel = parseDataToGuiData(data);
+        tableUI.changeData(guiModel);
+    }
+
+    private GuiData parseDataToGuiData(String data) {
+        // ... 파싱 처리 코드
+    }
+
+    // ... 기타 필드 등 다른 코드
+}
+```
+display 메서드는 loadHtml 메서드에서 읽어 온 HTML 응답 문자열을 updateGui 메서드에 보낸다.
+updateGui 메서드는 parseDataToGuiData 메서드를 이용해서 HTML 응답 메세지를 GUI에 보여주기 위한
+GuiData 객체로 변환한 뒤에 실제 tableUI를 이용해서 데이터를 보여주고 있다.
+
+여기서 데이터를 제공하는 서버가 HTTP 프로토콜에서 소켓 기반의 프로토콜로 변경되었다. 이 프로토콜은 응답 데이터로 byte 배열을 제공한다.
+그러면 아래와 같은 변화가 연쇄적으로 발생할 것이다.
+
+```java
+    public void display() {
+        // String data = loadHtml();
+        byte[] data = loadHtml();
+        updateGui(data);
+    }
+
+    public byte[] loadHtml() {
+        // HttpClient client = new HttpClient();
+        // client.connect(url);
+        // return client.getResponse();
+        SocketClient client = new SocketClient();
+        client.connect(server, port);
+        return client.read();
+    }
+
+    private void updateGui(byte[] data) {
+        GuiData guiModel = parseDataToGuiData(data);
+        tableUI.changeData(guiModel);
+    }
+
+    private GuiData parseDataToGuiData(byte[] data) {
+        // ... 파싱 처리 코드
+    }
+
+    // ... 기타 필드 등 다른 코드
+
+```
+이러한 연쇄적인 코드 수정은 두 개의 책임(데이터를 읽는 책임과 화면에 보여주는 책임)이 한 클래스에 아주 밀접하게 결합되어 있어서 발생한 증상이다.
+
+![](/assets/srp1.png)
+
+위와 같이 데이터 읽기와 데이터를 화면에 보여주는 책임을 두 개의 클래스로 분리하고 둘 간에 주고받는 데이터를 저수준의 String이 아닌
+알맞게 추상화된 타입을 사용하면, 데이터를 읽어 오는 부분의 변경 때문에 화면을 보여주는 부분의 코드가 변경되는 상황을 막을 수 있다.
+
+단일 책임 원칙을 어길 때 발생하는 또 다른 문제점은 재사용을 어렵게 한다는 것이다. DataViewer 클래스가 HTTP 연동을 위해서
+HttpClient 패키지를 사용하고 화면에 데이터를 보여주기 위해 GuiComp 패키지를 사용한다면 이들 간의 관계는 아래와 같을 것이다
+(HttpClient 패키지와 GuiComp 패키지가 각각 별도의 jar 파일로 제공).
+
+![](/assets/srp2.png)
+
+이때 데이터를 읽어 오는 기능이 필요한 DataRequiredClient 클래스를 만들어야 한다면 구현하기 위해 필요한 것은 DataViewer 클래스와
+HttpClient jar 파일이다. 하지만 실제로는 DataViewer가 GuiComp를 필요로 하므로 GuiComp jar 파일까지 필요하다.
+즉 실제 사용하지 않는 기능이 의존하는 jar 파일까지 필요한 것이다. 그러므로 단일 책임 원칙에 따라 아래와 같이 책임을 분리시켜야 한다.
+
+![](/assets/srp3.png)
+
+
+단일 책임 원칙을 지키기 위한 방법은 메서드를 실행하는 것이 누구인지 확인해 보는 것이다. 아래 그림에서 DataViewer 클래스는 display 메서드와
+loadData 메서드를 제공하는데, GUIApplication은 display 메서드를 사용하고 DataProcessor는 loadData()를 사용한다고 해보자.
+
+![](/assets/srp4.png)
+
+GUIApplication이 화면에 표시되는 방식을 변경해야 할 경우, 변경되는 메서드는 DataViewer 클래스의 display 메서드이다. 반면에
+DataProcessor가 읽어 오는 데이터를 String이 아닌 다른 타입으로 변경해야 할 경우, DataViewer의 loadData 메서드는 String이
+아닌 DataProcessor가 요구하는 타입으로 변경될 가능성이 높다. 이렇게 클래스의 사용자들이 서로 다른 메서드들을 사용한다면 그들 메서드는
+각각 다른 책임에 속할 가능성이 높고 따라서 책임 분리 후보가 될 수 있다.
 
 
 ## 리스코프 치환 원칙
