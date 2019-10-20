@@ -451,6 +451,10 @@ public void add(StatusObserver observer) { … }
 // View 클래스 
 public void setOnClickListener(OnClickListener o) { … }
 ```
+
+## 단일 책임 원칙
+
+
 ## 리스코프 치환 원칙
 리스코프 치환 원칙은 OCP을 받쳐 주는 다형성에 관한 원칙을 제공한다. 리스코프 치환 원칙은 다음과 같다. **상위 타입의 객체를 하위 타입의 객체로 치환해도 상위 타입을 사용하는 프로그램은 정상적으로 동작해야 한다.**
 ```java
