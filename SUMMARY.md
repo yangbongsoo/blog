@@ -50,6 +50,7 @@
 * [켄트백 구현패턴](implementation_patterns.md)
 * [클린코드](clean_code.md)
 * [클린코더스 강의 정리](clean_coders.md)
+* [클린아키텍처](clean_architecture.md)
 * [네이버를 만든 기술, 자바편](naver_tech_java.md)
 * [객체지향의 사실과 오해](oo_fact_and_misunderstanding.md)
 * [객체지향과 디자인패턴](oo_and_design_patterns.md)
