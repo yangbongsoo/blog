@@ -149,3 +149,18 @@ public class EmployeeFacade {
 ```
 
 EmployeeFacade에 코드는 거의 없다. 이 클래스는 세 클래스의 객체를 생성하고, 요청된 메서드를 가지는 객체로 위임하는 일을 책임진다.
+
+### OCP 개방 폐쇄 원칙
+
+![](/assets/ocp1.png)
+
+여기서 주목할 점은 FinancialDataMapper는 구현 관계를 통해 FinancialDataGateway를 알고 있지만, FinancialDataGateway는 FinancialDataMapper에 
+대해 아무것도 알지 못한다. 그러므로 FinancialDataMapper에서 발생한 변경으로부터 FinancialReportGenerator를 보호하려면 FinancialDataMapper가 
+FinancialDataGateway에 의존해야 하고 FinancialReportGenerator는 FinancialDataGateway를 사용해야 한다.
+
+FinancialDataGateway 인터페이스가 없었다면, Database 관련 의존성(low level detail)이 비지니스 로직을 담당하는 
+FinancialReportGenerator(high level policy)로 바로 향하게 된다.
+
+
+
+ 
