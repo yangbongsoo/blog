@@ -690,6 +690,7 @@ public void increaseHeight(Rectangle rec){
 이 문제를 해소하기 위해 rec 파라미터의 실제 타입이 Square일 경우를 막는 instanceof 연산자를 사용할 수 있을 것이다. 하지만 instanceof 연산자를 사용한다는 것 자체가 리스코프 치환 원칙 위반이 되고 이는 increaseHeight() 메서드가 Rectangle의 확장에 열려 있지 않다는 것을 뜻한다.
 
 리스코프 치환 원칙을 어기는 또 다른 흔한 예는 상위 타입에서 지정한 리턴 값의 범위에 해당되지 않는 값을 리턴하는 것이다. 예를 들어, 입력 스트림으로부터 데이터를 읽어와 출력 스트림에 복사해 주는 복사 기능은 다음과 같이 구현될 것이다.
+
 ```java
 public class CopyUtil {
   public static void copy(InputStream is, OutputStream out){
@@ -703,7 +704,9 @@ public class CopyUtil {
   }
 }
 ```
+
 InputStream의 read() 메서드는 스트림의 끝에 도달해서 더 이상 데이터를 읽어올 수 없을 경우 -1을 리턴한다고 정의되어 있고, CopyUtil.copy() 메서드는 이 규칙에 따라 is.read()의 리턴 값이 -1이 아닐 때까지 반복해서 데이터를읽어와 out에 쓴다. 그런데 만약 InputStream을 상속한 하위 타입에서 read() 메서드를 아래와 같이 구현하면 어떻게 될까?
+
 ```java
 public class SatanInputStream implements InputStream{
   public int read(byte[] data){
@@ -712,19 +715,22 @@ public class SatanInputStream implements InputStream{
   }
 }
 ```
+
 SatanInputStream의 read() 메서드는 데이터가 없을 때 0을 리턴하도록 구현했다. SatanInputStream 클래스의 사용자는 SatanInputStream 객체로부터 데이터를 읽어 와서 파일에 저장하기 위해 다음과 같이 CopyUtil.copy() 메서드를 사용할 수 있을 것이다. 
+
 ```java
 InputStream is = new SatanInputStream(someData);
 OutputStream out = new FileOutputStream(filePath);
 CopyUtil.copy(is,out);
 ```
+
 이렇게 되면 CopyUtil.copy() 메서드는 무한루프에 빠지게 된다. 왜냐하면 SatanInputStream의 read() 메서드는 데이터가 없더라도 -1을 리턴하지 않기 때문이다. 
 ```java
-public class CopyUtil{
-  public static void copy(InputStream is, OutputStream out){
+public class CopyUtil {
+  public static void copy(InputStream is, OutputStream out) {
     ...
     // is가 SatanInputStream인 경우 read() 메서드는 -1을 리턴하지 않으므로, 아래 코드는 무한루프가 된다.
-    while((len = is.read(data)) != -1){
+    while((len = is.read(data)) != -1) {
       out.write(data,0,len);
     }
   }
@@ -734,8 +740,8 @@ public class CopyUtil{
 
 리스코프 치환 원칙은 확장에 대한 것이다. 리스코프 치환 원칙을 어기면 OCP를 어길 가능성이 높아진다. 상품에 쿠폰을 적용해서 할인되는 액수 구하는 기능 예를 살펴보자.
 ```java
-public class Coupon{
-  public int calculateDiscountAmount(Item item){
+public class Coupon {
+  public int calculateDiscountAmount(Item item) {
     return item.getPrice() * discountRate;
   }
 }
@@ -743,8 +749,8 @@ public class Coupon{
 이 코드에서 Coupon 클래스의 calculateDiscountAmount() 메서드는 Item 클래스의  getPrice() 메서드를 이용해서 할인될 값을 구하고 있다. 그런데 특수 Item은 무조건 할인을 해주지 않는 정책이 추가되어, 이를 위해 Item 클래스를 상속받는 SpecialItem 클래스를 추가했다고 하자.
 ```java
 public class Coupon{
-  public int calculateDiscountAmount(Item item){
-    if(item instanceof SpecialItem)
+  public int calculateDiscountAmount(Item item) {
+    if (item instanceof SpecialItem)
       return 0;
       
     return item.getPrice() * discountRate;
@@ -757,31 +763,39 @@ Item 타입을 사용하는 코드(위 예제에서는 calculateDiscountAmount �
 
 위의 예제 같은 경우는 Item에 대한 추상화가 덜 되었기 때문에 리스코프 치환 원칙을 어기게 됐다. 따라서 상품의 가격 할인 가능 여부가 Item 및 그 하위 타입에서 변화되는 부분이며, 변화되는 부분을 Item 클래스에 추가함으로써 리스코프 치환 원칙을 지킬 수 있게 된다.
 ```java
-public class Item{
+public class Item {
   //변화되는 기능을 상위 타입에 추가 
-  public boolean isDiscountAvailable(){
+  public boolean isDiscountAvailable() {
     return true;
   }
 }
 
-public class SpecialItem extends Item{
+public class SpecialItem extends Item {
   @Override
-  public boolean isDiscountAvailable(){
+  public boolean isDiscountAvailable() {
     return false;
   }
 }
 ```
 이렇게 변화되는 부분을 상위 타입에 추가함으로써, instanceof 연산자를 사용하던 코드를 Item 클래스만 사용하도록 구현할 수 있게 되었다.
 ```java
-public class Coupon{
-  public int calculateDiscountAmount(Item item){
-    if(!item.isDiscountAvailable())
+public class Coupon {
+  public int calculateDiscountAmount(Item item) {
+    if (!item.isDiscountAvailable())
       return 0;
       
     return item.getPrice() * discountRate;
   }
 }
 ```
+
+## 인터페이스 분리 원칙
+인터페이스 분리 원칙은 클라이언트 입장에서 인터페이스를 분리하라는 원칙이다.
+각 클라이언트가 사용하는 기능을 중심으로 인터페이스를 분리함으로써, 클라이언트로부터 발생하는 인터페이스 변경의 여파가 다른 클라이언트에 미치는 영향을 최소화할 수 있게 된다.
+
+## 의존성 역전 원칙
+고수준 모듈은 저수준 모듈의 구현에 의존해서는 안된다. 저수준 모듈이 고수준 모듈에서 정의한 추상 타입에 의존해야 한다.
+
 ## Null 객체 패턴
 장기 고객 할인이라든가 신규 고객 할인과 같이 고객의 상태에 따라 특별 할인을 해준다고 가정해 보자. 사용 요금 명세서를 생성하는 기능은 아래 코드와 같이 명세서 상세 내역에 특별 할인 기능을 추가할 수 있을 것이다.
 ```java
