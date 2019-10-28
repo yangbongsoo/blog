@@ -546,6 +546,80 @@ DataProcessor가 읽어 오는 데이터를 String이 아닌 다른 타입으로
 아닌 DataProcessor가 요구하는 타입으로 변경될 가능성이 높다. 이렇게 클래스의 사용자들이 서로 다른 메서드들을 사용한다면 그들 메서드는
 각각 다른 책임에 속할 가능성이 높고 따라서 책임 분리 후보가 될 수 있다.
 
+## 개방 폐쇄 원칙
+확장에는 열려 있고 변경에는 닫혀 있어야한다.
+
+![](/assets/ocp2.png)
+
+메모리에서 byte를 읽어 오는 기능을 추가해야 할 경우, ByteSource 인터페이스를 상속받은 MemoryByteSource 클래스를 구현함으로써 기능 추가가 가능하다.
+그리고 새로운 기능이 추가되었지만, 이 새로운 기능을 사용할 FlowController 클래스의 코드는 변경되지 않는다. 즉 기능을 확장 하면서도 기능을 사용하는 기존 코드는
+변경되지 않는 것이다.
+
+OCP를 구현하는 또 다른 방법은 상속을 이용하는 것이다.
+
+```java
+public class ResponseSender {
+    private Data data;
+    public ResponseSender(Data data) {
+        this.data = data;
+    }
+    
+    public Data getData() {
+        return data;
+    }
+
+    public void send() {
+        sendHeader();
+        sendBody();
+    }
+
+    protected void sendHeader() { 
+        // 헤더 데이터 전송
+    }
+    
+    protected void sendBody() {
+        // 텍스트로 데이터 전송
+    }
+
+}
+```
+
+하위 클래스에서 sendHeader, sendBody 메서드를 오버라이딩 함으로써 기능 확장이 가능하다.
+
+```java
+public ZippedResponseSender extends ResponseSender {
+    public ZippedResponseSender(Data data) {
+        super(data);
+    }
+    
+    @Override
+    protected void sendBody() {
+        // 데이터 압축 처리
+    }
+}
+```
+
+ZippedResponseSender 클래스는 기존 기능에 압축 기능을 추가해 주는데, 이 기능을 추가하기 위해 ResponseSender 클래스의 코드는 바뀌지 않았다.
+
+### 개방 폐쇄 원칙이 깨질 때의 주요 증상
+
+![](/assets/ocp3.png)
+
+예를 들어 슈팅 게임을 개발하는 경우 다음과 같은 구조가 있다고 하자.
+그런데 화면에 이들 캐릭터를 표시해주는 코드가 다음과 같다면 어떨까?
+
+```java
+public void drawCharacter(Character character) {    
+    if (character instanceof Missile) {
+        Missile missile = (Missile) character; // 타입 다운 캐스팅
+    } else {   
+        character.draw();
+    }   
+}
+```
+위 코드는 character 파라미터의 타입이 Missile인 경우 별도 처리를 하고 있다. 만약 위와 같이 특정 타입인 경우에 별도 처리를 하도록 drawCharacter 메서드를
+구현한다면 drawCharacter 메서드는 Character가 확장될때 함께 수정된다. 즉 변경에 닫혀 있지 않은것이다. instanceof 와 같은 타입 확인 연산자가 사용된다면
+해당 코드는 개방 폐쇄 원칙을 지키지 않을 가능성이 높다. 
 
 ## 리스코프 치환 원칙
 리스코프 치환 원칙은 OCP을 받쳐 주는 다형성에 관한 원칙을 제공한다. 리스코프 치환 원칙은 다음과 같다. **상위 타입의 객체를 하위 타입의 객체로 치환해도 상위 타입을 사용하는 프로그램은 정상적으로 동작해야 한다.**
