@@ -73,7 +73,8 @@
 * [애자일적용후기](agile.md)
 * [Living Documentation](what__why__how_living_documentation.md)
 * [specification by example](specification_by_example.md)
-* [Mathematical Statistics](MathematicalStatistics.md)
+
+<!-- * [Mathematical Statistics](MathematicalStatistics.md) -->
 
 <!-- * [Real MySQL(작업중)] -->
   <!-- * [5장 인덱스](real_mysql/인덱스.md) -->
