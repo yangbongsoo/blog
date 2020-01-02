@@ -1,8 +1,8 @@
 # Network Programming
 
-
-## 동기 / 비동기 , 블로킹 / 논블로킹
+### 동기 / 비동기 , 블로킹 / 논블로킹
 출처 : https://www.youtube.com/watch?v=HKlUvCv9hvA
+출처 : 자바8인액션 p340
 
 **동기(synchronous)** : syn 은 함께 라는 뜻. chrono 는 시간 이라는 뜻. 즉 함께 시간을 맞춘다.
 **비동기(asynchronous)** : 시간을 맞추지 않는다 는 뜻
@@ -45,6 +45,32 @@ String res = es.submit(() -> "Hello Async").get();
 그러므로 블로킹이다.
 
 
+```java
+	@Async
+	public void asyncCall() {
+        restTemplate.exchange();
+	}
+```
+위의 코드를 비동기 + 블로킹 이라고 말할 수 있을까? 
+1) restTemplate 으로 api 쏘는 target이, 내가 만든 API 서버이면 `직접 제어 할 수 있는 대상`이라고 말할 수 있을까?
+2) 내가 만든 API 서버인데 그 안에서 또 외부 API를 호출한다면?
 
 
+
+
+
+cf) 자바8인액션에서는 동기 API, 비동기 API를 다음과 같이 설명한다.
+
+전통적인 동기 API에서는 메서드를 호출한 다음에 메서드가 계산을 완료할 때까지 기다렸다가 메서드가 반환되면 호출자는 반환된 값으로 계속 다른 동작을 수행한다.
+호출자와 피호출자가 각각 다른 스레드에서 실행되는 상황이었더라도 호출자는 피호출자의 동작 완료를 기다렸을 것이다. 이처럼 **동기 API를 사용하는 상황을
+블록 호출(blocking call)이라고 한다.**
+
+반면 비동기 API에서는 메서드가 즉시 반환되며 끝내지 못한 나머지 작업을 호출자 스레드와 동기적으로 실행될 수 있도록 다른 스레드에 할당한다.
+이와 같은 **비동기 API를 사용하는 상황을 비블록 호출(non-blcoking call)이라고 한다.**
+
+
+### 병렬성(parallelism), 동시성(concurrency)
+출처 : 자바8인액션 P337
+
+![](/assets/network-programming1.png)
 

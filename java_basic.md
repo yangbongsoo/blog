@@ -100,7 +100,7 @@ void add(int a, int b, int[] result)
 
 ![](/assets/jvm.PNG)
 
-1.메소드 영역(method area)
+1.메서드 영역(method area)
 
     - 프로그램 실행 중 어떤 클래스가 사용되면, JVM은 해당 클래스의 클래스파일(*.class)을 읽어서 분석하여 클래스에 대한 정보(클래스 데이터)를 이곳에 저장한다. 이때 그 클래스의 클래스변수도 이 영역에 함께 생성된다.
 

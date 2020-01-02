@@ -1,4 +1,4 @@
-소스를 다운받자마자 메소드를 인식 못한다는 에러가 발생했다. 이유는 lombok 때문(spring boot에서 지원안해줌)) !! 
+소스를 다운받자마자 메서드를 인식 못한다는 에러가 발생했다. 이유는 lombok 때문(spring boot에서 지원안해줌)) !! 
 
 lombok이 뭔고하니 
 ```java
@@ -41,11 +41,11 @@ lombok을 사용하기 위해서는
 
 AccountController에서 
 
-클래스에 @Controller, @ResponseBody 두개를 붙이면 이 클래스안의 모든 public 메소드에 @ResponseBody가 다 적용이 되는것이다.
+클래스에 @Controller, @ResponseBody 두개를 붙이면 이 클래스안의 모든 public 메서드에 @ResponseBody가 다 적용이 되는것이다.
 (@RestContoller = @Controller + @ResponseBody)
 요즘은 서버사이드 개발이 API개발로 바뀌었기 때문에 @RestController 쓰는게 무방하다. 
 
-메인 메소드를 실행하면 내장 임베디드 톰캣이 실행되면서 뜬다. 
+메인 메서드를 실행하면 내장 임베디드 톰캣이 실행되면서 뜬다. 
 
 Account 클래스를 만드는데 
 
@@ -60,7 +60,7 @@ AccountRepository는 jpa사용해서 만듦 두번째 인자는 pk 데이터타�
 extends JpaRepository<Account, Long>
 ```
 
-AccountService 클래스는 @Service 등록해서 component scan으로 빈으로 등록되게끔만 하고 @Autowired로 AccountRepository를 가지고 있게끔만 한다. 그리고 @Transactional 붙여주면 이 클래스 안에 만드는 모든 public 메소드는 다 transactional 애노테이션이 적용된다. 
+AccountService 클래스는 @Service 등록해서 component scan으로 빈으로 등록되게끔만 하고 @Autowired로 AccountRepository를 가지고 있게끔만 한다. 그리고 @Transactional 붙여주면 이 클래스 안에 만드는 모든 public 메서드는 다 transactional 애노테이션이 적용된다. 
 
 AccountController에서 
 ``` java
@@ -74,7 +74,7 @@ spring-boot를 쓰게되면 여러개의 메세지 컨버터가 이미 등록이
 그런데 Acount 객체를 바로 받는게 아니라 AccountDto 객체를 따로 만들어서 (내가 받을것만 또 지정해주는) 그걸로 바인딩 되게 하면 Acoount객체의 모든 변수를 바인딩 받지 않을 때 헷갈려 지지 않는다. 받을것만 AccountDto를 만들어서 넣게끔하니까 
 
 AccountDto 클래스 가보면 @NotBlank @Size가 적용되어 있는데 그걸 붙였다고 바로 검증이 되진 않는다. 
-실제 검증을 하려면 createAccount메소드 파라미터로 @Valid 꼭 붙여 줘야함
+실제 검증을 하려면 createAccount메서드 파라미터로 @Valid 꼭 붙여 줘야함
 
 **질문** 
 - 테스트에 @Transactional에 붙으면 자동으로 롤백이 된다고 말씀하셨는데 제가 아는 롤백이란 개념은 

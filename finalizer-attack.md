@@ -4,7 +4,7 @@
 
 ## How to attack
 
-Finalizers는 객체 생성할 때 취약점이 존재한다. finalizer의 개념은 java 메소드가 os로 리턴해야하는 자원을 해제 할 수있게 하는 것인데 finalizer에서 자바 코드가 실행될 수 있으므로 아래와 같은 코드가 허용된다.
+Finalizers는 객체 생성할 때 취약점이 존재한다. finalizer의 개념은 java 메서드가 os로 리턴해야하는 자원을 해제 할 수있게 하는 것인데 finalizer에서 자바 코드가 실행될 수 있으므로 아래와 같은 코드가 허용된다.
 
 ```java
 public class Zombie {
@@ -36,7 +36,7 @@ public class Zombie2 {
 }
 ```
 
-객체가 value 조건을 충족시키지 못하는 경우에도 finalizer로 작성할 수 있다. finalize \(\) 메소드의 존재로 인해 value 인수에 대한 검사의 결과는 무효화된다.
+객체가 value 조건을 충족시키지 못하는 경우에도 finalizer로 작성할 수 있다. finalize \(\) 메서드의 존재로 인해 value 인수에 대한 검사의 결과는 무효화된다.
 
 물론 아무도 위와 같은 코드를 작성하지는 않는다. 그러나 클래스가 subclassed된 경우 취약점이 발생할 수 있다.
 

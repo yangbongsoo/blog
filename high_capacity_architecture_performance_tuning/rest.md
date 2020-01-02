@@ -4,7 +4,7 @@ REST는 근래에 들어 HTTP와 JSON을 함께 사용하여 OPEN API를 구현�
 
 REST원리를 따르는 시스템은 Restful이란 용어로 지칭된다.
 
-REST는 크게 리소스, 메소드, 메세지 3가지 요소로 구성된다. <br>
+REST는 크게 리소스, 메서드, 메세지 3가지 요소로 구성된다. <br>
 
 ex) 이름이 Terry인 사용자를 생성한다
 ```
@@ -16,14 +16,14 @@ HTTP POST , http://myweb/users/
 }
 ```
 리소스  = http://myweb/users 형태의 URI <br>
-HTTP POST메소드 = 생성한다<br>
+HTTP POST메서드 = 생성한다<br>
 메세지 = JSON 문서를 이용한 내용<br>
 
-### 1.1 HTTP 메소드
+### 1.1 HTTP 메서드
 
-HTTP에는 여러 가지 메소드가 있지만, REST에서는 CRUD(Create, Read, Update, Delete)에 해당하는 4가지의 메소드만 사용한다.
+HTTP에는 여러 가지 메서드가 있지만, REST에서는 CRUD(Create, Read, Update, Delete)에 해당하는 4가지의 메서드만 사용한다.
 
-| 메소드 | 의미 | Idempotent |
+| 메서드 | 의미 | Idempotent |
 | -- | -- | -- |
 | POST | Create | No |
 | GET | Select | Yes |
@@ -33,10 +33,17 @@ HTTP에는 여러 가지 메소드가 있지만, REST에서는 CRUD(Create, Read
 Idempotent(멱등성)은 **여러 번 수행해도 결과가 같은 경우**를 의미한다. <br>
 ex) a++은 Idempotent 하지 않다고 하지만(호출할 때마다 값이 증가하기 때문), a=4와 같은 명령은 반복적으로 수행해도 Idempotent 하다(값이 같기 때문).
 
-POST 연산은 리소스를 추가하는 연산이기 때문에 Idempotent 하지 않지만, 나머지 GET, PUT, DELETE는 반복 수행해도 Idempotent하다. <br>GET의 경우 게시물의 조회 수 카운트를 늘려준다던가 하는 기능을 같이 수행했을 때는 Idempotent 하지 않은 메소드로 정의해야 한다. 
+POST 연산은 리소스를 추가하는 연산이기 때문에 Idempotent 하지 않지만, 나머지 GET, PUT, DELETE는 반복 수행해도 Idempotent하다. 
 
-REST는 개별 API를 상태 없이 수행하게 된다. 그래서 해당 REST API를 다른 API와 함께 호출하다가 실패하였을 경우, 트랜잭션 복구를 위해서 다시 실행해야 하는 경우가 있는데, Idempotent 하지 않은 메소드의 경우는 기존 상태를 저장했다가 다시 원상복귀해줘야 하는 문제가 있지만, Idempotent 한 메소드의 경우에는 반복적으로 다시 메소드를 수행해주면 된다. <br>
-ex) 게시물 조회를 하는 API가 있을 때 조회할 때마다 조회 수를 올리는 연산을 수행한다면 이 메소드는 Idempotent 하다고 볼 수 없고 조회하다가 실패하였을 때는 올라간 조회 수를 다시 -1 해줘야 한다. 즉, Idempotent 하지 않은 메소드에 대해서는 트랜잭션에 대한 처리에 주의가 필요하다. 
+게시물의 조회 수 카운트를 늘려준다던가 하는 기능을 같이 수행했을 때는 Idempotent 하지 않은 메서드(POST)로 정의해야 한다.
+
+cf) 'Idempotent 하지 않으면 POST 다' 는 원칙이 완벽하게 들어맞지 않는 경우도 있다.
+HTTP API를 설계할 때, 메서드를 어떤걸로 할 지 결정은 상황에 따라 달라질 수 밖에 없다. 
+
+참고 : https://homoefficio.github.io/2019/12/25/GET%EC%9D%B4%EB%83%90-POST%EB%83%90-%EA%B7%B8%EA%B2%83%EC%9D%B4-%EB%AC%B8%EC%A0%9C%EB%A1%9C%EB%8B%A4/?fbclid=IwAR0n1zHQO4kPpGkfWyCfchd3cLcVxXC43p_JRly03NQ4gVHy1fqJ3zaOJYo
+
+REST는 개별 API를 상태 없이 수행하게 된다. 그래서 해당 REST API를 다른 API와 함께 호출하다가 실패하였을 경우, 트랜잭션 복구를 위해서 다시 실행해야 하는 경우가 있는데, Idempotent 하지 않은 메서드의 경우는 기존 상태를 저장했다가 다시 원상복귀해줘야 하는 문제가 있지만, Idempotent 한 메서드의 경우에는 반복적으로 다시 메서드를 수행해주면 된다. <br>
+ex) 게시물 조회를 하는 API가 있을 때 조회할 때마다 조회 수를 올리는 연산을 수행한다면 이 메서드는 Idempotent 하다고 볼 수 없고 조회하다가 실패하였을 때는 올라간 조회 수를 다시 -1 해줘야 한다. 즉, Idempotent 하지 않은 메서드에 대해서는 트랜잭션에 대한 처리에 주의가 필요하다. 
 
 ### 1.2 REST의 리소스
 
@@ -73,7 +80,7 @@ HTTP PUT, http://myweb/users/terry
     "address":"suwon"
 }
 ```
-http://myweb/users라는 사용자 리소스 중에 ID가 terry인 사용자 정보에 대해서 주소를 suwon으로 수정하는 방식(수정은 HTTP메소드 중에 PUT을 사용한다) 
+http://myweb/users라는 사용자 리소스 중에 ID가 terry인 사용자 정보에 대해서 주소를 suwon으로 수정하는 방식(수정은 HTTP메서드 중에 PUT을 사용한다) 
 
 삭제
 ```
@@ -99,7 +106,7 @@ http://myweb/users라는 사용자 리소스 중에 ID가 terry인 사용자 정
 ### 1.4 REST 안티 패턴 
 
 1. GET이나 POST를 이용한 터널링 <br>
-ex) http://myweb/users?method=update&id=terry <br> 메소드의 실제 동작은 리소스를 업데이트 하는 내용인데, HTTP PUT을 사용하지 않고 GET에 쿼리 파라미터로 넘겨서 명시했다. 
+ex) http://myweb/users?method=update&id=terry <br> 메서드의 실제 동작은 리소스를 업데이트 하는 내용인데, HTTP PUT을 사용하지 않고 GET에 쿼리 파라미터로 넘겨서 명시했다. 
 
     ex) Insert(Create)성 오퍼레이션이 아닌데도 불구하고 JSON body에 오퍼레이션 명을 넘기는 형태
 ```
@@ -131,7 +138,7 @@ URI에 리소스명은 동사보다는 명사를 사용한다. REST API는 리�
 ```
 POST /dogs
 ```
-위는 /dogs라는 리소스를 생성하라는 의미로, URL은 HTTP 메소드에 의해 CRUD(생성, 읽기, 수정, 삭제)의 대상이 되는 개체(명사)라야 한다. 
+위는 /dogs라는 리소스를 생성하라는 의미로, URL은 HTTP 메서드에 의해 CRUD(생성, 읽기, 수정, 삭제)의 대상이 되는 개체(명사)라야 한다. 
 
 잘못된 예들은 다음과 같다.
 ```
@@ -299,7 +306,7 @@ API 서비스는 물리적으로 서버가 분리되어 있더라도 단일 URL�
 
 ## 3. REST의 문제점 
 
-HTTP + JSON만 쓴다고 REST가 아니다. REST 아키텍처를 제대로 사용하는 것은 리소스를 제대로 정의하고 이에 대한 CRUD를 HTTP 메소드인 POST/PUT/GET/DELETE에 대해서 맞춰 사용하며, 에러 코드에 대해서 HTTP 응답 코드를 사용해야 한다.
+HTTP + JSON만 쓴다고 REST가 아니다. REST 아키텍처를 제대로 사용하는 것은 리소스를 제대로 정의하고 이에 대한 CRUD를 HTTP 메서드인 POST/PUT/GET/DELETE에 대해서 맞춰 사용하며, 에러 코드에 대해서 HTTP 응답 코드를 사용해야 한다.
 
 ### 3.1 표준 규약이 없다. 
 ### 3.2 기존의 전통적인 RDBMS에 적용하기가 쉽지 않다. 
