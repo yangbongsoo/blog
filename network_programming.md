@@ -24,6 +24,7 @@
 동기, 비동기와는 관점이 다르다. 동기, 비동기에서 항상 블로킹, 논블로킹을 얘기할 수 있는게 아니다. <br>
 같이 언급할 수 있는 경우는 `내가 직접 제어할 수 없는 대상을 어떻게 상대할 것이냐 이 부분을 설명할 때` 이다. <br>
 이때는 블로킹과 논블로킹 얘기를 같이 해도 된다. 그래서 대상이 제한적이다. <br>
+여기서 말하는 `내가` 의 나는 스레드 이다. 즉 스레드 관점에서 봐야한다. 
 
 ```java
 ExecutorService es = Executors.newCachedThreadPool();
@@ -43,14 +44,15 @@ String res = es.submit(() -> "Hello Async").get();
 
 ```java
 @Async
-public void asyncCall() {
+public String asyncCall() {
     restTemplate.exchange();
 }
 ```
 
-위의 코드를 비동기 + 블로킹 이라고 말할 수 있을까? 
-1) restTemplate 으로 api 쏘는 target이, 내가 만든 API 서버이면 `직접 제어 할 수 있는 대상`이라고 말할 수 있을까?
-2) 내가 만든 API 서버인데 그 안에서 또 외부 API를 호출한다면?
+위의 코드는 asyncCall() 메서드를 비동기로 실행 시키는 메인 스레드에서 
+asyncCall() 메서드를 호출하고, 결과를 기다렸나 안기다렸나에 따라 블로킹/논블로킹을 이야기 할 수 있다.
+그리고 asyncCall() 메서드 안에서 restTemplate 으로 쏘고 결과를 기다리는건 동기이다.
+
 
 
 cf) 자바8인액션에서는 동기 API, 비동기 API를 다음과 같이 설명한다.
