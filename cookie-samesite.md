@@ -1,6 +1,5 @@
-# Http Cookie SameSite
-## Cookie 기본 성질
-Http Cookie 는 stateless(상태 정보를 유지하지 않는) HTTP protocol 에서 **stateful 하게 사용할 수 있게** 해주는 수단이다.
+## 쿠키 기본 성질
+쿠키 는 stateless(상태 정보를 유지하지 않는) HTTP protocol 에서 **stateful 하게 사용할 수 있게** 해주는 수단이다.
 
 ![](/assets/samesite3.png)
 
@@ -35,7 +34,7 @@ CSRF 공격을 막기 위한 보안 목적이고 SameSite 속성이 생겼고, <
 
 **Set-Cookie: ybs=1234; Path=/; Domain= admin.ybs.com; HttpOnly; Secure; Max-Age=-1; SameSite=Strict** <br>
 
-즉, admin.ybs.com 도메인과 SameSite 가 아닌 경우, 브라우저에서 쿠키 creation 과 delivery 를 제한한다는 뜻이다.
+즉, admin.ybs.com 도메인과 SameSite 가 아닌 경우, 브라우저에서 쿠키 생성과 전달을 제한한다는 뜻이다.
 
 ![](/assets/samesite5.png)
 
@@ -92,7 +91,7 @@ Note that this is the case for navigation triggered by the user directly (e.g. b
 옵션은 총 3가지가 있다.
 
 **1. SameSite=Strict** <br>
-모든 cross-site subresource requests, cross-site nested navigations 상황에서 cookie creation 및 delivery 를 허용하지 않는다. <br>
+모든 cross-site subresource requests, cross-site nested navigations 상황에서 쿠키 생성 및 전달을 허용하지 않는다. <br>
 여기서 subresource requests 는 html 파일 안에 js, css, img 등의 파일을 가져올 때를 말한다. navigation 개념도 중요한데 이는 다른 옵션에서 자세하게 설명하겠다. <br>
 
 **2. SameSite=None** <br>
@@ -101,7 +100,7 @@ Note that this is the case for navigation triggered by the user directly (e.g. b
 ![](/assets/samesite7.png)
 
 **3. SameSite=Lax** <br>
-top-level navigations(which use a safe HTTP method) 일 경우에만 cross-site 상황에서 cookie creation 및 delivery 를 허용한다.
+top-level navigations(which use a safe HTTP method) 일 경우에만 cross-site 상황에서 쿠키 생성 및 전달을 허용한다.
 
 먼저 safe HTTP method 는 "GET", "HEAD", "OPTIONS", and "TRACE" 이다(RFC7231).  
 
@@ -173,5 +172,5 @@ https://tools.ietf.org/html/rfc2119 <br>
 
 ![](/assets/samesite10.png)
 
-만약 Host 로 쿠키를 creation 하면, admin.ybs.com 도메인 한정이다. <br>
-test.admin.ybs.com 같은 서브 도메인에는 쿠키가 같이 delivery 되지 않는다. <br>
+만약 Host 로 쿠키를 생성하면, admin.ybs.com 도메인 한정이다. <br>
+test.admin.ybs.com 같은 서브 도메인에는 쿠키가 전달 되지 않는다. <br>
