@@ -24,13 +24,12 @@ SameSite 가 나온 배경을 살펴보면 RFC 문서에 다음과 같은 문장
 **"SameSite" cookies offer a robust defense against CSRF attack when deployed in strict mode, and when supported by the client.**<br>
 "SameSite" 쿠키는 strict 모드 일 때, 그리고 클라이언트 지원을 받을 때 CSRF(Cross-site request forgery) 공격에 대해 강력한 방어 기능을 제공한다.<br>
 
-CSRF 공격을 막기 위한 보안 목적이고 SameSite 속성이 생겼고, 기존에 없던 새로운 제약이 생길거라는것을 알 수 있다.<br>
-먼저 SameSite 속성에 대해서 자세히 알아보고 왜 SameSite 속성이 CSRF 공격을 막을 수 있는지 설명하겠다.<br>
+CSRF 공격을 막기 위한 보안 목적으로 SameSite 속성이 생겼고, 기존에 없던 새로운 제약이 생길거라는것을 알 수 있다.<br>
+먼저 SameSite 속성에 대해서 자세히 살펴보고 왜 CSRF 공격을 막을 수 있는지 설명하겠다.<br>
 
 ### SameSite 기준 및 범위
 Set-Cookie: ybs=1234; Path=/; Domain= admin.ybs.com; **SameSite=Strict**<br>
-
-즉, admin.ybs.com 도메인과 SameSite 가 아닌 경우, 브라우저에서 쿠키 생성과 전달을 제한한다는 뜻이다.
+admin.ybs.com 도메인과 SameSite 가 아닌 경우, 브라우저에서 쿠키 생성과 전달을 제한한다는 뜻이다.
 
 ![](/assets/samesite5.png)
 
@@ -46,7 +45,7 @@ or **if the request has no client.** The request is otherwise "cross-site".<br>
 먼저 TLD(top level domain) 라는게 있다.<br>
 TLD + 0 레벨(public suffix)에 해당하는 도메인들은 https://publicsuffix.org/list/public_suffix_list.dat 에서 관리하는데 
 예를 들어 "com", "github.io", "co.kr” 이 있다.<br>
-주의) TLD + 0 레벨은 마지막 dot(.) 기준 오른쪽 문자열이 아니다다.<br>
+주의) TLD + 0 레벨은 마지막 dot(.) 기준 오른쪽 문자열이 아니다.
 
 registered domain 은 TLD + 1 레벨의 도메인이다(중요).<br> 
 ex) https://www.example.com 에서 public suffix 은 "com", registered domain 은 "example.com"<br>
@@ -70,6 +69,7 @@ nested-browsing context 라면 각 document 의 상위 browsing context 의 orig
 그리고 Set-Cookie Domain 의 registered domain 도 ybs.com(TLD+1) 이니 SameSite 이다.<br>
 
 RFC 문서에서 request 가 client 를 갖지 않을 때도 SameSite 라고 했는데, 이는 브라우저 주소 창에서 직접 타이핑 쳐서 html 이 바뀌는 경우를 말한다.<br>
+
 아래에 SameSite 인지 CrossSite 인지 판단하는 알고리즘을 보면, 브라우저 주소 창에서 직접 타이핑 쳐서 html 이 바뀔 때 request 의 client 가 null 이 되고 
 SameSite 로 리턴되는것을 알 수 있다. 
 
@@ -87,8 +87,8 @@ Note that this is the case for navigation triggered by the user directly (e.g. b
 옵션은 총 3가지가 있다.
 
 **1. SameSite=Strict**<br>
-모든 cross-site subresource requests, cross-site nested navigations 상황에서 쿠키 생성 및 전달을 허용하지 않는다.<br>
-여기서 subresource requests 는 html 파일 안에 js, css, img 등의 파일을 가져올 때를 말한다. navigation 개념도 중요한데 이는 다른 옵션에서 자세하게 설명하겠다.<br>
+모든 cross-site subresource requests, cross-site nested navigations 상황에서 쿠키 생성 및 전달을 허용하지 않는다.
+여기서 subresource requests 는 html 파일 안에서 js, css, img 등의 리소스 가져올 때를 말한다. navigation 개념도 중요한데 이는 다른 옵션에서 자세하게 설명하겠다.<br>
 
 **2. SameSite=None**<br>
 반드시 secure 속성이 함께 추가되어야 동작한다. 즉 HTTPS 만 가능하다.<br>
@@ -103,14 +103,14 @@ top-level navigations(which use a safe HTTP method) 일 경우에만 cross-site 
 navigation 은 서버에서 html 을 보내줘서 페이지 이동이 되는 케이스를 말한다.<br>
 웹페이지에서 링크를 눌렀을 때 보통 2가지 flow 가 생긴다.<br>
 첫째, 서버에서 html 을 보내줄 때<br> 
-둘째, 서버에서 다운로드 파일을 보내줄 때<br>
+둘째, 서버에서 다운로드 파일을 보내줄 때
 
 이 중 첫번째에 해당하는게 navigation 이다.
 
 top-level navigation 은 main frame 이 이동하는 케이스를 말한다.
-iframe 이 있는 페이지 경우, iframe 내부 이동은 top-level navigation 이 아니기 때문에 구분 짓기 위한 개념으로 나왔다.
+iframe 이 있는 페이지 경우, iframe 내부 이동은 top-level navigation 이 아니기 때문에 구분 짓기 위한 개념이다.
 
-예를 들어 설명해보면 아래와 같다.<br>
+예를 들어 메일을 읽고 있는데 내용에 다른 링크 주소가 있다고 하자.
 
 ![](/assets/samesite8.png)
 
@@ -118,10 +118,11 @@ iframe 이 있는 페이지 경우, iframe 내부 이동은 top-level navigation
 그럴 경우 오동작하는 사이트들이 많아서 top-level navigations(safe HTTP method) 에 한해 third-party 쿠키를 허용해주는 Lax 모드를 지원하는 것이다.<br>
 
 **Set-Cookie 에 SameSite 속성이 없는 경우**<br>
-Incrementally Better Cookies draft-west-cookie-incrementalism-00(2019.05.07 ~ 2019.11.08) 에서는 SameSite=Lax 로 한다고 되어 있다.<br>
-크로니움 FAQ 에서는 SameSite=Lax 로 한다고 되어 있다.<br>
+Incrementally Better Cookies draft-west-cookie-incrementalism-00(2019.05.07 ~ 2019.11.08) 에서는 SameSite=Lax 로 한다고 되어 있다.
 
-RFC 6265 draft bis 04(2020.01.20 ~ 2020.07.23) 문서는 SameSite=None 으로 되어 있다.<br>
+크로니움 FAQ 에서는 SameSite=Lax 로 한다고 되어 있다.
+
+RFC 6265 draft bis 04(2020.01.20 ~ 2020.07.23) 문서는 SameSite=None 으로 되어 있다.
 
 브라우저별 업데이트 일정<br>
 chrome : 80 update(2/4)부터 적용한다고 했는데 2/17 단계적으로 변경 예정<br>
@@ -164,7 +165,7 @@ Should(정말 타당한 이유가 있을 때 안지켜도 되지만 신중하고
 May(필수가 아님, 구현 안해도 되지만 구현한거랑 안한거랑 상호운용이 가능해야함)<br>
 https://tools.ietf.org/html/rfc2119<br>
 
-**2. 일부 user-agent 에서는 Domain 속성이 없어도 현재 Host 로 쿠키를 저장(RFC6265)**<br>
+**2. 일부 user-agent 에서는 Domain 속성이 없을때 현재 Host 로 쿠키를 저장(RFC6265)**<br>
 
 ![](/assets/samesite10.png)
 
