@@ -120,7 +120,7 @@ iframe 이 있는 페이지 경우, iframe 내부 이동은 top-level navigation
 **Set-Cookie 에 SameSite 속성이 없는 경우**<br>
 Incrementally Better Cookies draft-west-cookie-incrementalism-00(2019.05.07 ~ 2019.11.08) 에서는 SameSite=Lax 로 한다고 되어 있다.
 
-크로니움 FAQ 에서는 SameSite=Lax 로 한다고 되어 있다.
+chromium FAQ 에서는 SameSite=Lax 로 한다고 되어 있다.
 
 RFC 6265 draft bis 04(2020.01.20 ~ 2020.07.23) 문서는 SameSite=None 으로 되어 있다.
 
@@ -128,7 +128,7 @@ RFC 6265 draft bis 04(2020.01.20 ~ 2020.07.23) 문서는 SameSite=None 으로 �
 chrome : 80 update(2/4)부터 적용한다고 했는데 2/17 단계적으로 변경 예정<br>
 safari : 업데이트 할거란 글은 있지만 일정 공유 안함<br>
 ie11 : 업데이트 한다는 얘기는 있지만 관련 히스토리는 없음<br>
-edge : 1월 15일날 크로니움 기반으로 변경. SameSite 작업은 chrome 과 동시 또는 나중에 한다고 함<br>
+edge : 1월 15일날 chromium 기반으로 변경. SameSite 작업은 chrome 과 동시 또는 나중에 한다고 함<br>
 firefox : 69버전에서 구현완료(기본값 변경은 하지는 않아서 당장은 문제 안됨)<br>
 
 **Set-Cookie 에  SameSite=Strict; SameSite=Lax; SameSite=None 여러개 붙은 경우**<br>
