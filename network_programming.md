@@ -1,6 +1,6 @@
 # Network Programming
 
-### 동기 / 비동기 , 블로킹 / 논블로킹
+## 동기 / 비동기 , 블로킹 / 논블로킹
 출처 : https://www.youtube.com/watch?v=HKlUvCv9hvA <br>
 출처 : 자바8인액션 p340 <br>
 
@@ -65,8 +65,65 @@ cf) 자바8인액션에서는 동기 API, 비동기 API를 다음과 같이 설�
 이와 같은 **비동기 API를 사용하는 상황을 비블록 호출(non-blcoking call)이라고 한다.**
 
 
-### 병렬성(parallelism), 동시성(concurrency)
+## 병렬성(parallelism), 동시성(concurrency)
 출처 : 자바8인액션 P337
 
 ![](/assets/network-programming1.png)
 
+## SSL 관련 예외
+
+브라우저에서는 신뢰할 수 있는 인증서로 나오지만 자바에서는 `unable to find valid certification path to requested target`
+으로 예외가 발생하는 경우가 있다. 자바는 신뢰할 수 있는 인증서 목록을 자체적으로 갖고 있는데 해당 파일은 아래의 스크립트 명령어로 확인 할 수 있다.
+비밀번호를 물어보면 디폴트 패스워드 changeit 입력하면 된다.
+```
+$ cd $JAVA_HOME/bin` 
+$ ./keytool -list -keystore ../jre/lib/security/cacerts`
+```
+
+
+또 https://10.1.2.3 와 같은 IP로 입력했을 때 안되는 이슈가 있는데 
+
+SSL 관련 검증 로직을 안타게 하기 위해서 아래와 같은 설정이 있는데
+
+일반적으로 프로덕션 코드에서는 이걸 쓰면 안되지만 프록시 서버라면 잘못된거더라도 그대로 통과시켜야 할 때가 있는데
+
+그런점을 고려해봤을 때 아래와 같이 끄는 방법도 있다. 
+
+참고) https://gs.saro.me/dev?tn=331
+
+apache httpclient
+
+```java
+SSLContextBuilder sslContextBuilder = new SSLContextBuilder();
+sslContextBuilder.loadTrustMaterial(null, (TrustStrategy)(x509Certificates, s) -> true);
+SSLConnectionSocketFactory sf = new SSLConnectionSocketFactory(sslContextBuilder.build(), new NoopHostnameVerifier());
+CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sf).build();
+
+HttpGet httpGet = new HttpGet("https://test.com");
+CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
+```
+
+url connection
+
+```java
+URL url = new URL(lgr);
+HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+connection.setRequestMethod("GET");
+
+SSLContext sc = SSLContext.getInstance("SSL");
+sc.init(null, createTrustManagers(), new java.security.SecureRandom());
+connection.setSSLSocketFactory(sc.getSocketFactory());
+
+
+public static TrustManager[] createTrustManagers() {
+	return new TrustManager[] {new X509TrustManager() {
+		public void checkClientTrusted(java.security.cert.X509Certificate[] x509Certificates, String s) {}
+
+		public void checkServerTrusted(java.security.cert.X509Certificate[] x509Certificates, String s) {}
+
+		public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+			return new java.security.cert.X509Certificate[] {};
+		}
+	}};
+}
+```
