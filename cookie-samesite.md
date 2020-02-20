@@ -137,7 +137,8 @@ firefox : 69버전에서 구현완료(기본값 변경은 하지는 않아서 �
 ### 서블릿/톰캣/스프링 SameSite 속성 지원 
 
 **1. Servlet**<br>
-java servlet api 4.0 Cookie 클래스에도 SameSite 설정을 위한 메서드는 없다. 이후 SameSite 속성 추가 PR이 merge 되었다.
+java servlet api 4.0 Cookie 클래스에도 SameSite 설정을 위한 메서드는 없다. 
+SameSite 속성 추가 PR 진행중 https://github.com/eclipse-ee4j/servlet-api/pull/271 (2020-02-20 기준 )
 
 **2. Spring Framework**<br>
 spring-web module 5.1 버전 Spring WebFlux 에서 ResponseCookie 클래스에 SameSite 속성이 추가되었다.
