@@ -27,6 +27,8 @@ SameSite 가 나온 배경을 살펴보면 RFC 문서에 다음과 같은 문장
 CSRF 공격을 막기 위한 보안 목적으로 SameSite 속성이 생겼고, 기존에 없던 새로운 제약이 생길거라는것을 알 수 있다.<br>
 먼저 SameSite 속성에 대해서 자세히 살펴보고 왜 CSRF 공격을 막을 수 있는지 설명하겠다.<br>
 
+출처 : https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-04
+
 ### SameSite 기준 및 범위
 Set-Cookie: ybs=1234; Path=/; Domain= admin.ybs.com; **SameSite=Strict**<br>
 admin.ybs.com 도메인과 SameSite 가 아닌 경우, 브라우저에서 쿠키 생성과 전달을 제한한다는 뜻이다.
@@ -143,10 +145,15 @@ SameSite 속성 추가 PR 진행중 https://github.com/eclipse-ee4j/servlet-api/
 **2. Spring Framework**<br>
 spring-web module 5.1 버전 Spring WebFlux 에서 ResponseCookie 클래스에 SameSite 속성이 추가되었다.
 
+출처 : https://github.com/spring-projects/spring-framework/wiki/What's-New-in-Spring-Framework-5.x#spring-webflux-1 <br>
+출처 : https://github.com/spring-projects/spring-framework/issues/23693 <br>
+
 **3. Tomcat**<br>
 2019-06-07 release 된 Tomcat 9.0.21 버전과 Tomcat 8.5.42 버전에서 context.xml 에 sameSiteCookies 속성을 추가하여 
 일괄적으로 SameSite 속성을 set-Cookie 헤더에 추가할 수 있다(Tomcat 7.x 버전은 지원하지 않음).
 
+출처 : https://github.com/apache/tomcat/pull/162 <br>
+출처 : https://github.com/apache/tomcat/pull/219 <br>
 ```xml
 <Context>
 	<CookieProcessor sameSiteCookies="strict" />
@@ -164,7 +171,7 @@ CSRF 공격은 ybs.com 에 대한 인증을 받은 상태라는 전제가 필요
 Must, Shall, Required(반드시 지켜야 하는 스펙)<br>
 Should(정말 타당한 이유가 있을 때 안지켜도 되지만 신중하고 정확히 이해되야 함)<br> 
 May(필수가 아님, 구현 안해도 되지만 구현한거랑 안한거랑 상호운용이 가능해야함)<br>
-https://tools.ietf.org/html/rfc2119<br>
+출처 : https://tools.ietf.org/html/rfc2119
 
 **2. 일부 user-agent 에서는 Domain 속성이 없을때 현재 Host 로 쿠키를 저장(RFC6265)**<br>
 
