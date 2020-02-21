@@ -125,10 +125,10 @@ chromium FAQ 에서는 SameSite=Lax 로 한다고 되어 있다.
 RFC 6265 draft bis 04(2020.01.20 ~ 2020.07.23) 문서는 SameSite=None 으로 되어 있다.
 
 브라우저별 업데이트 일정<br>
-chrome : 80 update(2/4)부터 적용한다고 했는데 2/17 단계적으로 변경 예정<br>
+chrome : 80 update(2020-02-04)부터 적용한다고 했는데 2020-02-17 부터 단계적으로 변경<br>
 safari : 업데이트 할거란 글은 있지만 일정 공유 안함<br>
 ie11 : 업데이트 한다는 얘기는 있지만 관련 히스토리는 없음<br>
-edge : 1월 15일날 chromium 기반으로 변경. SameSite 작업은 chrome 과 동시 또는 나중에 한다고 함<br>
+edge : 2020-01-15 chromium 기반으로 변경. SameSite 작업은 chrome 과 동시 또는 나중에 한다고 함<br>
 firefox : 69버전에서 구현완료(기본값 변경은 하지는 않아서 당장은 문제 안됨)<br>
 
 **Set-Cookie 에  SameSite=Strict; SameSite=Lax; SameSite=None 여러개 붙은 경우**<br>
@@ -138,7 +138,7 @@ firefox : 69버전에서 구현완료(기본값 변경은 하지는 않아서 �
 
 **1. Servlet**<br>
 java servlet api 4.0 Cookie 클래스에도 SameSite 설정을 위한 메서드는 없다. 
-SameSite 속성 추가 PR 진행중 https://github.com/eclipse-ee4j/servlet-api/pull/271 (2020-02-20 기준 )
+SameSite 속성 추가 PR 진행중 https://github.com/eclipse-ee4j/servlet-api/pull/271 (2020-02-20 기준)
 
 **2. Spring Framework**<br>
 spring-web module 5.1 버전 Spring WebFlux 에서 ResponseCookie 클래스에 SameSite 속성이 추가되었다.
