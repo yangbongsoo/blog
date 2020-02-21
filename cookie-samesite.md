@@ -15,9 +15,9 @@ Set-Cookie: ybs=1234; Path=/; Domain= admin.ybs.com; **SameSite=Strict**<br>
 위와 같이 쿠키에 SameSite 속성이 새롭게 추가 되었다.<br>
 
 사실 새롭다고 하기는 뭐한게 2016년에 draft-west-first-party-cookies-05 문서에서 처음으로 등장했다.<br>
-이후 RFC 6265 draft bis 02(2017.08.07 ~ 2018.02.08) 에서 추가되었고<br>
-RFC 6265 draft bis 03(2019.04.27 ~ 2019.10.29) 를 거쳐<br>
-RFC 6265 draft bis 04(2020.01.20 ~ 2020.07.23) 계속 상세화 되고 있다.<br>
+이후 RFC 6265 draft bis 02(2017-08-07 ~ 2018-02-08) 에서 추가되었고<br>
+RFC 6265 draft bis 03(2019-04-27 ~ 2019-10-29) 를 거쳐<br>
+RFC 6265 draft bis 04(2020-01-20 ~ 2020-07-23) 계속 상세화 되고 있다.<br>
 
 SameSite 가 나온 배경을 살펴보면 RFC 문서에 다음과 같은 문장이 있다. 
 
@@ -118,11 +118,11 @@ iframe 이 있는 페이지 경우, iframe 내부 이동은 top-level navigation
 그럴 경우 오동작하는 사이트들이 많아서 top-level navigations(safe HTTP method) 에 한해 third-party 쿠키를 허용해주는 Lax 모드를 지원하는 것이다.<br>
 
 **Set-Cookie 에 SameSite 속성이 없는 경우**<br>
-Incrementally Better Cookies draft-west-cookie-incrementalism-00(2019.05.07 ~ 2019.11.08) 에서는 SameSite=Lax 로 한다고 되어 있다.
+Incrementally Better Cookies draft-west-cookie-incrementalism-00(2019-05-07 ~ 2019-11-08) 에서는 SameSite=Lax 로 한다고 되어 있다.
 
 chromium FAQ 에서는 SameSite=Lax 로 한다고 되어 있다.
 
-RFC 6265 draft bis 04(2020.01.20 ~ 2020.07.23) 문서는 SameSite=None 으로 되어 있다.
+RFC 6265 draft bis 04(2020-01-20 ~ 2020-07-23) 문서는 SameSite=None 으로 되어 있다.
 
 브라우저별 업데이트 일정<br>
 chrome : 80 update(2020-02-04)부터 적용한다고 했는데 2020-02-17 부터 단계적으로 변경<br>
