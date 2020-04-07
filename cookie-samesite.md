@@ -17,7 +17,9 @@ Set-Cookie: ybs=1234; Path=/; Domain= admin.ybs.com; **SameSite=Strict**<br>
 사실 새롭다고 하기는 뭐한게 2016년에 draft-west-first-party-cookies-05 문서에서 처음으로 등장했다.<br>
 이후 RFC 6265 draft bis 02(2017-08-07 ~ 2018-02-08) 에서 추가되었고<br>
 RFC 6265 draft bis 03(2019-04-27 ~ 2019-10-29) 를 거쳐<br>
-RFC 6265 draft bis 04(2020-01-20 ~ 2020-07-23) 계속 상세화 되고 있다.<br>
+RFC 6265 draft bis 04(2020-01-20 ~ 2020-07-23) 
+RFC 6265 draft bis 05(2020-02-05 ~ 2020-08-08)
+계속 상세화 되고 있다.<br>
 
 SameSite 가 나온 배경을 살펴보면 RFC 문서에 다음과 같은 문장이 있다. 
 
