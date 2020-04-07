@@ -38,10 +38,10 @@ admin.ybs.com 도메인과 SameSite 가 아닌 경우, 브라우저에서 쿠키
 아래의 2번, 3번은 딱봐도 SameSite 가 아닌거 같다. 그런데 4번은 직관적으로 바로 판단이 안선다.<br> 
 결국 SameSite 판단 기준을 정확히 아는게 중요하다.<br>
 
-A request is "same-site" if its **target's URI's origin's registered domain** is an exact match for **the request's client's "site for cookies"**,
+A request is "same-site" if its **target's URI's origin's registrable domain** is an exact match for **the request's client's "site for cookies"**,
 or **if the request has no client.** The request is otherwise "cross-site".<br>
 
-위 문장은 SameSite 판단 기준에 대한 RFC 문서 내용이다. target's URI's origin's registered domain 과 request's client's "site for cookies" 가
+위 문장은 SameSite 판단 기준에 대한 RFC 문서 내용이다. target's URI's origin's registrable domain 과 request's client's "site for cookies" 가
 정확히 일치하거나 request 가 client 를 갖지 않을 때 SameSite 라고 한다. 이것만 봐서는 이해하기 힘들다. 각 워딩 개념을 정리하고 다시 보도록 하자.
 
 먼저 TLD(top level domain) 라는게 있다.<br>
@@ -49,26 +49,26 @@ TLD + 0 레벨(public suffix)에 해당하는 도메인들은 https://publicsuff
 예를 들어 "com", "github.io", "co.kr” 이 있다.<br>
 주의) TLD + 0 레벨은 마지막 dot(.) 기준 오른쪽 문자열이 아니다.
 
-registered domain 은 TLD + 1 레벨의 도메인이다(중요).<br> 
-ex) https://www.example.com 에서 public suffix 은 "com", registered domain 은 "example.com"<br>
+registrable domain 은 TLD + 1 레벨의 도메인이다(중요).<br> 
+ex) https://www.example.com 에서 public suffix 은 "com", registrable domain 은 "example.com"<br>
 
 ![](/assets/samesite1.png)
 
-그리고 브라우저 주소창 URI's origin 의 registered domain 을 top-level site 라고 한다.<br>
+그리고 브라우저 주소창 URI's origin 의 registrable domain 을 top-level site 라고 한다.<br>
 위와 같이 top-level browsing context 라면 "site for cookies" 는 top-level site 이다.<br>
 
 ![](/assets/samesite2.png)
 
 nested-browsing context 라면 각 document 의 상위 browsing context 의 origin 을 확인해야 한다.<br>
-하위 document 와 상위 document 의 origin 이 같은 registered domain 일 때만 "site for cookies" 는 top-level site 이다.<br>
-즉, request's client's "site for cookies＂는 브라우저 주소창 URI 의 registered domain 이다.<br> 
+하위 document 와 상위 document 의 origin 이 같은 registrable domain 일 때만 "site for cookies" 는 top-level site 이다.<br>
+즉, request's client's "site for cookies＂는 브라우저 주소창 URI 의 registrable domain 이다.<br> 
 
-**결론적으로 Set-Cookie Domain 의 registered domain 과 브라우저 주소창 URI 의 registered domain 이 정확하게 일치할 경우 SameSite 이다.**
+**결론적으로 Set-Cookie Domain 의 registrable domain 과 브라우저 주소창 URI 의 registrable domain 이 정확하게 일치할 경우 SameSite 이다.**
 
 ![](/assets/samesite6.png)
 
-위 그림을 보면 브라우저 주소창 URI 의 registered domain 은 ybs.com(TLD+1) 이다.<br>
-그리고 Set-Cookie Domain 의 registered domain 도 ybs.com(TLD+1) 이니 SameSite 이다.<br>
+위 그림을 보면 브라우저 주소창 URI 의 registrable domain 은 ybs.com(TLD+1) 이다.<br>
+그리고 Set-Cookie Domain 의 registrable domain 도 ybs.com(TLD+1) 이니 SameSite 이다.<br>
 
 RFC 문서에서 request 가 client 를 갖지 않을 때도 SameSite 라고 했는데, 이는 브라우저 주소 창에서 직접 타이핑 쳐서 html 이 바뀌는 경우를 말한다.<br>
 
@@ -80,7 +80,7 @@ For a given request ("request"), the following algorithm returns "same-site" or 
 1. If "request"'s client is "null", return "same-site".
 Note that this is the case for navigation triggered by the user directly (e.g. by typing directly into a user agent's address bar).
 2. Let "site" be "request"'s client's "site for cookies" (as defined in the following sections).
-3. Let "target" be the registered domain of "request"'s current url.
+3. Let "target" be the registrable domain of "request"'s current url.
 4. If "site" is an exact match for "target", return "same-site".
 5. Return "cross-site".
 ```
