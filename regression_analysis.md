@@ -133,6 +133,56 @@ $${\partial S \over \partial\beta_1} = -2\Sigma x_i(y_i -\beta_0 -\beta_1x_i)$$ 
 이 편미분 값을 0으로 만드는 $$\beta_0, \beta_1$$ 을 각각 $$b_0, b_1$$ 으로 대치하여 정리하면
 다음과 같고 이 식을 정규방정식(normal equations) 이라고 부른다.
 
+$$b_0n + b_1\Sigma x_i = \Sigma y_i$$ <br>
+$$b_0\Sigma x_i + b_1\Sigma x_i^2 = \Sigma x_iy_i$$ <br>
+
+하지만 편미분해서 얻어진 결과를 0으로 놓고 해를 구했다고 해서 그 해가 S 를 최소화한다는 보장은 없다.
+미분해서 0이 되는 것만으로는 2차원 그래프의 최대 최소를 알 수 없고 부가적인 정보가 필요하다.
+
+cf) 수학적으로 이에 대한 추가 설명이 있는데 일단 생략(이차 편미분 행렬이 PD 행렬이면 볼록함수고 역도 성립)
+
+다시 돌아와서 <br>
+$$b_0n + b_1\Sigma x_i = \Sigma y_i$$ <br>
+$$b_0\Sigma x_i + b_1\Sigma x_i^2 = \Sigma x_iy_i$$ <br>
+
+위의 정규방정식을 $$b_0, b_1$$ 에 대해서 풀면 다음과 같다.
+
+$$b_1 = {\Sigma x_iy_i - {(\Sigma x_i)(\Sigma y_i) \over n} \over \Sigma x_i^2 - { (\Sigma x_i)^2  \over n} } = {
+\Sigma (x_i - \bar x)(y_i - \bar y) \over \Sigma (x_i - \bar x)^2}$$ <br>
+
+$$b_0 = {\Sigma y_i \over n} - b_1 {\Sigma x_i \over n} = \bar y - b_1 \bar x$$ <br>
+
+수식은 복잡해 보이지만 파이썬으로 구하면 금방이다.
+
+```python
+# 최소제곱법 계산(method of least squares)
+# x평균, y평균 구하기
+xAvg = np.mean(xData)
+yAvg = np.mean(yData)
+
+# b1 구하기
+numerator = sum((xData - xAvg) * (yData - yAvg)) # 분자
+denominator = sum((xData - xAvg) ** 2) # 분모
+
+b1 = numerator/denominator
+print(b1)
+
+# b0 구하기
+n = len(xData)
+b0 = (sum(yData) / n) - (b1 * (sum(xData) / n))
+print(b0)
+```
+
+그래서 최소제곱법으로 적합된 회귀직선은 다음과 같다. <br>
+$$\hat y = -2.2695652173913032 + 2.608695652173913x $$ <br>
+
+
+
+
+
+
+
+
 
 참고1 : 회귀분석 박성현 저 <br>
 참고2 : https://brunch.co.kr/@gimmesilver/66 <br>
