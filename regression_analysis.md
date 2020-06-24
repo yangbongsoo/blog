@@ -74,46 +74,64 @@ $$y = \mu_{y*x} + \epsilon$$
 $$\mu_{y*x}$$
 
 
-### 회귀선의 추정(최소 제곱법)
+### 회귀선의 추정
+
+표본 자료(sample data)로부터 선형식을 추정하여 얻은 직선을 다음과 같이 표기한다. <br>
+$$\hat y = b_0 + b_1x$$ <br>
+
+이와 같은 직선을 회귀직선 또는 회귀선이라고 부른다. 여기에서 $$b_0, b_1, \hat y$$ 는 각각
+$$\beta_0, \beta_1, \mu_{y*x}$$ 의 추정값(estimate) 이다.
+
+
+**최소 제곱법**<br>
 
 $$y_i = \beta_0 + \beta_1 + \epsilon_i$$ 식에서 오차제곱들의 합은 다음과 같다.
 
 $$S = \sum_{i=1}^n \epsilon_i^2 = \sum_{i=1}^n(y_i-\beta_0-\beta_1x_i)^2$$
 
-이 S를 최소로 하는 $$\beta_0, \beta_1$$ 의 값을 구하는 방법이 최소제곱법이다.
+이 $$S$$를 최소로 하는 $$\beta_0, \beta_1$$ 값을 구하는 방법이 최소제곱법이다.
 
 $$\beta_0, \beta_1$$ 각각을 편미분해야 한다.
 
-$$\beta_0$$ 편미분($$\beta_0$$ 로 미분하고 나머지는 상수로 취급한다)
-
-$$\partial S \over \partial\beta_0 $$
+먼저 $$\beta_0$$ 편미분 해보자. <br>
+$$\beta_0$$ 로 미분하고 나머지는 상수로 취급한다. $$\partial S \over \partial\beta_0 $$ <br>
 
 $$\sum_{i=1}^n(-\beta_0+ A_i)^2 $$ : $$\beta_0$$ 만 미분하고 나머지는 상수로 취급하니까
 나머지를 $$A_i$$ 로 치환했다($$A_i = y_i - \beta_1x_i$$).
 
 시그마는 마지막에 추가해주면 되니까 $$(-\beta_0+ A_i)(-\beta_0+ A_i)$$ 를 미분해야 한다.
 
-cf) $$f(x)*g(x)$$ 미분은 $$f^\prime(x)*g(x) + f(x)*g^\prime(x)$$ 이다.
+cf) $$f(x)g(x)$$ 미분은 $$f^\prime(x)g(x) + f(x)g^\prime(x)$$ 이다.
 
 따라서 $$(-\beta_0+ A_i)(-\beta_0+ A_i)$$ 를 미분하면 <br>
 $$(-1)(-\beta_0+ A_i) + (-\beta_0+ A_i)(-1)$$ 된다. <br>
 그리고 $$(\beta_0 - A_i) + (\beta_0 - A_i) = 2(\beta_0 - A_i)$$ 이다. <br>
-그리고 시그마만 취해주면 되니까 최종적으로는 <br>
-$$\sum_{i=1}^n2(\beta_0 - A_i) = \sum_{i=1}^n2(\beta_0 - y_i + \beta_1x_i) = -2\sum_{i=1}^n(y_i -\beta_0  - \beta_1x_i)$$ 이 된다.
+최종적으로는 $$\sum_{i=1}^n2(\beta_0 - A_i) = \sum_{i=1}^n2(\beta_0 - y_i + \beta_1x_i) = -2\sum_{i=1}^n(y_i -\beta_0  - \beta_1x_i)$$ 이 된다.
 
+cf) $$f_1 + f_2 + f_3 + ... + f_n $$ 을 미분하면 $$f^\prime_1 + f^\prime_2 + f^\prime_3 + ... + f^\prime_n $$ 이다.
+그러므로 미분하고 시그마만 취해주면 된다.
 
+다음으로 $$\beta_1$$ 편미분 해보자. <br>
+$$\beta_1$$ 로 미분하고 나머지는 상수로 취급한다. $$\partial S \over \partial\beta_1 $$ <br>
 
+$$\sum_{i=1}^n(A_i -\beta_1x_i)^2 $$ : $$\beta_1$$ 만 미분하고 나머지는 상수로 취급하니까
+나머지를 $$A_i$$ 로 치환했다($$A_i = y_i - \beta_0$$).
 
+$$(A_i -\beta_1x_i)^2$$ 을 $$\beta_1$$ 으로 미분하기 위해선 합성함수 미분이 필요하다. <br>
+cf) $$f(g(x))$$ 를 미분하면 $$f^\prime(g(x)) * g^\prime(x)$$ 된다. <br>
+$$g(\beta_1) = -x_i\beta_1 + A_i$$ <br>
+$$f(x) = x^2$$<br>
+$$f(g(\beta_1)) = (-\beta_1x_i + A_i)^2$$ <br>
+따라서 미분을 하게 되면 $$-2\Sigma x_i(-x_i\beta_1+A_i)$$ 이 되고 (시그마 첨자 생략) <br>
+최종적으로 $$-2\Sigma x_i(-x_i\beta_1+ y_i-\beta_0)$$ 가 된다. <br>
 
+정리하면 다음과 같은 결과를 얻게 된다.
 
+$${\partial S \over \partial\beta_0} = -2\Sigma (y_i -\beta_0  - \beta_1x_i)$$ <br>
+$${\partial S \over \partial\beta_1} = -2\Sigma x_i(y_i -\beta_0 -\beta_1x_i)$$ <br>
 
-
-
-
-
-
-
-
+이 편미분 값을 0으로 만드는 $$\beta_0, \beta_1$$ 을 각각 $$b_0, b_1$$ 으로 대치하여 정리하면
+다음과 같고 이 식을 정규방정식(normal equations) 이라고 부른다.
 
 
 참고1 : 회귀분석 박성현 저 <br>
