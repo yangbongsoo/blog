@@ -176,8 +176,25 @@ print(b0)
 그래서 최소제곱법으로 적합된 회귀직선은 다음과 같다. <br>
 $$\hat y = -2.2695652173913032 + 2.608695652173913x $$ <br>
 
+구한 회귀선을 위의 산점도와 합쳐서 함께 보면 다음과 같다.
 
+```python
+xData = [4,8,9,8,8,12,6,10,6,9] # 광고료
+yData = [9,20,22,15,17,30,18,25,10,20] # 총판매액
+plt.scatter(xData, yData)
+plt.xlabel('ad cost')
+plt.ylabel('total')
+plt.title('result')
+plt.grid(True)
 
+x = np.arange(4, 13, 1)
+y = -2.2695652173913032 + 2.608695652173913 * x
+
+plt.plot(x, y)
+plt.show(
+```
+
+![](/assets/regression-equation1.png)
 
 
 
