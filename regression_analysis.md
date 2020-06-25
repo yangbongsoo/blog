@@ -196,7 +196,9 @@ plt.show(
 
 ![](/assets/regression-equation1.png)
 
+### 회귀선의 정도
 
+회귀선만 갖고는 이 점들을 어느 정도 잘 대변하여 주고 있는가를 알 수 없다.
 
 
 
