@@ -75,6 +75,7 @@
 * [Living Documentation](what__why__how_living_documentation.md)
 * [specification by example](specification_by_example.md)
 * [회귀분석정리](regression_analysis.md)
+* [가설검정](hypothesis-testing.md)
 
 <!-- * [Real MySQL(작업중)] -->
   <!-- * [5장 인덱스](real_mysql/인덱스.md) -->
