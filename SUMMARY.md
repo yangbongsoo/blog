@@ -74,7 +74,7 @@
 * [애자일적용후기](agile.md)
 * [Living Documentation](what__why__how_living_documentation.md)
 * [specification by example](specification_by_example.md)
-* [단순회귀분석정리](simple_regression_analysis.md)
+* [단순회귀분석](simple_regression_analysis.md)
 * [가설검정](hypothesis-testing.md)
 
 <!-- * [Real MySQL(작업중)] -->
