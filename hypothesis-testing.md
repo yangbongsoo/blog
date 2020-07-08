@@ -44,13 +44,13 @@ marginal pdf를 구해 계산하는 방식. (2) 기존에 주어진 것처럼, �
 (2) 의 방법이 좀 더 계산이 적어서 (1) 보다 낫다. 그리고 $$X_1, X_2$$ 가 지수분포이므로 이 둘은 positive임이 명백하다.<br>
 
 적분 구간을 정리하면 다음과 같다. <br>
-$$X_1 + X_2 \le 2\ln2, X_1 >0, X_2 >0$$ <br>
+$$X_1 + X_2 \le 2\ln2, \quad X_1 >0, \quad X_2 >0$$ <br>
 $$\Leftrightarrow 0 < X_1 < X_1 + X_2 \le 2ln2$$ <br>
-$$\Leftrightarrow 0 < X_1 < 2ln2, 0 < X_2 \le 2ln2 - X_1$$ <br>
+$$\Leftrightarrow 0 < X_1 < 2ln2, \quad 0 < X_2 \le 2ln2 - X_1$$ <br>
 
 $$X_1, X_2$$ 가 독립이기 때문에 joint pdf 가 각각의 marginal로 분리되고 이로 인해 계산이 수월해진다(분리가 안되는 경우 계산이 복잡해 지는 경우가 많음). <br>
 $$\Pr_{\theta=1}({X_1+X_2} \le 2\ln2)$$ <br>
-$$\Leftrightarrow P(0 < X_1 < 2ln2 and 0 < X_2 \le 2ln2 - X_1)$$
+$$\Leftrightarrow P(0 < X_1 < 2ln2 \quad AND \quad 0 < X_2 \le 2ln2 - X_1)$$
 
 
 
