@@ -66,10 +66,7 @@ $$\Leftrightarrow {3 \over 4} - {1 \over 2}ln2 = 0.40342640972002736 $$ <br>
 
 cf1) 지수함수 $$y = e^x $$ 를 미분하면 $$y \prime = e^x$$ 똑같다. <br>
 cf2) $$\int e^{f(x)} = {1 \over f\prime(x)}e^{f(x)} + C$$ <br>
-
-
-
-cf) support 은 확률값이 0이 아닌 것들을 말한다. <br>
+cf3) support 은 확률값이 0이 아닌 것들을 말한다. <br>
 area where the value of pdf(pmf) is none-zero $$\{x | p(x) > 0\}$$ <br>
 
 **유의수준을 구해라**<br>
