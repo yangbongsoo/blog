@@ -3,7 +3,7 @@
 ### EXERCISES 4.5.5
 
 Let $$X_1, X_2$$ be a random sample of size n = 2 from the distribution having <br>
-pdf $$ f(x;\theta) = (1/\theta)e^{-x/\theta}, 0 < x < \infty$$ zero elsewhere. <br>
+pdf $$ f(x;\theta) = (1/\theta)e^{-x/\theta}, \ 0 < x < \infty$$ zero elsewhere. <br>
 We reject $$H_0 : \theta = 2$$ and accept $$H_1 : \theta = 1$$ if the observed values of $$X_1, X_2$$, <br>
 say $$x_1, x_2$$ are such that $${f(x_1;2)f(x_2;2) \over f(x_1;1)f(x_2;1)} \le {1\over2} $$. <br>
 Here $$\Omega = \{ \theta:\theta = 1,2 \}$$. <br>
@@ -50,9 +50,19 @@ $$\Leftrightarrow 0 < X_1 < 2ln2, \quad 0 < X_2 \le 2ln2 - X_1$$ <br>
 
 $$X_1, X_2$$ 가 독립이기 때문에 joint pdf 가 각각의 marginal로 분리되고 이로 인해 계산이 수월해진다(분리가 안되는 경우 계산이 복잡해 지는 경우가 많음). <br>
 $$\Pr_{\theta=1}({X_1+X_2} \le 2\ln2)$$ <br>
-$$\Leftrightarrow P(0 < X_1 < 2ln2 \quad AND \quad 0 < X_2 \le 2ln2 - X_1)$$
-
-
+$$\Leftrightarrow P(0 < X_1 < 2ln2 \quad AND \quad 0 < X_2 \le 2ln2 - X_1)$$ <br>
+$$\Leftrightarrow \int_{0}^{2ln2} \int_{0}^{2ln2-x_1} f_{1,2}(x_1,x_2) \ dx_2, dx_1$$ <br>
+$$\Leftrightarrow \int_{0}^{2ln2} \int_{0}^{2ln2-x_1} f_1(x_1)f_2(x_2) \ dx_2, \ dx_1 (independence)$$ <br>
+$$\theta=1$$ 일때 계산하기 때문에 문제 pdf $$f(x;\theta) = (1/\theta)e^{-x/\theta} 에 1을 넣으면 된다.<br>
+$$\Leftrightarrow \int_{0}^{2ln2} \int_{0}^{2ln2-x_1} e^{-x_1}e^{-x_2} \ dx_2, \ dx_1 $$ <br>
+$$\Leftrightarrow \int_{0}^{2ln2} e^{-x_1} \int_{0}^{2ln2-x_1} e^{-x_2} \ dx_2, \ dx_1 $$ <br>
+안쪽 정적분부터 정리해야 한다. <br>
+$$\left[ -e^{-x_2} \right]_{0}^{2ln2-x_1} = 1-e^{x_1-2ln2}$$ <br>
+$$\Leftrightarrow \int_{0}^{2ln2} e^{-x_1} (1-e^{x_1-2ln2}) \ dx_1 $$ <br>
+$$\Leftrightarrow \int_{0}^{2ln2} (e^{-x_1} -e^{-2ln2}) \ dx_1 $$ <br>
+$$\Leftrightarrow \int_{0}^{2ln2} (e^{-x_1} - {1 \over 4}) \ dx_1 $$ <br>
+$$\Leftrightarrow \left[ -e^{-x_1} - {1 \over 4}x_1 \right]_{0}^{2ln2} = -e^{-2ln2} -{1 \over 4}2ln2 + 1 $$ <br>
+$$\Leftrightarrow {3 \over 4} - {1 \over 2}ln2 = 0.40342640972002736 $$ <br>
 
 cf1) 지수함수 $$y = e^x $$ 를 미분하면 $$y \prime = e^x$$ 똑같다. <br>
 cf2) $$\int e^{f(x)} = {1 \over f\prime(x)}e^{f(x)} + C$$ <br>
