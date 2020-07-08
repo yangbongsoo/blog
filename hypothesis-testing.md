@@ -53,7 +53,7 @@ $$\Pr_{\theta=1}({X_1+X_2} \le 2\ln2)$$ <br>
 $$\Leftrightarrow P(0 < X_1 < 2ln2 \quad AND \quad 0 < X_2 \le 2ln2 - X_1)$$ <br>
 $$\Leftrightarrow \int_{0}^{2ln2} \int_{0}^{2ln2-x_1} f_{1,2}(x_1,x_2) \ dx_2, dx_1$$ <br>
 $$\Leftrightarrow \int_{0}^{2ln2} \int_{0}^{2ln2-x_1} f_1(x_1)f_2(x_2) \ dx_2, \ dx_1 (independence)$$ <br>
-$$\theta=1$$ 일때 계산하기 때문에 문제 pdf $$f(x;\theta) = (1/\theta)e^{-x/\theta} 에 1을 넣으면 된다.<br>
+$$\theta=1$$ 일때 계산하기 때문에 문제 pdf $$f(x;\theta) = (1/\theta)e^{-x/\theta}$$ 에 1을 넣으면 된다.<br>
 $$\Leftrightarrow \int_{0}^{2ln2} \int_{0}^{2ln2-x_1} e^{-x_1}e^{-x_2} \ dx_2, \ dx_1 $$ <br>
 $$\Leftrightarrow \int_{0}^{2ln2} e^{-x_1} \int_{0}^{2ln2-x_1} e^{-x_2} \ dx_2, \ dx_1 $$ <br>
 안쪽 정적분부터 정리해야 한다. <br>
