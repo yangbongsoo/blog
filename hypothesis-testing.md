@@ -71,13 +71,27 @@ area where the value of pdf(pmf) is none-zero $$\{x | p(x) > 0\}$$ <br>
 
 **유의수준을 구해라**<br>
 유의수준(significance level)은 Type1 Error 의 최대 허용범위다. Type1 Error는 H1을 선택했는데 H0가 참인 경우다. <br>
-Type1 Error 는 H1을 선택했고 H0가 참일 때다. <br>
 H1을 선택했다는 말은 H0를 기각했다는 말이다. 다시말해 기각역안에 들어왔다는 말이다. <br>
 결론적으로 유의수준은 H0가 참인 상황이고, 데이터가 기각역 안에 들어있을 확률을 말한다. <br>
 
 $$\theta = 2$$ 일 때 관측된 데이터 $$x_1, x_2$$ 가 $${x_1+x_2} \le 2\ln2$$ 에 들어있을 확률 <br>
 $$\Pr_{\theta=2}({X_1+X_2} \le 2\ln2)$$ 를 구하면 된다. <br>
 
+적분 구간을 정리하면 다음과 같다. <br>
+$$X_1 + X_2 \le 2\ln2, \quad X_1 >0, \quad X_2 >0$$ <br>
+$$\Leftrightarrow 0 < X_1 < X_1 + X_2 \le 2ln2$$ <br>
+$$\Leftrightarrow 0 < X_1 < 2ln2, \quad 0 < X_2 \le 2ln2 - X_1$$ <br>
+
+$$\Pr_{\theta=2}({X_1+X_2} \le 2\ln2)$$ <br>
+$$\Leftrightarrow P(0 < X_1 < 2ln2 \quad AND \quad 0 < X_2 \le 2ln2 - X_1)$$ <br>
+$$\Leftrightarrow \int_{0}^{2ln2} \int_{0}^{2ln2-x_1} f_{1,2}(x_1,x_2) \ dx_2, dx_1$$ <br>
+$$\Leftrightarrow \int_{0}^{2ln2} \int_{0}^{2ln2-x_1} f_1(x_1)f_2(x_2) \ dx_2, \ dx_1 (independence)$$ <br>
+$$\theta=2$$ 일때 계산하기 때문에 문제 pdf $$f(x;\theta) = (1/\theta)e^{-x/\theta}$$ 에 2를 넣으면 된다.<br>
+$$\Leftrightarrow \int_{0}^{2ln2} \int_{0}^{2ln2-x_1} {1 \over4} e^{-x_1 \over 2}e^{-x_2 \over 2} \ dx_2, \ dx_1 $$ <br>
+$$\Leftrightarrow {1 \over4} \int_{0}^{2ln2} e^{-x_1 \over 2} \int_{0}^{2ln2-x_1} e^{-x_2 \over 2} \ dx_2, \ dx_1 $$ <br>
+안쪽 정적분부터 정리해야 한다.<br>
+$$\left[ -2e^{-x_2 \over 2} \right]_{0}^{2ln2-x_1} = 2-2e^{-ln2+ {x_1 \over 2}}$$ <br>
+$$\Leftrightarrow {1 \over 4} \int_{0}^{2ln2} e^{-x_1 \over 2} (2-2e^{-ln2+ {x_1 \over 2}}) \ dx_1 $$ <br>
 
 
 
