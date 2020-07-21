@@ -92,12 +92,11 @@ $$\Leftrightarrow {1 \over4} \int_{0}^{2ln2} e^{-x_1 \over 2} \int_{0}^{2ln2-x_1
 안쪽 정적분부터 정리해야 한다.<br>
 $$\left[ -2e^{-x_2 \over 2} \right]_{0}^{2ln2-x_1} = 2-2e^{-ln2+ {x_1 \over 2}}$$ <br>
 $$\Leftrightarrow {1 \over 4} \int_{0}^{2ln2} e^{-x_1 \over 2} (2-2e^{-ln2+ {x_1 \over 2}}) \ dx_1 $$ <br>
-
-
-
-
-
-
-
+$$\Leftrightarrow {1 \over 4} \int_{0}^{2ln2} (2e^{-x_1 \over 2} -2e^{-ln2}) \ dx_1 $$ <br>
+$$\Leftrightarrow {1 \over 4} \int_{0}^{2ln2} (2e^{-x_1 \over 2} -1) \ dx_1 $$ <br>
+$$\Leftrightarrow {1 \over 4}\left[ -4e^{-x_1 \over 2} - x_1 \right]_{0}^{2ln2} $$ <br>
+$$\Leftrightarrow {1 \over 4} {(-4e^{-ln2} -2ln2 + 4)}$$ <br>
+$$\Leftrightarrow {1 \over 4} {(2 -2ln2)}$$ <br>
+$$\Leftrightarrow {1 \over 2} {(1 -1ln2)} = 0.15342640972002736$$ <br>
 
 참고 : [7th Edition] Robert V. Hogg, Joeseph McKean, Allen T Craig - Introduction to Mathematical Statistics (2012, Pearson)
