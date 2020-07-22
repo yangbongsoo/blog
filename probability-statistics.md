@@ -13,6 +13,11 @@ $$\Leftrightarrow {1 \over n}(E \left[ X_1 \right] + E \left[ X_2 \right] + ... 
 $$\Leftrightarrow {1 \over n}(nE \left[ X \right]) \quad (identical)$$ <br>
 $$\Leftrightarrow E \left[ X \right]$$ <br>
 
+$$Var(X) = \sigma^2$$ <br>
+$$Var(\bar{X}) = Var({X_1+X_2+...+X_n \over n}) = {1 \over n^2}Var(X_1+X_2+...+X_n)$$ <br>
+$${1 \over n^2} nVar(X) = {\sigma^2 \over n}$$ <br>
+
+
 
 
 
