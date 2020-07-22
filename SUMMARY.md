@@ -76,6 +76,7 @@
 * [specification by example](specification_by_example.md)
 * [단순회귀분석](simple_regression_analysis.md)
 * [가설검정](hypothesis-testing.md)
+* [확률과통계](probability-statistics.md)
 
 <!-- * [Real MySQL(작업중)] -->
   <!-- * [5장 인덱스](real_mysql/인덱스.md) -->
