@@ -1,6 +1,6 @@
 # 확률과 통계
 
-## 헷갈렸던 부분들 정리
+## 기본 정리
 
 $$X \thicksim N(\mu, \sigma^2) $$ 에서 $$\mu$$ 는 모평균이고 $$\sigma^2$$ 은 모분산이다. <br>
 $$X_1, X_2, ... ,X_n \overset{iid}{\thicksim} N(\mu, \sigma^2)$$ 일때 <br>
@@ -11,7 +11,6 @@ $$\sigma^2 \over n$$ 은 표본평균의 분산이다. <br>
 표본분산은 관측된 표본 $$X_i$$ 들이 평균을 기준으로 얼마나 퍼져있는지 나타낸다. <br>
 
 $$E \left[ X \right] = \mu$$ <br>
-
 $$E \left[ \bar{X} \right] = E \left[ {X_1+X_2+...+X_n \over n} \right]$$ <br>
 $$E \left[ \bar{X} \right] = {1 \over n}(E \left[ X_1 \right] + E \left[ X_2 \right] + ... + E \left[ X_n \right]) $$ <br>
 $$E \left[ \bar{X} \right] = {1 \over n}(nE \left[ X \right]) \quad (identical)$$ <br>
@@ -28,7 +27,6 @@ $$E \left[ (x- \mu)^2 \right] = E \left[ X^2 \right] - \{ E \left[ X \right] \}^
 
 표준화는 기대값을 0, 분산을 1로 만드는 작업이다. <br>
 $$Z = {X- E \left[ X \right] \over \sqrt {Var(x)}} = {X- \mu \over \sigma}$$ <br>
-
 분자를 V 로 치환하자. <br>
 $$V = X- E \left[ X \right]$$ <br>
 $$E \left[ V \right] = E \left[ X \right] - E \left[ E \left[ X \right] \right]$$ <br>
@@ -37,7 +35,14 @@ $$E \left[ E \left[ X \right] \right] = \int_{-\infty}^{\infty}(\int_{-\infty}^{
 $$E \left[ E \left[ X \right] \right] = \int_{-\infty}^{\infty} E \left[ X \right] f(x)dx$$ <br>
 $$E \left[ E \left[ X \right] \right] = E \left[ X \right] \int_{-\infty}^{\infty} f(x)dx$$ (기대값은 상수니까 앞으로 나올 수 있다)<br>
 $$E \left[ E \left[ X \right] \right] = E \left[ X \right] * 1$$ (pdf) <br>
-그러므로 $$E \left[ V \right] = 0$$ 이다.
+$$E \left[ V \right] = 0$$ 이다. 그러므로 $$E \left[ Z \right]$$ 는 0이 된다. <br>
+
+$$Var(V) = E \left[ (V - E \left[ V \right])^2 \right]$$ <br>
+$$Var(V) = E \left[ V^2 \right]$$ (위에서 $$E \left[ V \right] = 0$$ 임을 알았기 때문) <br>
+$$Var(V) = E \left[ (X- E \left[ X \right])^2 \right]$$ <br>
+$$Var(V) = Var(X) $$ <br>
+그러므로 $$Var(Z) = Var({V \over \sqrt{Var(X)}}) = { 1 \over Var(X)} Var(V) = 1 $$ 이 된다.
+
 
 ## p-value 에 대한 글
 
@@ -51,9 +56,4 @@ $$E \left[ E \left[ X \right] \right] = E \left[ X \right] * 1$$ (pdf) <br>
 알려줬다.
 
 원문 : http://scienceon.hani.co.kr/402347
-
-
-
-
-
 
