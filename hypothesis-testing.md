@@ -64,11 +64,6 @@ $$\Leftrightarrow \int_{0}^{2ln2} (e^{-x_1} - {1 \over 4}) \ dx_1 $$ <br>
 $$\Leftrightarrow \left[ -e^{-x_1} - {1 \over 4}x_1 \right]_{0}^{2ln2} = -e^{-2ln2} -{1 \over 4}2ln2 + 1 $$ <br>
 $$\Leftrightarrow {3 \over 4} - {1 \over 2}ln2 = 0.40342640972002736 $$ <br>
 
-cf1) 지수함수 $$y = e^x $$ 를 미분하면 $$y \prime = e^x$$ 똑같다. <br>
-cf2) $$\int e^{f(x)} = {1 \over f\prime(x)}e^{f(x)} + C$$ <br>
-cf3) support 은 확률값이 0이 아닌 것들을 말한다. <br>
-area where the value of pdf(pmf) is none-zero $$\{x | p(x) > 0\}$$ <br>
-
 **유의수준을 구해라**<br>
 유의수준(significance level)은 Type1 Error 의 최대 허용범위다. Type1 Error는 H1을 선택했는데 H0가 참인 경우다. <br>
 H1을 선택했다는 말은 H0를 기각했다는 말이다. 다시말해 기각역안에 들어왔다는 말이다. <br>
@@ -98,5 +93,13 @@ $$\Leftrightarrow {1 \over 4}\left[ -4e^{-x_1 \over 2} - x_1 \right]_{0}^{2ln2} 
 $$\Leftrightarrow {1 \over 4} {(-4e^{-ln2} -2ln2 + 4)}$$ <br>
 $$\Leftrightarrow {1 \over 4} {(2 -2ln2)}$$ <br>
 $$\Leftrightarrow {1 \over 2} {(1 -1ln2)} = 0.15342640972002736$$ <br>
+
+
+cf1) 지수함수 $$y = e^x $$ 를 미분하면 $$y \prime = e^x$$ 똑같다. <br>
+cf2) $$y = e^{f(x)}$$ 를 미분하면 $$y \prime = e^{f(x)} * f\prime(x)$$ 이다(합성함수미분).<br>
+따라서 $$\int e^{f(x)} * f \prime(x) = e^{f(x)} + C$$ 이다. <br>
+cf3) support 은 확률값이 0이 아닌 것들을 말한다. <br>
+area where the value of pdf(pmf) is none-zero $$\{x | p(x) > 0\}$$ <br>
+
 
 참고 : [7th Edition] Robert V. Hogg, Joeseph McKean, Allen T Craig - Introduction to Mathematical Statistics (2012, Pearson)

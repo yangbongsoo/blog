@@ -12,9 +12,9 @@ $$\sigma^2 \over n$$ 은 표본평균의 분산이다. <br>
 
 $$E \left[ X \right] = \mu$$ <br>
 $$E \left[ \bar{X} \right] = E \left[ {X_1+X_2+...+X_n \over n} \right]$$ <br>
-$$\Leftrightarrow {1 \over n}(E \left[ X_1 \right] + E \left[ X_2 \right] + ... + E \left[ X_n \right]) $$ <br>
-$$\Leftrightarrow {1 \over n}(nE \left[ X \right]) \quad (identical)$$ <br>
-$$\Leftrightarrow E \left[ X \right]$$ <br>
+$$= {1 \over n}(E \left[ X_1 \right] + E \left[ X_2 \right] + ... + E \left[ X_n \right]) $$ <br>
+$$= {1 \over n}(nE \left[ X \right]) \quad (identical)$$ <br>
+$$= E \left[ X \right]$$ <br>
 
 $$Var(X) = \sigma^2$$ <br>
 $$Var(\bar{X}) = Var({X_1+X_2+...+X_n \over n}) = {1 \over n^2}Var(X_1+X_2+...+X_n)$$ <br>
@@ -29,7 +29,7 @@ $${1 \over n^2} nVar(X) = {\sigma^2 \over n}$$ <br>
 이는 반증주의적 과정과는 반대라 할 수 있다."
 
 유의성 검정에 대한 글이다. H0 를 기각하기 때문에 H1을 선택하는게 당연한 flow 라고 생각했었는데 그게 올바르지 않을 수 있다는걸
-깨우쳐줬다.
+알려줬다.
 
 원문 : http://scienceon.hani.co.kr/402347
 
