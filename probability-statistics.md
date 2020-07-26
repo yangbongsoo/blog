@@ -11,14 +11,33 @@ $$\sigma^2 \over n$$ 은 표본평균의 분산이다. <br>
 표본분산은 관측된 표본 $$X_i$$ 들이 평균을 기준으로 얼마나 퍼져있는지 나타낸다. <br>
 
 $$E \left[ X \right] = \mu$$ <br>
+
 $$E \left[ \bar{X} \right] = E \left[ {X_1+X_2+...+X_n \over n} \right]$$ <br>
-$$= {1 \over n}(E \left[ X_1 \right] + E \left[ X_2 \right] + ... + E \left[ X_n \right]) $$ <br>
-$$= {1 \over n}(nE \left[ X \right]) \quad (identical)$$ <br>
-$$= E \left[ X \right]$$ <br>
+$$E \left[ \bar{X} \right] = {1 \over n}(E \left[ X_1 \right] + E \left[ X_2 \right] + ... + E \left[ X_n \right]) $$ <br>
+$$E \left[ \bar{X} \right] = {1 \over n}(nE \left[ X \right]) \quad (identical)$$ <br>
+$$E \left[ \bar{X} \right] = E \left[ X \right]$$ <br>
+통계량의 기대값($$E \left[ \bar{X} \right]$$)이 모수($$\mu$$)와 일치할 때 $$\bar{X}$$를 모수의 불편추정량(unbiased estimator) 이라고 한다.<br>
 
 $$Var(X) = \sigma^2$$ <br>
 $$Var(\bar{X}) = Var({X_1+X_2+...+X_n \over n}) = {1 \over n^2}Var(X_1+X_2+...+X_n)$$ <br>
 $${1 \over n^2} nVar(X) = {\sigma^2 \over n}$$ <br>
+
+편차란 기대값 $$\mu$$ 를 기준으로 퍼져있는 정도를 말한다. 부호는 중요하지 않으니까 제곱한다. 그리고 그거의 기대값은 분산이다. <br>
+$$E \left[ (x- \mu)^2 \right] = E \left[ X^2 \right] - \{ E \left[ X \right] \}^2 $$ 그리고 이건 모분산이다. <br>
+
+
+표준화는 기대값을 0, 분산을 1로 만드는 작업이다. <br>
+$$Z = {X- E \left[ X \right] \over \sqrt {Var(x)}} = {X- \mu \over \sigma}$$ <br>
+
+분자를 V 로 치환하자. <br>
+$$V = X- E \left[ X \right]$$ <br>
+$$E \left[ V \right] = E \left[ X \right] - E \left[ E \left[ X \right] \right]$$ <br>
+$$E \left[ E \left[ X \right] \right]$$ 를 먼저 구해보자. <br>
+$$E \left[ E \left[ X \right] \right] = \int_{-\infty}^{\infty}(\int_{-\infty}^{\infty}xf(x)dx)f(x)dx$$ <br>
+$$E \left[ E \left[ X \right] \right] = \int_{-\infty}^{\infty} E \left[ X \right] f(x)dx$$ <br>
+$$E \left[ E \left[ X \right] \right] = E \left[ X \right] \int_{-\infty}^{\infty} f(x)dx$$ (기대값은 상수니까 앞으로 나올 수 있다)<br>
+$$E \left[ E \left[ X \right] \right] = E \left[ X \right] * 1$$ (pdf) <br>
+그러므로 $$E \left[ V \right] = 0$$ 이다.
 
 ## p-value 에 대한 글
 
