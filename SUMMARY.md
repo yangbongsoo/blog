@@ -74,9 +74,10 @@
 * [애자일적용후기](agile.md)
 * [Living Documentation](what__why__how_living_documentation.md)
 * [specification by example](specification_by_example.md)
-* [단순회귀분석](simple_regression_analysis.md)
-* [가설검정](hypothesis-testing.md)
 * [확률과 통계](probability-statistics.md)
+* [Multivariate Distributions](multivariate_distributions.md)
+* [가설검정](hypothesis-testing.md)
+* [단순회귀분석](simple_regression_analysis.md)
 
 <!-- * [Real MySQL(작업중)] -->
   <!-- * [5장 인덱스](real_mysql/인덱스.md) -->
