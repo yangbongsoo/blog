@@ -46,5 +46,20 @@ $$= \int_{0}^{{1\over2}} 15x_1^2 \{{1\over2}(1-x_1)^2 - {1\over2}x_1^2\} \ dx_1$
 $$= \int_{0}^{{1\over2}} 15x_1^2 ({1\over2} - x_1) \ dx_1$$ <br>
 $$= \left[ {5 \over2}x_1^3 \right]_{0}^{1\over2} - \left[ 5x_1^4 \right]_{0}^{1\over2} = 0$$ <br>
 
+### EXERCISES 2.1.13
+Let $$X_1, X_2$$ be two random variables with joint pdf
+$$f(x_1, x_2) = 4x_1x_2, \ 0 < x_1 < 1, \ 0 < x_2 < 1$$ zero elsewhere.
+Compute $$E(X_1), E(X_1^2), E(X_2), E(X_2^2), E(X_1X_2)$$. Is $$E(X_1X_2) = E(X_1)E(X_2)$$?
+Find $$E(3X_2 - 2X_1^2 + 6X_1X_2)$$. <br>
+
+먼저 $$E(X_1)$$ 을 구해보자. <br>
+$$\int_{0}^{1}x_1 f(x_1) \ dx_1 $$ 이다 <br>
+내가 알고 있는건 joint pdf 이고 $$f(x_1)$$ 을 적분하려면 $$X_1$$ 의 마지널 pdf 를 구해야한다.
+다시 말해 $$X_2$$ 를 적분하고 $$X_1$$ 을 상수취급한다. <br>
+
+$$\int_{0}^{1} 4x_1x_2 \ dx_2 $$ <br>
+$$= 4x_1 \int_{0}^{1} x_2 \ dx_2 $$ <br>
+
+
 
 참고 : [7th Edition] Robert V. Hogg, Joeseph McKean, Allen T Craig - Introduction to Mathematical Statistics (2012, Pearson)
