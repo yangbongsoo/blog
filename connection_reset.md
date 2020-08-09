@@ -182,11 +182,11 @@ $ tcpdump -vvv -s 1500 tcp
 이것은 전혀 확인 응답이 아니다. 재설정의 수신기는 연결을 중단하고 애플리케이션에게 연결이 재설정됐다는 것을 통보한다. 이것은 종종
 Connection reset by peer 오류 표시나 유사한 메세지를 유발한다.
 
-Connection reset by peer 는 remote server 에서 RST 패킷을 보낸것이고 
+Connection reset by peer 는 remote server 에서 RST 패킷을 보낸것이고
 일반적인 handshake 와 달리 즉시 connection 을 끊어버린다. 이것은 일반적인 half-closed 상태 전환을 우회한다.
 
-Connection reset by peer 은 상대방과 통화 중 상대방이 전화기를 쾅 내려놓는거와 동일하다. 
-아무런 응답없이 계속 hang 걸린채로 내버려두는것보다는 예의바르다. 그러나 TCP/IP converseur 에서 기대되는 진정한 예의바른 FIN-ACK 가 아니다. 
+Connection reset by peer 은 상대방과 통화 중 상대방이 전화기를 쾅 내려놓는거와 동일하다.
+아무런 응답없이 계속 hang 걸린채로 내버려두는것보다는 예의바르다. 그러나 TCP/IP converseur 에서 기대되는 진정한 예의바른 FIN-ACK 가 아니다.
 
 cf) https://stackoverflow.com/questions/1434451/what-does-connection-reset-by-peer-mean
 
