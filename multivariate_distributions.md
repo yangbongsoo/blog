@@ -1,3 +1,5 @@
+# Multivariate Distributions
+
 ### EXERCISES 2.1.10
 Let $$X_1$$ and $$X_2$$ have the joint pdf $$f(x_1, x_2) = 15x_1^2x_2$$,
 $$0 < x_1 < x_2 < 1$$, zero elsewhere. Find the marginal pdfs and compute
