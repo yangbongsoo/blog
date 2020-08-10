@@ -53,13 +53,29 @@ Compute $$E(X_1), E(X_1^2), E(X_2), E(X_2^2), E(X_1X_2)$$. Is $$E(X_1X_2) = E(X_
 Find $$E(3X_2 - 2X_1^2 + 6X_1X_2)$$. <br>
 
 먼저 $$E(X_1)$$ 을 구해보자. <br>
-$$\int_{0}^{1}x_1 f(x_1) \ dx_1 $$ 이다 <br>
-내가 알고 있는건 joint pdf 이고 $$f(x_1)$$ 을 적분하려면 $$X_1$$ 의 마지널 pdf 를 구해야한다.
+$$\int_{0}^{1}x_1 f(x_1) \ dx_1 $$ 을 구해야한다. <br>
+내가 알고 있는건 $$f(x_1, x_2)$$ joint pdf 이고 $$f(x_1)$$ 을 구하려면 $$X_1$$ 의 마지널 pdf 를 구해야한다.
 다시 말해 $$X_2$$ 를 적분하고 $$X_1$$ 을 상수취급한다. <br>
 
 $$\int_{0}^{1} 4x_1x_2 \ dx_2 $$ <br>
 $$= 4x_1 \int_{0}^{1} x_2 \ dx_2 $$ <br>
+$$= 4x_1 \left[ {1\over2}x_2^2 \right]_{0}^{1} $$ <br>
+$$= 2x_1$$ <br>
 
+이제 $$\int_{0}^{1}x_1 f(x_1) \ dx_1 $$ 에 대입을 하면 <br>
+$$\int_{0}^{1} 2x_1^2 \ dx_1 $$ <br>
+$$= \left[ {2\over 3}x_1^3 \right]_{0}^{1}$$ <br>
+$$= {2 \over 3}$$ <br>
 
+그리고 $$E(X_2)$$ 는 똑같이 $${2 \over 3}$$ 이 된다. <br>
+
+다음, $$E(X_1X_2)$$ 을 구해보자. <br>
+$$\int_{0}^{1} \int_{0}^{1} x_1x_2 (4x_1x_2) \ dx_1 \ dx_2$$ <br>
+$$= \int_{0}^{1} 4x_2^2 \int_{0}^{1} x_1^2 \ dx_1 \ dx_2$$ <br>
+$$= \int_{0}^{1} {4\over3}x_2^2  \ dx_2$$ <br>
+$$= {4\over3} * {1 \over 3} = {4 \over 9} <br>
+
+따라서 $$E(X_1X_2) = E(X_1)E(X_2)$$ 이다. 추가적으로 joint pdf $$4x_1x_2$$ 가 각각의 곱으로
+쪼개지고 ($$2x_1$$, $$2x_2$$) support도 분리되어 있기 때문에 독립이라고 할 수 있다.
 
 참고 : [7th Edition] Robert V. Hogg, Joeseph McKean, Allen T Craig - Introduction to Mathematical Statistics (2012, Pearson)
