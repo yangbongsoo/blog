@@ -5,6 +5,7 @@
 * [Connection Reset](connection_reset.md)
 * [자주쓰는 쉘스크립트 모음](shell_script.md)
 * [Tshark](tshark.md)
+* [네트워크프로그래밍](network_programming.md)
 * [Spring 개발 이슈모음]
   * [issue1 ~ issue21](spring_develop_issue/spring_develop_issue1.md)
   * [issue22 ~ ](spring_develop_issue/spring_develop_issue2.md)
@@ -13,7 +14,7 @@
   * [Part2-1 함수형 데이터 처리](java8_in_action/part2_functional_data_processing.md)
   * [Part2-2 함수형 데이터 처리](java8_in_action/part2-2_functional_data_processing.md)
   * [Part3-1 효과적인 자바8 프로그래밍](java8_in_action/part3-1_effective_java8_programming.md)
-* [Effective Java (3rd Edition 추가 작업중)]
+* [Effective Java]
   * [객체의 생성과 삭제](effective_java/creating_and_destroying_objects.md)
   * [모든 객체의 공통 메서드](effective_java/methods_common_to_all_objects.md)
   * [클래스와 인터페이스](effective_java/classes_and_interfaces.md)
