@@ -118,6 +118,99 @@ ResultMap 확장이 가능하다.
 </resultMap>
 ```
 
+## DB 전환위한 dual write
+
+두개의 트랜잭션매니저를 묶는 트랜잭션매니저가 필요하다.
+```xml
+<!-- Chained Transaction manager for a multi tx -->
+<bean id="chainedTransactionManager" class="org.springframework.data.transaction.ChainedTransactionManager">
+	<constructor-arg>
+		<list>
+			<ref bean="transactionManager" />
+			<ref bean="secondaryTransactionManager" />
+		</list>
+	</constructor-arg>
+</bean>
+
+<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="dataSource"/>
+</bean>
+
+<bean id="secondaryTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="secondaryDataSource"/>
+</bean>
+```
+
+그리고 secondaryDataSource 빈을 등록한다.
+
+```xml
+<bean id="secondaryDataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+	<!-- 프로퍼티 설정 -->
+</bean>
+```
+
+그리고 동적 db 판별을 위한 설정으로 databaseIdProvider 빈을 등록한다.
+서로 호환이 안되는 쿼리가 있을 경우 사용한다.
+
+```xml
+<bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
+	<property name="properties">
+		<props>
+			<prop key="MSSQL">MSSQL</prop>
+			<prop key="MySQL">MYSQL</prop>
+		</props>
+	</property>
+</bean>
+```
+
+```xml
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!-- 동적DB 판별을 위한 설정 -->
+    <property name="databaseIdProvider" ref="databaseIdProvider"/>
+    <property name="dataSource" ref="dataSource" />
+</bean>
+
+<bean id="secondarySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<!-- 동적DB 판별을 위한 설정 -->
+	<property name="databaseIdProvider" ref="databaseIdProvider"/>
+	<property name="dataSource" ref="secondaryDataSource" />
+</bean>
+
+<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+    <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+</bean>
+
+<bean id="secondarySqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	<constructor-arg index="0" ref="secondarySqlSessionFactory"></constructor-arg>
+</bean>
+```
+
+설정이 끝나면 쿼리에서 다음과 같이 분기해서 사용하면 된다.
+```xml
+<select>
+    <if test="_databaseId == 'MSSQL'">
+        <!-- MSSQL 전용쿼리 -->
+    </if>
+
+    <if test="_databaseId == 'MYSQL'">
+        <!-- MYSQL 전용쿼리 -->
+    </if>
+</select>
+```
+
+자바코드에서 사용할 때는 Dao 를 두개 만들어야한다. ex) TaskDao, TaskSecondaryDao
+그래서 서비스레이어에서 각 dao를 호출해서 dual-write를 수행하고, TaskSecondaryDao 에서는 secondarySqlSessionTemplate 를 주입받아 사용한다.
+
+```java
+@Autowired
+@Qualifier("secondarySqlSessionTemplate")
+private SqlSessionTemplate secondarySqlSessionTemplate;
+```
+
+참고로 호환이 안되는 쿼리 분기는 master, secondary 관계없이 작업해야한다.
+mssql -> mysql 로 바꿨을 때 master, secondary 가 서로 바뀌는데 이때 영향을 받지 않는다.
+
+
 ## 동적 SQL
 마이바티는 `<if>`, `<choose>`, `<where>`, `<foreach>`, `<trim>`과 같은 엘리먼트를 사용해서 동적인 SQL 쿼리를 만들도록 지원한다.
 
