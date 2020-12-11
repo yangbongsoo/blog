@@ -120,7 +120,18 @@ ResultMap 확장이 가능하다.
 
 ## DB 전환위한 dual write
 
-두개의 트랜잭션매니저를 묶는 트랜잭션매니저가 필요하다.
+두개의 트랜잭션매니저를 묶는 chainedTransactionManager 가 필요하다.
+cf) spring data commons 의존성이 없다면 추가
+
+```xml
+<dependency>
+	<groupId>org.springframework.data</groupId>
+	<artifactId>spring-data-commons</artifactId>
+	<version>2.1.17.RELEASE</version>
+</dependency>
+```
+
+그리고 설정에 추가한다.
 ```xml
 <!-- Chained Transaction manager for a multi tx -->
 <bean id="chainedTransactionManager" class="org.springframework.data.transaction.ChainedTransactionManager">
