@@ -1,8 +1,5 @@
 # Introduction
 
-## E-mail : goodbs1000@gmail.com
+## 앞으로 신규 포스팅은 티스토리로 https://yangbongsoo.tistory.com
 
-## Github : [https://github.com/yangbongsoo](https://github.com/yangbongsoo)
-
-## Gitbook : [https://yangbongsoo.gitbook.io/study/](https://yangbongsoo.gitbook.io/study/)
 
